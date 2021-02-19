@@ -18,5 +18,13 @@
     <ClCompile Include="2048-Console.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="Tableau.cpp">
+      <Filter>Header Files</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="Tableau.h">
+      <Filter>Resource Files</Filter>
+    </ClInclude>
   </ItemGroup>
 </Project>
