@@ -1,14 +1,16 @@
 #pragma once
 #include <random>
 #include <iostream>
+#include <cstdlib>
+#include <ctime>
+#include <vector>
 
 using namespace std;
 
 class Tableau
 {
 public:
-
-	bool Next_Move_Possible;
+	Tableau(int i);
 	Tableau();
 	~Tableau();
 
@@ -19,19 +21,22 @@ public:
 
 	void Ajout_Random();
 
-	void Est_Plein();
-
-	void Move_Possible();
+	bool Move_Possible();
 
 	void Afficher();
 
 	int Get_Highest();
 
-	int random(int low, int high);
+	int random(int high);
 
 private:
-	int tableau[4][4];
+	int ratio = 5;
+	int size;
 	int score = 0;
+
+	vector<int> two_four;
+
+	int** tableau;
 };
 
 
