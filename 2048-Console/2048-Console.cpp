@@ -10,38 +10,43 @@ int main()
     Tableau tab = Tableau();
     char input;
 
-    cout << "Choix du move :\nw = haut\na = gauche\ns = bas\nd = droit\nq = quitter" << endl;
-    input = _getch();
-
-    while (input != 'q' && tab.Next_Move_Possible == true && tab.Get_Highest()<2048)
+    do
     {
+        cout << "W = haut" << endl;
+        cout << "A = gauche" << endl;
+        cout << "S = bas" << endl;
+        cout << "D = droit" << endl;
+        cout << "Q = quitter" << endl;
+
+        input = _getch();
+
         //Switch case pour le jeu
         switch (input)
         {
 
         case 'w':
-            cout << endl << "Up" << endl;//key up
+            //cout << endl << "Up" << endl;//key up
             tab.Bouge_Haut();
             break;
 
         case 's':
-            cout << endl << "Down" << endl;   // key down
+            //cout << endl << "Down" << endl;   // key down
             tab.Bouge_Bas();
             break;
 
         case 'd':
-            cout << endl << "Right" << endl;  // key right
+            //cout << endl << "Right" << endl;  // key right
             tab.Bouge_Droit();
             break;
 
         case 'a':
-            cout << endl << "Left" << endl;  // key left
+            //cout << endl << "Left" << endl;  // key left
             tab.Bouge_Gauche();
             break;
         }
 
-        cout << "Choix du move :\nw = haut\na = gauche\ns = bas\nd = droit\nq = quitter" << endl;
-        input = _getch();
-    }
+        tab.Afficher();
+
+    } while (input != 'q' || tab.Next_Move_Possible != false || tab.Get_Highest() < 2048);
     
 }

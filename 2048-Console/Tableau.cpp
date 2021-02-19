@@ -1,18 +1,20 @@
 ﻿#include "Tableau.h"
+#include <vector>
+using namespace std;
 
 
 Tableau::Tableau()
 {	
 	//Détermine 2 position de case pour les valeurs de départ
-	int pos_1 = rand() % 16 + 1;
-	int pos_2 = rand() % 16 + 1;
-	int NbCase = 1;
+	int pos_1 = random(0, 16);
+	int pos_2 = random(0, 16);
+	int NbCase = 0;
 	Next_Move_Possible = true;
+
 	while (pos_2 == pos_1)
 	{
-		pos_2 = rand() % 16 + 1;
+		pos_2 = random(0, 16);
 	}
-
 
 	//Remplir le tableau avec 
 	for (int y = 0; y < 4; y++)
@@ -21,7 +23,7 @@ Tableau::Tableau()
 		{
 			if (NbCase == pos_1)
 			{
-				int val = rand() % 2 + 1;
+				int val = random(1, 2);
 				if (val == 1)
 				{
 					tableau[y][x] = 2;
@@ -33,7 +35,7 @@ Tableau::Tableau()
 			}
 			else if (NbCase == pos_2)
 			{
-				int val = rand() % 2 + 1;
+				int val = random(1,2);
 				if (val == 1)
 				{
 					tableau[y][x] = 2;
@@ -345,6 +347,7 @@ void Tableau::Bouge_Droit()
 			}
 		}
 	}
+
 	Ajout_Random();
 }
 
@@ -1491,38 +1494,42 @@ void Tableau::Bouge_Bas()
 void Tableau::Ajout_Random()
 {
 	//Faire l'ajout
-	bool place = false;
+	vector<int> v;
 
-	do
+	for (int y = 0; y < 4; y++)
 	{
-		int pos = rand() % 16 + 1;
-		int NbCase = 1;
-
-		for (int y = 0; y < 4; y++)
+		for (int x = 0; x < 4; x++)
 		{
-			for (int x = 0; x < 4; x++)
+			if (tableau[y][x] == 0)
 			{
-				if (NbCase == pos)
-				{
-					if (tableau[y][x] == 0)
-					{
-						int val = rand() % 2 + 1;
-						if (val == 1)
-						{
-							tableau[y][x] = 2;
-						}
-						else
-						{
-							tableau[y][x] = 4;
-						}
-						place = true;
-					}					
-				}
-				NbCase++;
+				v.push_back((y * 4) + x);
 			}
 		}
+	}
+	int index = random(0, v.size());
+	int pos = v[index];
 
-	} while (place != true);
+	int NbCase = 0;
+
+	for (int y = 0; y < 4; y++)
+	{
+		for (int x = 0; x < 4; x++)
+		{
+			if (NbCase == pos)
+			{
+				int val = random(1, 2);
+				if (val == 1)
+				{
+					tableau[y][x] = 2;
+				}
+				else
+				{
+					tableau[y][x] = 4;
+				}
+			}
+			NbCase++;
+		}
+	}
 
 	Est_Plein();
 }
@@ -1542,7 +1549,6 @@ void Tableau::Est_Plein()
 	{
 		Move_Possible();
 	}
-	Afficher();
 }
 
 void Tableau::Move_Possible()
@@ -1583,33 +1589,107 @@ void Tableau::Move_Possible()
 
 void Tableau::Afficher()
 {
+	int high = Get_Highest();
+
+	system("cls");
 	cout << "Score : " << score << endl;
 	cout << "Max : " << Get_Highest() << endl;
 
-	for (int y = 0; y < 4; y++)
+	if (high < 10)
 	{
-		cout << "|";
-
-		for (int x = 0; x < 4; x++)
+		for (int y = 0; y < 4; y++)
 		{
-			if (tableau[y][x] < 10)
+			for (int x = 0; x < 4; x++)
 			{
-				cout << "  " << tableau[y][x] << " |";
+				if (tableau[y][x] != 0)
+				{
+					cout << "[" << tableau[y][x] << "]";
+				}
+				else
+				{
+					cout << "[ ]";
+				}
 			}
-			else if (tableau[y][x] < 100)
-			{
-				cout << " " << tableau[y][x] << " |";
-			}
-			else if (tableau[y][x] < 1000)
-			{
-				cout << " " << tableau[y][x] << "|";
-			}
-			else
-			{
-				cout << tableau[y][x] << "|";
-			}
+			cout << endl;
 		}
-		cout << endl;
+	}
+	else if (high < 100)
+	{
+		for (int y = 0; y < 4; y++)
+		{
+			for (int x = 0; x < 4; x++)
+			{
+				if (tableau[y][x] == 0)
+				{
+					cout << "[  ]";
+				}
+				else if (tableau[y][x] < 10)
+				{
+					cout << "[ " << tableau[y][x] << "]";
+				}
+				else
+				{
+					cout << "[" << tableau[y][x] << "]";
+				}
+			}
+			cout << endl;
+		}
+	}
+	else if (high < 1000)
+	{
+		for (int y = 0; y < 4; y++)
+		{
+			for (int x = 0; x < 4; x++)
+			{
+				if (tableau[y][x] == 0)
+				{
+					cout << "[   ]";
+				}
+				else if (tableau[y][x] < 10)
+				{
+					cout << "[ " << tableau[y][x] << " ]";
+				}
+				else if (tableau[y][x] < 100)
+				{
+					cout << "[ " << tableau[y][x] << "]";
+				}
+				else
+				{
+					cout << "[" << tableau[y][x] << "]";
+				}
+			}
+			cout << endl;
+		}
+	}
+	else
+	{
+		for (int y = 0; y < 4; y++)
+		{
+			for (int x = 0; x < 4; x++)
+			{
+				if (tableau[y][x] == 0)
+				{
+					cout << "[    ]";
+				}
+				else if (tableau[y][x] < 10)
+				{
+					cout << "[  " << tableau[y][x] << " ]";
+				}
+				else if (tableau[y][x] < 100)
+				{
+					cout << "[ " << tableau[y][x] << "]";
+				}
+				else if (tableau[y][x] < 1000)
+				{
+					cout << "[ " << tableau[y][x] << "]";
+				}
+				else
+				{
+					cout <<"["<< tableau[y][x] << "]";
+				}
+			}
+			cout << endl;
+		}
 	}
 	cout << endl;
 }
@@ -1628,4 +1708,10 @@ int Tableau::Get_Highest()
 		}
 	}
 	return max;
+}
+
+int Tableau::random(int low, int high)
+{
+	srand((unsigned int)time(NULL));
+	return rand() % high + low;
 }

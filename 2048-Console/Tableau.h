@@ -27,6 +27,7 @@ public:
 
 	int Get_Highest();
 
+	int random(int low, int high);
 
 private:
 	int tableau[4][4];
