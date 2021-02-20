@@ -516,8 +516,29 @@ int Tableau::Get_Score()
 	return score;
 }
 
+int Tableau::Get_Size()
+{
+	return size;
+}
+
 int Tableau::random(int high)
 {
 	srand((int)time(0));
 	return rand() % high;
+}
+
+void Tableau::Save()
+{
+	ofstream file;
+
+	file.open("Stats.txt", ios_base::app);
+
+	if (score > 0)
+	{
+		if (file.is_open())
+		{
+			file << "Mode(" << size << "x" << size << ") - Score(" << score << ") - Nombre de mouvement(" << Nb_Move << ") - Case max(" << Get_Max() << ")" << endl;
+			file.close();
+		}
+	}
 }

@@ -1,0 +1,1 @@
+Mode(3x3) - Score(64) - Nombre de mouvement(12) - Case max(16)

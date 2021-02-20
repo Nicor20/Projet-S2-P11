@@ -4,6 +4,8 @@
 #include <cstdlib>
 #include <ctime>
 #include <vector>
+#include <string>
+#include <fstream>
 
 using namespace std;
 
@@ -28,8 +30,11 @@ public:
 	int Get_Max();
 	int Get_Move();
 	int Get_Score();
+	int Get_Size();
 
 	int random(int high);
+
+	void Save();
 
 private:
 	int ratio = 5;
