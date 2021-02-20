@@ -25,7 +25,9 @@ public:
 
 	void Afficher();
 
-	int Get_Highest();
+	int Get_Max();
+	int Get_Move();
+	int Get_Score();
 
 	int random(int high);
 
@@ -33,6 +35,7 @@ private:
 	int ratio = 5;
 	int size;
 	int score = 0;
+	int Nb_Move = 0;
 
 	vector<int> two_four;
 

@@ -2,27 +2,27 @@
 #include<conio.h>
 #include "Tableau.h"
 
-
-using namespace std;
-
 //Le menu de base vas ici
 int main()
 {
     Tableau* tableau;
     tableau = new Tableau();
 
-    int mode = 4;
+    int Menu = 0;
+    int Mode = 4;
+    bool continuer;
+
     char input;
-    bool Afficher_Menu = true;
 
     while (true)
     {
-        if (Afficher_Menu == true)
+        if (Menu == 0)
         {
-            delete tableau;
+            continuer = false;
             system("cls");
             cout << "2048 version console equipe P11" << endl << endl;
             cout << "Choisir le mode de jeu :" << endl << endl;
+            cout << "3 = Mode 3x3" << endl;
             cout << "4 = Mode 4x4" << endl;
             cout << "5 = Mode 5x5" << endl;
             cout << "6 = Mode 6x6" << endl;
@@ -31,298 +31,92 @@ int main()
             cout << "Q = quitter" << endl;
             input = _getch();
 
-            if (input == '4')
+            if (input == '3' || input == '4' || input == '5' || input == '6' || input == '7' || input == '8')
             {
-                mode = 4;
-                tableau = new Tableau(4);
-                Afficher_Menu = false;
-            }
-            else if (input == '5')
-            {
-                mode = 5;
-                tableau = new Tableau(5);
-                Afficher_Menu = false;
-            }
-            else if (input == '6')
-            {
-                mode = 6;
-                tableau = new Tableau(6);
-                Afficher_Menu = false;
-            }
-            else if (input == '7')
-            {
-                mode = 7;
-                tableau = new Tableau(7);
-                Afficher_Menu = false;
-            }
-            else if (input == '8')
-            {
-                mode = 8;
-                tableau = new Tableau(8);
-                Afficher_Menu = false;
+                delete tableau;
+                tableau = new Tableau(input - '0');
+                Menu = 1;
             }
             else if (input == 'q' || input == 'Q')
             {
                 break;
             }
-            
         }
-        else
+        else if (Menu == 1)
         {
-            if (mode == 4)
+            tableau->Afficher();
+
+            cout << "W = haut" << endl;
+            cout << "A = gauche" << endl;
+            cout << "S = bas" << endl;
+            cout << "D = droit" << endl;
+            cout << "Q = Menu principale" << endl;
+
+            input = _getch();
+
+            if (input == 'w' || input == 'W')
             {
-                tableau->Afficher();
-
-                cout << "W = haut" << endl;
-                cout << "A = gauche" << endl;
-                cout << "S = bas" << endl;
-                cout << "D = droit" << endl;
-                cout << "F = Fin de partie" << endl;
-
-                input = _getch();
-
-                if (input == 'w' || input == 'W')
-                {
-                    tableau->Bouge_Haut();
-                    tableau->Afficher();
-                }
-                else if (input == 's' || input == 'S')
-                {
-                    tableau->Bouge_Bas();
-                    tableau->Afficher();
-                }
-                else if (input == 'd' || input == 'D')
-                {
-                    tableau->Bouge_Droit();
-                    tableau->Afficher();
-                }
-                else if (input == 'a' || input == 'A')
-                {
-                    tableau->Bouge_Gauche();
-                    tableau->Afficher();
-                }
-                else if (input == 'f' || input == 'F')
-                {
-                    system("cls");
-                    cout << "Fin" << endl;
-                    Afficher_Menu = true;
-                }
-                else if (tableau->Move_Possible() == false)
-                {
-                    system("cls");
-                    cout << "Perdu" << endl;
-                    Afficher_Menu = true;
-                }
-                else if (tableau->Get_Highest() >= 2048)
-                {
-                    system("cls");
-                    cout << "Gagner" << endl;
-                    Afficher_Menu = true;
-                }
+                tableau->Bouge_Haut();
             }
-            else if (mode == 5)
+            else if (input == 's' || input == 'S')
             {
-                tableau->Afficher();
-
-                cout << "W = haut" << endl;
-                cout << "A = gauche" << endl;
-                cout << "S = bas" << endl;
-                cout << "D = droit" << endl;
-                cout << "F = Fin de partie" << endl;
-
-                input = _getch();
-
-                if (input == 'w' || input == 'W')
-                {
-                    tableau->Bouge_Haut();
-                    tableau->Afficher();
-                }
-                else if (input == 's' || input == 'S')
-                {
-                    tableau->Bouge_Bas();
-                    tableau->Afficher();
-                }
-                else if (input == 'd' || input == 'D')
-                {
-                    tableau->Bouge_Droit();
-                    tableau->Afficher();
-                }
-                else if (input == 'a' || input == 'A')
-                {
-                    tableau->Bouge_Gauche();
-                    tableau->Afficher();
-                }
-                else if (input == 'f' || input == 'F')
-                {
-                    system("cls");
-                    cout << "Fin" << endl;
-                    Afficher_Menu = true;
-                }
-                else if (tableau->Move_Possible() == false)
-                {
-                    system("cls");
-                    cout << "Perdu" << endl;
-                    Afficher_Menu = true;
-                }
-                else if (tableau->Get_Highest() >= 2048)
-                {
-                    system("cls");
-                    cout << "Gagner" << endl;
-                    Afficher_Menu = true;
-                }
+                tableau->Bouge_Bas();
             }
-            else if (mode == 6)
+            else if (input == 'd' || input == 'D')
             {
-                tableau->Afficher();
-
-                cout << "W = haut" << endl;
-                cout << "A = gauche" << endl;
-                cout << "S = bas" << endl;
-                cout << "D = droit" << endl;
-                cout << "F = Fin de partie" << endl;
-
-                input = _getch();
-
-                if (input == 'w' || input == 'W')
-                {
-                    tableau->Bouge_Haut();
-                    tableau->Afficher();
-                }
-                else if (input == 's' || input == 'S')
-                {
-                    tableau->Bouge_Bas();
-                    tableau->Afficher();
-                }
-                else if (input == 'd' || input == 'D')
-                {
-                    tableau->Bouge_Droit();
-                    tableau->Afficher();
-                }
-                else if (input == 'a' || input == 'A')
-                {
-                    tableau->Bouge_Gauche();
-                    tableau->Afficher();
-                }
-                else if (input == 'f' || input == 'F')
-                {
-                    system("cls");
-                    cout << "Fin" << endl;
-                    Afficher_Menu = true;
-                }
-                else if (tableau->Move_Possible() == false)
-                {
-                    system("cls");
-                    cout << "Perdu" << endl;
-                    Afficher_Menu = true;
-                }
-                else if (tableau->Get_Highest() >= 2048)
-                {
-                    system("cls");
-                    cout << "Gagner" << endl;
-                    Afficher_Menu = true;
-                }
+                tableau->Bouge_Droit();
             }
-            else if (mode == 7)
+            else if (input == 'a' || input == 'A')
             {
-                tableau->Afficher();
-
-                cout << "W = haut" << endl;
-                cout << "A = gauche" << endl;
-                cout << "S = bas" << endl;
-                cout << "D = droit" << endl;
-                cout << "F = Fin de partie" << endl;
-
-                input = _getch();
-
-                if (input == 'w' || input == 'W')
-                {
-                    tableau->Bouge_Haut();
-                    tableau->Afficher();
-                }
-                else if (input == 's' || input == 'S')
-                {
-                    tableau->Bouge_Bas();
-                    tableau->Afficher();
-                }
-                else if (input == 'd' || input == 'D')
-                {
-                    tableau->Bouge_Droit();
-                    tableau->Afficher();
-                }
-                else if (input == 'a' || input == 'A')
-                {
-                    tableau->Bouge_Gauche();
-                    tableau->Afficher();
-                }
-                else if (input == 'f' || input == 'F')
-                {
-                    system("cls");
-                    cout << "Fin" << endl;
-                    Afficher_Menu = true;
-                }
-                else if (tableau->Move_Possible() == false)
-                {
-                    system("cls");
-                    cout << "Perdu" << endl;
-                    Afficher_Menu = true;
-                }
-                else if (tableau->Get_Highest() >= 2048)
-                {
-                    system("cls");
-                    cout << "Gagner" << endl;
-                    Afficher_Menu = true;
-                }
+                tableau->Bouge_Gauche();
             }
-            else if (mode == 8)
+            else if (input == 'q' || input == 'Q')
             {
-                tableau->Afficher();
+                system("cls");
+                cout << "Fin" << endl;
+                Menu = 0;
+            }
+            
+            if (tableau->Move_Possible() == false)
+            {
+                system("cls");
 
-                cout << "W = haut" << endl;
-                cout << "A = gauche" << endl;
-                cout << "S = bas" << endl;
-                cout << "D = droit" << endl;
-                cout << "F = Fin de partie" << endl;
+                cout << "Vous avez perdu la partie!" << endl << endl;
+                cout << "Score : " << tableau->Get_Score() << endl;
+                cout << "Max : " << tableau->Get_Max() << endl;
+                cout << "Nombre de mouvement : " << tableau->Get_Move() << endl;
+                cin.ignore();
 
-                input = _getch();
+                Menu = 0;
+            }
+            
+            if (tableau->Get_Max() >= 2048 && continuer == false)
+            {
+                system("cls");
+                cout << "Vous avez gagner la partie!" << endl;
+                cout << "Score : " << tableau->Get_Score() << endl;
+                cout << "Nombre de mouvement : " << tableau->Get_Move() << endl;
+                cin.ignore();
 
-                if (input == 'w' || input == 'W')
-                {
-                    tableau->Bouge_Haut();
-                    tableau->Afficher();
-                }
-                else if (input == 's' || input == 'S')
-                {
-                    tableau->Bouge_Bas();
-                    tableau->Afficher();
-                }
-                else if (input == 'd' || input == 'D')
-                {
-                    tableau->Bouge_Droit();
-                    tableau->Afficher();
-                }
-                else if (input == 'a' || input == 'A')
-                {
-                    tableau->Bouge_Gauche();
-                    tableau->Afficher();
-                }
-                else if (input == 'f' || input == 'F')
-                {
-                    system("cls");
-                    cout << "Fin" << endl;
-                    Afficher_Menu = true;
-                }
-                else if (tableau->Move_Possible() == false)
-                {
-                    system("cls");
-                    cout << "Perdu" << endl;
-                    Afficher_Menu = true;
-                }
-                else if (tableau->Get_Highest() >= 2048)
-                {
-                    system("cls");
-                    cout << "Gagner" << endl;
-                    Afficher_Menu = true;
-                }
+                Menu = 2;
+            }
+        }
+        else if (Menu == 2)
+        {
+            system("cls");
+            cout << "Vouler vous continuer la Partie" << endl;
+            cout << "Y = Oui" << endl;
+            cout << "N = Non" << endl;
+            input = _getch();
+
+            if (input == 'y' || input == 'Y')
+            {
+                Menu = 1;
+                continuer = true;
+            }
+            else if (input == 'N' || input == 'n')
+            {
+                Menu = 0;
             }
         }
     }

@@ -1,10 +1,10 @@
 ﻿#include "Tableau.h"
 
-using namespace std;
 
 Tableau::Tableau(int z)
 {	
 	size = z;
+
 	for (int i = 0; i < ratio*10; i++)
 	{
 		if (i % ratio != 0)
@@ -20,23 +20,23 @@ Tableau::Tableau(int z)
 	//Détermine 2 position de case pour les valeurs de départ
 	vector<int> vec;
 
-	tableau = new int* [z];
+	tableau = new int* [size];
 
-	for (int i = 0; i < z; i++)
+	for (int i = 0; i < size; i++)
 	{
-		tableau[i] = new int[z];
+		tableau[i] = new int[size];
 	}
 
-	for (int i = 0; i < z * z; i++)
+	for (int i = 0; i < size * size; i++)
 	{
-		tableau[(int)floor(i / z)][i % z] = 0;
+		tableau[(int)floor(i / size)][i % size] = 0;
 		vec.push_back(i);
 	}
 
 	for (int i = 0; i < 2; i++)
 	{
 		int pos = vec[random(vec.size())];
-		tableau[(int)floor(pos / z)][pos % z] = two_four[random(ratio*10)];
+		tableau[(int)floor(pos / size)][pos % size] = two_four[random(ratio*10)];
 		vec.erase(vec.begin() + pos);
 	}
 }
@@ -57,9 +57,8 @@ Tableau::~Tableau()
 
 void Tableau::Bouge_Droit()
 {
-	int y;
-	int x;
-	int z;
+	bool move = false;
+	int x = 0, y = 0, z = 0;
 
 	for (y = 0; y < size; y++)
 	{
@@ -95,7 +94,7 @@ void Tableau::Bouge_Droit()
 					{
 						tableau[y][x] = tableau[y][z];
 						tableau[y][z] = 0;
-
+						move = true;
 						break;
 					}
 				}
@@ -103,14 +102,17 @@ void Tableau::Bouge_Droit()
 		}
 	}
 
+	if (move == true)
+	{
+		Nb_Move++;
+	}
 	Ajout_Random();
 }
 
 void Tableau::Bouge_Gauche()
 {
-	int y;
-	int x;
-	int z;
+	bool move = false;
+	int x = 0, y = 0, z = 0;
 
 	for (y = 0; y < size; y++)
 	{
@@ -146,7 +148,7 @@ void Tableau::Bouge_Gauche()
 					{
 						tableau[y][x] = tableau[y][z];
 						tableau[y][z] = 0;
-
+						move = true;
 						break;
 					}
 				}
@@ -154,14 +156,17 @@ void Tableau::Bouge_Gauche()
 		}
 	}
 
+	if (move == true)
+	{
+		Nb_Move++;
+	}
 	Ajout_Random();
 }
 
 void Tableau::Bouge_Haut()
 {
-	int y;
-	int x;
-	int z;
+	bool move = false;
+	int x = 0, y = 0, z = 0;
 
 	for (x = 0; x < size; x++)
 	{
@@ -197,7 +202,7 @@ void Tableau::Bouge_Haut()
 					{
 						tableau[y][x] = tableau[z][x];
 						tableau[z][x] = 0;
-
+						move = true;
 						break;
 					}
 				}
@@ -205,14 +210,17 @@ void Tableau::Bouge_Haut()
 		}
 	}
 
+	if (move == true)
+	{
+		Nb_Move++;
+	}
 	Ajout_Random();
 }
 
 void Tableau::Bouge_Bas()
 {
-	int y;
-	int x;
-	int z;
+	bool move = false;
+	int x = 0, y = 0, z = 0;
 
 	for (x = 0; x < size; x++)
 	{
@@ -248,6 +256,7 @@ void Tableau::Bouge_Bas()
 					{
 						tableau[y][x] = tableau[z][x];
 						tableau[z][x] = 0;
+						move = true;
 						break;
 					}
 				}
@@ -255,6 +264,10 @@ void Tableau::Bouge_Bas()
 		}
 	}
 
+	if (move == true)
+	{
+		Nb_Move++;
+	}
 	Ajout_Random();
 }
 
@@ -270,8 +283,13 @@ void Tableau::Ajout_Random()
 		}
 	}
 
-	int pos = vec[random(vec.size())];
-	tableau[(int)floor(pos / size)][pos % size] = two_four[random(ratio*10)];
+	if (vec.size() > 0)
+	{
+		int pos = vec[random(vec.size())];
+		tableau[(int)floor(pos / size)][pos % size] = two_four[random(ratio*10)];
+	}
+
+	
 }
 
 void Tableau::Afficher()
@@ -279,8 +297,8 @@ void Tableau::Afficher()
 	system("cls");
 	cout << "Mode " << size << "x" << size << endl << endl;
 	cout << "Score : " << score << endl;
-	cout << "Max : " << Get_Highest() << endl;
-
+	cout << "Max : " << Get_Max() << "/2048" << endl;
+	
 	for (int y = 0; y < size; y++)
 	{
 		if (y == 0)
@@ -350,7 +368,8 @@ void Tableau::Afficher()
 			cout << char(180) << endl;
 		}
 	}
-	cout << endl;
+	
+	cout << "Nombre de mouvement : " << Nb_Move << endl << endl;
 }
 
 bool Tableau::Move_Possible()
@@ -366,7 +385,7 @@ bool Tableau::Move_Possible()
 
 	if (Nb_full == size*size)
 	{		
-		int y,x,z;
+		int x = 0, y = 0, z = 0;
 
 		bool droit = false;
 		for (y = 0; y < size; y++)
@@ -456,7 +475,7 @@ bool Tableau::Move_Possible()
 			}
 		}
 
-		if (droit == false && gauche == false && haut == false && bas == true)
+		if (droit == false && gauche == false && haut == false && bas == false)
 		{
 			return false;
 		}
@@ -471,7 +490,7 @@ bool Tableau::Move_Possible()
 	}
 }
 
-int Tableau::Get_Highest()
+int Tableau::Get_Max()
 {
 	int max = 0;
 	for (int y = 0; y < size; y++)
@@ -485,6 +504,16 @@ int Tableau::Get_Highest()
 		}
 	}
 	return max;
+}
+
+int Tableau::Get_Move()
+{
+	return Nb_Move;
+}
+
+int Tableau::Get_Score()
+{
+	return score;
 }
 
 int Tableau::random(int high)
