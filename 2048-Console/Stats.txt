@@ -1,1 +1,3 @@
-Mode(3x3) - Score(64) - Nombre de mouvement(12) - Case max(16)
+Mode(4x4) - Pointage(48) - Nombre de mouvement(10) - Valeur de case maximal(16)
+Mode(4x4) - Pointage(12) - Nombre de mouvement(4) - Valeur de case maximal(8)
+Mode(4x4) - Pointage(180) - Nombre de mouvement(27) - Valeur de case maximal(32)
