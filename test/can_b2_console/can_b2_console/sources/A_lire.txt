@@ -1,0 +1,16 @@
+Distribution codes sources du programme Can_b2_console
+
+Utiliser la librairie CommunicationFPGA 
+      CommunicationFPGA.lib (mode debug)  
+      ou CommunicationFPGA-release.lib (mode release) 
+Dans le répertoire VSC2017 (pour Visual Studio 2017) 
+
+ou 
+     CommunicationFPGA.lib (mode debug)
+Dans le répertoire VSC2013 (pour Visual Studio 2013)  le cas échéant.
+
+
+D. Dalle
+C.A. Brunet
+
+février 2018

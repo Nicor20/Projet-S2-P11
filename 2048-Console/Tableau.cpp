@@ -61,6 +61,23 @@ Tableau::~Tableau()
 	delete[] tableau;
 }
 
+void Tableau::Load_Grid(vector<string> v)
+{
+	//[0] = mode
+	//[1] = score
+	//[2] = nb moves
+	//[3] = Max
+	//[4 à ?] = valeur des cases
+
+	score = atoi(v[1].c_str());
+	Nb_Move = atoi(v[2].c_str());
+
+	for (int i = 0; i < size * size; i++)
+	{
+		tableau[(int)floor(i / size)][i % size] = atoi(v[i + 4].c_str());
+	}
+}
+
 void Tableau::Bouge_Droit()
 {
 	bool move = false;
@@ -587,7 +604,7 @@ int Tableau::random(int high)
 	return rand() % high;
 }
 
-void Tableau::Save()
+void Tableau::Save_Stats()
 {
 	//Sauvegarde les info pertinante dans le fichier .txt
 	ofstream file;
@@ -602,4 +619,38 @@ void Tableau::Save()
 			file.close();
 		}
 	}
+}
+
+void Tableau::Save_Grid()
+{
+	//[0] = mode
+	//[1] = score
+	//[2] = nb moves
+	//[3] = Max
+	//[4 à ?] = valeur des cases
+
+	string text = to_string(size) + "/";
+	text += to_string(score) + "/";
+	text += to_string(Nb_Move) + "/";
+	text += to_string(Get_Max()) + "/";
+
+	for (int x = 0; x < size; x++)
+	{
+		for (int y = 0; y < size; y++)
+		{
+			text += to_string(tableau[x][y]) + "/";
+		}
+	}
+
+	text.erase(text.size() - 1);
+
+	ofstream file;
+
+	file.open("Save.txt");
+	if (file.is_open())
+	{
+		file << text << endl;
+		file.close();
+	}
+
 }

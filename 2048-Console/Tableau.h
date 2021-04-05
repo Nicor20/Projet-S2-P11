@@ -2,12 +2,10 @@
 	Auteur : Nicolas Cantin
 */
 
-#pragma once
 #include <random>
 #include <iostream>
 #include <cstdlib>
 #include <ctime>
-#include <vector>
 #include <string>
 #include <fstream>
 
@@ -20,11 +18,13 @@ public:
 	Tableau();
 	~Tableau();
 
+	void Load_Grid(vector<string> v);
 
 	void Bouge_Droit();		// Pour combiner et bouger les cases vers la droite
 	void Bouge_Gauche();	// Pour combiner et bouger les cases vers la gauche
 	void Bouge_Haut();		// Pour combiner et bouger les cases vers le haut
 	void Bouge_Bas();		// Pour combiner et bouger les cases vers le bas
+
 
 	void Ajout_Random();	// Ajoute une case de valeur aléatoire (2 ou 4) dans une case vide de facon aléatoire
 
@@ -39,7 +39,8 @@ public:
 
 	int random(int high);	// Renvoie un valeur random
 
-	void Save();			// Sauvegarde les informations pertinente pour le menu statistique
+	void Save_Stats();		// Sauvegarde les informations pertinente pour le menu statistique
+	void Save_Grid();		// Sauvegarde la grille
 
 private:
 	int ratio = 5;			// Ratio de 2 pour chaque 4
