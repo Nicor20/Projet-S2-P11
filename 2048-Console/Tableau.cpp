@@ -120,10 +120,9 @@ void Tableau::Bouge_Droit()
 	if (move == true)
 	{
 		Nb_Move++;
+		// Ajout d'un 2 ou d'un 4 à une case vide
+		Ajout_Random();
 	}
-	
-	// Ajout d'un 2 ou d'un 4 à une case vide
-	Ajout_Random();
 }
 
 void Tableau::Bouge_Gauche()
@@ -185,10 +184,11 @@ void Tableau::Bouge_Gauche()
 	if (move == true)
 	{
 		Nb_Move++;
+		// Ajout d'un 2 ou d'un 4 à une case vide
+		Ajout_Random();
 	}
 
-	// Ajout d'un 2 ou d'un 4 à une case vide
-	Ajout_Random();
+	
 }
 
 void Tableau::Bouge_Haut()
@@ -250,10 +250,11 @@ void Tableau::Bouge_Haut()
 	if (move == true)
 	{
 		Nb_Move++;
+		// Ajout d'un 2 ou d'un 4 à une case vide
+		Ajout_Random();
 	}
 
-	// Ajout d'un 2 ou d'un 4 à une case vide
-	Ajout_Random();
+	
 }
 
 void Tableau::Bouge_Bas()
@@ -315,10 +316,11 @@ void Tableau::Bouge_Bas()
 	if (move == true)
 	{
 		Nb_Move++;
+		// Ajout d'un 2 ou d'un 4 à une case vide
+		Ajout_Random();
 	}
 
-	// Ajout d'un 2 ou d'un 4 à une case vide
-	Ajout_Random();
+	
 }
 
 void Tableau::Ajout_Random()
