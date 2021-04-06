@@ -1,4 +1,23 @@
 ﻿  Generate moc_predefs.h
 F:\Program Files (x86)\Microsoft Visual Studio\2019\Community\MSBuild\Microsoft\VC\v160\Microsoft.CppCommon.targets(240,5): warning MSB8064: Custom build for item "debug\moc_predefs.h.cbt" succeeded, but specified dependency "f:\users\walan\documents\github\projet-s2-p11\super2048\debug\moc_predefs.h.cbt" does not exist. This may cause incremental build to work incorrectly.
-  joueur.cpp
+  main.cpp
+F:\Users\walan\Documents\GitHub\Projet-S2-P11\Super2048\main.cpp(1,1): warning C4828: The file contains a character starting at offset 0x10c that is illegal in the current source character set (codepage 65001).
+F:\Users\walan\Documents\GitHub\Projet-S2-P11\Super2048\main.cpp(1,1): warning C4828: The file contains a character starting at offset 0x116 that is illegal in the current source character set (codepage 65001).
+F:\Users\walan\Documents\GitHub\Projet-S2-P11\Super2048\main.cpp(1,1): warning C4828: The file contains a character starting at offset 0x231 that is illegal in the current source character set (codepage 65001).
+F:\Users\walan\Documents\GitHub\Projet-S2-P11\Super2048\main.cpp(1,1): warning C4828: The file contains a character starting at offset 0x298 that is illegal in the current source character set (codepage 65001).
+F:\Users\walan\Documents\GitHub\Projet-S2-P11\Super2048\main.cpp(1,1): warning C4828: The file contains a character starting at offset 0x342 that is illegal in the current source character set (codepage 65001).
+F:\Users\walan\Documents\GitHub\Projet-S2-P11\Super2048\main.cpp(1,1): warning C4828: The file contains a character starting at offset 0x35f that is illegal in the current source character set (codepage 65001).
+F:\Users\walan\Documents\GitHub\Projet-S2-P11\Super2048\main.cpp(1,1): warning C4828: The file contains a character starting at offset 0x4e6 that is illegal in the current source character set (codepage 65001).
+F:\Users\walan\Documents\GitHub\Projet-S2-P11\Super2048\main.cpp(1,1): warning C4828: The file contains a character starting at offset 0x55f that is illegal in the current source character set (codepage 65001).
+F:\Users\walan\Documents\GitHub\Projet-S2-P11\Super2048\main.cpp(1,1): warning C4828: The file contains a character starting at offset 0x613 that is illegal in the current source character set (codepage 65001).
+F:\Users\walan\Documents\GitHub\Projet-S2-P11\Super2048\Joueur.h(1,1): warning C4828: The file contains a character starting at offset 0xba that is illegal in the current source character set (codepage 65001).
+F:\Users\walan\Documents\GitHub\Projet-S2-P11\Super2048\Joueur.h(1,1): warning C4828: The file contains a character starting at offset 0xc7 that is illegal in the current source character set (codepage 65001).
+F:\Users\walan\Documents\GitHub\Projet-S2-P11\Super2048\tableauTuile.h(1,1): warning C4828: The file contains a character starting at offset 0x13a that is illegal in the current source character set (codepage 65001).
+F:\Users\walan\Documents\GitHub\Projet-S2-P11\Super2048\tableauTuile.h(1,1): warning C4828: The file contains a character starting at offset 0x159 that is illegal in the current source character set (codepage 65001).
+F:\Users\walan\Documents\GitHub\Projet-S2-P11\Super2048\tableauTuile.h(1,1): warning C4828: The file contains a character starting at offset 0x166 that is illegal in the current source character set (codepage 65001).
+F:\Users\walan\Documents\GitHub\Projet-S2-P11\Super2048\tableauTuile.h(1,1): warning C4828: The file contains a character starting at offset 0x178 that is illegal in the current source character set (codepage 65001).
+F:\Users\walan\Documents\GitHub\Projet-S2-P11\Super2048\tableauTuile.h(1,1): warning C4828: The file contains a character starting at offset 0x1fc that is illegal in the current source character set (codepage 65001).
+F:\Users\walan\Documents\GitHub\Projet-S2-P11\Super2048\tableauTuile.h(1,1): warning C4828: The file contains a character starting at offset 0x21c that is illegal in the current source character set (codepage 65001).
+F:\Users\walan\Documents\GitHub\Projet-S2-P11\Super2048\tableauTuile.h(1,1): warning C4828: The file contains a character starting at offset 0x229 that is illegal in the current source character set (codepage 65001).
+F:\Users\walan\Documents\GitHub\Projet-S2-P11\Super2048\tuile.h(1,1): warning C4828: The file contains a character starting at offset 0x6e that is illegal in the current source character set (codepage 65001).
   Super2048.vcxproj -> F:\Users\walan\Documents\GitHub\Projet-S2-P11\Super2048\debug\Super2048.exe
