@@ -52,5 +52,3 @@ private:
 
 	int** tableau;			// pointeur de pointeur pour faire le tableau adaptif
 };
-
-

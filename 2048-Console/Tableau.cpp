@@ -1,15 +1,15 @@
-ï»¿/*
+/*
 	Auteur : Nicolas Cantin
 */
 
 #include "Tableau.h"
 
 Tableau::Tableau(int z)
-{	
+{
 	size = z;
 
 	// Rempli le vecteur de 2 et de 4
-	for (int i = 0; i < ratio*10; i++)
+	for (int i = 0; i < ratio * 10; i++)
 	{
 		if (i % ratio != 0)
 		{
@@ -24,7 +24,7 @@ Tableau::Tableau(int z)
 	//vecteur pour les case vide
 	vector<int> vec;
 
-	//CrÃ©ation du tableau adaptif selon la valeur de size
+	//Création du tableau adaptif selon la valeur de size
 	tableau = new int* [size];
 	for (int i = 0; i < size; i++)
 	{
@@ -38,11 +38,11 @@ Tableau::Tableau(int z)
 		vec.push_back(i);
 	}
 
-	//DÃ©termine 2 position de case pour les valeurs de dÃ©part
+	//Détermine 2 position de case pour les valeurs de départ
 	for (int i = 0; i < 2; i++)
 	{
 		int pos = vec[random(vec.size())];
-		tableau[(int)floor(pos / size)][pos % size] = two_four[random(ratio*10)];
+		tableau[(int)floor(pos / size)][pos % size] = two_four[random(ratio * 10)];
 		vec.erase(vec.begin() + pos);
 	}
 }
@@ -67,7 +67,7 @@ void Tableau::Load_Grid(vector<string> v)
 	//[1] = score
 	//[2] = nb moves
 	//[3] = Max
-	//[4 Ã  ?] = valeur des cases
+	//[4 à ?] = valeur des cases
 
 	score = atoi(v[1].c_str());
 	Nb_Move = atoi(v[2].c_str());
@@ -83,16 +83,16 @@ void Tableau::Bouge_Droit()
 	bool move = false;
 	int x = 0, y = 0, z = 0;
 
-	// Passe Ã  travers chaque rangÃ© du tableau du haut vers le bas
+	// Passe à travers chaque rangé du tableau du haut vers le bas
 	for (y = 0; y < size; y++)
 	{
 		// De la droie vers la gauche
-		for (x = size-1; x >= 0; x--)
+		for (x = size - 1; x >= 0; x--)
 		{
 			// Si la case n'est pas vide
 			if (tableau[y][x] != 0)
 			{
-				// VÃ©rifie chacune des case Ã  la gauche de celle-ci
+				// Vérifie chacune des case à la gauche de celle-ci
 				for (z = x - 1; z >= 0; z--)
 				{
 					// Si la case n'est pas vide
@@ -101,6 +101,7 @@ void Tableau::Bouge_Droit()
 						// Si les deux case ont la meme valeur on vas les joindres
 						if (tableau[y][x] == tableau[y][z])
 						{
+							move = true;
 							score += tableau[y][x] + tableau[y][z];
 							tableau[y][x] *= 2;
 							tableau[y][z] = 0;
@@ -110,14 +111,14 @@ void Tableau::Bouge_Droit()
 				}
 			}
 		}
-		
+
 		// De la droite vers la gauche
-		for (x = size-1; x >= 0; x--)
+		for (x = size - 1; x >= 0; x--)
 		{
 			// Si la case est vide
 			if (tableau[y][x] == 0)
 			{
-				// VÃ©rifie chacune des case Ã  la gauche de celle-ci
+				// Vérifie chacune des case à la gauche de celle-ci
 				for (z = x - 1; z >= 0; z--)
 				{
 					// Si la case n'est pas vide la bouger 
@@ -133,11 +134,11 @@ void Tableau::Bouge_Droit()
 		}
 	}
 
-	// Si une case Ã  bouger augmenter de un le nombre de mouvement 
+	// Si une case à bouger augmenter de un le nombre de mouvement 
 	if (move == true)
 	{
 		Nb_Move++;
-		// Ajout d'un 2 ou d'un 4 Ã  une case vide
+		// Ajout d'un 2 ou d'un 4 à une case vide
 		Ajout_Random();
 	}
 }
@@ -147,7 +148,7 @@ void Tableau::Bouge_Gauche()
 	bool move = false;
 	int x = 0, y = 0, z = 0;
 
-	// Passe Ã  travers chaque rangÃ© du tableau du haut vers le bas
+	// Passe à travers chaque rangé du tableau du haut vers le bas
 	for (y = 0; y < size; y++)
 	{
 		// De la gauche vers la droite
@@ -156,7 +157,7 @@ void Tableau::Bouge_Gauche()
 			// Si la case n'est pas vide
 			if (tableau[y][x] != 0)
 			{
-				// VÃ©rifie chacune des case Ã  la droite de celle-ci
+				// Vérifie chacune des case à la droite de celle-ci
 				for (z = x + 1; z < size; z++)
 				{
 					// Si la case n'est pas vide
@@ -165,6 +166,7 @@ void Tableau::Bouge_Gauche()
 						// Si les deux case ont la meme valeur on vas les joindres
 						if (tableau[y][x] == tableau[y][z])
 						{
+							move = true;
 							score += tableau[y][x] + tableau[y][z];
 							tableau[y][x] *= 2;
 							tableau[y][z] = 0;
@@ -181,10 +183,10 @@ void Tableau::Bouge_Gauche()
 			// Si la case est vide
 			if (tableau[y][x] == 0)
 			{
-				// VÃ©rifie chacune des case Ã  la droite de celle-ci
+				// Vérifie chacune des case à la droite de celle-ci
 				for (z = x + 1; z < size; z++)
 				{
-					// Si la case n'est pas vide la dÃ©placer
+					// Si la case n'est pas vide la déplacer
 					if (tableau[y][z] != 0)
 					{
 						tableau[y][x] = tableau[y][z];
@@ -197,15 +199,15 @@ void Tableau::Bouge_Gauche()
 		}
 	}
 
-	// Si une case Ã  bouger augmenter de un le nombre de mouvement 
+	// Si une case à bouger augmenter de un le nombre de mouvement 
 	if (move == true)
 	{
 		Nb_Move++;
-		// Ajout d'un 2 ou d'un 4 Ã  une case vide
+		// Ajout d'un 2 ou d'un 4 à une case vide
 		Ajout_Random();
 	}
 
-	
+
 }
 
 void Tableau::Bouge_Haut()
@@ -213,7 +215,7 @@ void Tableau::Bouge_Haut()
 	bool move = false;
 	int x = 0, y = 0, z = 0;
 
-	// Passe Ã  travers chaque colone du tableau de la gauche vers la droite
+	// Passe à travers chaque colone du tableau de la gauche vers la droite
 	for (x = 0; x < size; x++)
 	{
 		// Du haut vers le bas
@@ -222,7 +224,7 @@ void Tableau::Bouge_Haut()
 			// Si la case n'est pas vide
 			if (tableau[y][x] != 0)
 			{
-				// VÃ©rifie chacune des case en bas de celle-ci
+				// Vérifie chacune des case en bas de celle-ci
 				for (z = y + 1; z < size; z++)
 				{
 					// Si la case n'est pas vide
@@ -231,6 +233,7 @@ void Tableau::Bouge_Haut()
 						// Si les deux case ont la meme valeur on vas les joindres
 						if (tableau[y][x] == tableau[z][x])
 						{
+							move = true;
 							score += tableau[y][x] + tableau[z][x];
 							tableau[y][x] *= 2;
 							tableau[z][x] = 0;
@@ -247,7 +250,7 @@ void Tableau::Bouge_Haut()
 			// Si la case est vide
 			if (tableau[y][x] == 0)
 			{
-				// VÃ©rifie chacune des case en bas de celle-ci
+				// Vérifie chacune des case en bas de celle-ci
 				for (z = y + 1; z < size; z++)
 				{
 					// Si la case n'est pas vide la bouger
@@ -263,15 +266,15 @@ void Tableau::Bouge_Haut()
 		}
 	}
 
-	// Si une case Ã  bouger augmenter de un le nombre de mouvement 
+	// Si une case à bouger augmenter de un le nombre de mouvement 
 	if (move == true)
 	{
 		Nb_Move++;
-		// Ajout d'un 2 ou d'un 4 Ã  une case vide
+		// Ajout d'un 2 ou d'un 4 à une case vide
 		Ajout_Random();
 	}
 
-	
+
 }
 
 void Tableau::Bouge_Bas()
@@ -279,16 +282,16 @@ void Tableau::Bouge_Bas()
 	bool move = false;
 	int x = 0, y = 0, z = 0;
 
-	// Passe Ã  travers chaque colone du tableau de la gauche vers la droite
+	// Passe à travers chaque colone du tableau de la gauche vers la droite
 	for (x = 0; x < size; x++)
 	{
 		// Du bas vers le haut
-		for (y = size-1; y >=0 ; y--)
+		for (y = size - 1; y >= 0; y--)
 		{
 			// Si la case n'est pas vide
 			if (tableau[y][x] != 0)
 			{
-				// VÃ©rifie chacune des case en haut de celle-ci
+				// Vérifie chacune des case en haut de celle-ci
 				for (z = y - 1; z >= 0; z--)
 				{
 					// Si la case n'est pas vide
@@ -297,6 +300,7 @@ void Tableau::Bouge_Bas()
 						// Si les deux case ont la meme valeur on vas les joindres
 						if (tableau[y][x] == tableau[z][x])
 						{
+							move = true;
 							score += tableau[y][x] + tableau[z][x];
 							tableau[y][x] *= 2;
 							tableau[z][x] = 0;
@@ -308,12 +312,12 @@ void Tableau::Bouge_Bas()
 		}
 
 		// Du bas vers le haut
-		for (y = size-1; y >= 0; y--)
+		for (y = size - 1; y >= 0; y--)
 		{
 			// Si la case est vide
 			if (tableau[y][x] == 0)
 			{
-				// VÃ©rifie chacune des case en bas de celle-ci
+				// Vérifie chacune des case en bas de celle-ci
 				for (z = y - 1; z >= 0; z--)
 				{
 					// Si la case n'est pas vide la bouger
@@ -329,22 +333,22 @@ void Tableau::Bouge_Bas()
 		}
 	}
 
-	// Si une case Ã  bouger augmenter de un le nombre de mouvement 
+	// Si une case à bouger augmenter de un le nombre de mouvement 
 	if (move == true)
 	{
 		Nb_Move++;
-		// Ajout d'un 2 ou d'un 4 Ã  une case vide
+		// Ajout d'un 2 ou d'un 4 à une case vide
 		Ajout_Random();
 	}
 
-	
+
 }
 
 void Tableau::Ajout_Random()
 {
 	// Remplis le vecteur avec la position des case vide du graphique 
 	vector<int> vec;
-	for (int i = 0; i < size*size; i++)
+	for (int i = 0; i < size * size; i++)
 	{
 		if (tableau[(int)floor(i / size)][i % size] == 0)
 		{
@@ -352,11 +356,11 @@ void Tableau::Ajout_Random()
 		}
 	}
 
-	// Si il y a une case de vide dÃ©terminer une position alÃ©atoire et insert 2 ou 4
+	// Si il y a une case de vide déterminer une position aléatoire et insert 2 ou 4
 	if (vec.size() > 0)
 	{
 		int pos = vec[random(vec.size())];
-		tableau[(int)floor(pos / size)][pos % size] = two_four[random(ratio*10)];
+		tableau[(int)floor(pos / size)][pos % size] = two_four[random(ratio * 10)];
 	}
 }
 
@@ -365,11 +369,12 @@ void Tableau::Afficher()
 	// Vide la console
 	system("cls");
 
+	cout << dec;
 	//Affiche les info importante ainsi que la grille de jeu
 	cout << "Mode " << size << "x" << size << endl << endl;
 	cout << "Score : " << score << endl;
 	cout << "Max : " << Get_Max() << "/2048" << endl;
-	
+
 	for (int y = 0; y < size; y++)
 	{
 		if (y == 0)
@@ -378,7 +383,7 @@ void Tableau::Afficher()
 			for (int i = 0; i < size; i++)
 			{
 				cout << char(196) << char(196) << char(196) << char(196);
-				if (i != size-1)
+				if (i != size - 1)
 				{
 					cout << char(194);
 				}
@@ -418,7 +423,7 @@ void Tableau::Afficher()
 			for (int i = 0; i < size; i++)
 			{
 				cout << char(196) << char(196) << char(196) << char(196);
-				if (i != size-1)
+				if (i != size - 1)
 				{
 					cout << char(193);
 				}
@@ -431,7 +436,7 @@ void Tableau::Afficher()
 			for (int i = 0; i < size; i++)
 			{
 				cout << char(196) << char(196) << char(196) << char(196);
-				if (i != size-1)
+				if (i != size - 1)
 				{
 					cout << char(197);
 				}
@@ -439,7 +444,7 @@ void Tableau::Afficher()
 			cout << char(180) << endl;
 		}
 	}
-	
+
 	cout << "Nombre de mouvement : " << Nb_Move << endl << endl;
 }
 
@@ -448,7 +453,7 @@ bool Tableau::Move_Possible()
 	int Nb_empty = 0;
 
 	// Compile le nombre de case vide
-	for (int i = 0; i < size*size; i++)
+	for (int i = 0; i < size * size; i++)
 	{
 		if (tableau[(int)floor(i / size)][i % size] == 0)
 		{
@@ -456,9 +461,9 @@ bool Tableau::Move_Possible()
 		}
 	}
 
-	// Si il n'y a pas de case vide vÃ©rifier si il est possible de joindre des case
+	// Si il n'y a pas de case vide vérifier si il est possible de joindre des case
 	if (Nb_empty == 0)
-	{		
+	{
 		int x = 0, y = 0, z = 0;
 
 		bool droit = false;
@@ -566,7 +571,7 @@ bool Tableau::Move_Possible()
 
 int Tableau::Get_Max()
 {
-	//DÃ©termine la valeur maximal prÃ©sente dans la grille
+	//Détermine la valeur maximal présente dans la grille
 	int max = 0;
 	for (int y = 0; y < size; y++)
 	{
@@ -629,7 +634,7 @@ void Tableau::Save_Grid()
 	//[1] = score
 	//[2] = nb moves
 	//[3] = Max
-	//[4 Ã  ?] = valeur des cases
+	//[4 à ?] = valeur des cases
 
 	string text = to_string(size) + "/";
 	text += to_string(score) + "/";

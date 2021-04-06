@@ -18,23 +18,29 @@
     <ClCompile Include="2048-Console.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="Tableau.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
     <ClCompile Include="Jeu.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="Tableau.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="Tableau.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
     <ClInclude Include="Jeu.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="Tableau.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="CommunicationFPGA.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
-    <Text Include="Stats.txt" />
+    <Library Include="CommunicationFPGA.lib" />
+  </ItemGroup>
+  <ItemGroup>
     <Text Include="Save.txt" />
+    <Text Include="Stats.txt" />
   </ItemGroup>
 </Project>
