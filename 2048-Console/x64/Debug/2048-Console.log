@@ -1,0 +1,7 @@
+﻿  2048-Console.cpp
+  Jeu.cpp
+  Tableau.cpp
+C:\Users\canti\Desktop\Projet-S2-P11\2048-Console\2048-Console\Tableau.cpp(44,34): warning C4267: 'argument': conversion from 'size_t' to 'int', possible loss of data
+C:\Users\canti\Desktop\Projet-S2-P11\2048-Console\2048-Console\Tableau.cpp(362,34): warning C4267: 'argument': conversion from 'size_t' to 'int', possible loss of data
+  Generating Code...
+  2048-Console.vcxproj -> C:\Users\canti\Desktop\Projet-S2-P11\2048-Console\2048-Console\x64\Debug\2048-Console.exe

@@ -21,7 +21,7 @@
   <PropertyGroup Label="Globals">
     <VCProjectVersion>16.0</VCProjectVersion>
     <Keyword>Win32Proj</Keyword>
-    <ProjectGuid>{3b2c583b-f12e-45cb-889b-b7d34e75d455}</ProjectGuid>
+    <ProjectGuid>{bf340712-0315-466a-a6a3-15bbcb1d1474}</ProjectGuid>
     <RootNamespace>My2048Console</RootNamespace>
     <WindowsTargetPlatformVersion>10.0</WindowsTargetPlatformVersion>
   </PropertyGroup>
@@ -144,8 +144,12 @@
     <ClCompile Include="Tableau.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="CommunicationFPGA.h" />
     <ClInclude Include="Jeu.h" />
     <ClInclude Include="Tableau.h" />
+  </ItemGroup>
+  <ItemGroup>
+    <Library Include="CommunicationFPGA.lib" />
   </ItemGroup>
   <ItemGroup>
     <Text Include="Save.txt" />

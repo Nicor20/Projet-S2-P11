@@ -1,0 +1,2 @@
+﻿LINK : fatal error C1047: The object or library file 'CommunicationFPGA-release.lib' was created with an older compiler than other objects; rebuild old objects and libraries
+LINK : fatal error LNK1257: code generation failed
