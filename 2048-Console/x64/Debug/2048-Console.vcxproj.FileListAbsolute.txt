@@ -1,2 +1,4 @@
 C:\Users\canti\Desktop\Projet-S2-P11\2048-Console\2048-Console\x64\Debug\2048-Console.exe
 C:\Users\canti\Desktop\Projet-S2-P11\2048-Console\2048-Console\x64\Debug\2048-Console.pdb
+C:\Users\canti\Desktop\Projet-S2-P11\2048-Console\x64\Debug\2048-Console.exe
+C:\Users\canti\Desktop\Projet-S2-P11\2048-Console\x64\Debug\2048-Console.pdb

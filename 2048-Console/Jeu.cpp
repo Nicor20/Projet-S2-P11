@@ -402,10 +402,85 @@ void Jeu::Setup_FPGA()
 	cout << setfill('0') << setw(4) << hex << showbase << internal << endl;
 	cout << "   Stat_BTN,  SWT,  compt_t,      ch[0], ch[1], ch[2], ch[3]" << endl;
 
+	//setup phoneme
+	Phoneme temp;
+
+	//Phoneme 'a'
+	temp.val[0][0] = 60;		//min pot1
+	temp.val[0][1] = 90;		//max pot1
+	temp.val[1][0] = 520;		//min pot2
+	temp.val[1][1] = 610;		//max pot2
+	temp.val[2][0] = 20;		//min pot3
+	temp.val[2][1] = 60;		//max pot3
+	temp.val[3][0] = 90;		//min pot4
+	temp.val[3][1] = 170;		//max pot4
+	val_ref[0] = temp;
+
+	//Phoneme 'e'
+	temp.val[0][0] = 180;		//min pot1
+	temp.val[0][1] = 270;		//max pot1
+	temp.val[1][0] = 60;		//min pot2
+	temp.val[1][1] = 100;		//max pot2
+	temp.val[2][0] = 300;		//min pot3
+	temp.val[2][1] = 530;		//max pot3
+	temp.val[3][0] = 130;		//min pot4
+	temp.val[3][1] = 240;		//max pot4
+	val_ref[1] = temp;
+
+	//Phoneme 'eu'
+	temp.val[0][0] = 550;		//min pot1
+	temp.val[0][1] = 830;		//max pot1
+	temp.val[1][0] = 180;		//min pot2
+	temp.val[1][1] = 280;		//max pot2
+	temp.val[2][0] = 240;		//min pot3
+	temp.val[2][1] = 390;		//max pot3
+	temp.val[3][0] = 40;		//min pot4
+	temp.val[3][1] = 110;		//max pot4
+	val_ref[2] = temp;
+
+	//Phoneme 'i'
+	temp.val[0][0] = 500;		//min pot1
+	temp.val[0][1] = 780;		//max pot1
+	temp.val[1][0] = 0;			//min pot2
+	temp.val[1][1] = 60;		//max pot2
+	temp.val[2][0] = 430;		//min pot3
+	temp.val[2][1] = 615;		//max pot3
+	temp.val[3][0] = 585;		//min pot4
+	temp.val[3][1] = 810;		//max pot4
+	val_ref[3] = temp;
+
+	/*	
+	* Phoneme 'a'
+	* pot1 = 0x16
+	* pot2 = 0x8D
+	* pot3 = 0x0A
+	* pot4 = 0x20
+	* 
+	* Phoneme 'e'
+	* pot1 = 0x38
+	* pot2 = 0x14
+	* pot3 = 0x68
+	* pot4 = 0x2E
+	* 
+	* Phoneme 'eu'
+	* pot1 = 0xAD
+	* pot2 = 0x3A
+	* pot3 = 0x4F
+	* pot4 = 0x16
+	* 
+	* Phoneme 'i'
+	* pot1 = 0xA0
+	* pot2 = 0x08
+	* pot3 = 0x83
+	* pot4 = 0xAE
+	*/
+	
 }
 
 bool Jeu::Lecture_FPGA()
 {
+	bool move_bon = false;
+
 	// lecture statut et BTN
 	if (statutport)
 	{
@@ -475,6 +550,69 @@ bool Jeu::Lecture_FPGA()
 
 	if (statutport)
 	{
+		//Ajuster les pot
+		if (swt == 0x80)
+		{//#1
+			statutport = port.ecrireRegistre(nreg_ecri_aff7sg0, 0x01);
+			statutport = port.ecrireRegistre(nreg_ecri_aff7sg1, Chanel[0]);
+			statutport = port.ecrireRegistre(nreg_ecri_aff7dot, 0x04);
+		}
+		else if (swt == 0x40)
+		{//#2
+			statutport = port.ecrireRegistre(nreg_ecri_aff7sg0, 0x02);
+			statutport = port.ecrireRegistre(nreg_ecri_aff7sg1, Chanel[1]);
+			statutport = port.ecrireRegistre(nreg_ecri_aff7dot, 0x04);
+		}
+		else if (swt == 0x20)
+		{//#3
+			statutport = port.ecrireRegistre(nreg_ecri_aff7sg0, 0x03);
+			statutport = port.ecrireRegistre(nreg_ecri_aff7sg1, Chanel[2]);
+			statutport = port.ecrireRegistre(nreg_ecri_aff7dot, 0x04);
+		}
+		else if (swt == 0x10)
+		{//#4
+			statutport = port.ecrireRegistre(nreg_ecri_aff7sg0, 0x04);
+			statutport = port.ecrireRegistre(nreg_ecri_aff7sg1, Chanel[3]);
+			statutport = port.ecrireRegistre(nreg_ecri_aff7dot, 0x04);
+		}
+		else
+		{
+			statutport = port.ecrireRegistre(nreg_ecri_aff7sg0, 0x00);
+			statutport = port.ecrireRegistre(nreg_ecri_aff7sg1, 0x00);
+			statutport = port.ecrireRegistre(nreg_ecri_aff7dot, 0x00);
+		}
+
+		if (stat_btn == 0x11 && swt == 0x00 && save_val == false)
+		{
+			save_val = true;
+			nb_saved = 0;
+		}
+
+		if (save_val == true && nb_saved < nb_lecture_voulu-1)
+		{
+			val_verif[nb_saved][0] = Chanel[0];
+			val_verif[nb_saved][1] = Chanel[1];
+			val_verif[nb_saved][2] = Chanel[2];
+			val_verif[nb_saved][3] = Chanel[3];
+			//cout << "Lecture #" << to_string(nb_saved + 1) << endl;
+			nb_saved++;
+		}
+		else if (save_val == true && nb_saved == nb_lecture_voulu-1)
+		{
+			val_verif[nb_saved][0] = Chanel[0];
+			val_verif[nb_saved][1] = Chanel[1];
+			val_verif[nb_saved][2] = Chanel[2];
+			val_verif[nb_saved][3] = Chanel[3];
+			
+			//cout << "Lecture #" << to_string(nb_saved + 1) << endl;
+			cout << "Start Verif" << endl;
+			move_bon = Verification();
+			Sleep(1000);
+			save_val = false;
+		}
+
+
+		/*
 		// Mémoire phonem 1
 		if (swt == 0x82)
 		{
@@ -581,10 +719,86 @@ bool Jeu::Lecture_FPGA()
 			statutport = port.ecrireRegistre(nreg_ecri_aff7sg1, 0x00);
 			statutport = port.ecrireRegistre(nreg_ecri_aff7dot, 0x00);
 		}
+		*/
 	}
 
 	Sleep(delai_boucle);
-	return false;
+	return move_bon;
+}
+
+bool Jeu::Verification()
+{
+	int pointage[4] = { 0 };
+
+	for (int a = 0; a < nb_lecture_voulu; a++) // lecture #1 a #10
+	{
+		for (int b = 0; b < 4; b++)// pot #1 a #4
+		{
+			for (int c = 0; c < 4; c++) //Phonème #1 a #4
+			{
+				if ((val_verif[a][b]*4) >= val_ref[c].val[b][0] && (val_verif[a][b]*4) <= val_ref[c].val[b][1])
+				{
+					//cout << dec << "l=" << to_string(a + 1) << " P=" << to_string(b + 1) << " h=" << to_string(c + 1) << " val=";
+					//cout << hex << to_string(val_verif[a][b]) << endl;
+					pointage[c]++;
+				}
+			}
+		}
+	}
 
 
+	//Trouver le correspondant
+	int max = 0;
+	int num = 0;
+	int seuil = floor((4.0 * nb_lecture_voulu) * 0.8);
+	for (int i = 0; i < 4; i++)
+	{
+		if (pointage[i] >= max)
+		{
+			num = i+1;
+			max = pointage[i];
+		}
+	}
+	
+	cout << "Nombre de bon = " << to_string(max) << endl;
+	if (num == 1 && max >= seuil)
+	{
+		statutport = port.ecrireRegistre(nreg_ecri_aff7sg0, num);
+		statutport = port.ecrireRegistre(nreg_ecri_aff7sg1, pointage[num-1]);
+		statutport = port.ecrireRegistre(nreg_ecri_aff7dot, 0x04);
+		tab->Bouge_Haut();
+		return true;
+	}
+	else if (num == 2 && max >= seuil)
+	{
+		statutport = port.ecrireRegistre(nreg_ecri_aff7sg0, num);
+		statutport = port.ecrireRegistre(nreg_ecri_aff7sg1, pointage[num - 1]);
+		statutport = port.ecrireRegistre(nreg_ecri_aff7dot, 0x04);
+		tab->Bouge_Droit();
+		return true;
+	}
+	else if (num == 3 && max >= seuil)
+	{
+		statutport = port.ecrireRegistre(nreg_ecri_aff7sg0, num);
+		statutport = port.ecrireRegistre(nreg_ecri_aff7sg1, pointage[num - 1]);
+		statutport = port.ecrireRegistre(nreg_ecri_aff7dot, 0x04);
+		tab->Bouge_Bas();
+		return true;
+	}
+	else if (num == 4 && max >= seuil)
+	{
+		statutport = port.ecrireRegistre(nreg_ecri_aff7sg0, num);
+		statutport = port.ecrireRegistre(nreg_ecri_aff7sg1, pointage[num - 1]);
+		statutport = port.ecrireRegistre(nreg_ecri_aff7dot, 0x04);
+		tab->Bouge_Gauche();
+		return true;
+	}
+	else
+	{
+		statutport = port.ecrireRegistre(nreg_ecri_aff7sg0, 0x0E);
+		statutport = port.ecrireRegistre(nreg_ecri_aff7sg1, 0xE0);
+		statutport = port.ecrireRegistre(nreg_ecri_aff7dot, 0);
+		cout << "Erreur de lecture" << endl;
+		return false;
+	}
 }

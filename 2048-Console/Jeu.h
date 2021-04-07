@@ -12,6 +12,12 @@
 
 //using namespace std;
 
+struct Phoneme
+{
+	int val[4][2];
+};
+
+
 class Jeu
 {
 public:
@@ -41,6 +47,8 @@ public:
 	void Setup_FPGA();
 	bool Lecture_FPGA();
 
+	bool Verification();
+
 
 private:
 	//Grille de jeu
@@ -57,6 +65,12 @@ private:
 
 
 	//FPGA
+	Phoneme val_ref[4];
+	int nb_lecture_voulu = 10;
+
+	int val_verif[10][4];
+	bool save_val;
+	int nb_saved;
 
 	int vref_1 = 0x00;
 	int vref_2 = 0x00;
@@ -70,7 +84,7 @@ private:
 	int aff7sg_octet1 = 0;                  // octet 0 (droite) pour afficheur 7 segments
 	int stat_btn = 0;                       // donnee recue du FPGA: statut et BTN
 	int Chanel[4];                          // donnee converties recues du FPGA      
-	const int delai_boucle = 100;            // delai d'attente ajouté dans la boucle de lecture en ms
+	const int delai_boucle = 10;            // delai d'attente ajouté dans la boucle de lecture en ms
 	int canal_a_afficher = 0;               // donnee recue du FPGA
 	int indice_canal_a_afficher = 0;
 
