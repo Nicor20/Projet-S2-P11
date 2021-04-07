@@ -2,6 +2,9 @@
 	Auteur : Nicolas Cantin
 */
 
+#ifndef TABLEAU_H
+#define TABLEAU_H
+
 #include <random>
 #include <iostream>
 #include <cstdlib>
@@ -10,6 +13,7 @@
 #include <fstream>
 
 using namespace std;
+
 
 class Tableau
 {
@@ -54,3 +58,4 @@ private:
 };
 
 
+#endif //TABLEAU_H
