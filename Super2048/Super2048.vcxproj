@@ -142,10 +142,12 @@
   <ItemGroup>
     <ClCompile Include="joueur.cpp" />
     <ClCompile Include="main.cpp" />
+    <ClCompile Include="Tableau.cpp" />
     <ClCompile Include="tableauTuile.cpp" />
     <ClCompile Include="tuile.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="Tableau.h" />
     <ClInclude Include="tableauTuile.h" />
     <ClInclude Include="tuile.h" />
     <ClInclude Include="joueur.h" />
