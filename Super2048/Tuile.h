@@ -2,8 +2,6 @@
 #define TUILE_H
 
 #include <QGraphicsRectItem>
-#include <QGraphicsItem>
-#include <QObject>
 
 using namespace std;
 class Tuile : public QObject, public QGraphicsRectItem

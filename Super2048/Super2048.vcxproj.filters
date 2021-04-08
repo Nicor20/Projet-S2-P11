@@ -33,6 +33,9 @@
     <ClCompile Include="Affichage.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="Grille.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
     <ClCompile Include="Jeu.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
@@ -45,6 +48,9 @@
   </ItemGroup>
   <ItemGroup>
     <CustomBuild Include="Affichage.h">
+      <Filter>Header Files</Filter>
+    </CustomBuild>
+    <CustomBuild Include="Grille.h">
       <Filter>Header Files</Filter>
     </CustomBuild>
     <ClInclude Include="Jeu.h">
@@ -62,6 +68,12 @@
       <Filter>Generated Files</Filter>
     </ClCompile>
     <ClCompile Include="release\moc_Affichage.cpp">
+      <Filter>Generated Files</Filter>
+    </ClCompile>
+    <ClCompile Include="debug\moc_Grille.cpp">
+      <Filter>Generated Files</Filter>
+    </ClCompile>
+    <ClCompile Include="release\moc_Grille.cpp">
       <Filter>Generated Files</Filter>
     </ClCompile>
     <ClCompile Include="debug\moc_Tuile.cpp">
