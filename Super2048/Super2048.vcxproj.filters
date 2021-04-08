@@ -39,6 +39,9 @@
     <ClCompile Include="Tableau.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="Tuile.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <CustomBuild Include="Affichage.h">
@@ -50,12 +53,21 @@
     <ClInclude Include="Tableau.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <CustomBuild Include="Tuile.h">
+      <Filter>Header Files</Filter>
+    </CustomBuild>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="debug\moc_Affichage.cpp">
       <Filter>Generated Files</Filter>
     </ClCompile>
     <ClCompile Include="release\moc_Affichage.cpp">
+      <Filter>Generated Files</Filter>
+    </ClCompile>
+    <ClCompile Include="debug\moc_Tuile.cpp">
+      <Filter>Generated Files</Filter>
+    </ClCompile>
+    <ClCompile Include="release\moc_Tuile.cpp">
       <Filter>Generated Files</Filter>
     </ClCompile>
     <CustomBuild Include="debug\moc_predefs.h.cbt">
