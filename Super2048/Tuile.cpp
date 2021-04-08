@@ -1,4 +1,3 @@
-
 #include "Tuile.h"
 
 Tuile::Tuile()
@@ -27,3 +26,4 @@ void Tuile::setSize(int NouvSize)
 {
 	Size = NouvSize;
 }
+

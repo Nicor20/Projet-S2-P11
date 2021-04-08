@@ -29,9 +29,17 @@ void Affichage::LoadZonedeJeu(int mode)
 	view = new  QGraphicsView(scene);
 	view->setScene(scene);
 	setCentralWidget(view);
+
 	//comment redimentionner les tuiles AVANT DE LES CRÉER?
-	grille = new Grille;
-	grille->AddGrille(mode, view, scene);
+
+	//---Cree la grille de tuile fixe et les affiche a lecrant
+	grillefixe = new Grille;
+	grillefixe->AddGrille(mode, view, scene);
+	grillefixe->AfficheGrille(mode, scene);
+
+	//---Cree la grille de tuile dynamique
+	grilledynamique = new Grille;
+	grilledynamique->AddGrille(mode, view, scene);
 
 	//---Message correspondant au mode dans la status Bar
 	if (mode > 2 && mode < 9)

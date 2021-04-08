@@ -10,7 +10,6 @@
 #include <QDebug>
 #include "Grille.h"
 
-
 using namespace std;
 
 class Affichage : public QMainWindow
@@ -31,9 +30,8 @@ private:
 	//---Lorsque Zone de jeux est Loader---//
 	QGraphicsScene* scene; // Pointe la scene correspondant à la zone de jeux
 	QGraphicsView* view; // Vois la Scene de la zone de Jeux
-	Grille* grille; // Grille de tuile
-
-
+	Grille* grillefixe; // Grille de tuile
+	Grille* grilledynamique; // Grille de tuile
 };
 #endif //AFFICHAGE_H
 

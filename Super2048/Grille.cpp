@@ -22,11 +22,11 @@ void Grille::AddGrille(int mode, QGraphicsView* view, QGraphicsScene* scene)
 	}
 
 	//---Détermine la position de départ de la créaton de tableau
-	int origine_X = ((view->width()) / 2) - ((ListTuileGrille[1]->getSize() * 113) / 2);
-	int origine_Y = ((view->height()) / 2) - ((ListTuileGrille[1]->getSize() * 113) / 2);
+	origine_X = ((view->width()) / 2) - ((ListTuileGrille[1]->getSize() * 113) / 2);
+	origine_Y = ((view->height()) / 2) - ((ListTuileGrille[1]->getSize() * 113) / 2);
 
 
-	//---Place les Tuiles de la liste des tuile dans la grille et donne leur coordonnée
+	//---Place les Tuiles de la liste des tuile dans la grille 
 	for (int i = 0; i < mode * mode; i++)
 	{
 		int ranger = i / mode;
@@ -36,7 +36,11 @@ void Grille::AddGrille(int mode, QGraphicsView* view, QGraphicsScene* scene)
 		//qDebug() << "colone: " << colone;
 		//qDebug() << "ranger: " << ranger;
 	}
+}
 
+void Grille::AfficheGrille(int mode, QGraphicsScene* scene)
+{
+	// donne leur coordonnée
 	for (size_t i = 0; i < mode; i++)
 	{
 
@@ -48,7 +52,6 @@ void Grille::AddGrille(int mode, QGraphicsView* view, QGraphicsScene* scene)
 			//qDebug() << "pos y: " << Pos_Y;
 			//qDebug() << "pos x: " << Pos_X;
 			scene->addItem(TuileGrille[i][j]);
-		};
+		}
 	}
-
 }
