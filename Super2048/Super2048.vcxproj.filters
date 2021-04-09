@@ -27,34 +27,55 @@
     </Filter>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="main.cpp">
+    <ClCompile Include="2048-Console.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="joueur.cpp">
+    <ClCompile Include="Affichage.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="tuile.cpp">
+    <ClCompile Include="Grille.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="tableauTuile.cpp">
+    <ClCompile Include="Jeu.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Tableau.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Tuile.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="super2048.h">
+    <CustomBuild Include="Affichage.h">
+      <Filter>Header Files</Filter>
+    </CustomBuild>
+    <ClInclude Include="Grille.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="joueur.h">
+    <ClInclude Include="Jeu.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="tuile.h">
+    <ClInclude Include="Tableau.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="tableauTuile.h">
+    <CustomBuild Include="Tuile.h">
       <Filter>Header Files</Filter>
-    </ClInclude>
+    </CustomBuild>
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="debug\moc_Affichage.cpp">
+      <Filter>Generated Files</Filter>
+    </ClCompile>
+    <ClCompile Include="release\moc_Affichage.cpp">
+      <Filter>Generated Files</Filter>
+    </ClCompile>
+    <ClCompile Include="debug\moc_Tuile.cpp">
+      <Filter>Generated Files</Filter>
+    </ClCompile>
+    <ClCompile Include="release\moc_Tuile.cpp">
+      <Filter>Generated Files</Filter>
+    </ClCompile>
     <CustomBuild Include="debug\moc_predefs.h.cbt">
       <Filter>Generated Files</Filter>
     </CustomBuild>

@@ -7,6 +7,10 @@ class Tuile: public QGraphicsRectItem // crée les tuiles du jeux
 {
 public:
 	Tuile();
+
+	~Tuile();
+
+	Tuile(int type); //0 == tuile vide autre == tuiles de jeux
 	
 	// getter
 	int getValeur();

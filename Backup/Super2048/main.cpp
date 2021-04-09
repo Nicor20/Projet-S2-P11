@@ -38,7 +38,7 @@ int main(int argc, char* argv[])
 	int origine_Y = ((view->height()) / 2) - ((hauteur * 113) / 2);
 
 	//place les tuiles
-	board->placeTuiles(origine_X, origine_Y, hauteur, largeur, scene);
+	board->placegrille(origine_X, origine_Y, hauteur, largeur, scene);
 
 
 	//---------------Paramètre le joueur
