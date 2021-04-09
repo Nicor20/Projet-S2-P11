@@ -9,6 +9,7 @@
 #include <QStatusBar>
 #include <QDebug>
 #include "Grille.h"
+#include "Joueur.h"
 
 using namespace std;
 

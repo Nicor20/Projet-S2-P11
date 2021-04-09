@@ -10,6 +10,7 @@ Affichage::Affichage()
 	//---Ajoute les éléments suivant à l'affichage
 	LoadZonedeJeu(5); // Ajoute la zone de Jeu au mode spécifier à la fenêtre
 	
+
 	//---TEST DES CAPACITÉ DE LA GRILLE				  
 	//qDebug() << "Taille debut: " << grilledynamique->getSize();
 	AddTuile(0, 0, 2); //Ajoute
@@ -48,8 +49,6 @@ void Affichage::LoadZonedeJeu(int mode)
 	//---Cree la grille de tuile dynamique
 	grilledynamique = new Grille(mode);
 	
-
-
 	//---Message correspondant au mode dans la status Bar
 	if (mode > 2 && mode < 9)
 	{

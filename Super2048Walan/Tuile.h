@@ -19,7 +19,7 @@ public:
 	int getExiste(); // retourne 1 si la tuiles est deja sur le plateau de jeux
 
 public slots:
-	//void Mouve(int direction); // 0 = stop, 1 = haut, 2 = bas, 3 = gauche, 4 = droite
+	
 
 private:
 	int Valeur = 0; //valeur de la tuile 0 = tuiles grille(fixe), autre = Tuile dynamique(dynamique) 
