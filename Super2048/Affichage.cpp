@@ -8,7 +8,16 @@ Affichage::Affichage()
 	setMinimumSize(600, 600);
 
 	//---Ajoute les éléments suivant à l'affichage
-	LoadZonedeJeu(5); // Ajoute la zone de Jeu au mode spécifier à la fenêtre 
+	LoadZonedeJeu(5); // Ajoute la zone de Jeu au mode spécifier à la fenêtre
+	
+	//---TEST DES CAPACITÉ DE LA GRILLE				  
+	//qDebug() << "Taille debut: " << grilledynamique->getSize();
+	AddTuile(0, 0, 2); //Ajoute
+	//qDebug() << "Taille apres tuile 1: " << grilledynamique->getSize();
+	grilledynamique->setTuilePoss(2, 0, grilledynamique->getTuile_XY(0, 0));
+	//qDebug() << "Taille deplacement tuile 1: " << grilledynamique->getSize();
+	AddTuile(2, 5, 2);
+	//qDebug() << "Taille apres tuile 2: " << grilledynamique->getSize();
 }
 
 Affichage::~Affichage()
@@ -33,13 +42,13 @@ void Affichage::LoadZonedeJeu(int mode)
 	//comment redimentionner les tuiles AVANT DE LES CRÉER?
 
 	//---Cree la grille de tuile fixe et les affiche a lecrant
-	grillefixe = new Grille;
-	grillefixe->AddGrille(mode, view, scene);
-	grillefixe->AfficheGrille(mode, scene);
+	grillefixe = new Grille(mode);
+	AfficheGrille(grillefixe);
 
 	//---Cree la grille de tuile dynamique
-	grilledynamique = new Grille;
-	grilledynamique->AddGrille(mode, view, scene);
+	grilledynamique = new Grille(mode);
+	
+
 
 	//---Message correspondant au mode dans la status Bar
 	if (mode > 2 && mode < 9)
@@ -57,7 +66,19 @@ void Affichage::AddTuile(int coord_X, int coord_Y, int valeur)
 {
 	//---Paramètre la tuile à ajouté à l'écrant
 	Tuile * tuile = new Tuile(valeur);
-	tuile->setPos(coord_X, coord_Y);
-
 	scene->addItem(tuile); // Ajoute la tuile à la scene avec les paramètre indiquées
+	grilledynamique->setTuilePoss(coord_X, coord_Y, tuile);
+}
+
+void Affichage::AfficheGrille(Grille* grille)
+{
+	int taille_cote = grille->getMode();
+
+	for (int i = 0; i < taille_cote * taille_cote; i++)
+	{	
+		qDebug() << "affiche tuile de grille";
+		scene->addItem(grille->getTuile_List(i));
+	}
+	show();
+
 }

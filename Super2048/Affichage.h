@@ -24,6 +24,7 @@ public:
 	void LoadZonedeJeu(int mode); //mode == nombre de cases par cotes de la grille ("mode" X "mode")
 	void AddTuile(int coord_X, int coord_Y, int valeur); // crée une tuile aux coordonnés indiqué
 	void Message(const char* message); // message écrit dans la Status Bar de l'interface
+	void AfficheGrille(Grille* grille);
 
 private:
 

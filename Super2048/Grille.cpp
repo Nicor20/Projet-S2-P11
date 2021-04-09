@@ -2,56 +2,115 @@
 
 Grille::Grille()
 {
-
+	qDebug() << "Grille basique Creer";
 }
 
-void Grille::AddGrille(int mode, QGraphicsView* view, QGraphicsScene* scene)
+Grille::Grille(int mode)
 {
-	//---crée la liste des tuiles de la grille
+	qDebug() << "Grille moder Creer";
+	//---cree la liste des tuiles de la grille
 	for (int i = 0; i < mode * mode; i++)
 	{
 		Tuile* tuile = new Tuile(0);
 		ListTuileGrille.append(tuile);
 	}
+	Mode = mode;
+	setCoordGrille(0, 0);
+}
 
-	//---Crée la grille de jeux selon la taille demandé (Mode de jeux)
-	TuileGrille = new Tuile * *[mode];
-	for (int i = 0; i < mode; i++)
+int Grille::getMode()
+{
+	return Mode;
+}
+
+int Grille::getSize()
+{
+	int taille = 0;
+	taille = ListTuileGrille.size();
+	return taille;
+}
+
+Tuile* Grille::getTuile_XY(int colone, int ranger)
+{
+	
+	int position = 0;
+
+	position = colone * Mode + ranger;
+	return ListTuileGrille[position];
+
+}
+
+int Grille::getTuile_XY_Position(int colone, int ranger)
+{
+
+	int position = 0;
+
+	position = colone * Mode + ranger;
+	return position;
+
+}
+
+Tuile* Grille::getTuile_List(int index)
+{
+	return ListTuileGrille[index];
+}
+
+void Grille::setTuilePoss(int colone, int ranger, Tuile* tuile)
+{
+	//place la tuile à la position donnée
+	int index = 0;
+	index = getTuile_XY_Position(colone, ranger);
+	if (index >= Mode*Mode || index < 0) // Annule le placement si la tuile sort de la grille
 	{
-		TuileGrille[i] = new Tuile * [mode];
+		qDebug() << "cette tuile ne peux pas sortir de la grille";
+		tuile->destroyed();
 	}
-
-	//---Détermine la position de départ de la créaton de tableau
-	origine_X = ((view->width()) / 2) - ((ListTuileGrille[1]->getSize() * 113) / 2);
-	origine_Y = ((view->height()) / 2) - ((ListTuileGrille[1]->getSize() * 113) / 2);
-
-
-	//---Place les Tuiles de la liste des tuile dans la grille 
-	for (int i = 0; i < mode * mode; i++)
+	else if (getTuile_List(index)->getValeur() > 1) // Annule le placement si la tuiledynamique en remplacerais une autre à l'index indiqué
 	{
-		int ranger = i / mode;
-		int colone = i % mode;
-		TuileGrille[ranger][colone] = ListTuileGrille[i];
-		//qDebug() << "i: " << i;
-		//qDebug() << "colone: " << colone;
-		//qDebug() << "ranger: " << ranger;
+		qDebug() << "cette tuile ne peux pas apparetre au meme endroit quune autre tuile";
+		tuile->destroyed();
+	}
+	else if (tuile->getExiste())
+	{
+		qDebug() << "cette tuile est deja sur le plateau, elle echange de position avec la tuile vide la ou elle va";
+		int index_Actuel=0;
+		index_Actuel = ListTuileGrille.indexOf(tuile);
+		tuile->setPos(getTuile_List(index)->pos());
+
+		ListTuileGrille.swapItemsAt(index_Actuel,index);
+	}
+	else
+	{
+		qDebug() << "cette tuile nest pas deja sur le plateau, elle en remplacera une vide";
+		tuile->setPos(getTuile_List(index)->pos());
+		ListTuileGrille.replace(index, tuile);
 	}
 }
 
-void Grille::AfficheGrille(int mode, QGraphicsScene* scene)
+void Grille::setCoordGrille(int coord_x, int coord_y)
 {
-	// donne leur coordonnée
-	for (size_t i = 0; i < mode; i++)
+	// Assigne des coordonnees aux tuiles
+	for (int i = 0; i < Mode; i++)
 	{
 
-		for (size_t j = 0; j < mode; j++)
+		for (int j = 0; j < Mode; j++)
 		{
-			int Pos_X = origine_X + (i * TuileGrille[i][j]->getSize());
-			int Pos_Y = origine_Y + (j * TuileGrille[i][j]->getSize());
-			TuileGrille[i][j]->setPos(Pos_X, Pos_Y);
-			//qDebug() << "pos y: " << Pos_Y;
-			//qDebug() << "pos x: " << Pos_X;
-			scene->addItem(TuileGrille[i][j]);
+			int Pos_X = coord_x + (i * getTuile_XY(i,j)->getSize());
+			int Pos_Y = coord_y + (j * getTuile_XY(i, j)->getSize());
+			getTuile_XY(i, j)->setPos(Pos_X, Pos_Y);
+			qDebug() << "pos y: " << Pos_Y;
+			qDebug() << "pos x: " << Pos_X;
 		}
 	}
+
 }
+
+
+
+/*
+retourne index [position dans la liste] à partir des index [x][y]
+x*colone+y=position dans la liste
+
+retourne indexe [x][y] d'un item à partir d'une liste 1D
+x = position dans la liste / taille de colone;
+y = position dans la liste % ranger;*/

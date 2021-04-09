@@ -1,6 +1,4 @@
 ﻿F:\Program Files (x86)\Microsoft Visual Studio\2019\Community\MSBuild\Microsoft\VC\v160\Microsoft.CppBuild.targets(519,5): warning MSB8028: The intermediate directory (debug\) contains files shared from another project (2048-Console.vcxproj).  This can lead to incorrect clean and rebuild behavior.
-  MOC Affichage.h
-  MOC Grille.h
   2048-Console.cpp
 F:\Users\walan\Documents\GitHub\Projet-S2-P11\Super2048\Jeu.h(1,1): warning C4828: The file contains a character starting at offset 0xf2 that is illegal in the current source character set (codepage 65001).
 F:\Users\walan\Documents\GitHub\Projet-S2-P11\Super2048\Tableau.h(1,1): warning C4828: The file contains a character starting at offset 0x2aa that is illegal in the current source character set (codepage 65001).
@@ -13,12 +11,19 @@ F:\Users\walan\Documents\GitHub\Projet-S2-P11\Super2048\Affichage.h(1,1): warnin
 F:\Users\walan\Documents\GitHub\Projet-S2-P11\Super2048\Affichage.h(1,1): warning C4828: The file contains a character starting at offset 0x210 that is illegal in the current source character set (codepage 65001).
 F:\Users\walan\Documents\GitHub\Projet-S2-P11\Super2048\Affichage.h(1,1): warning C4828: The file contains a character starting at offset 0x219 that is illegal in the current source character set (codepage 65001).
 F:\Users\walan\Documents\GitHub\Projet-S2-P11\Super2048\Affichage.h(1,1): warning C4828: The file contains a character starting at offset 0x24b that is illegal in the current source character set (codepage 65001).
-F:\Users\walan\Documents\GitHub\Projet-S2-P11\Super2048\Affichage.h(1,1): warning C4828: The file contains a character starting at offset 0x2e7 that is illegal in the current source character set (codepage 65001).
-F:\Users\walan\Documents\GitHub\Projet-S2-P11\Super2048\Grille.h(1,1): warning C4828: The file contains a character starting at offset 0x235 that is illegal in the current source character set (codepage 65001).
-F:\Users\walan\Documents\GitHub\Projet-S2-P11\Super2048\Tuile.h(1,1): warning C4828: The file contains a character starting at offset 0x104 that is illegal in the current source character set (codepage 65001).
-F:\Users\walan\Documents\GitHub\Projet-S2-P11\Super2048\Tuile.h(1,1): warning C4828: The file contains a character starting at offset 0x167 that is illegal in the current source character set (codepage 65001).
-F:\Users\walan\Documents\GitHub\Projet-S2-P11\Super2048\Tuile.h(1,1): warning C4828: The file contains a character starting at offset 0x16b that is illegal in the current source character set (codepage 65001).
-F:\Users\walan\Documents\GitHub\Projet-S2-P11\Super2048\Tuile.h(1,1): warning C4828: The file contains a character starting at offset 0x266 that is illegal in the current source character set (codepage 65001).
+F:\Users\walan\Documents\GitHub\Projet-S2-P11\Super2048\Affichage.h(1,1): warning C4828: The file contains a character starting at offset 0x30d that is illegal in the current source character set (codepage 65001).
+F:\Users\walan\Documents\GitHub\Projet-S2-P11\Super2048\Grille.h(1,1): warning C4828: The file contains a character starting at offset 0x179 that is illegal in the current source character set (codepage 65001).
+F:\Users\walan\Documents\GitHub\Projet-S2-P11\Super2048\Grille.h(1,1): warning C4828: The file contains a character starting at offset 0x24e that is illegal in the current source character set (codepage 65001).
+F:\Users\walan\Documents\GitHub\Projet-S2-P11\Super2048\Grille.h(1,1): warning C4828: The file contains a character starting at offset 0x44d that is illegal in the current source character set (codepage 65001).
+F:\Users\walan\Documents\GitHub\Projet-S2-P11\Super2048\Grille.h(1,1): warning C4828: The file contains a character starting at offset 0x466 that is illegal in the current source character set (codepage 65001).
+F:\Users\walan\Documents\GitHub\Projet-S2-P11\Super2048\Grille.h(1,1): warning C4828: The file contains a character starting at offset 0x4e6 that is illegal in the current source character set (codepage 65001).
+F:\Users\walan\Documents\GitHub\Projet-S2-P11\Super2048\Tuile.h(1,1): warning C4828: The file contains a character starting at offset 0x117 that is illegal in the current source character set (codepage 65001).
+F:\Users\walan\Documents\GitHub\Projet-S2-P11\Super2048\Tuile.h(1,1): warning C4828: The file contains a character starting at offset 0x17a that is illegal in the current source character set (codepage 65001).
+F:\Users\walan\Documents\GitHub\Projet-S2-P11\Super2048\Tuile.h(1,1): warning C4828: The file contains a character starting at offset 0x17e that is illegal in the current source character set (codepage 65001).
+F:\Users\walan\Documents\GitHub\Projet-S2-P11\Super2048\Tuile.h(1,1): warning C4828: The file contains a character starting at offset 0x2fc that is illegal in the current source character set (codepage 65001).
+F:\Users\walan\Documents\GitHub\Projet-S2-P11\Super2048\Tuile.h(1,1): warning C4828: The file contains a character starting at offset 0x334 that is illegal in the current source character set (codepage 65001).
+F:\Users\walan\Documents\GitHub\Projet-S2-P11\Super2048\Tuile.h(1,1): warning C4828: The file contains a character starting at offset 0x33b that is illegal in the current source character set (codepage 65001).
+F:\Users\walan\Documents\GitHub\Projet-S2-P11\Super2048\Tuile.h(1,1): warning C4828: The file contains a character starting at offset 0x358 that is illegal in the current source character set (codepage 65001).
   Affichage.cpp
 F:\Users\walan\Documents\GitHub\Projet-S2-P11\Super2048\Affichage.cpp(1,1): warning C4828: The file contains a character starting at offset 0x40 that is illegal in the current source character set (codepage 65001).
 F:\Users\walan\Documents\GitHub\Projet-S2-P11\Super2048\Affichage.cpp(1,1): warning C4828: The file contains a character starting at offset 0x4b that is illegal in the current source character set (codepage 65001).
@@ -28,64 +33,68 @@ F:\Users\walan\Documents\GitHub\Projet-S2-P11\Super2048\Affichage.cpp(1,1): warn
 F:\Users\walan\Documents\GitHub\Projet-S2-P11\Super2048\Affichage.cpp(1,1): warning C4828: The file contains a character starting at offset 0x129 that is illegal in the current source character set (codepage 65001).
 F:\Users\walan\Documents\GitHub\Projet-S2-P11\Super2048\Affichage.cpp(1,1): warning C4828: The file contains a character starting at offset 0x131 that is illegal in the current source character set (codepage 65001).
 F:\Users\walan\Documents\GitHub\Projet-S2-P11\Super2048\Affichage.cpp(1,1): warning C4828: The file contains a character starting at offset 0x139 that is illegal in the current source character set (codepage 65001).
-F:\Users\walan\Documents\GitHub\Projet-S2-P11\Super2048\Affichage.cpp(1,1): warning C4828: The file contains a character starting at offset 0x228 that is illegal in the current source character set (codepage 65001).
-F:\Users\walan\Documents\GitHub\Projet-S2-P11\Super2048\Affichage.cpp(1,1): warning C4828: The file contains a character starting at offset 0x2e9 that is illegal in the current source character set (codepage 65001).
-F:\Users\walan\Documents\GitHub\Projet-S2-P11\Super2048\Affichage.cpp(1,1): warning C4828: The file contains a character starting at offset 0x4ac that is illegal in the current source character set (codepage 65001).
-F:\Users\walan\Documents\GitHub\Projet-S2-P11\Super2048\Affichage.cpp(1,1): warning C4828: The file contains a character starting at offset 0x4ba that is illegal in the current source character set (codepage 65001).
-F:\Users\walan\Documents\GitHub\Projet-S2-P11\Super2048\Affichage.cpp(1,1): warning C4828: The file contains a character starting at offset 0x4c1 that is illegal in the current source character set (codepage 65001).
-F:\Users\walan\Documents\GitHub\Projet-S2-P11\Super2048\Affichage.cpp(1,1): warning C4828: The file contains a character starting at offset 0x4c7 that is illegal in the current source character set (codepage 65001).
-F:\Users\walan\Documents\GitHub\Projet-S2-P11\Super2048\Affichage.cpp(1,1): warning C4828: The file contains a character starting at offset 0x544 that is illegal in the current source character set (codepage 65001).
-F:\Users\walan\Documents\GitHub\Projet-S2-P11\Super2048\Affichage.cpp(1,1): warning C4828: The file contains a character starting at offset 0x55d that is illegal in the current source character set (codepage 65001).
-F:\Users\walan\Documents\GitHub\Projet-S2-P11\Super2048\Affichage.cpp(1,1): warning C4828: The file contains a character starting at offset 0x568 that is illegal in the current source character set (codepage 65001).
+F:\Users\walan\Documents\GitHub\Projet-S2-P11\Super2048\Affichage.cpp(1,1): warning C4828: The file contains a character starting at offset 0x3c3 that is illegal in the current source character set (codepage 65001).
+F:\Users\walan\Documents\GitHub\Projet-S2-P11\Super2048\Affichage.cpp(1,1): warning C4828: The file contains a character starting at offset 0x486 that is illegal in the current source character set (codepage 65001).
+F:\Users\walan\Documents\GitHub\Projet-S2-P11\Super2048\Affichage.cpp(1,1): warning C4828: The file contains a character starting at offset 0x684 that is illegal in the current source character set (codepage 65001).
+F:\Users\walan\Documents\GitHub\Projet-S2-P11\Super2048\Affichage.cpp(1,1): warning C4828: The file contains a character starting at offset 0x692 that is illegal in the current source character set (codepage 65001).
+F:\Users\walan\Documents\GitHub\Projet-S2-P11\Super2048\Affichage.cpp(1,1): warning C4828: The file contains a character starting at offset 0x699 that is illegal in the current source character set (codepage 65001).
+F:\Users\walan\Documents\GitHub\Projet-S2-P11\Super2048\Affichage.cpp(1,1): warning C4828: The file contains a character starting at offset 0x69f that is illegal in the current source character set (codepage 65001).
+F:\Users\walan\Documents\GitHub\Projet-S2-P11\Super2048\Affichage.cpp(1,1): warning C4828: The file contains a character starting at offset 0x6f7 that is illegal in the current source character set (codepage 65001).
+F:\Users\walan\Documents\GitHub\Projet-S2-P11\Super2048\Affichage.cpp(1,1): warning C4828: The file contains a character starting at offset 0x710 that is illegal in the current source character set (codepage 65001).
+F:\Users\walan\Documents\GitHub\Projet-S2-P11\Super2048\Affichage.cpp(1,1): warning C4828: The file contains a character starting at offset 0x71b that is illegal in the current source character set (codepage 65001).
 F:\Users\walan\Documents\GitHub\Projet-S2-P11\Super2048\Affichage.h(1,1): warning C4828: The file contains a character starting at offset 0x1f7 that is illegal in the current source character set (codepage 65001).
 F:\Users\walan\Documents\GitHub\Projet-S2-P11\Super2048\Affichage.h(1,1): warning C4828: The file contains a character starting at offset 0x210 that is illegal in the current source character set (codepage 65001).
 F:\Users\walan\Documents\GitHub\Projet-S2-P11\Super2048\Affichage.h(1,1): warning C4828: The file contains a character starting at offset 0x219 that is illegal in the current source character set (codepage 65001).
 F:\Users\walan\Documents\GitHub\Projet-S2-P11\Super2048\Affichage.h(1,1): warning C4828: The file contains a character starting at offset 0x24b that is illegal in the current source character set (codepage 65001).
-F:\Users\walan\Documents\GitHub\Projet-S2-P11\Super2048\Affichage.h(1,1): warning C4828: The file contains a character starting at offset 0x2e7 that is illegal in the current source character set (codepage 65001).
-F:\Users\walan\Documents\GitHub\Projet-S2-P11\Super2048\Grille.h(1,1): warning C4828: The file contains a character starting at offset 0x235 that is illegal in the current source character set (codepage 65001).
-F:\Users\walan\Documents\GitHub\Projet-S2-P11\Super2048\Tuile.h(1,1): warning C4828: The file contains a character starting at offset 0x104 that is illegal in the current source character set (codepage 65001).
-F:\Users\walan\Documents\GitHub\Projet-S2-P11\Super2048\Tuile.h(1,1): warning C4828: The file contains a character starting at offset 0x167 that is illegal in the current source character set (codepage 65001).
-F:\Users\walan\Documents\GitHub\Projet-S2-P11\Super2048\Tuile.h(1,1): warning C4828: The file contains a character starting at offset 0x16b that is illegal in the current source character set (codepage 65001).
-F:\Users\walan\Documents\GitHub\Projet-S2-P11\Super2048\Tuile.h(1,1): warning C4828: The file contains a character starting at offset 0x266 that is illegal in the current source character set (codepage 65001).
+F:\Users\walan\Documents\GitHub\Projet-S2-P11\Super2048\Affichage.h(1,1): warning C4828: The file contains a character starting at offset 0x30d that is illegal in the current source character set (codepage 65001).
+F:\Users\walan\Documents\GitHub\Projet-S2-P11\Super2048\Grille.h(1,1): warning C4828: The file contains a character starting at offset 0x179 that is illegal in the current source character set (codepage 65001).
+F:\Users\walan\Documents\GitHub\Projet-S2-P11\Super2048\Grille.h(1,1): warning C4828: The file contains a character starting at offset 0x24e that is illegal in the current source character set (codepage 65001).
+F:\Users\walan\Documents\GitHub\Projet-S2-P11\Super2048\Grille.h(1,1): warning C4828: The file contains a character starting at offset 0x44d that is illegal in the current source character set (codepage 65001).
+F:\Users\walan\Documents\GitHub\Projet-S2-P11\Super2048\Grille.h(1,1): warning C4828: The file contains a character starting at offset 0x466 that is illegal in the current source character set (codepage 65001).
+F:\Users\walan\Documents\GitHub\Projet-S2-P11\Super2048\Grille.h(1,1): warning C4828: The file contains a character starting at offset 0x4e6 that is illegal in the current source character set (codepage 65001).
+F:\Users\walan\Documents\GitHub\Projet-S2-P11\Super2048\Tuile.h(1,1): warning C4828: The file contains a character starting at offset 0x117 that is illegal in the current source character set (codepage 65001).
+F:\Users\walan\Documents\GitHub\Projet-S2-P11\Super2048\Tuile.h(1,1): warning C4828: The file contains a character starting at offset 0x17a that is illegal in the current source character set (codepage 65001).
+F:\Users\walan\Documents\GitHub\Projet-S2-P11\Super2048\Tuile.h(1,1): warning C4828: The file contains a character starting at offset 0x17e that is illegal in the current source character set (codepage 65001).
+F:\Users\walan\Documents\GitHub\Projet-S2-P11\Super2048\Tuile.h(1,1): warning C4828: The file contains a character starting at offset 0x2fc that is illegal in the current source character set (codepage 65001).
+F:\Users\walan\Documents\GitHub\Projet-S2-P11\Super2048\Tuile.h(1,1): warning C4828: The file contains a character starting at offset 0x334 that is illegal in the current source character set (codepage 65001).
+F:\Users\walan\Documents\GitHub\Projet-S2-P11\Super2048\Tuile.h(1,1): warning C4828: The file contains a character starting at offset 0x33b that is illegal in the current source character set (codepage 65001).
+F:\Users\walan\Documents\GitHub\Projet-S2-P11\Super2048\Tuile.h(1,1): warning C4828: The file contains a character starting at offset 0x358 that is illegal in the current source character set (codepage 65001).
   Grille.cpp
-F:\Users\walan\Documents\GitHub\Projet-S2-P11\Super2048\Grille.cpp(1,1): warning C4828: The file contains a character starting at offset 0x8c that is illegal in the current source character set (codepage 65001).
-F:\Users\walan\Documents\GitHub\Projet-S2-P11\Super2048\Grille.cpp(1,1): warning C4828: The file contains a character starting at offset 0x12d that is illegal in the current source character set (codepage 65001).
-F:\Users\walan\Documents\GitHub\Projet-S2-P11\Super2048\Grille.cpp(1,1): warning C4828: The file contains a character starting at offset 0x158 that is illegal in the current source character set (codepage 65001).
-F:\Users\walan\Documents\GitHub\Projet-S2-P11\Super2048\Grille.cpp(1,1): warning C4828: The file contains a character starting at offset 0x1e9 that is illegal in the current source character set (codepage 65001).
-F:\Users\walan\Documents\GitHub\Projet-S2-P11\Super2048\Grille.cpp(1,1): warning C4828: The file contains a character starting at offset 0x202 that is illegal in the current source character set (codepage 65001).
-F:\Users\walan\Documents\GitHub\Projet-S2-P11\Super2048\Grille.cpp(1,1): warning C4828: The file contains a character starting at offset 0x210 that is illegal in the current source character set (codepage 65001).
-F:\Users\walan\Documents\GitHub\Projet-S2-P11\Super2048\Grille.cpp(1,1): warning C4828: The file contains a character starting at offset 0x45f that is illegal in the current source character set (codepage 65001).
-F:\Users\walan\Documents\GitHub\Projet-S2-P11\Super2048\Grille.h(1,1): warning C4828: The file contains a character starting at offset 0x235 that is illegal in the current source character set (codepage 65001).
-F:\Users\walan\Documents\GitHub\Projet-S2-P11\Super2048\Tuile.h(1,1): warning C4828: The file contains a character starting at offset 0x104 that is illegal in the current source character set (codepage 65001).
-F:\Users\walan\Documents\GitHub\Projet-S2-P11\Super2048\Tuile.h(1,1): warning C4828: The file contains a character starting at offset 0x167 that is illegal in the current source character set (codepage 65001).
-F:\Users\walan\Documents\GitHub\Projet-S2-P11\Super2048\Tuile.h(1,1): warning C4828: The file contains a character starting at offset 0x16b that is illegal in the current source character set (codepage 65001).
-F:\Users\walan\Documents\GitHub\Projet-S2-P11\Super2048\Tuile.h(1,1): warning C4828: The file contains a character starting at offset 0x266 that is illegal in the current source character set (codepage 65001).
-F:\Users\walan\Documents\GitHub\Projet-S2-P11\Super2048\Grille.cpp(8,71): warning C4100: 'scene': unreferenced formal parameter
-F:\Users\walan\Documents\GitHub\Projet-S2-P11\Super2048\Grille.cpp(49,62): warning C4267: 'initializing': conversion from 'size_t' to 'int', possible loss of data
-F:\Users\walan\Documents\GitHub\Projet-S2-P11\Super2048\Grille.cpp(50,62): warning C4267: 'initializing': conversion from 'size_t' to 'int', possible loss of data
-F:\Users\walan\Documents\GitHub\Projet-S2-P11\Super2048\Grille.cpp(54,11): error C2227: left of '->addItem' must point to class/struct/union/generic type
-F:\Users\walan\Documents\GitHub\Projet-S2-P11\Super2048\Grille.cpp(54,11): message : type is 'int'
-  Tuile.cpp
-F:\Users\walan\Documents\GitHub\Projet-S2-P11\Super2048\Tuile.cpp(1,1): warning C4828: The file contains a character starting at offset 0x52 that is illegal in the current source character set (codepage 65001).
-F:\Users\walan\Documents\GitHub\Projet-S2-P11\Super2048\Tuile.h(1,1): warning C4828: The file contains a character starting at offset 0x104 that is illegal in the current source character set (codepage 65001).
-F:\Users\walan\Documents\GitHub\Projet-S2-P11\Super2048\Tuile.h(1,1): warning C4828: The file contains a character starting at offset 0x167 that is illegal in the current source character set (codepage 65001).
-F:\Users\walan\Documents\GitHub\Projet-S2-P11\Super2048\Tuile.h(1,1): warning C4828: The file contains a character starting at offset 0x16b that is illegal in the current source character set (codepage 65001).
-F:\Users\walan\Documents\GitHub\Projet-S2-P11\Super2048\Tuile.h(1,1): warning C4828: The file contains a character starting at offset 0x266 that is illegal in the current source character set (codepage 65001).
+F:\Users\walan\Documents\GitHub\Projet-S2-P11\Super2048\Grille.cpp(1,1): warning C4828: The file contains a character starting at offset 0x36d that is illegal in the current source character set (codepage 65001).
+F:\Users\walan\Documents\GitHub\Projet-S2-P11\Super2048\Grille.cpp(1,1): warning C4828: The file contains a character starting at offset 0x37f that is illegal in the current source character set (codepage 65001).
+F:\Users\walan\Documents\GitHub\Projet-S2-P11\Super2048\Grille.cpp(1,1): warning C4828: The file contains a character starting at offset 0x4f4 that is illegal in the current source character set (codepage 65001).
+F:\Users\walan\Documents\GitHub\Projet-S2-P11\Super2048\Grille.cpp(1,1): warning C4828: The file contains a character starting at offset 0x504 that is illegal in the current source character set (codepage 65001).
+F:\Users\walan\Documents\GitHub\Projet-S2-P11\Super2048\Grille.cpp(1,1): warning C4828: The file contains a character starting at offset 0x9c8 that is illegal in the current source character set (codepage 65001).
+F:\Users\walan\Documents\GitHub\Projet-S2-P11\Super2048\Grille.cpp(1,1): warning C4828: The file contains a character starting at offset 0xa29 that is illegal in the current source character set (codepage 65001).
+F:\Users\walan\Documents\GitHub\Projet-S2-P11\Super2048\Grille.h(1,1): warning C4828: The file contains a character starting at offset 0x179 that is illegal in the current source character set (codepage 65001).
+F:\Users\walan\Documents\GitHub\Projet-S2-P11\Super2048\Grille.h(1,1): warning C4828: The file contains a character starting at offset 0x24e that is illegal in the current source character set (codepage 65001).
+F:\Users\walan\Documents\GitHub\Projet-S2-P11\Super2048\Grille.h(1,1): warning C4828: The file contains a character starting at offset 0x44d that is illegal in the current source character set (codepage 65001).
+F:\Users\walan\Documents\GitHub\Projet-S2-P11\Super2048\Grille.h(1,1): warning C4828: The file contains a character starting at offset 0x466 that is illegal in the current source character set (codepage 65001).
+F:\Users\walan\Documents\GitHub\Projet-S2-P11\Super2048\Grille.h(1,1): warning C4828: The file contains a character starting at offset 0x4e6 that is illegal in the current source character set (codepage 65001).
+F:\Users\walan\Documents\GitHub\Projet-S2-P11\Super2048\Tuile.h(1,1): warning C4828: The file contains a character starting at offset 0x117 that is illegal in the current source character set (codepage 65001).
+F:\Users\walan\Documents\GitHub\Projet-S2-P11\Super2048\Tuile.h(1,1): warning C4828: The file contains a character starting at offset 0x17a that is illegal in the current source character set (codepage 65001).
+F:\Users\walan\Documents\GitHub\Projet-S2-P11\Super2048\Tuile.h(1,1): warning C4828: The file contains a character starting at offset 0x17e that is illegal in the current source character set (codepage 65001).
+F:\Users\walan\Documents\GitHub\Projet-S2-P11\Super2048\Tuile.h(1,1): warning C4828: The file contains a character starting at offset 0x2fc that is illegal in the current source character set (codepage 65001).
+F:\Users\walan\Documents\GitHub\Projet-S2-P11\Super2048\Tuile.h(1,1): warning C4828: The file contains a character starting at offset 0x334 that is illegal in the current source character set (codepage 65001).
+F:\Users\walan\Documents\GitHub\Projet-S2-P11\Super2048\Tuile.h(1,1): warning C4828: The file contains a character starting at offset 0x33b that is illegal in the current source character set (codepage 65001).
+F:\Users\walan\Documents\GitHub\Projet-S2-P11\Super2048\Tuile.h(1,1): warning C4828: The file contains a character starting at offset 0x358 that is illegal in the current source character set (codepage 65001).
   moc_Affichage.cpp
 F:\Users\walan\Documents\GitHub\Projet-S2-P11\Super2048\Affichage.h(1,1): warning C4828: The file contains a character starting at offset 0x1f7 that is illegal in the current source character set (codepage 65001).
 F:\Users\walan\Documents\GitHub\Projet-S2-P11\Super2048\Affichage.h(1,1): warning C4828: The file contains a character starting at offset 0x210 that is illegal in the current source character set (codepage 65001).
 F:\Users\walan\Documents\GitHub\Projet-S2-P11\Super2048\Affichage.h(1,1): warning C4828: The file contains a character starting at offset 0x219 that is illegal in the current source character set (codepage 65001).
 F:\Users\walan\Documents\GitHub\Projet-S2-P11\Super2048\Affichage.h(1,1): warning C4828: The file contains a character starting at offset 0x24b that is illegal in the current source character set (codepage 65001).
-F:\Users\walan\Documents\GitHub\Projet-S2-P11\Super2048\Affichage.h(1,1): warning C4828: The file contains a character starting at offset 0x2e7 that is illegal in the current source character set (codepage 65001).
-F:\Users\walan\Documents\GitHub\Projet-S2-P11\Super2048\Grille.h(1,1): warning C4828: The file contains a character starting at offset 0x235 that is illegal in the current source character set (codepage 65001).
-F:\Users\walan\Documents\GitHub\Projet-S2-P11\Super2048\Tuile.h(1,1): warning C4828: The file contains a character starting at offset 0x104 that is illegal in the current source character set (codepage 65001).
-F:\Users\walan\Documents\GitHub\Projet-S2-P11\Super2048\Tuile.h(1,1): warning C4828: The file contains a character starting at offset 0x167 that is illegal in the current source character set (codepage 65001).
-F:\Users\walan\Documents\GitHub\Projet-S2-P11\Super2048\Tuile.h(1,1): warning C4828: The file contains a character starting at offset 0x16b that is illegal in the current source character set (codepage 65001).
-F:\Users\walan\Documents\GitHub\Projet-S2-P11\Super2048\Tuile.h(1,1): warning C4828: The file contains a character starting at offset 0x266 that is illegal in the current source character set (codepage 65001).
-  moc_Grille.cpp
-F:\Users\walan\Documents\GitHub\Projet-S2-P11\Super2048\Grille.h(1,1): warning C4828: The file contains a character starting at offset 0x235 that is illegal in the current source character set (codepage 65001).
-F:\Users\walan\Documents\GitHub\Projet-S2-P11\Super2048\Tuile.h(1,1): warning C4828: The file contains a character starting at offset 0x104 that is illegal in the current source character set (codepage 65001).
-F:\Users\walan\Documents\GitHub\Projet-S2-P11\Super2048\Tuile.h(1,1): warning C4828: The file contains a character starting at offset 0x167 that is illegal in the current source character set (codepage 65001).
-F:\Users\walan\Documents\GitHub\Projet-S2-P11\Super2048\Tuile.h(1,1): warning C4828: The file contains a character starting at offset 0x16b that is illegal in the current source character set (codepage 65001).
-F:\Users\walan\Documents\GitHub\Projet-S2-P11\Super2048\Tuile.h(1,1): warning C4828: The file contains a character starting at offset 0x266 that is illegal in the current source character set (codepage 65001).
+F:\Users\walan\Documents\GitHub\Projet-S2-P11\Super2048\Affichage.h(1,1): warning C4828: The file contains a character starting at offset 0x30d that is illegal in the current source character set (codepage 65001).
+F:\Users\walan\Documents\GitHub\Projet-S2-P11\Super2048\Grille.h(1,1): warning C4828: The file contains a character starting at offset 0x179 that is illegal in the current source character set (codepage 65001).
+F:\Users\walan\Documents\GitHub\Projet-S2-P11\Super2048\Grille.h(1,1): warning C4828: The file contains a character starting at offset 0x24e that is illegal in the current source character set (codepage 65001).
+F:\Users\walan\Documents\GitHub\Projet-S2-P11\Super2048\Grille.h(1,1): warning C4828: The file contains a character starting at offset 0x44d that is illegal in the current source character set (codepage 65001).
+F:\Users\walan\Documents\GitHub\Projet-S2-P11\Super2048\Grille.h(1,1): warning C4828: The file contains a character starting at offset 0x466 that is illegal in the current source character set (codepage 65001).
+F:\Users\walan\Documents\GitHub\Projet-S2-P11\Super2048\Grille.h(1,1): warning C4828: The file contains a character starting at offset 0x4e6 that is illegal in the current source character set (codepage 65001).
+F:\Users\walan\Documents\GitHub\Projet-S2-P11\Super2048\Tuile.h(1,1): warning C4828: The file contains a character starting at offset 0x117 that is illegal in the current source character set (codepage 65001).
+F:\Users\walan\Documents\GitHub\Projet-S2-P11\Super2048\Tuile.h(1,1): warning C4828: The file contains a character starting at offset 0x17a that is illegal in the current source character set (codepage 65001).
+F:\Users\walan\Documents\GitHub\Projet-S2-P11\Super2048\Tuile.h(1,1): warning C4828: The file contains a character starting at offset 0x17e that is illegal in the current source character set (codepage 65001).
+F:\Users\walan\Documents\GitHub\Projet-S2-P11\Super2048\Tuile.h(1,1): warning C4828: The file contains a character starting at offset 0x2fc that is illegal in the current source character set (codepage 65001).
+F:\Users\walan\Documents\GitHub\Projet-S2-P11\Super2048\Tuile.h(1,1): warning C4828: The file contains a character starting at offset 0x334 that is illegal in the current source character set (codepage 65001).
+F:\Users\walan\Documents\GitHub\Projet-S2-P11\Super2048\Tuile.h(1,1): warning C4828: The file contains a character starting at offset 0x33b that is illegal in the current source character set (codepage 65001).
+F:\Users\walan\Documents\GitHub\Projet-S2-P11\Super2048\Tuile.h(1,1): warning C4828: The file contains a character starting at offset 0x358 that is illegal in the current source character set (codepage 65001).
   Generating Code...
+  Super2048.vcxproj -> F:\Users\walan\Documents\GitHub\Projet-S2-P11\Super2048\debug\Super2048.exe
