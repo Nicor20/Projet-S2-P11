@@ -46,7 +46,6 @@ void Affichage::LoadZonedeJeu(int mode)
 	setCentralWidget(view);
 
 	//---Cree le tableau de jeux
-	qDebug() << "creation tableau";
 	tableau = new Tableau(mode);
 
 
@@ -75,7 +74,6 @@ void Affichage::LoadZonedeJeu(int mode)
 
 void Affichage::AddTuile(int coord_X, int coord_Y, int valeur)
 {
-	qDebug() << "Creation de tuile";
 	//---Paramètre la tuile à ajouté à l'écrant
 	Tuile * tuile = new Tuile(valeur);
 	scene->addItem(tuile); // Ajoute la tuile à la scene avec les paramètre indiquées
@@ -88,7 +86,6 @@ void Affichage::AfficheGrille(Grille* grille)
 
 	for (int i = 0; i < taille_cote * taille_cote; i++)
 	{
-		qDebug() << "affiche tuile de grille";
 		scene->addItem(grille->getTuile_List(i));
 	}
 }
@@ -102,9 +99,9 @@ void Affichage::SyncronisationDesGrilles()
 	{
 		for (int y = 0; y < mode; y++)
 		{
-			qDebug() << "coord X: " << x << "coord y: " << y;
+			//qDebug() << "coord X: " << x << "coord y: " << y;
 			valeur = tableau->getTableauValeur(x,y);
-			qDebug() << "Valeur Lue pour tuile : " << valeur;
+			//qDebug() << "Valeur Lue pour tuile : " << valeur;
 			AddTuile(x, y, valeur);
 		}
 	}
@@ -132,25 +129,25 @@ void Affichage::keyPressEvent(QKeyEvent* event)
 	
 	if (event->key() == Qt::Key_Left) // bouge vers la gauche
 	{
-		qDebug() << "Bouge Gauche";
+		//qDebug() << "Bouge Gauche";
 		tableau->Bouge_Haut();
 		SyncronisationDesGrilles();
 	}
 	else if (event->key() == Qt::Key_Right) // bouge vers la droite
 	{
-		qDebug() << "Bouge Droite";
+		//qDebug() << "Bouge Droite";
 		tableau->Bouge_Bas();
 		SyncronisationDesGrilles();
 	}
 	else if (event->key() == Qt::Key_Up) // bouge vers le haut
 	{
-		qDebug() << "Bouge Haut";
+		//qDebug() << "Bouge Haut";
 		tableau->Bouge_Gauche();
 		SyncronisationDesGrilles();
 	}
 	else if (event->key() == Qt::Key_Down) // bouge vers le bas
 	{
-		qDebug() << "Bouge Bas";
+		//qDebug() << "Bouge Bas";
 		tableau->Bouge_Droit();
 		SyncronisationDesGrilles();
 	}

@@ -669,6 +669,6 @@ int Tableau::getVectSize()
 
 int Tableau::getTableauValeur(int x, int y)
 {
-	qDebug() << "Valeur tableau " << tableau[x][y];
+	//qDebug() << "Valeur tableau " << tableau[x][y];
 	return tableau[x][y];
 }
