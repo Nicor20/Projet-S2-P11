@@ -8,8 +8,10 @@
 #include <QString>
 #include <QStatusBar>
 #include <QDebug>
+#include <QKeyEvent>
 #include "Grille.h"
-#include "Joueur.h"
+#include "Tableau.h"
+
 
 using namespace std;
 
@@ -26,6 +28,14 @@ public:
 	void AddTuile(int coord_X, int coord_Y, int valeur); // crée une tuile aux coordonnés indiqué
 	void Message(const char* message); // message écrit dans la Status Bar de l'interface
 	void AfficheGrille(Grille* grille);
+	void SyncronisationDesGrilles();
+	
+	//void RunJeux();
+	
+	QGraphicsScene* getScene();
+	QGraphicsView* getView();
+	//Joueur* getJoueur();
+	void keyPressEvent(QKeyEvent* event);
 
 private:
 
@@ -34,6 +44,8 @@ private:
 	QGraphicsView* view; // Vois la Scene de la zone de Jeux
 	Grille* grillefixe; // Grille de tuile
 	Grille* grilledynamique; // Grille de tuile
+	Tableau* tableau;
+	//Joueur* joueur;
 };
 #endif //AFFICHAGE_H
 

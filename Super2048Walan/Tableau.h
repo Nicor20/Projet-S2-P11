@@ -1,5 +1,6 @@
 /*
 	Auteur : Nicolas Cantin
+	Modifier par: Walan Brousseau
 */
 
 #ifndef TABLEAU_H
@@ -11,6 +12,7 @@
 #include <ctime>
 #include <string>
 #include <fstream>
+#include "Grille.h"
 
 using namespace std;
 
@@ -45,6 +47,10 @@ public:
 
 	void Save_Stats();		// Sauvegarde les informations pertinente pour le menu statistique
 	void Save_Grid();		// Sauvegarde la grille
+
+	int getVecteurValeur(int index);// retourne la valeur du vecteur à l'index
+	int getTableauValeur(int x, int y);
+	int getVectSize();	// retourne la taille du vecteur
 
 private:
 	int ratio = 5;			// Ratio de 2 pour chaque 4

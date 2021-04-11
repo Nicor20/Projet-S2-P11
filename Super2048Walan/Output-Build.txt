@@ -1,0 +1,7 @@
+﻿Build started...
+1>------ Build started: Project: Super2048, Configuration: Debug x64 ------
+1>F:\Program Files (x86)\Microsoft Visual Studio\2019\Community\MSBuild\Microsoft\VC\v160\Microsoft.CppBuild.targets(519,5): warning MSB8028: The intermediate directory (debug\) contains files shared from another project (2048-Console.vcxproj).  This can lead to incorrect clean and rebuild behavior.
+1>Tuile.cpp
+1>F:\Users\walan\Documents\GitHub\Projet-S2-P11\Super2048Walan\Tuile.cpp : fatal error C1041: cannot open program database 'F:\Users\walan\Documents\GitHub\Projet-S2-P11\Super2048Walan\debug\vc142.pdb'; if multiple CL.EXE write to the same .PDB file, please use /FS
+1>Done building project "Super2048.vcxproj" -- FAILED.
+========== Build: 0 succeeded, 1 failed, 0 up-to-date, 0 skipped ==========

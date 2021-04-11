@@ -13,7 +13,7 @@ Jeu::~Jeu()
 
 }
 
-/*void Jeu::Run()
+void Jeu::Run()
 {
 	while (run == true)
 	{
@@ -38,6 +38,7 @@ Jeu::~Jeu()
 
 void Jeu::Menu_Accueil()
 {
+	//cette fonction 
 	system("cls");
 
 	// Composant du menu accueil
@@ -62,12 +63,12 @@ void Jeu::Menu_Accueil()
 	bool Good = false;
 	char input;
 
-	while (Good == false)
+	while (Good == false) //garde l'interface dans la fonctoin acceuil jusqu'a avis contraire
 	{
-		input = _getch();
+		input = _getch(); //semble capté l'input du clavier. pour changer de menu. ce qui le rend maitre de l'application. sur l'interface. ce n'est pas ce que je veux pour ça ici
 		cout << input << endl;
 		
-		if (input == '3' || input == '4' || input == '5' || input == '6' || input == '7' || input == '8')
+		if (input == '3' || input == '4' || input == '5' || input == '6' || input == '7' || input == '8') //SÉLECTION DES MODE !!!!
 		{
 			Setup_Grid(input - '0');
 			window_to_show = "Jeu";
@@ -89,7 +90,7 @@ void Jeu::Menu_Accueil()
 			Good = true;
 		}
 	}
-}*/
+}
 
 void Jeu::Menu_Load()
 {
@@ -183,26 +184,28 @@ void Jeu::Menu_Jeu()
 	bool show = true;
 	while (show == true)
 	{
-		system("cls");
+		//crear screen
 		//Afficher la grid
-		tab->Afficher();
-		cout << "W ou fleche haut = haut" << endl;
+		//tab->Afficher();
+		//afficher les contrôles
+		/*cout << "W ou fleche haut = haut" << endl;
 		cout << "A ou fleche gauche = gauche" << endl;
 		cout << "S ou fleche bas = bas" << endl;
 		cout << "D ou fleche droit = droit" << endl;
-		cout << "Q = Menu principale" << endl;
+		cout << "Q = Menu principale" << endl;*/
 
 		// Lire la réponse
 		bool Good = false;
 		char input;
 
-		while (Good != true)
+		while (Good != true) //Boucle qui garde le jeux dans cette fonctions.
 		{
-			input = _getch();
+			//input = _getch(); // get input -> remplaçable par le "QKeyInput" de l'interface
 
 			if (input == 'w' || input == 'W' || input == 72) //Bouge les cases du tableau vers le haut
 			{
-				tab->Bouge_Haut();
+				tab->Bouge_Haut(); //Le tableau a des fonctions pour bouger lui-même. donc pas nesséssaire de gardé cette boucle si je place l'interface en tant que maitre
+				
 				Good = true;
 			}
 			else if (input == 's' || input == 'S' || input == 80)//Bouge les cases du tableau vers le bas
@@ -226,7 +229,7 @@ void Jeu::Menu_Jeu()
 				//Dirige vers le menu accueil
 				Good = true;
 				show = false;
-				Menu_Sauvegarde();
+				Menu_Sauvegarde(); //Jeux peux appeler des fonctions pour afficher des menu dans l'interface CONSOLE.
 			}
 		}
 	}
@@ -268,10 +271,11 @@ void Jeu::Menu_Sauvegarde()
 
 void Jeu::Menu_Stats()
 {
-	system("cls");
+	// clear screen
 
-	cout << "Q = Quitter" << endl << endl;
-	cout << "Stats : " << endl;
+	// Load new screen
+	//Q = quit
+	//stat = stat
 
 	//Lis les infos du fichier .txt et les affiche
 	string text;

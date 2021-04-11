@@ -6,12 +6,14 @@
 #include <QGraphicsScene>
 #include "Tuile.h"
 
+
 class Grille
 {
 public:
 	Grille();
 	Grille(int mode);											// ajoute une grille de jeux de la taille correspondant au mode de jeux
-	
+	~Grille();
+
 	Tuile* getTuile_XY(int colone, int ranger);					//retourne le poineur de la tuile dans la liste correspondant à l'index XY
 	Tuile* getTuile_List(int index);							//retourne la tuile à l'index de la list
 	void setTuilePoss(int colone, int ranger, Tuile* Newtuile); //change ou determine la position d'une tuile dans la grille

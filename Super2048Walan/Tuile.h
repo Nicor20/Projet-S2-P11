@@ -2,6 +2,8 @@
 #define TUILE_H
 
 #include <QGraphicsRectItem>
+#include <QBrush>
+#include <QPixmap>
 #include <QDebug>
 
 using namespace std;
@@ -14,9 +16,10 @@ public:
 	~Tuile();
 
 	int getSize(); //retourne la taille d'un coté de tuile en pixel
-	void setSize(int NouvSize); //change la taille de toutes les futures tuiles générées
 	int getValeur(); //retourne la valeur de la tuile
 	int getExiste(); // retourne 1 si la tuiles est deja sur le plateau de jeux
+	void setSize(int NouvSize); //change la taille de toutes les futures tuiles générées
+	void setValeur(int NouvValeur); //Change la valeur de la tuile
 
 public slots:
 	

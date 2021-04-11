@@ -20,7 +20,7 @@ public:
 	Jeu();
 	~Jeu();
 
-	//void Run(); Vétuste
+	void Run();
 	
 	void Menu_Accueil();
 
