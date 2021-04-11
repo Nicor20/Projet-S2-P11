@@ -53,9 +53,16 @@ void Affichage::LoadZonedeJeu(int mode)
 	view->setScene(scene);
 	setCentralWidget(view);
 
+	//---Cree les Scores Boards
+	scoreboard = new Score(QString("Score"));
+	scene->addItem(scoreboard);
+
+	nbmouve = new Score(QString("Nombre de Mouvements"));
+	scene->addItem(nbmouve);
+	nbmouve->setPos(0,20);
+
 	//---Cree le tableau de jeux
 	tableau = new Tableau(mode);
-
 
 	//---Cree la grille de tuile fixe et les affiche a lecrant
 	grillefixe = new Grille(mode,scene_width,scene_height);
@@ -66,6 +73,9 @@ void Affichage::LoadZonedeJeu(int mode)
 
 	//---syncronise les valeur des tuiles du tableaudynamique et les valeurs du tableau de jeu
 	SyncronisationDesGrilles();
+
+	//---sycronyse les valeurs initiales des score
+	UpdateScore();
 
 	//---Message correspondant au mode dans la status Bar
 	if (mode > 2 && mode < 9)
@@ -112,6 +122,7 @@ void Affichage::SyncronisationDesGrilles()
 			valeur = tableau->getTableauValeur(x,y);
 			//qDebug() << "Valeur Lue pour tuile : " << valeur;
 			AddTuile(x, y, valeur);
+			UpdateScore();
 			show();
 		}
 	}
@@ -127,12 +138,15 @@ QGraphicsView* Affichage::getView()
 	return view;
 }
 
-/*Joueur* Affichage::getJoueur()
-
+void Affichage::UpdateScore()
 {
-	return joueur;
-}*/
-
+	int nbMouve = 0;
+	int score = 0;
+	nbMouve = tableau->Get_Move();
+	score = tableau->Get_Score();
+	scoreboard->setScore(score);
+	nbmouve->setScore(nbMouve);
+}
 
 void Affichage::keyPressEvent(QKeyEvent* event)
 {

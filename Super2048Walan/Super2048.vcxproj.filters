@@ -52,6 +52,9 @@
     <ClCompile Include="Joueur.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="Score.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
     <ClCompile Include="Tableau.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
@@ -73,6 +76,9 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="Joueur.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Score.h">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="Tableau.h">

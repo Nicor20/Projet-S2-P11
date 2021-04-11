@@ -144,6 +144,7 @@
     <ClCompile Include="Grille.cpp" />
     <ClCompile Include="Jeu.cpp" />
     <ClCompile Include="Joueur.cpp" />
+    <ClCompile Include="Score.cpp" />
     <ClCompile Include="Tableau.cpp" />
     <ClCompile Include="Tuile.cpp" />
     <ClCompile Include="qrc_Resource.cpp" />
@@ -162,6 +163,7 @@
     <ClInclude Include="Grille.h" />
     <ClInclude Include="Jeu.h" />
     <ClInclude Include="Joueur.h" />
+    <ClInclude Include="Score.h" />
     <ClInclude Include="Tableau.h" />
     <CustomBuild Include="Tuile.h">
       <AdditionalInputs Condition="&apos;$(Configuration)|$(Platform)&apos;==&apos;Release|x64&apos;">Tuile.h;release\moc_predefs.h;C:\Qt\6.0.0\msvc2019_64\bin\moc.exe;%(AdditionalInputs)</AdditionalInputs>
