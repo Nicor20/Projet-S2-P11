@@ -1,20 +1,5 @@
 ﻿F:\Program Files (x86)\Microsoft Visual Studio\2019\Community\MSBuild\Microsoft\VC\v160\Microsoft.CppBuild.targets(519,5): warning MSB8028: The intermediate directory (debug\) contains files shared from another project (2048-Console.vcxproj).  This can lead to incorrect clean and rebuild behavior.
-  Grille.cpp
-F:\Users\walan\Documents\GitHub\Projet-S2-P11\Super2048Walan\Grille.cpp(1,1): warning C4828: The file contains a character starting at offset 0x41a that is illegal in the current source character set (codepage 65001).
-F:\Users\walan\Documents\GitHub\Projet-S2-P11\Super2048Walan\Grille.cpp(1,1): warning C4828: The file contains a character starting at offset 0x42c that is illegal in the current source character set (codepage 65001).
-F:\Users\walan\Documents\GitHub\Projet-S2-P11\Super2048Walan\Grille.cpp(1,1): warning C4828: The file contains a character starting at offset 0x55e that is illegal in the current source character set (codepage 65001).
-F:\Users\walan\Documents\GitHub\Projet-S2-P11\Super2048Walan\Grille.cpp(1,1): warning C4828: The file contains a character starting at offset 0x75e that is illegal in the current source character set (codepage 65001).
-F:\Users\walan\Documents\GitHub\Projet-S2-P11\Super2048Walan\Grille.cpp(1,1): warning C4828: The file contains a character starting at offset 0x7bf that is illegal in the current source character set (codepage 65001).
-F:\Users\walan\Documents\GitHub\Projet-S2-P11\Super2048Walan\Grille.h(1,1): warning C4828: The file contains a character starting at offset 0x191 that is illegal in the current source character set (codepage 65001).
-F:\Users\walan\Documents\GitHub\Projet-S2-P11\Super2048Walan\Grille.h(1,1): warning C4828: The file contains a character starting at offset 0x1db that is illegal in the current source character set (codepage 65001).
-F:\Users\walan\Documents\GitHub\Projet-S2-P11\Super2048Walan\Grille.h(1,1): warning C4828: The file contains a character starting at offset 0x40f that is illegal in the current source character set (codepage 65001).
-F:\Users\walan\Documents\GitHub\Projet-S2-P11\Super2048Walan\Grille.h(1,1): warning C4828: The file contains a character starting at offset 0x428 that is illegal in the current source character set (codepage 65001).
-F:\Users\walan\Documents\GitHub\Projet-S2-P11\Super2048Walan\Grille.h(1,1): warning C4828: The file contains a character starting at offset 0x4a8 that is illegal in the current source character set (codepage 65001).
-F:\Users\walan\Documents\GitHub\Projet-S2-P11\Super2048Walan\Tuile.h(1,1): warning C4828: The file contains a character starting at offset 0x13e that is illegal in the current source character set (codepage 65001).
-F:\Users\walan\Documents\GitHub\Projet-S2-P11\Super2048Walan\Tuile.h(1,1): warning C4828: The file contains a character starting at offset 0x223 that is illegal in the current source character set (codepage 65001).
-F:\Users\walan\Documents\GitHub\Projet-S2-P11\Super2048Walan\Tuile.h(1,1): warning C4828: The file contains a character starting at offset 0x227 that is illegal in the current source character set (codepage 65001).
-F:\Users\walan\Documents\GitHub\Projet-S2-P11\Super2048Walan\Tuile.h(1,1): warning C4828: The file contains a character starting at offset 0x311 that is illegal in the current source character set (codepage 65001).
-F:\Users\walan\Documents\GitHub\Projet-S2-P11\Super2048Walan\Tuile.h(1,1): warning C4828: The file contains a character starting at offset 0x349 that is illegal in the current source character set (codepage 65001).
-F:\Users\walan\Documents\GitHub\Projet-S2-P11\Super2048Walan\Tuile.h(1,1): warning C4828: The file contains a character starting at offset 0x350 that is illegal in the current source character set (codepage 65001).
-F:\Users\walan\Documents\GitHub\Projet-S2-P11\Super2048Walan\Tuile.h(1,1): warning C4828: The file contains a character starting at offset 0x36d that is illegal in the current source character set (codepage 65001).
+  RCC Resource.qrc
+F:\Program Files (x86)\Microsoft Visual Studio\2019\Community\MSBuild\Microsoft\VC\v160\Microsoft.CppBuild.targets(1097,5): warning MSB8027: Two or more files with the name of qrc_Resource.cpp will produce outputs to the same location. This can lead to an incorrect build result.  The files involved are qrc_Resource.cpp, debug\qrc_Resource.cpp.
+  qrc_Resource.cpp
   Super2048.vcxproj -> F:\Users\walan\Documents\GitHub\Projet-S2-P11\Super2048Walan\debug\Super2048.exe

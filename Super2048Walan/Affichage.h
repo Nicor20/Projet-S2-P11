@@ -45,7 +45,8 @@ private:
 	Grille* grillefixe; // Grille de tuile
 	Grille* grilledynamique; // Grille de tuile
 	Tableau* tableau;
-	//Joueur* joueur;
+	int scene_width = 1080;
+	int scene_height = 700;
 };
 #endif //AFFICHAGE_H
 

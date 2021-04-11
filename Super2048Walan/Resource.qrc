@@ -1,16 +1,17 @@
 <RCC>
-    <qresource prefix="/new/Assets">
-        <file>Ressources/Assets/Tuile2.png</file>
-        <file>Ressources/Assets/Tuile4.png</file>
-        <file>Ressources/Assets/Tuile8.png</file>
-        <file>Ressources/Assets/Tuile16.png</file>
-        <file>Ressources/Assets/Tuile32.png</file>
-        <file>Ressources/Assets/Tuile64.png</file>
-        <file>Ressources/Assets/Tuile128.png</file>
-        <file>Ressources/Assets/Tuile256.png</file>
-        <file>Ressources/Assets/Tuile512.png</file>
-        <file>Ressources/Assets/Tuile1024.png</file>
-        <file>Ressources/Assets/Tuile2048.png</file>
-        <file>Ressources/Assets/TuileVide.png</file>
+    <qresource prefix="/Resource">
+        <file>Resource/60x60/Tuile2.png</file>
+        <file>Resource/60x60/Tuile4.png</file>
+        <file>Resource/60x60/Tuile8.png</file>
+        <file>Resource/60x60/Tuile16.png</file>
+        <file>Resource/60x60/Tuile32.png</file>
+        <file>Resource/60x60/Tuile64.png</file>
+        <file>Resource/60x60/Tuile128.png</file>
+        <file>Resource/60x60/Tuile256.png</file>
+        <file>Resource/60x60/Tuile512.png</file>
+        <file>Resource/60x60/Tuile1024.png</file>
+        <file>Resource/60x60/Tuile2048.png</file>
+        <file>Resource/60x60/TuileVide.png</file>
+	<file>Resource/BG.png</file>
     </qresource>
 </RCC>

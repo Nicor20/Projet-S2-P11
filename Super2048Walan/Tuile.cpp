@@ -13,11 +13,10 @@ Tuile::Tuile()
 Tuile::Tuile(int valeur)
 {
 	//crée la tuile
-	setRect(0,0, Size, Size);
-	Valeur = valeur;
+	setRect(0, 0, Size, Size);
 	//qDebug() << Valeur;
-
 	setValeur(valeur);
+
 }
 
 Tuile::~Tuile()
@@ -43,82 +42,121 @@ int Tuile::getValeur()
 void Tuile::setValeur(int NouvValeur)
 {
 	Valeur = NouvValeur;
+	QBrush brush;
+	//QRect rec = this->rect().toRect();
+
 
 	if (Valeur == 2)
 	{
 		//qDebug() << "tuile 2";
-		setBrush(Qt::lightGray);
-		//setPixmap(QPixmap(":/Assets/Tuile2.png"));
+		//setBrush(Qt::lightGray);
+		brush.setTextureImage(QImage(":/Resource/Resource/60x60/Tuile2.png"));
+		setBrush(brush);
+		setOpacity(1);
+		show();
 
 	}
 	else if (Valeur == 4)
 	{
 		//qDebug() << "tuile 4";
-		setBrush(Qt::gray);
-		//setPixmap(QPixmap(":/Tuile4.png"));
+		//setBrush(Qt::gray);
+		brush.setTextureImage(QImage(":/Resource/Resource/60x60/Tuile4.png"));
+		setBrush(brush);
+		setOpacity(1);
+		show();
 	}
 	else if (Valeur == 8)
 	{
 		//qDebug() << "tuile 8";
-		setBrush(Qt::cyan);
-		//setPixmap(QPixmap(":/Tuile8.png"));
+		//setBrush(Qt::cyan);
+		brush.setTextureImage(QImage(":/Resource/Resource/60x60/Tuile8.png"));
+		setBrush(brush);
+		setOpacity(1);
+		show();
 	}
 	else if (Valeur == 16)
 	{
 		//qDebug() << "tuile 16";
-		setBrush(Qt::darkCyan);
-		//setPixmap(QPixmap(":/Tuile16.png"));
+		//setBrush(Qt::darkCyan);
+		brush.setTextureImage(QImage(":/Resource/Resource/60x60/Tuile16.png"));
+		setBrush(brush);
+		setOpacity(1);
+		show();
 	}
 	else if (Valeur == 32)
 	{
 		//qDebug() << "tuile 32";
-		setBrush(Qt::blue);
-		//setPixmap(QPixmap(":/Tuile32.png"));
+		//setBrush(Qt::blue);
+		brush.setTextureImage(QImage(":/Resource/Resource/60x60/Tuile32.png"));
+		setBrush(brush);
+		setOpacity(1);
+		show();
 	}
 	else if (Valeur == 64)
 	{
 		//qDebug() << "tuile 64";
-		setBrush(Qt::darkBlue);
-		//setPixmap(QPixmap(":/Tuile64.png"));
+		//setBrush(Qt::darkBlue);
+		brush.setTextureImage(QImage(":/Resource/Resource/60x60/Tuile64.png"));
+		setBrush(brush);
+		setOpacity(1);
+		show();
 	}
 	else if (Valeur == 128)
 	{
 		//qDebug() << "tuile 128";
-		setBrush(Qt::darkGreen);
-		//setPixmap(QPixmap(":/Tuile128.png"));
+		//setBrush(Qt::darkGreen);
+		brush.setTextureImage(QImage(":/Resource/Resource/60x60/Tuile128.png"));
+		setBrush(brush);
+		setOpacity(1);
+		show();
 	}
 	else if (Valeur == 256)
 	{
 		//qDebug() << "tuile 256";
-		setBrush(Qt::red);
-		//setPixmap(QPixmap(":/Tuile256.png"));
+		//setBrush(Qt::red);
+		brush.setTextureImage(QImage(":/Resource/Resource/60x60/Tuile256.png"));
+		setBrush(brush);
+		setOpacity(1);
+		show();
 	}
 	else if (Valeur == 512)
 	{
 		//qDebug() << "tuile 512";
-		setBrush(Qt::darkRed);
-		//setPixmap(QPixmap(":/Tuile512.png"));
+		//setBrush(Qt::darkRed);
+		brush.setTextureImage(QImage(":/Resource/Resource/60x60/Tuile512.png"));
+		setBrush(brush);
+		setOpacity(1);
+		show();
 	}
 	else if (Valeur == 1024)
 	{
 		//qDebug() << "tuile 1024";
-		setBrush(Qt::magenta);
-		//setPixmap(QPixmap(":/Ressources/Assets/Tuile1024.png"));
+		//setBrush(Qt::magenta);
+		brush.setTextureImage(QImage(":/Resource/Resource/60x60/Tuile1024.png"));
+		setBrush(brush);
+		setOpacity(1);
+		show();
 
 	}
 	else if (Valeur == 2048)
 	{
 		//qDebug() << "tuile 2048";
-		setBrush(Qt::darkMagenta);
-		//setPixmap(QPixmap(":/Ressources/Assets/Tuile2048.png"));
+		//setBrush(Qt::darkMagenta);
+		brush.setTextureImage(QImage(":/Resource/Resource/60x60/Tuile2048.png"));
+		setBrush(brush);
+		setOpacity(1);
+		show();
+
 	}
 	else
 	{
 		//qDebug() << "tuile blanche";
-		setBrush(Qt::white);
-		//qDebug() << "File exists -" << QFileInfo("Ressources/Assets/TuileVide.png").exists() << " " << QFileInfo("Ressources/Assets/TuileVide.png").absoluteFilePath();
-		//setPixmap(QPixmap(":/Ressources/Assets/TuileVide.png"));
-		//show();
+		//setBrush(Qt::white);
+		
+		brush.setTextureImage(QImage(":/Resource/Resource/60x60/TuileVide.png"));
+		setBrush(brush);
+		setOpacity(1);
+		show();
 	}
 }
 

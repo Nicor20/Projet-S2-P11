@@ -1,0 +1,1427 @@
+{
+  "version": "2.1.0",
+  "$schema": "https://schemastore.azurewebsites.net/schemas/json/sarif-2.1.0-rtm.5.json",
+  "runs": [
+    {
+      "results": [],
+      "tool": {
+        "driver": {
+          "name": "PREfast",
+          "fullName": "PREfast Code Analysis",
+          "version": "14.28.29913.0",
+          "informationUri": "https://aka.ms/cpp/ca"
+        }
+      },
+      "invocations": [
+        {
+          "commandLine": "\"F:\\Program Files (x86)\\Microsoft Visual Studio\\2019\\Community\\VC\\Tools\\MSVC\\14.28.29910\\bin\\HostX86\\x64\\c1xx.dll\" -ACf{1F7B090C-16DB-4822-966A-A93D26ED4681} -ACpmspft140.dll -Alint -D_PREFAST_ -D_AST_FE_ -Analyze -zm0x00E9B1C0 -il C:\\Users\\walan\\AppData\\Local\\Temp\\_CL_76bcb537ast -typedil -f qrc_Resource.cpp -Ze -D_MSC_EXTENSIONS -Zp16 -pc \\:/ -D_MSC_VER=1928 -D_MSC_FULL_VER=192829913 -D_MSC_BUILD=0 -D_M_AMD64=100 -ZILP448 -D_M_X64=100 -D_WIN64 -D_WIN32 -GR -D_CPPRTTI -I F:\\Users\\walan\\Documents\\GitHub\\Projet-S2-P11\\Super2048Walan -I F:\\Users\\walan\\Documents\\GitHub\\Projet-S2-P11\\Super2048Walan\\Ressources -I F:\\Users\\walan\\Documents\\GitHub\\Projet-S2-P11\\Super2048Walan\\LIBS -I F:\\Users\\walan\\Documents\\GitHub\\Projet-S2-P11\\Super2048Walan\\+= -I C:\\Qt\\6.0.0\\msvc2019_64\\include -I C:\\Qt\\6.0.0\\msvc2019_64\\include\\QtWidgets -I C:\\Qt\\6.0.0\\msvc2019_64\\include\\QtGui -I C:\\Qt\\6.0.0\\msvc2019_64\\include\\QtCore -I F:\\Users\\walan\\Documents\\GitHub\\Projet-S2-P11\\Super2048Walan\\debug -I C:\\Qt\\6.0.0\\msvc2019_64\\mkspecs\\win32-msvc -nologo -W 3 -diagnostics:column -Ot -DCODE_ANALYSIS -D_CONSOLE -DUNICODE -D_UNICODE -DWIN32 -D_ENABLE_EXTENDED_ALIGNED_STORAGE -DWIN64 -DQT_WIDGETS_LIB -DQT_GUI_LIB -DQT_CORE_LIB -EHs -D_CPPUNWIND -EHc -MDd -D_DEBUG -D_MT -D_DLL -GS -D_M_FP_PRECISE -Zc:wchar_t -Zc:forScope -std:c++17 -Fodebug\\qrc_Resource.obj -Fddebug\\vc142.pdb -Gd -wd 4577 -wd 4467 -analyze:projectdirectory F:\\Users\\walan\\Documents\\GitHub\\Projet-S2-P11\\Super2048Walan -analyze:rulesetdirectory ;F:\\Program Files (x86)\\Microsoft Visual Studio\\2019\\Community\\Team Tools\\Static Analysis Tools\\\\Rule Sets; -analyze:ruleset F:\\Program Files (x86)\\Microsoft Visual Studio\\2019\\Community\\Team Tools\\Static Analysis Tools\\Rule Sets\\NativeRecommendedRules.ruleset -analyze:quiet -analyze:plugin F:\\Program Files (x86)\\Microsoft Visual Studio\\2019\\Community\\VC\\Tools\\MSVC\\14.28.29910\\bin\\HostX86\\x86\\EspXEngine.dll -FC -errorreport:prompt -Zc:rvalueCast -Zc:strictStrings -permissive- -Zc:__cplusplus -Zc:externConstexpr -validate-charset -utf-8 -D_UTF8 -w3 4100 -w3 4189 -w4 4996 -w4 4456 -w4 4457 -w4 4458 -I F:\\Program Files (x86)\\Microsoft Visual Studio\\2019\\Community\\VC\\Tools\\MSVC\\14.28.29910\\include -I F:\\Program Files (x86)\\Microsoft Visual Studio\\2019\\Community\\VC\\Tools\\MSVC\\14.28.29910\\atlmfc\\include -I F:\\Program Files (x86)\\Microsoft Visual Studio\\2019\\Community\\VC\\Auxiliary\\VS\\include -I C:\\Program Files (x86)\\Windows Kits\\10\\Include\\10.0.19041.0\\ucrt -I F:\\Program Files (x86)\\Microsoft Visual Studio\\2019\\Community\\VC\\Auxiliary\\VS\\UnitTest\\include -I C:\\Program Files (x86)\\Windows Kits\\10\\Include\\10.0.19041.0\\um -I C:\\Program Files (x86)\\Windows Kits\\10\\Include\\10.0.19041.0\\shared -I C:\\Program Files (x86)\\Windows Kits\\10\\Include\\10.0.19041.0\\winrt -I C:\\Program Files (x86)\\Windows Kits\\10\\Include\\10.0.19041.0\\cppwinrt -I C:\\Program Files (x86)\\Windows Kits\\NETFXSDK\\4.8\\Include\\um",
+          "executionSuccessful": true
+        }
+      ],
+      "artifacts": [
+        {
+          "location": {
+            "uri": "file:///f:/users/walan/documents/github/projet-s2-p11/super2048walan/debug/qrc_resource.cpp"
+          },
+          "roles": [
+            "analysisTarget"
+          ],
+          "hashes": {
+            "md5": "4b5f09340735a9a5503f335e388cd604"
+          }
+        },
+        {
+          "location": {
+            "uri": "file:///C:/Qt/6.0.0/msvc2019_64/include/QtCore/qglobal.h"
+          },
+          "roles": [
+            "resultFile"
+          ],
+          "hashes": {
+            "md5": "a6511f35168e47a6d74d14f632b74c2f"
+          }
+        },
+        {
+          "location": {
+            "uri": "file:///C:/Qt/6.0.0/msvc2019_64/include/QtCore/qnamespace.h"
+          },
+          "roles": [
+            "resultFile"
+          ],
+          "hashes": {
+            "md5": "28524932fe1a97a61674c70fac995d31"
+          }
+        },
+        {
+          "location": {
+            "uri": "file:///C:/Qt/6.0.0/msvc2019_64/include/QtCore/qchar.h"
+          },
+          "roles": [
+            "resultFile"
+          ],
+          "hashes": {
+            "md5": "f12dc59611d26362e664a2e08939b303"
+          }
+        },
+        {
+          "location": {
+            "uri": "file:///C:/Qt/6.0.0/msvc2019_64/include/QtCore/qarraydata.h"
+          },
+          "roles": [
+            "resultFile"
+          ],
+          "hashes": {
+            "md5": "232393677cb4b528b6cf4d98681ac024"
+          }
+        },
+        {
+          "location": {
+            "uri": "file:///C:/Qt/6.0.0/msvc2019_64/include/QtCore/qbytearray.h"
+          },
+          "roles": [
+            "resultFile"
+          ],
+          "hashes": {
+            "md5": "8c4c39633197aa3808c2893f70774de6"
+          }
+        },
+        {
+          "location": {
+            "uri": "file:///C:/Qt/6.0.0/msvc2019_64/include/QtCore/qstring.h"
+          },
+          "roles": [
+            "resultFile"
+          ],
+          "hashes": {
+            "md5": "7df04866617959d8d12ceb06116574b0"
+          }
+        },
+        {
+          "location": {
+            "uri": "file:///C:/Qt/6.0.0/msvc2019_64/include/QtCore/qdatastream.h"
+          },
+          "roles": [
+            "resultFile"
+          ],
+          "hashes": {
+            "md5": "c92ddb8acfe4080d2b611a4527b6161d"
+          }
+        },
+        {
+          "location": {
+            "uri": "file:///C:/Qt/6.0.0/msvc2019_64/include/QtCore/qmetacontainer.h"
+          },
+          "roles": [
+            "resultFile"
+          ],
+          "hashes": {
+            "md5": "1ec3c0f50222ad181ae1d63e2aa6999f"
+          }
+        },
+        {
+          "location": {
+            "uri": "file:///C:/Qt/6.0.0/msvc2019_64/include/QtCore/qmetatype.h"
+          },
+          "roles": [
+            "resultFile"
+          ],
+          "hashes": {
+            "md5": "1fc0a92e8c72c490d79124b28bc4f2dd"
+          }
+        },
+        {
+          "location": {
+            "uri": "file:///C:/Qt/6.0.0/msvc2019_64/include/QtCore/qstringconverter.h"
+          },
+          "roles": [
+            "resultFile"
+          ],
+          "hashes": {
+            "md5": "97e52e2e492a80b9c121dad83d84c08e"
+          }
+        },
+        {
+          "location": {
+            "uri": "file:///C:/Qt/6.0.0/msvc2019_64/include/QtCore/qtextstream.h"
+          },
+          "roles": [
+            "resultFile"
+          ],
+          "hashes": {
+            "md5": "7f05ab89bde13f4b3e16164b891a137e"
+          }
+        },
+        {
+          "location": {
+            "uri": "file:///C:/Qt/6.0.0/msvc2019_64/include/QtCore/qsharedpointer_impl.h"
+          },
+          "roles": [
+            "resultFile"
+          ],
+          "hashes": {
+            "md5": "c0e07d5341c964499412eccfc147cf3d"
+          }
+        },
+        {
+          "location": {
+            "uri": "file:///C:/Qt/6.0.0/msvc2019_64/include/QtCore/qdebug.h"
+          },
+          "roles": [
+            "resultFile"
+          ],
+          "hashes": {
+            "md5": "7e3131af9e5535cf0763017994e4a9b6"
+          }
+        },
+        {
+          "location": {
+            "uri": "file:///C:/Qt/6.0.0/msvc2019_64/include/QtCore/qvariant.h"
+          },
+          "roles": [
+            "resultFile"
+          ],
+          "hashes": {
+            "md5": "62968692b349fb543d6faea283e5da09"
+          }
+        },
+        {
+          "location": {
+            "uri": "file:///C:/Qt/6.0.0/msvc2019_64/include/QtGui/qtransform.h"
+          },
+          "roles": [
+            "resultFile"
+          ],
+          "hashes": {
+            "md5": "ab773398b27ad3b58a7168d97ef5e1e8"
+          }
+        },
+        {
+          "location": {
+            "uri": "file:///C:/Qt/6.0.0/msvc2019_64/include/QtGui/qcolor.h"
+          },
+          "roles": [
+            "resultFile"
+          ],
+          "hashes": {
+            "md5": "82beb2655c34104f676c83ee32ba628d"
+          }
+        },
+        {
+          "location": {
+            "uri": "file:///C:/Qt/6.0.0/msvc2019_64/include/QtGui/qpixelformat.h"
+          },
+          "roles": [
+            "resultFile"
+          ],
+          "hashes": {
+            "md5": "24658c3f7b83aa29d64164ff1f73d4e2"
+          }
+        },
+        {
+          "location": {
+            "uri": "file:///C:/Qt/6.0.0/msvc2019_64/include/QtGui/qimage.h"
+          },
+          "roles": [
+            "resultFile"
+          ],
+          "hashes": {
+            "md5": "4756c5a0b26675aafc4e1d227f265fe3"
+          }
+        },
+        {
+          "location": {
+            "uri": "file:///C:/Qt/6.0.0/msvc2019_64/include/QtWidgets/qgraphicsitem.h"
+          },
+          "roles": [
+            "resultFile"
+          ],
+          "hashes": {
+            "md5": "e2722e0bc21204b03576c173a3637b58"
+          }
+        },
+        {
+          "location": {
+            "uri": "file:///C:/Qt/6.0.0/msvc2019_64/include/QtGui/qbrush.h"
+          },
+          "roles": [
+            "resultFile"
+          ],
+          "hashes": {
+            "md5": "c328d759f1c204f1e3c89c8f53b2df01"
+          }
+        },
+        {
+          "location": {
+            "uri": "file:///C:/Qt/6.0.0/msvc2019_64/include/QtGui/qtextoption.h"
+          },
+          "roles": [
+            "resultFile"
+          ],
+          "hashes": {
+            "md5": "e98ec9e9fdcc59909891750948522218"
+          }
+        },
+        {
+          "location": {
+            "uri": "file:///C:/Qt/6.0.0/msvc2019_64/include/QtGui/qfont.h"
+          },
+          "roles": [
+            "resultFile"
+          ],
+          "hashes": {
+            "md5": "64e116423801e763b825ca4f677d0bcf"
+          }
+        },
+        {
+          "location": {
+            "uri": "file:///C:/Qt/6.0.0/msvc2019_64/include/QtGui/qpainter.h"
+          },
+          "roles": [
+            "resultFile"
+          ],
+          "hashes": {
+            "md5": "8e539e6afcdc9ba7c22ffc410d5983c1"
+          }
+        },
+        {
+          "location": {
+            "uri": "file:///F:/Users/walan/Documents/GitHub/Projet-S2-P11/Super2048Walan/debug/moc_Tuile.cpp"
+          },
+          "roles": [
+            "analysisTarget",
+            "resultFile"
+          ],
+          "hashes": {
+            "md5": "2c78ab0f9854475b0ba9ce6d1148bb76"
+          }
+        },
+        {
+          "location": {
+            "uri": "file:///C:/Qt/6.0.0/msvc2019_64/include/QtCore/qflags.h"
+          },
+          "roles": [
+            "resultFile"
+          ],
+          "hashes": {
+            "md5": "083ec1f119747f1f0fc2dc2656f84eac"
+          }
+        },
+        {
+          "location": {
+            "uri": "file:///C:/Qt/6.0.0/msvc2019_64/include/QtCore/qarraydatapointer.h"
+          },
+          "roles": [
+            "resultFile"
+          ],
+          "hashes": {
+            "md5": "56ac2152e969d555d6068b360db504bf"
+          }
+        },
+        {
+          "location": {
+            "uri": "file:///C:/Qt/6.0.0/msvc2019_64/include/QtCore/qarraydataops.h"
+          },
+          "roles": [
+            "resultFile"
+          ],
+          "hashes": {
+            "md5": "845a799f89443f4b3639917a3f0892be"
+          }
+        },
+        {
+          "location": {
+            "uri": "file:///f:/users/walan/documents/github/projet-s2-p11/super2048walan/tuile.h"
+          },
+          "hashes": {
+            "md5": "5d668542fb1a30f237d835614f06d9fb"
+          }
+        },
+        {
+          "location": {
+            "uri": "file:///c:/qt/6.0.0/msvc2019_64/include/qtwidgets/qgraphicsrectitem"
+          },
+          "hashes": {
+            "md5": "716d3d50d52ca1f2b01d86ad48ab5b44"
+          }
+        },
+        {
+          "location": {
+            "uri": "file:///c:/qt/6.0.0/msvc2019_64/include/qtwidgets/qtwidgetsglobal.h"
+          },
+          "hashes": {
+            "md5": "17b764122c97af9d72dbf92785ba3c20"
+          }
+        },
+        {
+          "location": {
+            "uri": "file:///c:/qt/6.0.0/msvc2019_64/include/qtgui/qtguiglobal.h"
+          },
+          "hashes": {
+            "md5": "02e414b6a8ba840824d465f8d284d392"
+          }
+        },
+        {
+          "location": {
+            "uri": "file:///c:/qt/6.0.0/msvc2019_64/include/qtcore/qconfig.h"
+          },
+          "hashes": {
+            "md5": "434d4dbf21f26b15fe0a3ad393d26d02"
+          }
+        },
+        {
+          "location": {
+            "uri": "file:///c:/qt/6.0.0/msvc2019_64/include/qtcore/qtcore-config.h"
+          },
+          "hashes": {
+            "md5": "88584c52092c5d0046993e346f1b1c91"
+          }
+        },
+        {
+          "location": {
+            "uri": "file:///c:/qt/6.0.0/msvc2019_64/include/qtcore/qsystemdetection.h"
+          },
+          "hashes": {
+            "md5": "75e2843804e5974d6bbbbe8abec7ec93"
+          }
+        },
+        {
+          "location": {
+            "uri": "file:///c:/qt/6.0.0/msvc2019_64/include/qtcore/qprocessordetection.h"
+          },
+          "hashes": {
+            "md5": "22685275de8211c40586b8e2ebd3774a"
+          }
+        },
+        {
+          "location": {
+            "uri": "file:///c:/qt/6.0.0/msvc2019_64/include/qtcore/qcompilerdetection.h"
+          },
+          "hashes": {
+            "md5": "05ad0cad9d37707e54cb4b874d9ec58e"
+          }
+        },
+        {
+          "location": {
+            "uri": "file:///c:/qt/6.0.0/msvc2019_64/include/qtcore/qtypeinfo.h"
+          },
+          "hashes": {
+            "md5": "f56505d4a1e7adc346734215f771e559"
+          }
+        },
+        {
+          "location": {
+            "uri": "file:///c:/qt/6.0.0/msvc2019_64/include/qtcore/qcontainerfwd.h"
+          },
+          "hashes": {
+            "md5": "0866ee54c073ec1622767ea3fc83d5ca"
+          }
+        },
+        {
+          "location": {
+            "uri": "file:///c:/qt/6.0.0/msvc2019_64/include/qtcore/qsysinfo.h"
+          },
+          "hashes": {
+            "md5": "8501a2dc7ee608c84c939bc26214230a"
+          }
+        },
+        {
+          "location": {
+            "uri": "file:///c:/qt/6.0.0/msvc2019_64/include/qtcore/qlogging.h"
+          },
+          "hashes": {
+            "md5": "5a9522b5e491913a4f78a943069a1826"
+          }
+        },
+        {
+          "location": {
+            "uri": "file:///c:/qt/6.0.0/msvc2019_64/include/qtcore/qatomic.h"
+          },
+          "hashes": {
+            "md5": "8c0d7e3cd4a175be9688b37d3df02a36"
+          }
+        },
+        {
+          "location": {
+            "uri": "file:///c:/qt/6.0.0/msvc2019_64/include/qtcore/qbasicatomic.h"
+          },
+          "hashes": {
+            "md5": "43027e8d5355b5879728e53053e028bf"
+          }
+        },
+        {
+          "location": {
+            "uri": "file:///c:/qt/6.0.0/msvc2019_64/include/qtcore/qatomic_cxx11.h"
+          },
+          "hashes": {
+            "md5": "e86380c8209675a97d72afcc699b7e53"
+          }
+        },
+        {
+          "location": {
+            "uri": "file:///c:/qt/6.0.0/msvc2019_64/include/qtcore/qgenericatomic.h"
+          },
+          "hashes": {
+            "md5": "02b6e6768a0a4a41d4c91ba0a6f4f66f"
+          }
+        },
+        {
+          "location": {
+            "uri": "file:///c:/qt/6.0.0/msvc2019_64/include/qtcore/qglobalstatic.h"
+          },
+          "hashes": {
+            "md5": "2f91d4c9cb13e72c8ef030e909e8289d"
+          }
+        },
+        {
+          "location": {
+            "uri": "file:///c:/qt/6.0.0/msvc2019_64/include/qtcore/qnumeric.h"
+          },
+          "hashes": {
+            "md5": "2819b50dc7d5bf11774fc85627b5faf8"
+          }
+        },
+        {
+          "location": {
+            "uri": "file:///c:/qt/6.0.0/msvc2019_64/include/qtcore/qversiontagging.h"
+          },
+          "hashes": {
+            "md5": "d134ef4ab1bd2dd548c0b8e2a5550839"
+          }
+        },
+        {
+          "location": {
+            "uri": "file:///c:/qt/6.0.0/msvc2019_64/include/qtgui/qtgui-config.h"
+          },
+          "hashes": {
+            "md5": "b2bc923e54cf898399fecfcca1ed83e7"
+          }
+        },
+        {
+          "location": {
+            "uri": "file:///c:/qt/6.0.0/msvc2019_64/include/qtwidgets/qtwidgets-config.h"
+          },
+          "hashes": {
+            "md5": "4eb80947d9401ecd4d6c43d38fc6f1f5"
+          }
+        },
+        {
+          "location": {
+            "uri": "file:///c:/qt/6.0.0/msvc2019_64/include/qtcore/qobject.h"
+          },
+          "hashes": {
+            "md5": "0f4c658c34a4ee15d9a2484b3bfe22ce"
+          }
+        },
+        {
+          "location": {
+            "uri": "file:///c:/qt/6.0.0/msvc2019_64/include/qtcore/qobjectdefs.h"
+          },
+          "hashes": {
+            "md5": "6fdc77f556c15e662af8ba8c8f25a599"
+          }
+        },
+        {
+          "location": {
+            "uri": "file:///c:/qt/6.0.0/msvc2019_64/include/qtcore/qtmetamacros.h"
+          },
+          "hashes": {
+            "md5": "a17460413bd06273dd9dde8ad370844b"
+          }
+        },
+        {
+          "location": {
+            "uri": "file:///c:/qt/6.0.0/msvc2019_64/include/qtcore/qobjectdefs_impl.h"
+          },
+          "hashes": {
+            "md5": "16579da828529165d1095494d1b41c97"
+          }
+        },
+        {
+          "location": {
+            "uri": "file:///c:/qt/6.0.0/msvc2019_64/include/qtcore/qstringview.h"
+          },
+          "hashes": {
+            "md5": "41f30de70e87a61900338956572edc02"
+          }
+        },
+        {
+          "location": {
+            "uri": "file:///c:/qt/6.0.0/msvc2019_64/include/qtcore/qrefcount.h"
+          },
+          "hashes": {
+            "md5": "32def1d4b1eeaa9a8d66a2eac6389747"
+          }
+        },
+        {
+          "location": {
+            "uri": "file:///c:/qt/6.0.0/msvc2019_64/include/qtcore/qpair.h"
+          },
+          "hashes": {
+            "md5": "8cdba6560419097d07c4d7c118847230"
+          }
+        },
+        {
+          "location": {
+            "uri": "file:///c:/qt/6.0.0/msvc2019_64/include/qtcore/qcontainertools_impl.h"
+          },
+          "hashes": {
+            "md5": "0a1f61ba2eb3391184885d1a7071457c"
+          }
+        },
+        {
+          "location": {
+            "uri": "file:///c:/qt/6.0.0/msvc2019_64/include/qtcore/qbytearrayalgorithms.h"
+          },
+          "hashes": {
+            "md5": "17908969835db040822a8352fa890a39"
+          }
+        },
+        {
+          "location": {
+            "uri": "file:///c:/qt/6.0.0/msvc2019_64/include/qtcore/qbytearrayview.h"
+          },
+          "hashes": {
+            "md5": "a1d790bcf1e3f55e7ec884d5223e66fc"
+          }
+        },
+        {
+          "location": {
+            "uri": "file:///c:/qt/6.0.0/msvc2019_64/include/qtcore/qstringliteral.h"
+          },
+          "hashes": {
+            "md5": "7a808026e2328a51edea11b60272093b"
+          }
+        },
+        {
+          "location": {
+            "uri": "file:///c:/qt/6.0.0/msvc2019_64/include/qtcore/qstringalgorithms.h"
+          },
+          "hashes": {
+            "md5": "847a44f266cd23abbef4769ff5996610"
+          }
+        },
+        {
+          "location": {
+            "uri": "file:///c:/qt/6.0.0/msvc2019_64/include/qtcore/qanystringview.h"
+          },
+          "hashes": {
+            "md5": "9a63f441e64005e8d7da84b90db2b252"
+          }
+        },
+        {
+          "location": {
+            "uri": "file:///c:/qt/6.0.0/msvc2019_64/include/qtcore/qutf8stringview.h"
+          },
+          "hashes": {
+            "md5": "e3ecb5899405b2a0387d3209f03c555f"
+          }
+        },
+        {
+          "location": {
+            "uri": "file:///c:/qt/6.0.0/msvc2019_64/include/qtcore/qstringtokenizer.h"
+          },
+          "hashes": {
+            "md5": "3d34c03a406dc6beed7688cffe9ea709"
+          }
+        },
+        {
+          "location": {
+            "uri": "file:///c:/qt/6.0.0/msvc2019_64/include/qtcore/qlist.h"
+          },
+          "hashes": {
+            "md5": "8f623843cd0cd8f8644d6a2f8a63c75a"
+          }
+        },
+        {
+          "location": {
+            "uri": "file:///c:/qt/6.0.0/msvc2019_64/include/qtcore/qhashfunctions.h"
+          },
+          "hashes": {
+            "md5": "3dcd743f5b557d9891ac410c3cc1e719"
+          }
+        },
+        {
+          "location": {
+            "uri": "file:///c:/qt/6.0.0/msvc2019_64/include/qtcore/qiterator.h"
+          },
+          "hashes": {
+            "md5": "1c060826cad43657de7079d2f4d3de31"
+          }
+        },
+        {
+          "location": {
+            "uri": "file:///c:/qt/6.0.0/msvc2019_64/include/qtcore/qbytearraylist.h"
+          },
+          "hashes": {
+            "md5": "cc1574231ab904a535b6d16d6a9e8677"
+          }
+        },
+        {
+          "location": {
+            "uri": "file:///c:/qt/6.0.0/msvc2019_64/include/qtcore/qstringlist.h"
+          },
+          "hashes": {
+            "md5": "301e003ec5fb4f6282429eaee86975af"
+          }
+        },
+        {
+          "location": {
+            "uri": "file:///c:/qt/6.0.0/msvc2019_64/include/qtcore/qalgorithms.h"
+          },
+          "hashes": {
+            "md5": "cd524c83a33028188582477076837e22"
+          }
+        },
+        {
+          "location": {
+            "uri": "file:///c:/qt/6.0.0/msvc2019_64/include/qtcore/qstringmatcher.h"
+          },
+          "hashes": {
+            "md5": "9280296a105ca1f449f009acb2538496"
+          }
+        },
+        {
+          "location": {
+            "uri": "file:///c:/qt/6.0.0/msvc2019_64/include/qtcore/qscopedpointer.h"
+          },
+          "hashes": {
+            "md5": "3bf131cc6e85fe5e81fbfd543ef68fbb"
+          }
+        },
+        {
+          "location": {
+            "uri": "file:///c:/qt/6.0.0/msvc2019_64/include/qtcore/qcompare.h"
+          },
+          "hashes": {
+            "md5": "84dc8ba9ceaf23345275f5fbc492ae93"
+          }
+        },
+        {
+          "location": {
+            "uri": "file:///c:/qt/6.0.0/msvc2019_64/include/qtcore/qvarlengtharray.h"
+          },
+          "hashes": {
+            "md5": "ddf8d06a4a9e9f30d902285977a8fa85"
+          }
+        },
+        {
+          "location": {
+            "uri": "file:///c:/qt/6.0.0/msvc2019_64/include/qtcore/qiodevicebase.h"
+          },
+          "hashes": {
+            "md5": "2b3a4b960c24d79ca4e868823e968a7a"
+          }
+        },
+        {
+          "location": {
+            "uri": "file:///c:/qt/6.0.0/msvc2019_64/include/qtcore/qiterable.h"
+          },
+          "hashes": {
+            "md5": "c9edd098b7fdf74d49de87995a30a2e3"
+          }
+        },
+        {
+          "location": {
+            "uri": "file:///c:/qt/6.0.0/msvc2019_64/include/qtcore/qcontainerinfo.h"
+          },
+          "hashes": {
+            "md5": "a4981ff7ba4a157e72cd46a5b22751b0"
+          }
+        },
+        {
+          "location": {
+            "uri": "file:///c:/qt/6.0.0/msvc2019_64/include/qtcore/qtaggedpointer.h"
+          },
+          "hashes": {
+            "md5": "27a039dd488468c58cf83d01ab6c5549"
+          }
+        },
+        {
+          "location": {
+            "uri": "file:///c:/qt/6.0.0/msvc2019_64/include/qtcore/qmath.h"
+          },
+          "hashes": {
+            "md5": "166cb20ffd1c1ac48a706e880f2c63c3"
+          }
+        },
+        {
+          "location": {
+            "uri": "file:///c:/qt/6.0.0/msvc2019_64/include/qtcore/qobject_impl.h"
+          },
+          "hashes": {
+            "md5": "89c7c9914e0e57d87f41b00df9aa37b9"
+          }
+        },
+        {
+          "location": {
+            "uri": "file:///c:/qt/6.0.0/msvc2019_64/include/qtcore/qproperty.h"
+          },
+          "hashes": {
+            "md5": "a5eb2dcba351bfaccb3b88be5ab72a3b"
+          }
+        },
+        {
+          "location": {
+            "uri": "file:///c:/qt/6.0.0/msvc2019_64/include/qtcore/qshareddata.h"
+          },
+          "hashes": {
+            "md5": "4fd4b6b6aa0d7b9c10fceb02148108fa"
+          }
+        },
+        {
+          "location": {
+            "uri": "file:///c:/qt/6.0.0/msvc2019_64/include/qtcore/qpropertyprivate.h"
+          },
+          "hashes": {
+            "md5": "3d35d0c869349d88f9ca8a23db996d33"
+          }
+        },
+        {
+          "location": {
+            "uri": "file:///c:/qt/6.0.0/msvc2019_64/include/qtcore/qmap.h"
+          },
+          "hashes": {
+            "md5": "35bc3fbdffeddca54155520e97d41593"
+          }
+        },
+        {
+          "location": {
+            "uri": "file:///c:/qt/6.0.0/msvc2019_64/include/qtcore/qshareddata_impl.h"
+          },
+          "hashes": {
+            "md5": "599a16a7affc7254a11f32f787947cf6"
+          }
+        },
+        {
+          "location": {
+            "uri": "file:///c:/qt/6.0.0/msvc2019_64/include/qtcore/qhash.h"
+          },
+          "hashes": {
+            "md5": "70f5b83de089bce4ca08be6a16762cf6"
+          }
+        },
+        {
+          "location": {
+            "uri": "file:///c:/qt/6.0.0/msvc2019_64/include/qtcore/qset.h"
+          },
+          "hashes": {
+            "md5": "471b20fabeabeb7fca7d8fb77c4796de"
+          }
+        },
+        {
+          "location": {
+            "uri": "file:///c:/qt/6.0.0/msvc2019_64/include/qtcore/qcontiguouscache.h"
+          },
+          "hashes": {
+            "md5": "b45ad88ad0394cb6ca1067a3823acfb9"
+          }
+        },
+        {
+          "location": {
+            "uri": "file:///c:/qt/6.0.0/msvc2019_64/include/qtcore/qsharedpointer.h"
+          },
+          "hashes": {
+            "md5": "b3c2cdda0d9e147b06de07daa92bd88f"
+          }
+        },
+        {
+          "location": {
+            "uri": "file:///c:/qt/6.0.0/msvc2019_64/include/qtcore/qrect.h"
+          },
+          "hashes": {
+            "md5": "f5bc3332a0fa57c51254f87e8b00e5f7"
+          }
+        },
+        {
+          "location": {
+            "uri": "file:///c:/qt/6.0.0/msvc2019_64/include/qtcore/qmargins.h"
+          },
+          "hashes": {
+            "md5": "bb69f5830be60a7aa5c8dd3b34bb2893"
+          }
+        },
+        {
+          "location": {
+            "uri": "file:///c:/qt/6.0.0/msvc2019_64/include/qtcore/qsize.h"
+          },
+          "hashes": {
+            "md5": "7b87b509f504ebfdb3c344306e8b29d3"
+          }
+        },
+        {
+          "location": {
+            "uri": "file:///c:/qt/6.0.0/msvc2019_64/include/qtcore/qpoint.h"
+          },
+          "hashes": {
+            "md5": "922c5473876d8744b1964c5eac2efb6a"
+          }
+        },
+        {
+          "location": {
+            "uri": "file:///c:/qt/6.0.0/msvc2019_64/include/qtgui/qpainterpath.h"
+          },
+          "hashes": {
+            "md5": "5d4e726a066a44ed16c638ec93b9e7d5"
+          }
+        },
+        {
+          "location": {
+            "uri": "file:///c:/qt/6.0.0/msvc2019_64/include/qtgui/qpolygon.h"
+          },
+          "hashes": {
+            "md5": "6dfa179118cddd14c61bd82da301feeb"
+          }
+        },
+        {
+          "location": {
+            "uri": "file:///c:/qt/6.0.0/msvc2019_64/include/qtgui/qregion.h"
+          },
+          "hashes": {
+            "md5": "2ec1bcc1e4f1ef344fd86abc3e6a3268"
+          }
+        },
+        {
+          "location": {
+            "uri": "file:///c:/qt/6.0.0/msvc2019_64/include/qtgui/qwindowdefs.h"
+          },
+          "hashes": {
+            "md5": "cab9d722946b8765d1e4e5c0ce278efd"
+          }
+        },
+        {
+          "location": {
+            "uri": "file:///c:/qt/6.0.0/msvc2019_64/include/qtgui/qwindowdefs_win.h"
+          },
+          "hashes": {
+            "md5": "610d2e409c1cb427cca462c7e873d8f3"
+          }
+        },
+        {
+          "location": {
+            "uri": "file:///c:/qt/6.0.0/msvc2019_64/include/qtcore/qline.h"
+          },
+          "hashes": {
+            "md5": "78a81caaa6a24f69fce1945da8bc889b"
+          }
+        },
+        {
+          "location": {
+            "uri": "file:///c:/qt/6.0.0/msvc2019_64/include/qtgui/qpixmap.h"
+          },
+          "hashes": {
+            "md5": "361f73d883c4c094b474b3bda74094f9"
+          }
+        },
+        {
+          "location": {
+            "uri": "file:///c:/qt/6.0.0/msvc2019_64/include/qtgui/qpaintdevice.h"
+          },
+          "hashes": {
+            "md5": "a14616a4bc6a1a9ba806d064ee5d7c53"
+          }
+        },
+        {
+          "location": {
+            "uri": "file:///c:/qt/6.0.0/msvc2019_64/include/qtgui/qrgb.h"
+          },
+          "hashes": {
+            "md5": "8bf16bca1f21a241ad282962ca4a3566"
+          }
+        },
+        {
+          "location": {
+            "uri": "file:///c:/qt/6.0.0/msvc2019_64/include/qtgui/qrgba64.h"
+          },
+          "hashes": {
+            "md5": "f98693be66299636de591f25819279b3"
+          }
+        },
+        {
+          "location": {
+            "uri": "file:///c:/qt/6.0.0/msvc2019_64/include/qtgui/qbrush"
+          },
+          "hashes": {
+            "md5": "771c8d65e3275716918c79ff932e33be"
+          }
+        },
+        {
+          "location": {
+            "uri": "file:///c:/qt/6.0.0/msvc2019_64/include/qtgui/qpixmap"
+          },
+          "hashes": {
+            "md5": "7ac9e55930f196d64473ea541d72d602"
+          }
+        },
+        {
+          "location": {
+            "uri": "file:///c:/qt/6.0.0/msvc2019_64/include/qtgui/qpainter"
+          },
+          "hashes": {
+            "md5": "e2178f8afec0638e83862f6431ef4653"
+          }
+        },
+        {
+          "location": {
+            "uri": "file:///c:/qt/6.0.0/msvc2019_64/include/qtgui/qpen.h"
+          },
+          "hashes": {
+            "md5": "a31fb500a1ddf8a6781accd42b39003b"
+          }
+        },
+        {
+          "location": {
+            "uri": "file:///c:/qt/6.0.0/msvc2019_64/include/qtgui/qfontinfo.h"
+          },
+          "hashes": {
+            "md5": "0857996e940763a5b7db3faf7c93a1c7"
+          }
+        },
+        {
+          "location": {
+            "uri": "file:///c:/qt/6.0.0/msvc2019_64/include/qtgui/qfontmetrics.h"
+          },
+          "hashes": {
+            "md5": "51f3670f63a129646ba5e3a532e9c874"
+          }
+        },
+        {
+          "location": {
+            "uri": "file:///c:/qt/6.0.0/msvc2019_64/include/qtcore/qdebug"
+          },
+          "hashes": {
+            "md5": "0c81b97088327333c4144bedc1e090a2"
+          }
+        },
+        {
+          "location": {
+            "uri": "file:///c:/qt/6.0.0/msvc2019_64/include/qtwidgets/qgraphicspixmapitem"
+          },
+          "hashes": {
+            "md5": "716d3d50d52ca1f2b01d86ad48ab5b44"
+          }
+        },
+        {
+          "location": {
+            "uri": "file:///C:/Qt/6.0.0/msvc2019_64/include/QtGui/qpalette.h"
+          },
+          "roles": [
+            "resultFile"
+          ],
+          "hashes": {
+            "md5": "536b68f406d84f7f5b0f814cb2873685"
+          }
+        },
+        {
+          "location": {
+            "uri": "file:///C:/Qt/6.0.0/msvc2019_64/include/QtWidgets/qsizepolicy.h"
+          },
+          "roles": [
+            "resultFile"
+          ],
+          "hashes": {
+            "md5": "c8f2fb51512cb5186fd42848ae1045c8"
+          }
+        },
+        {
+          "location": {
+            "uri": "file:///C:/Qt/6.0.0/msvc2019_64/include/QtGui/qcursor.h"
+          },
+          "roles": [
+            "resultFile"
+          ],
+          "hashes": {
+            "md5": "c5da25014525b4c3a8705f89396189ae"
+          }
+        },
+        {
+          "location": {
+            "uri": "file:///C:/Qt/6.0.0/msvc2019_64/include/QtGui/qkeysequence.h"
+          },
+          "roles": [
+            "resultFile"
+          ],
+          "hashes": {
+            "md5": "1804a6cc0eacb6fdd23bfb4f96ff4b53"
+          }
+        },
+        {
+          "location": {
+            "uri": "file:///C:/Qt/6.0.0/msvc2019_64/include/QtWidgets/qwidget.h"
+          },
+          "roles": [
+            "resultFile"
+          ],
+          "hashes": {
+            "md5": "8e9fac2f185e7d14e876bd3016c55163"
+          }
+        },
+        {
+          "location": {
+            "uri": "file:///C:/Qt/6.0.0/msvc2019_64/include/QtGui/qicon.h"
+          },
+          "roles": [
+            "resultFile"
+          ],
+          "hashes": {
+            "md5": "c74531139097df6873929ddb2a013eea"
+          }
+        },
+        {
+          "location": {
+            "uri": "file:///C:/Qt/6.0.0/msvc2019_64/include/QtWidgets/qtabwidget.h"
+          },
+          "roles": [
+            "resultFile"
+          ],
+          "hashes": {
+            "md5": "7f2c64cbd0a63c5ba84fa182d2e83e43"
+          }
+        },
+        {
+          "location": {
+            "uri": "file:///C:/Qt/6.0.0/msvc2019_64/include/QtWidgets/qmainwindow.h"
+          },
+          "roles": [
+            "resultFile"
+          ],
+          "hashes": {
+            "md5": "e1b303e95edfdc637bb75a751b02967e"
+          }
+        },
+        {
+          "location": {
+            "uri": "file:///C:/Qt/6.0.0/msvc2019_64/include/QtWidgets/qgraphicsscene.h"
+          },
+          "roles": [
+            "resultFile"
+          ],
+          "hashes": {
+            "md5": "b1be2ba33c312da56d0b501547c21d07"
+          }
+        },
+        {
+          "location": {
+            "uri": "file:///C:/Qt/6.0.0/msvc2019_64/include/QtWidgets/qframe.h"
+          },
+          "roles": [
+            "resultFile"
+          ],
+          "hashes": {
+            "md5": "91e22382760260a0b7159c6d43efd321"
+          }
+        },
+        {
+          "location": {
+            "uri": "file:///C:/Qt/6.0.0/msvc2019_64/include/QtWidgets/qabstractscrollarea.h"
+          },
+          "roles": [
+            "resultFile"
+          ],
+          "hashes": {
+            "md5": "7d56fb841516604c086fa7a12aaa9947"
+          }
+        },
+        {
+          "location": {
+            "uri": "file:///C:/Qt/6.0.0/msvc2019_64/include/QtWidgets/qgraphicsview.h"
+          },
+          "roles": [
+            "resultFile"
+          ],
+          "hashes": {
+            "md5": "a6cc507257a250462c403764a9338137"
+          }
+        },
+        {
+          "location": {
+            "uri": "file:///C:/Qt/6.0.0/msvc2019_64/include/QtCore/qcoreevent.h"
+          },
+          "roles": [
+            "resultFile"
+          ],
+          "hashes": {
+            "md5": "855cd98c9617455e0da16922384c49ed"
+          }
+        },
+        {
+          "location": {
+            "uri": "file:///C:/Qt/6.0.0/msvc2019_64/include/QtCore/qiodevice.h"
+          },
+          "roles": [
+            "resultFile"
+          ],
+          "hashes": {
+            "md5": "6bc90769cc747a223d2b580fb4704c2d"
+          }
+        },
+        {
+          "location": {
+            "uri": "file:///C:/Qt/6.0.0/msvc2019_64/include/QtCore/qurl.h"
+          },
+          "roles": [
+            "resultFile"
+          ],
+          "hashes": {
+            "md5": "d01fed871d57466046b83b104fdec40f"
+          }
+        },
+        {
+          "location": {
+            "uri": "file:///C:/Qt/6.0.0/msvc2019_64/include/QtGui/qvectornd.h"
+          },
+          "roles": [
+            "resultFile"
+          ],
+          "hashes": {
+            "md5": "017bf1e98510069035830a808a79a2bc"
+          }
+        },
+        {
+          "location": {
+            "uri": "file:///C:/Qt/6.0.0/msvc2019_64/include/QtGui/qpointingdevice.h"
+          },
+          "roles": [
+            "resultFile"
+          ],
+          "hashes": {
+            "md5": "53cde0f66c9c14618595b739b82c48b1"
+          }
+        },
+        {
+          "location": {
+            "uri": "file:///C:/Qt/6.0.0/msvc2019_64/include/QtGui/qevent.h"
+          },
+          "roles": [
+            "resultFile"
+          ],
+          "hashes": {
+            "md5": "60238dcd1cf26fe8a3b4e43628d637e3"
+          }
+        },
+        {
+          "location": {
+            "uri": "file:///F:/Users/walan/Documents/GitHub/Projet-S2-P11/Super2048Walan/debug/moc_Affichage.cpp"
+          },
+          "roles": [
+            "analysisTarget",
+            "resultFile"
+          ],
+          "hashes": {
+            "md5": "dc5e3c09513c801aee2d3a3a56c80703"
+          }
+        },
+        {
+          "location": {
+            "uri": "file:///f:/users/walan/documents/github/projet-s2-p11/super2048walan/affichage.h"
+          },
+          "hashes": {
+            "md5": "ce044a27337a0982786baf81b777c307"
+          }
+        },
+        {
+          "location": {
+            "uri": "file:///c:/qt/6.0.0/msvc2019_64/include/qtwidgets/qmainwindow"
+          },
+          "hashes": {
+            "md5": "c68e64d45f967dd678ef29e86cb9648d"
+          }
+        },
+        {
+          "location": {
+            "uri": "file:///c:/qt/6.0.0/msvc2019_64/include/qtgui/qbitmap.h"
+          },
+          "hashes": {
+            "md5": "cfbd04a6c65388591ed9de4e6db32e0b"
+          }
+        },
+        {
+          "location": {
+            "uri": "file:///c:/qt/6.0.0/msvc2019_64/include/qtwidgets/qgraphicsscene"
+          },
+          "hashes": {
+            "md5": "a5f0dc8928f1c745c10061b3cdc2a7e6"
+          }
+        },
+        {
+          "location": {
+            "uri": "file:///c:/qt/6.0.0/msvc2019_64/include/qtwidgets/qgraphicsview"
+          },
+          "hashes": {
+            "md5": "e9f85cdac6ac86b1b81dac403cc6aa53"
+          }
+        },
+        {
+          "location": {
+            "uri": "file:///c:/qt/6.0.0/msvc2019_64/include/qtwidgets/qscrollarea.h"
+          },
+          "hashes": {
+            "md5": "3f7ababa65ede106183d3f323a7843ca"
+          }
+        },
+        {
+          "location": {
+            "uri": "file:///c:/qt/6.0.0/msvc2019_64/include/qtcore/qstring"
+          },
+          "hashes": {
+            "md5": "79e71952103b27e5ed89b28c1312e072"
+          }
+        },
+        {
+          "location": {
+            "uri": "file:///c:/qt/6.0.0/msvc2019_64/include/qtwidgets/qstatusbar"
+          },
+          "hashes": {
+            "md5": "5e02d756dce4631944e3d482b675c780"
+          }
+        },
+        {
+          "location": {
+            "uri": "file:///c:/qt/6.0.0/msvc2019_64/include/qtwidgets/qstatusbar.h"
+          },
+          "hashes": {
+            "md5": "7e30175f0a3f78e88ad22b56b0674afb"
+          }
+        },
+        {
+          "location": {
+            "uri": "file:///c:/qt/6.0.0/msvc2019_64/include/qtgui/qkeyevent"
+          },
+          "hashes": {
+            "md5": "58f43813afb2b18b586e1e116a2fa1c4"
+          }
+        },
+        {
+          "location": {
+            "uri": "file:///c:/qt/6.0.0/msvc2019_64/include/qtcore/qpointer.h"
+          },
+          "hashes": {
+            "md5": "4c9fe3f188a2b8a66870b33a5bf267fb"
+          }
+        },
+        {
+          "location": {
+            "uri": "file:///c:/qt/6.0.0/msvc2019_64/include/qtgui/qeventpoint.h"
+          },
+          "hashes": {
+            "md5": "0a0cdc0e645ddc7326411b5e8a968193"
+          }
+        },
+        {
+          "location": {
+            "uri": "file:///c:/qt/6.0.0/msvc2019_64/include/qtgui/qvector2d.h"
+          },
+          "hashes": {
+            "md5": "1d7a5a77bd6b949447302946710f67e3"
+          }
+        },
+        {
+          "location": {
+            "uri": "file:///c:/qt/6.0.0/msvc2019_64/include/qtgui/qinputdevice.h"
+          },
+          "hashes": {
+            "md5": "a5d6506c1712664d0a0fca2013f3906f"
+          }
+        },
+        {
+          "location": {
+            "uri": "file:///c:/qt/6.0.0/msvc2019_64/include/qtgui/qscreen.h"
+          },
+          "hashes": {
+            "md5": "297fe3f10262da2d356d37655b9847ef"
+          }
+        },
+        {
+          "location": {
+            "uri": "file:///c:/qt/6.0.0/msvc2019_64/include/qtcore/qlist"
+          },
+          "hashes": {
+            "md5": "fc193b8d30e869e1187b72304348244f"
+          }
+        },
+        {
+          "location": {
+            "uri": "file:///c:/qt/6.0.0/msvc2019_64/include/qtcore/qobject"
+          },
+          "hashes": {
+            "md5": "f57e7bf7c1248d49c4b16b8266a0e770"
+          }
+        },
+        {
+          "location": {
+            "uri": "file:///c:/qt/6.0.0/msvc2019_64/include/qtcore/qrect"
+          },
+          "hashes": {
+            "md5": "63f1bc80f86aa74bf8e070b2bfcb17ca"
+          }
+        },
+        {
+          "location": {
+            "uri": "file:///c:/qt/6.0.0/msvc2019_64/include/qtcore/qsize"
+          },
+          "hashes": {
+            "md5": "a1b7b04d57ce55c22a2437e097ebcdb4"
+          }
+        },
+        {
+          "location": {
+            "uri": "file:///c:/qt/6.0.0/msvc2019_64/include/qtcore/qsizef"
+          },
+          "hashes": {
+            "md5": "a1b7b04d57ce55c22a2437e097ebcdb4"
+          }
+        },
+        {
+          "location": {
+            "uri": "file:///c:/qt/6.0.0/msvc2019_64/include/qtgui/qtransform"
+          },
+          "hashes": {
+            "md5": "f94980dffe56de0f7e74c3289127ced0"
+          }
+        },
+        {
+          "location": {
+            "uri": "file:///f:/users/walan/documents/github/projet-s2-p11/super2048walan/grille.h"
+          },
+          "hashes": {
+            "md5": "d1eafd260fc0a12e03021c50294af4ce"
+          }
+        },
+        {
+          "location": {
+            "uri": "file:///c:/qt/6.0.0/msvc2019_64/include/qtcore/qvector"
+          },
+          "hashes": {
+            "md5": "925bf0ae3cc15ba9d8ff6f6602f462b9"
+          }
+        },
+        {
+          "location": {
+            "uri": "file:///c:/qt/6.0.0/msvc2019_64/include/qtcore/qvector.h"
+          },
+          "hashes": {
+            "md5": "a0b2b59cf18f59213c8f45e764b4eaa6"
+          }
+        },
+        {
+          "location": {
+            "uri": "file:///f:/users/walan/documents/github/projet-s2-p11/super2048walan/tableau.h"
+          },
+          "hashes": {
+            "md5": "6baf90127aa2759ce1f1668883758f18"
+          }
+        },
+        {
+          "location": {
+            "uri": "file:///f:/users/walan/documents/github/projet-s2-p11/super2048walan/qrc_resource.cpp"
+          },
+          "roles": [
+            "analysisTarget"
+          ],
+          "hashes": {
+            "md5": "4b5f09340735a9a5503f335e388cd604"
+          }
+        }
+      ]
+    }
+  ]
+}

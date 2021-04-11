@@ -58,6 +58,9 @@
     <ClCompile Include="Tuile.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="qrc_Resource.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <CustomBuild Include="Affichage.h">
@@ -106,43 +109,46 @@
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
+    <None Include="Resource\BG.png">
+      <Filter>Resource Files</Filter>
+    </None>
     <CustomBuild Include="Resource.qrc">
       <Filter>Resource Files</Filter>
     </CustomBuild>
-    <None Include="Ressources\Assets\Tuile1024.png">
+    <None Include="Resource\60x60\Tuile1024.png">
       <Filter>Resource Files</Filter>
     </None>
-    <None Include="Ressources\Assets\Tuile128.png">
+    <None Include="Resource\60x60\Tuile128.png">
       <Filter>Resource Files</Filter>
     </None>
-    <None Include="Ressources\Assets\Tuile16.png">
+    <None Include="Resource\60x60\Tuile16.png">
       <Filter>Resource Files</Filter>
     </None>
-    <None Include="Ressources\Assets\Tuile2.png">
+    <None Include="Resource\60x60\Tuile2.png">
       <Filter>Resource Files</Filter>
     </None>
-    <None Include="Ressources\Assets\Tuile2048.png">
+    <None Include="Resource\60x60\Tuile2048.png">
       <Filter>Resource Files</Filter>
     </None>
-    <None Include="Ressources\Assets\Tuile256.png">
+    <None Include="Resource\60x60\Tuile256.png">
       <Filter>Resource Files</Filter>
     </None>
-    <None Include="Ressources\Assets\Tuile32.png">
+    <None Include="Resource\60x60\Tuile32.png">
       <Filter>Resource Files</Filter>
     </None>
-    <None Include="Ressources\Assets\Tuile4.png">
+    <None Include="Resource\60x60\Tuile4.png">
       <Filter>Resource Files</Filter>
     </None>
-    <None Include="Ressources\Assets\Tuile512.png">
+    <None Include="Resource\60x60\Tuile512.png">
       <Filter>Resource Files</Filter>
     </None>
-    <None Include="Ressources\Assets\Tuile64.png">
+    <None Include="Resource\60x60\Tuile64.png">
       <Filter>Resource Files</Filter>
     </None>
-    <None Include="Ressources\Assets\Tuile8.png">
+    <None Include="Resource\60x60\Tuile8.png">
       <Filter>Resource Files</Filter>
     </None>
-    <None Include="Ressources\Assets\TuileVide.png">
+    <None Include="Resource\60x60\TuileVide.png">
       <Filter>Resource Files</Filter>
     </None>
   </ItemGroup>
