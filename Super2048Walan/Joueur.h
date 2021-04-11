@@ -1,22 +1,15 @@
-#ifndef JOUEUR_H
 #define JOUEUR_H
+#ifdef JOUEUR_H
 
-#include <QObject>
+#include <QKeyEvent>
 
-class Joueur : public QObject
+class Joueur
 {
-	Q_OBJECT
+	
 public:
-	Joueur();
-	~Joueur();
 
-
-public slots:
-	void Mouve();
-
-private:
-
+	void keyPressEvent(QKeyEvent* event); //gère les contrôles du joueur
 
 };
 
-#endif //JOUEUR_H
+#endif JOUEUR_H

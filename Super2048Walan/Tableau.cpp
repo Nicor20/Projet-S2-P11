@@ -49,7 +49,7 @@ Tableau::Tableau(int z)
 
 Tableau::Tableau()
 {
-
+	qDebug() << "Tableau Detruit";
 }
 
 Tableau::~Tableau()
@@ -655,4 +655,20 @@ void Tableau::Save_Grid()
 		file.close();
 	}
 
+}
+
+int Tableau::getVecteurValeur(int index)
+{
+	return two_four[index];
+}
+
+int Tableau::getVectSize()
+{
+	return two_four.size();
+}
+
+int Tableau::getTableauValeur(int x, int y)
+{
+	qDebug() << "Valeur tableau " << tableau[x][y];
+	return tableau[x][y];
 }
