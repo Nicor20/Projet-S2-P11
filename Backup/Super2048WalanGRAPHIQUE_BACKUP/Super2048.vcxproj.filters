@@ -1,0 +1,155 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Project xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <Filter Include="Generated Files">
+      <UniqueIdentifier>{71ED8ED8-ACB9-4CE9-BBE1-E00B30144E11}</UniqueIdentifier>
+      <Extensions>cpp;c;cxx;moc;h;def;odl;idl;res;</Extensions>
+    </Filter>
+    <Filter Include="Generated Files">
+      <UniqueIdentifier>{71ED8ED8-ACB9-4CE9-BBE1-E00B30144E11}</UniqueIdentifier>
+      <Extensions>cpp;c;cxx;moc;h;def;odl;idl;res;</Extensions>
+    </Filter>
+    <Filter Include="Header Files">
+      <UniqueIdentifier>{93995380-89BD-4b04-88EB-625FBE52EBFB}</UniqueIdentifier>
+      <Extensions>h;hpp;hxx;hm;inl;inc;xsd</Extensions>
+    </Filter>
+    <Filter Include="Header Files">
+      <UniqueIdentifier>{93995380-89BD-4b04-88EB-625FBE52EBFB}</UniqueIdentifier>
+      <Extensions>h;hpp;hxx;hm;inl;inc;xsd</Extensions>
+    </Filter>
+    <Filter Include="Resource Files">
+      <UniqueIdentifier>{D9D6E242-F8AF-46E4-B9FD-80ECBC20BA3E}</UniqueIdentifier>
+      <Extensions>qrc;*</Extensions>
+      <ParseFiles>false</ParseFiles>
+    </Filter>
+    <Filter Include="Resource Files">
+      <UniqueIdentifier>{D9D6E242-F8AF-46E4-B9FD-80ECBC20BA3E}</UniqueIdentifier>
+      <Extensions>qrc;*</Extensions>
+      <ParseFiles>false</ParseFiles>
+    </Filter>
+    <Filter Include="Source Files">
+      <UniqueIdentifier>{4FC737F1-C7A5-4376-A066-2A32D752A2FF}</UniqueIdentifier>
+      <Extensions>cpp;c;cxx;def;odl;idl;hpj;bat;asm;asmx</Extensions>
+    </Filter>
+    <Filter Include="Source Files">
+      <UniqueIdentifier>{4FC737F1-C7A5-4376-A066-2A32D752A2FF}</UniqueIdentifier>
+      <Extensions>cpp;c;cxx;def;odl;idl;hpj;bat;asm;asmx</Extensions>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="2048-Console.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Affichage.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Grille.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Jeu.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Joueur.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Tableau.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Tuile.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="qrc_Resource.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <CustomBuild Include="Affichage.h">
+      <Filter>Header Files</Filter>
+    </CustomBuild>
+    <ClInclude Include="Grille.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Jeu.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Joueur.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Tableau.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <CustomBuild Include="Tuile.h">
+      <Filter>Header Files</Filter>
+    </CustomBuild>
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="debug\moc_Affichage.cpp">
+      <Filter>Generated Files</Filter>
+    </ClCompile>
+    <ClCompile Include="release\moc_Affichage.cpp">
+      <Filter>Generated Files</Filter>
+    </ClCompile>
+    <ClCompile Include="debug\moc_Tuile.cpp">
+      <Filter>Generated Files</Filter>
+    </ClCompile>
+    <ClCompile Include="release\moc_Tuile.cpp">
+      <Filter>Generated Files</Filter>
+    </ClCompile>
+    <CustomBuild Include="debug\moc_predefs.h.cbt">
+      <Filter>Generated Files</Filter>
+    </CustomBuild>
+    <CustomBuild Include="release\moc_predefs.h.cbt">
+      <Filter>Generated Files</Filter>
+    </CustomBuild>
+    <ClCompile Include="debug\qrc_Resource.cpp">
+      <Filter>Generated Files</Filter>
+    </ClCompile>
+    <ClCompile Include="release\qrc_Resource.cpp">
+      <Filter>Generated Files</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resource\BG.png">
+      <Filter>Resource Files</Filter>
+    </None>
+    <CustomBuild Include="Resource.qrc">
+      <Filter>Resource Files</Filter>
+    </CustomBuild>
+    <None Include="Resource\60x60\Tuile1024.png">
+      <Filter>Resource Files</Filter>
+    </None>
+    <None Include="Resource\60x60\Tuile128.png">
+      <Filter>Resource Files</Filter>
+    </None>
+    <None Include="Resource\60x60\Tuile16.png">
+      <Filter>Resource Files</Filter>
+    </None>
+    <None Include="Resource\60x60\Tuile2.png">
+      <Filter>Resource Files</Filter>
+    </None>
+    <None Include="Resource\60x60\Tuile2048.png">
+      <Filter>Resource Files</Filter>
+    </None>
+    <None Include="Resource\60x60\Tuile256.png">
+      <Filter>Resource Files</Filter>
+    </None>
+    <None Include="Resource\60x60\Tuile32.png">
+      <Filter>Resource Files</Filter>
+    </None>
+    <None Include="Resource\60x60\Tuile4.png">
+      <Filter>Resource Files</Filter>
+    </None>
+    <None Include="Resource\60x60\Tuile512.png">
+      <Filter>Resource Files</Filter>
+    </None>
+    <None Include="Resource\60x60\Tuile64.png">
+      <Filter>Resource Files</Filter>
+    </None>
+    <None Include="Resource\60x60\Tuile8.png">
+      <Filter>Resource Files</Filter>
+    </None>
+    <None Include="Resource\60x60\TuileVide.png">
+      <Filter>Resource Files</Filter>
+    </None>
+  </ItemGroup>
+</Project>
