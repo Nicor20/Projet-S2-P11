@@ -9,6 +9,16 @@
 #include <QStatusBar>
 #include <QDebug>
 #include <QKeyEvent>
+
+//TEST LAYOUT
+#include <QGraphicsGridLayout>
+#include <QGraphicsWidget>
+#include <QLabel>
+#include <QLineEdit>
+#include <QLayout>
+#include <QPushButton>
+//---------------
+
 #include "Grille.h"
 #include "Tableau.h"
 #include "Score.h"

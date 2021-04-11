@@ -5,10 +5,10 @@ Affichage::Affichage()
 	//---Paremètre la fenêtre principale
 	statusBar(); // ajoute une status bar
 	show(); // Affiche la fenêtre
-	setMinimumSize(600, 600);
+	//setMinimumSize(600, 600);
 
 	//---Ajoute les éléments suivant à l'affichage
-	LoadZonedeJeu(5); // Ajoute la zone de Jeu au mode spécifier à la fenêtre
+	LoadZonedeJeu(8); // Ajoute la zone de Jeu au mode spécifier à la fenêtre
 	show();
 	
 
@@ -24,13 +24,14 @@ Affichage::Affichage()
 
 Affichage::~Affichage()
 {
+
 	grilledynamique->~Grille();
 	grillefixe->~Grille();
 	tableau->~Tableau();
 	view->~QGraphicsView();
 	scene ->~QGraphicsScene();
 	qDebug() << "page detruite";
-	destroy(this);
+
 }
 
 void Affichage::Message(const char* message)
@@ -42,21 +43,26 @@ void Affichage::LoadZonedeJeu(int mode)
 {
 	//---Paramètre la Zone de jeux
 	
-	scene = new QGraphicsScene(0,0,scene_width,scene_height);
+	scene = new QGraphicsScene(/*0,0,scene_width,scene_height*/);
 	//QBrush brush;
 	//brush.setTextureImage(QImage(":/Resource/Resource/BG.png"));
 	QPixmap pim(":/Resource/Resource/BG.png");
 	
-	scene->setBackgroundBrush(pim.scaled(scene_width,scene_height,Qt::IgnoreAspectRatio,Qt::SmoothTransformation));
-	show();
+	scene->setBackgroundBrush(pim/*.scaled(scene_width,scene_height,Qt::IgnoreAspectRatio,Qt::SmoothTransformation)*/);
 	view = new  QGraphicsView(scene);
-	view->setScene(scene);
-	setCentralWidget(view);
+	view->setFocusPolicy(Qt::NoFocus); // Empêche de prendre le focus pour les key event
+
+	QGridLayout* layout = new QGridLayout;
+	QWidget* widget = new QWidget;
+	layout->addWidget(view,1,1,2,1);
+	widget->setLayout(layout);
+	widget->setFocusPolicy(Qt::NoFocus); // Empêche de prendre le focus pour les key event
+	setCentralWidget(widget);
+
 
 	//---Cree les Scores Boards
 	scoreboard = new Score(QString("Score"));
 	scene->addItem(scoreboard);
-
 	nbmouve = new Score(QString("Nombre de Mouvements"));
 	scene->addItem(nbmouve);
 	nbmouve->setPos(0,20);

@@ -3,6 +3,7 @@
 Score::Score(QString titre)
 {
 	//---initialise le score board
+	
 	Valeur = 0;
 	Titre = titre;
 

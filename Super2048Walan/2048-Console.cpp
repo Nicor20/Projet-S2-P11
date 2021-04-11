@@ -11,8 +11,8 @@
 int main(int argc, char* argv[])
 {
 	QApplication app(argc, argv); //cette boucle fait tourner l'application constament
-	
 	Affichage affichage;
+	affichage.setFocusPolicy(Qt::StrongFocus);
 	affichage.setFocus();
 	qDebug() << "Initialisation terminer";
 	

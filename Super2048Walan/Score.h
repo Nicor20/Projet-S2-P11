@@ -3,6 +3,8 @@
 
 #include <QGraphicsTextItem>
 #include <QFont>
+#include <QGraphicsWidget>
+#include <QTextItem>
 
 class Score : public QGraphicsTextItem
 {
@@ -11,11 +13,11 @@ public:
 
 	void setScore(int NouvValeur);
 	int getScore();
-	
 
 private:
 	QString Titre;
 	int Valeur;
+
 };
 
 #endif // SCORE_H
