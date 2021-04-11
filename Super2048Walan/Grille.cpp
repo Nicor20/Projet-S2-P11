@@ -7,7 +7,7 @@ Grille::Grille()
 
 Grille::Grille(int mode)
 {
-	qDebug() << "Grille moder Creer";
+	qDebug() << "Grille mode" << mode << "creer";
 	//---cree la liste des tuiles de la grille
 	for (int i = 0; i < mode * mode; i++)
 	{
@@ -64,9 +64,13 @@ void Grille::setTuilePoss(int colone, int ranger, Tuile* tuile)
 {
 	//place la tuile à la position donnée
 	int index = 0;
+	Tuile* tuileaenlever;
 	index = getTuile_XY_Position(colone, ranger);
+	tuileaenlever = getTuile_List(index);
 	tuile->setPos(getTuile_List(index)->pos());
 	ListTuileGrille.replace(index, tuile);
+	qDebug() << "Taille liste" << ListTuileGrille.size();
+	tuileaenlever->~Tuile(); // détruit la tuile remplacer
 }
 
 void Grille::setCoordGrille(int coord_x, int coord_y)
@@ -80,8 +84,8 @@ void Grille::setCoordGrille(int coord_x, int coord_y)
 			int Pos_X = coord_x + (i * getTuile_XY(i,j)->getSize());
 			int Pos_Y = coord_y + (j * getTuile_XY(i, j)->getSize());
 			getTuile_XY(i, j)->setPos(Pos_X, Pos_Y);
-			qDebug() << "pos y: " << Pos_Y;
-			qDebug() << "pos x: " << Pos_X;
+			//qDebug() << "pos y: " << Pos_Y;
+			//qDebug() << "pos x: " << Pos_X;
 		}
 	}
 
