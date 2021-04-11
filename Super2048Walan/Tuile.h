@@ -4,7 +4,9 @@
 #include <QGraphicsRectItem>
 #include <QBrush>
 #include <QPixmap>
+#include <QPainter>
 #include <QDebug>
+#include <QGraphicsPixmapItem>
 
 using namespace std;
 class Tuile : public QObject, public QGraphicsRectItem
@@ -19,10 +21,10 @@ public:
 	int getValeur(); //retourne la valeur de la tuile
 	int getExiste(); // retourne 1 si la tuiles est deja sur le plateau de jeux
 	void setSize(int NouvSize); //change la taille de toutes les futures tuiles générées
-	void setValeur(int NouvValeur); //Change la valeur de la tuile
+	void setValeur(int NouvValeur); //Change la valeur de la tuile;
 
 public slots:
-	
+
 
 private:
 	int Valeur = 0; //valeur de la tuile 0 = tuiles grille(fixe), autre = Tuile dynamique(dynamique) 

@@ -10,6 +10,7 @@ Affichage::Affichage()
 	//---Ajoute les éléments suivant à l'affichage
 	LoadZonedeJeu(5); // Ajoute la zone de Jeu au mode spécifier à la fenêtre
 	show();
+	
 
 	//---TEST DES CAPACITÉ DE LA GRILLE				  
 	//qDebug() << "Taille debut: " << grilledynamique->getSize();
@@ -40,7 +41,14 @@ void Affichage::Message(const char* message)
 void Affichage::LoadZonedeJeu(int mode)
 {
 	//---Paramètre la Zone de jeux
-	scene = new QGraphicsScene();
+	
+	scene = new QGraphicsScene(0,0,scene_width,scene_height);
+	//QBrush brush;
+	//brush.setTextureImage(QImage(":/Resource/Resource/BG.png"));
+	QPixmap pim(":/Resource/Resource/BG.png");
+	
+	scene->setBackgroundBrush(pim.scaled(scene_width,scene_height,Qt::IgnoreAspectRatio,Qt::SmoothTransformation));
+	show();
 	view = new  QGraphicsView(scene);
 	view->setScene(scene);
 	setCentralWidget(view);
@@ -50,11 +58,11 @@ void Affichage::LoadZonedeJeu(int mode)
 
 
 	//---Cree la grille de tuile fixe et les affiche a lecrant
-	grillefixe = new Grille(mode);
+	grillefixe = new Grille(mode,scene_width,scene_height);
 	AfficheGrille(grillefixe);
 
 	//---Cree la grille de tuile dynamique
-	grilledynamique = new Grille(mode);
+	grilledynamique = new Grille(mode,scene_width,scene_height);
 
 	//---syncronise les valeur des tuiles du tableaudynamique et les valeurs du tableau de jeu
 	SyncronisationDesGrilles();
@@ -87,6 +95,7 @@ void Affichage::AfficheGrille(Grille* grille)
 	for (int i = 0; i < taille_cote * taille_cote; i++)
 	{
 		scene->addItem(grille->getTuile_List(i));
+		show();
 	}
 }
 
@@ -103,6 +112,7 @@ void Affichage::SyncronisationDesGrilles()
 			valeur = tableau->getTableauValeur(x,y);
 			//qDebug() << "Valeur Lue pour tuile : " << valeur;
 			AddTuile(x, y, valeur);
+			show();
 		}
 	}
 }
@@ -129,25 +139,25 @@ void Affichage::keyPressEvent(QKeyEvent* event)
 	
 	if (event->key() == Qt::Key_Left) // bouge vers la gauche
 	{
-		//qDebug() << "Bouge Gauche";
+		qDebug() << "Bouge Gauche";
 		tableau->Bouge_Haut();
 		SyncronisationDesGrilles();
 	}
 	else if (event->key() == Qt::Key_Right) // bouge vers la droite
 	{
-		//qDebug() << "Bouge Droite";
+		qDebug() << "Bouge Droite";
 		tableau->Bouge_Bas();
 		SyncronisationDesGrilles();
 	}
 	else if (event->key() == Qt::Key_Up) // bouge vers le haut
 	{
-		//qDebug() << "Bouge Haut";
+		qDebug() << "Bouge Haut";
 		tableau->Bouge_Gauche();
 		SyncronisationDesGrilles();
 	}
 	else if (event->key() == Qt::Key_Down) // bouge vers le bas
 	{
-		//qDebug() << "Bouge Bas";
+		qDebug() << "Bouge Bas";
 		tableau->Bouge_Droit();
 		SyncronisationDesGrilles();
 	}

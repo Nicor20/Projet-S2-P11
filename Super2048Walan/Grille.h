@@ -11,7 +11,7 @@ class Grille
 {
 public:
 	Grille();
-	Grille(int mode);											// ajoute une grille de jeux de la taille correspondant au mode de jeux
+	Grille(int mode, int scene_with, int scene_height);											// ajoute une grille de jeux de la taille correspondant au mode de jeux
 	~Grille();
 
 	Tuile* getTuile_XY(int colone, int ranger);					//retourne le poineur de la tuile dans la liste correspondant à l'index XY
@@ -26,6 +26,9 @@ private:
 	int Mode; // définit la longueur d'un côté de la grille et le mode de jeux
 
 	QVector<Tuile*> ListTuileGrille; //listes des tuiles dans la grilles selon l ordre de créations de celles-ci
+	int Origine_X = 0;
+	int Origine_Y = 0;
+
 
 };
 #endif //GRILLE_H

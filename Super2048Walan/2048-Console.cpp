@@ -1,5 +1,6 @@
 /*
 	Auteur : Nicolas Cantin
+	Modifier par: Walan Brousseau
 */
 
 #include <QApplication>
@@ -13,6 +14,7 @@ int main(int argc, char* argv[])
 	
 	Affichage affichage;
 	affichage.setFocus();
+	qDebug() << "Initialisation terminer";
 	
 	return app.exec();
 
