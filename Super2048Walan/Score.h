@@ -1,21 +1,26 @@
 #ifndef SCORE_H
 #define SCORE_H
 
-#include <QGraphicsTextItem>
+#include <QLabel>
 #include <QFont>
-#include <QGraphicsWidget>
-#include <QTextItem>
+#include <QWidget>
+#include <QVBoxLayout>
 
-class Score : public QGraphicsTextItem
+class Score : public QLabel
 {
 public:
 	Score(QString titre);
+	~Score();
+
+	QWidget* Board;
 
 	void setScore(int NouvValeur);
 	int getScore();
 
 private:
-	QString Titre;
+	QLabel* Titre;
+	QLabel* TextValeur;
+	
 	int Valeur;
 
 };

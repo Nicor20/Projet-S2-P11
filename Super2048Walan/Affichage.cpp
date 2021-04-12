@@ -1,30 +1,42 @@
 #include "Affichage.h"
 
+
+//------------------Constructeurs et Destructeurs
 Affichage::Affichage()
 {
 	//---Paremètre la fenêtre principale
 	statusBar(); // ajoute une status bar
-	show(); // Affiche la fenêtre
-	//setMinimumSize(600, 600);
+	widget = new QWidget;
+	setCentralWidget(widget);
 
-	//---Ajoute les éléments suivant à l'affichage
-	LoadZonedeJeu(8); // Ajoute la zone de Jeu au mode spécifier à la fenêtre
-	show();
+	//---Ajoute les éléments suivant à l'affichage TEMPORAIRE
+	LoadZonedeJeu(5); // Ajoute la zone de Jeu au mode spécifier à la fenêtre
+
+	//---Paramètre l'affichages des éléments de jeux
+	QGridLayout* layout = new QGridLayout;
+	layout->addWidget(scoreboard->Board, 0, 5, 1, 1);
+	layout->addWidget(nbmouve->Board, 1, 5, 1, 1);
+	layout->addWidget(view, 0, 1, 4,4);
+	widget->setLayout(layout);
+
+	QString message = tr("A context menu is available by right-clicking");
+	statusBar()->showMessage(message);
 	
+	//---paramètre la barre de menu et leurs actions
+	CreationActions();
+	CreationMenus();
 
-	//---TEST DES CAPACITÉ DE LA GRILLE				  
-	//qDebug() << "Taille debut: " << grilledynamique->getSize();
-	//AddTuile(0, 0, 8); //Ajoute une tuile 
-	//qDebug() << "Taille apres tuile 1: " << grilledynamique->getSize();
-	//grilledynamique->setTuilePoss(2, 0, grilledynamique->getTuile_XY(0, 0)); // exemple de commande de déplacement de tuile
-	//qDebug() << "Taille deplacement tuile 1: " << grilledynamique->getSize();
-	//AddTuile(2, 5, 1024);
-	//qDebug() << "Taille apres tuile 2: " << grilledynamique->getSize();
+	setWindowTitle(tr("Super 2048"));
+	setMinimumSize(160, 160);
+	resize(600, 600);
+
+	show();
 }
 
 Affichage::~Affichage()
 {
-
+	scoreboard->~Score();
+	nbmouve->~Score();
 	grilledynamique->~Grille();
 	grillefixe->~Grille();
 	tableau->~Tableau();
@@ -34,38 +46,100 @@ Affichage::~Affichage()
 
 }
 
+
+//-------------------Utilitaire
+void Affichage::CreationActions()
+{
+	//creer les action:
+	//NouvellePartie
+	NouvellePartie = new QAction(tr("&Nouvelle Partie"), this);
+	NouvellePartie->setStatusTip(tr("Recommencer une nouvelle partie dans le mode actuelle"));
+	connect(NouvellePartie, &QAction::triggered, this, &Affichage::Recommencer);
+	
+	//ChargerPartie
+	ChargerPartie = new QAction(tr("&Charger Partie"), this);
+	ChargerPartie->setStatusTip(tr("Charge la dernière partie sauvegarder"));
+	connect(ChargerPartie, &QAction::triggered, this, &Affichage::Charger);
+	
+	//SauvegarderPartie
+	SauvegarderPartie = new QAction(tr("&Sauvegarder Partie"), this);
+	SauvegarderPartie->setStatusTip(tr("Sauvegarde la partie actuelle"));
+	connect(SauvegarderPartie, &QAction::triggered, this, &Affichage::Sauvegarder);
+	
+	//QuitterPartie
+	QuitterPartie = new QAction(tr("&Quitter Partie"), this);
+	QuitterPartie->setStatusTip(tr("Quitte la partie actuelle Sans Sauvegarder"));
+	connect(QuitterPartie, &QAction::triggered, this, &Affichage::Quitter);
+}
+
+void Affichage::CreationMenus()
+{
+	//---Parametre les Menu déroulants
+	//Menu
+	Menu = menuBar()->addMenu(tr("&Menu"));
+	Menu->addAction(NouvellePartie);
+	Menu->addAction(ChargerPartie);
+	Menu->addAction(SauvegarderPartie);
+	Menu->addSeparator();
+	Menu->addAction(QuitterPartie);
+}
+
 void Affichage::Message(const char* message)
 {
 	statusBar()->showMessage(message);
 }
 
+QGraphicsScene* Affichage::getScene()
+{
+	return scene;
+}
+
+QGraphicsView* Affichage::getView()
+{
+	return view;
+}
+
+
+//-------------------Menus
+void Affichage::Recommencer()
+{
+	qDebug() << "NON IMPLEMENTER WIP Doit permettre de recommencer une nouvelle partie avec le mode actuell WIP";
+}
+
+void Affichage::Charger()
+{
+	qDebug() << "NON IMPLEMENTER WIP Doit Permettre de charger une partie WIP";
+}
+
+void Affichage::Sauvegarder()
+{
+	qDebug() << "NON IMPLEMENTER WIP Doit sauvegarger la partie actuelle WIP";
+}
+
+void Affichage::Quitter()
+{
+	//Ferme l'interface
+	qDebug() << "NON IMPLEMENTER WIP Doit quitter la partie actuelle et retourner au menu principale WIP";
+}
+
+
+//------------------Jeux
 void Affichage::LoadZonedeJeu(int mode)
 {
 	//---Paramètre la Zone de jeux
-	
 	scene = new QGraphicsScene(/*0,0,scene_width,scene_height*/);
 	//QBrush brush;
 	//brush.setTextureImage(QImage(":/Resource/Resource/BG.png"));
 	QPixmap pim(":/Resource/Resource/BG.png");
 	
-	scene->setBackgroundBrush(pim/*.scaled(scene_width,scene_height,Qt::IgnoreAspectRatio,Qt::SmoothTransformation)*/);
+	scene->setBackgroundBrush(pim.scaled(scene_width,scene_height,Qt::IgnoreAspectRatio,Qt::SmoothTransformation));
 	view = new  QGraphicsView(scene);
 	view->setFocusPolicy(Qt::NoFocus); // Empêche de prendre le focus pour les key event
 
-	QGridLayout* layout = new QGridLayout;
-	QWidget* widget = new QWidget;
-	layout->addWidget(view,1,1,2,1);
-	widget->setLayout(layout);
-	widget->setFocusPolicy(Qt::NoFocus); // Empêche de prendre le focus pour les key event
-	setCentralWidget(widget);
-
 
 	//---Cree les Scores Boards
-	scoreboard = new Score(QString("Score"));
-	scene->addItem(scoreboard);
-	nbmouve = new Score(QString("Nombre de Mouvements"));
-	scene->addItem(nbmouve);
-	nbmouve->setPos(0,20);
+	scoreboard = new Score("Score");
+	nbmouve = new Score("Nombre de Mouvements");
 
 	//---Cree le tableau de jeux
 	tableau = new Tableau(mode);
@@ -132,16 +206,6 @@ void Affichage::SyncronisationDesGrilles()
 			show();
 		}
 	}
-}
-
-QGraphicsScene* Affichage::getScene()
-{
-	return scene;
-}
-
-QGraphicsView* Affichage::getView()
-{
-	return view;
 }
 
 void Affichage::UpdateScore()
