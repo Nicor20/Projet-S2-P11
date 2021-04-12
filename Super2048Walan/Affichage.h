@@ -19,6 +19,7 @@
 #include <QPushButton>
 //---------------
 
+#include <QMenuBar>
 #include "Grille.h"
 #include "Tableau.h"
 #include "Score.h"
@@ -48,9 +49,30 @@ public:
 
 	QGraphicsScene* getScene(); // Renvois la scene du central Widget de la page de jeux
 	QGraphicsView* getView();	// Renvois la vue du central Widget de la page de jeux
-	
+
+
+private slots:
+	void Recommencer();
+	void Charger();
+	void Sauvegarder();
+	void Quitter();
+
 
 private:
+
+	int scene_width = 1024; //détermine la largeur de la scene en pixel
+	int scene_height = 760; // détermine la hauteur de la scene en pixel
+	QWidget* widget;
+
+	//---MenuBar EXemple
+	void CreationActions();
+	void CreationMenus();
+
+	QMenu* Menu;
+	QAction* NouvellePartie;
+	QAction* ChargerPartie;
+	QAction* SauvegarderPartie;
+	QAction* QuitterPartie;
 
 	//---Lorsque Zone de jeux est Loader---//
 	QGraphicsScene* scene; // Pointe la scene correspondant à la zone de jeux
@@ -61,8 +83,7 @@ private:
 	Score* scoreboard; // pointe le score Board "Score"
 	Score* nbmouve; // pointe le score Board "Nombre de Mouvement"
 
-	int scene_width = 1024; //détermine la largeur de la scene en pixel
-	int scene_height = 760; // détermine la hauteur de la scene en pixel
+
 };
 #endif //AFFICHAGE_H
 

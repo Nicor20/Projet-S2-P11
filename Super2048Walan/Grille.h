@@ -23,7 +23,7 @@ public:
 	int getTuile_XY_Position(int colone, int ranger);			//retourne la position dans la liste(index) d'une tuile au coordonee XY de la grille
 
 private:
-	int Mode; // définit la longueur d'un côté de la grille et le mode de jeux
+	int Mode = 0; // définit la longueur d'un côté de la grille et le mode de jeux
 
 	QVector<Tuile*> ListTuileGrille; //listes des tuiles dans la grilles selon l ordre de créations de celles-ci
 	int Origine_X = 0;
