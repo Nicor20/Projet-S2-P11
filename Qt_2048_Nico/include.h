@@ -18,5 +18,8 @@
 #include <QDebug>
 #include <QList>
 #include <QMessageBox>
+#include <QKeyEvent>
+#include <QTimer>
+#include <QGroupBox>
 
 #endif // INCLUDE_H

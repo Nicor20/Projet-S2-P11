@@ -1,0 +1,4 @@
+﻿  stats.cpp
+C:\Users\canti\Desktop\Projet-S2-P11\tryNico\FPGA.h(1,1): warning C4828: The file contains a character starting at offset 0x439 that is illegal in the current source character set (codepage 65001).
+C:\Users\canti\Desktop\Projet-S2-P11\tryNico\stats.cpp(164,9): warning C4189: 'i': local variable is initialized but not referenced
+  Qt_2048_Nico.vcxproj -> C:\Users\canti\Desktop\Projet-S2-P11\tryNico\debug\Qt_2048_Nico.exe

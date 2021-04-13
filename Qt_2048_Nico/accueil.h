@@ -19,22 +19,24 @@ public:
     void CheckSave();
 
 private slots:
-    void SizePlus_clicked();
-    void SizeMoin_clicked();
-    void ModePlus_clicked();
-    void ModeMoin_clicked();
-    void Jouer_clicked();
-    void Charger_clicked();
-    void Stats_clicked();
-    void Quitter_clicked();
+    void Button_clicked();
+
 private:
     QWidget *centralWidget;
     QGridLayout *gLayout;
     QVBoxLayout *vLayout;
     QHBoxLayout *hLayout1;
-    QHBoxLayout *hLayout2;
-    QLabel **label;
-    QPushButton **button;
+
+    QLabel *label_Titre;
+    QLabel *label_Sub;
+    QLabel *label_GridSize;
+           
+    QPushButton* button_Moin;
+    QPushButton* button_Plus;
+    QPushButton* button_Jouer;
+    QPushButton* button_Charger;
+    QPushButton* button_Stats;
+    QPushButton* button_Quitter;
 
     int GridSize;
     int GameMode;

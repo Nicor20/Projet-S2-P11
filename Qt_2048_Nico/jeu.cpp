@@ -1,4 +1,5 @@
 #include "jeu.h"
+#include <iostream>
 
 Jeu::Jeu(int size, int mode, bool load) : ModeJeu(mode) , Loaded(load)
 {
@@ -52,39 +53,35 @@ Jeu::Jeu(int size, int mode, bool load) : ModeJeu(mode) , Loaded(load)
 
     //Labels
     {
-        label = new QLabel*[3];
+        label_Score = Create_Label("label_Score","Score\n" + QString::number(grid->GetScore()),15,true);
+        label_Score->setFrameStyle(QFrame::Box | QFrame::Sunken);
+        label_Score->setLineWidth(4);
+        label_Score->setMidLineWidth(3);
 
-        label[0] = Create_Label("label_Score","Score\n" + QString::number(grid->GetScore()),15,true);
-        label[0]->setFrameStyle(QFrame::Box | QFrame::Sunken);
-        label[0]->setLineWidth(4);
-        label[0]->setMidLineWidth(3);
+        label_NbMove = Create_Label("label_NbMove","Nb Move\n" + QString::number(grid->GetNbMove()),15,true);
+        label_NbMove->setFrameStyle(QFrame::Box | QFrame::Sunken);
+        label_NbMove->setLineWidth(4);
+        label_NbMove->setMidLineWidth(3);
 
-        label[1] = Create_Label("label_NbMove","Nb Move\n" + QString::number(grid->GetNbMove()),15,true);
-        label[1]->setFrameStyle(QFrame::Box | QFrame::Sunken);
-        label[1]->setLineWidth(4);
-        label[1]->setMidLineWidth(3);
-
-        label[2] = Create_Label("label_Max","Max\n" + QString::number(grid->GetMax()),15,true);
-        label[2]->setFrameStyle(QFrame::Box | QFrame::Sunken);
-        label[2]->setLineWidth(4);
-        label[2]->setMidLineWidth(3);
+        label_Max = Create_Label("label_Max","Max\n" + QString::number(grid->GetMax()),15,true);
+        label_Max->setFrameStyle(QFrame::Box | QFrame::Sunken);
+        label_Max->setLineWidth(4);
+        label_Max->setMidLineWidth(3);
     }
 
     //Buttons
     {
-        button = new QPushButton*[5];
-
-        button[0] = Create_Button("button_Haut","Haut",15,true);
-        button[1] = Create_Button("button_Gauche","Gauche",15,true);
-        button[2] = Create_Button("button_Bas","Bas",15,true);
-        button[3] = Create_Button("button_Droit","Droit",15,true);
-        button[4] = Create_Button("button_Menu","Menu",15,true);
-
-        connect(button[0],SIGNAL(clicked()),this,SLOT(Haut_clicked()));
-        connect(button[1],SIGNAL(clicked()),this,SLOT(Gauche_clicked()));
-        connect(button[2],SIGNAL(clicked()),this,SLOT(Bas_clicked()));
-        connect(button[3],SIGNAL(clicked()),this,SLOT(Droit_clicked()));
-        connect(button[4],SIGNAL(clicked()),this,SLOT(Menu_clicked()));
+        button_Haut = Create_Button("button_Haut","Haut",15,true);
+        button_Gauche = Create_Button("button_Gauche","Gauche",15,true);
+        button_Bas = Create_Button("button_Bas","Bas",15,true);
+        button_Droit = Create_Button("button_Droit","Droit",15,true);
+        button_Menu = Create_Button("button_Menu","Menu",15,true);
+        
+        connect(button_Haut, &QPushButton::clicked, this, &Jeu::Button_clicked);
+        connect(button_Gauche, &QPushButton::clicked, this, &Jeu::Button_clicked);
+        connect(button_Bas, &QPushButton::clicked, this, &Jeu::Button_clicked);
+        connect(button_Droit, &QPushButton::clicked, this, &Jeu::Button_clicked);
+        connect(button_Menu, &QPushButton::clicked, this, &Jeu::Button_clicked);
     }
 
     //Game_gLayout
@@ -96,22 +93,21 @@ Jeu::Jeu(int size, int mode, bool load) : ModeJeu(mode) , Loaded(load)
                 Game_gLayout->addWidget(labelGrid[x][y],x,y);
             }
         }
-
     }
 
     //Button_gLayout
     {
-        Button_gLayout->addWidget(button[0],0,1);
-        Button_gLayout->addWidget(button[1],1,0);
-        Button_gLayout->addWidget(button[2],1,1);
-        Button_gLayout->addWidget(button[3],1,2);
+        Button_gLayout->addWidget(button_Haut,0,1);
+        Button_gLayout->addWidget(button_Gauche,1,0);
+        Button_gLayout->addWidget(button_Bas,1,1);
+        Button_gLayout->addWidget(button_Droit,1,2);
     }
 
     //Stats_gLayout
     {
-        Stats_gLayout->addWidget(label[0],0,0);
-        Stats_gLayout->addWidget(label[1],0,1);
-        Stats_gLayout->addWidget(label[2],0,2);
+        Stats_gLayout->addWidget(label_Score,0,0);
+        Stats_gLayout->addWidget(label_NbMove,0,1);
+        Stats_gLayout->addWidget(label_Max,0,2);
     }
 
     //vLayout
@@ -122,20 +118,262 @@ Jeu::Jeu(int size, int mode, bool load) : ModeJeu(mode) , Loaded(load)
         vLayout->addSpacerItem(new QSpacerItem(40,20));
         vLayout->addLayout(Button_gLayout);
         vLayout->addSpacerItem(new QSpacerItem(40,20));
-        vLayout->addWidget(button[4]);
+        vLayout->addWidget(button_Menu);
     }
 
     //Fill gridLayout
     gLayout->addLayout(vLayout,0,0,Qt::AlignCenter);
 
     this->setCentralWidget(centralWidget);
+
+    //Timer
+    {
+        CarteFPGA = new FPGA();
+        Timer = new QTimer(centralWidget);
+        connect(Timer, &QTimer::timeout, this, &Jeu::FPGA_Timer);
+
+        if (CarteFPGA->Connected())
+        {
+            Timer->start(interval_wait);
+        }
+    }
 }
 
 Jeu::~Jeu()
 {
-
+    if (Timer->isActive())
+    {
+        Timer->stop();
+    }
+    
+    delete CarteFPGA;
+    this->destroy();
 }
 
+void Jeu::RefreshGrid()
+{
+    for(int x = 0; x < GridSize; x++)
+    {
+        for(int y = 0; y < GridSize; y++)
+        {
+            labelGrid[x][y]->setText(QString::number(grid->Get(x,y)));
+            CustomLabel(labelGrid[x][y]);
+        }
+    }
+
+    label_Score ->setText("Score\n" + QString::number(grid->GetScore()));
+    label_NbMove ->setText("Nb Move\n" + QString::number(grid->GetNbMove()));
+    label_Max ->setText("Max\n" + QString::number(grid->GetMax()));
+}
+
+#pragma region Mouvement
+void Jeu::Bouge_Haut()
+{
+    if (Lecture_FPGA == false)
+    {
+        QString Status = grid->Haut();
+        RefreshGrid();
+
+        if (Status == "Perdu")
+        {
+            SaveStats(Status);
+            ClearFile();
+            Accueil* w = new Accueil(GridSize, ModeJeu);
+            w->showMaximized();
+            this->close();
+        }
+        else if (Status == "Gagne")
+        {
+            SaveStats(Status);
+            ClearFile();
+            Accueil* w = new Accueil(GridSize, ModeJeu);
+            w->showMaximized();
+            this->close();
+        }
+    }
+}
+
+void Jeu::Bouge_Droit()
+{
+    if (Lecture_FPGA == false)
+    {
+        QString Status = grid->Droit();
+        RefreshGrid();
+
+        if (Status == "Perdu")
+        {
+            SaveStats(Status);
+            ClearFile();
+            Accueil* w = new Accueil(GridSize, ModeJeu);
+            w->showMaximized();
+            this->close();
+        }
+        else if (Status == "Gagne")
+        {
+            SaveStats(Status);
+            ClearFile();
+            Accueil* w = new Accueil(GridSize, ModeJeu);
+            w->showMaximized();
+            this->close();
+        }
+    }
+}
+
+void Jeu::Bouge_Bas()
+{
+    if (Lecture_FPGA == false)
+    {
+        QString Status = grid->Bas();
+        RefreshGrid();
+
+        if (Status == "Perdu")
+        {
+            SaveStats(Status);
+            ClearFile();
+            Accueil* w = new Accueil(GridSize, ModeJeu);
+            w->showMaximized();
+            this->close();
+        }
+        else if (Status == "Gagne")
+        {
+            SaveStats(Status);
+            ClearFile();
+            Accueil* w = new Accueil(GridSize, ModeJeu);
+            w->showMaximized();
+            this->close();
+        }
+    }
+}
+
+void Jeu::Bouge_Gauche()
+{
+    if (Lecture_FPGA == false)
+    {
+        QString Status = grid->Gauche();
+        RefreshGrid();
+
+        if (Status == "Perdu")
+        {
+            SaveStats(Status);
+            ClearFile();
+            Accueil* w = new Accueil(GridSize, ModeJeu);
+            w->showMaximized();
+            this->close();
+        }
+        else if (Status == "Gagne")
+        {
+            SaveStats(Status);
+            ClearFile();
+            Accueil* w = new Accueil(GridSize, ModeJeu);
+            w->showMaximized();
+            this->close();
+        }
+    }
+}
+#pragma endregion
+
+#pragma region Slot
+void Jeu::FPGA_Timer()
+{
+    QString text = CarteFPGA->Read();
+
+    if (text == "LecStart")
+    {
+        Timer->setInterval(interval_read);
+        Lecture_FPGA = true;
+        cout << "Debut de lecture" << endl;
+    }
+    else if (text == "Lec")
+    {
+        cout << "Lecture" << endl;
+    }
+    else if (text == "LecStop")
+    {
+        Timer->setInterval(interval_wait);
+        cout << "Fin de lecture" << endl;
+    }
+    else if (text == "Haut")
+    {
+        Lecture_FPGA = false;
+        Bouge_Haut();
+        cout << "Haut" << endl;
+    }
+    else if (text == "Droit")
+    {
+        Lecture_FPGA = false;
+        Bouge_Droit();
+        cout << "Droit" << endl;
+    }
+    else if (text == "Bas")
+    {
+        Lecture_FPGA = false;
+        Bouge_Bas();
+        cout << "Bas" << endl;
+    }
+    else if (text == "Gauche")
+    {
+        Lecture_FPGA = false;
+        Bouge_Gauche();
+        cout << "Gauche" << endl;
+    }
+    else if (text == "Aucun")
+    {
+        Lecture_FPGA = false;
+        cout << "Aucun" << endl;
+    }
+    else if (text == "Rien")
+    {
+        cout << "Rien" << endl;
+    }
+    else if (text == "Erreur")
+    {
+        Lecture_FPGA = false;
+        Timer->stop();
+        cout << "Erreur" << endl;
+    }
+    else
+    {
+        Lecture_FPGA = false;
+        cout << "Pas prevus!!!" << endl;
+        Timer->stop();
+    }
+}
+
+void Jeu::Button_clicked()
+{
+    QString name = qobject_cast<QPushButton*>(sender())->objectName();
+
+    if (name == "button_Haut")
+    {
+        cout << "Bouton Haut" << endl;
+        Bouge_Haut();
+    }
+    else if (name == "button_Droit")
+    {
+        cout << "Bouton Droit" << endl;
+        Bouge_Droit();
+    }
+    else if (name == "button_Bas")
+    {
+        cout << "Bouton Bas" << endl;
+        Bouge_Bas();
+    }
+    else if (name == "button_Gauche")
+    {
+        cout << "Bouton Gauche" << endl;
+        Bouge_Gauche();
+    }
+    else if (name == "button_Menu")
+    {
+        cout << "Bouton Menu" << endl;
+        Menu();
+    }
+
+    
+}
+#pragma endregion
+
+#pragma region Creator
 QPushButton* Jeu::Create_Button(QString nom, QString text,int size, bool bold)
 {
     QFont font;
@@ -161,117 +399,6 @@ QLabel* Jeu::Create_Label(QString nom, QString text,int size, bool bold)
     font.setBold(bold);
     temp->setFont(font);
     return temp;
-}
-
-void Jeu::RefreshGrid()
-{
-    for(int x = 0; x < GridSize; x++)
-    {
-        for(int y = 0; y < GridSize; y++)
-        {
-            labelGrid[x][y]->setText(QString::number(grid->Get(x,y)));
-            CustomLabel(labelGrid[x][y]);
-        }
-    }
-
-    label[0] ->setText("Score\n" + QString::number(grid->GetScore()));
-    label[1] ->setText("Nb Move\n" + QString::number(grid->GetNbMove()));
-    label[2] ->setText("Max\n" + QString::number(grid->GetMax()));
-}
-
-void Jeu::Haut_clicked()
-{
-    QString Status = grid->Haut();
-    RefreshGrid();
-
-
-    if(Status == "Perdu")
-    {
-        SaveStats(Status);
-        ClearFile();
-    }
-    else if(Status == "Gagne")
-    {
-        SaveStats(Status);
-        ClearFile();
-    }
-}
-
-void Jeu::Bas_clicked()
-{
-    QString Status = grid->Bas();
-    RefreshGrid();
-
-    if(Status == "Perdu")
-    {
-        SaveStats(Status);
-        ClearFile();
-    }
-    else if(Status == "Gagne")
-    {
-        SaveStats(Status);
-        ClearFile();
-    }
-}
-
-void Jeu::Droit_clicked()
-{
-    QString Status = grid->Droit();
-    RefreshGrid();
-
-    if(Status == "Perdu")
-    {
-        SaveStats(Status);
-        ClearFile();
-    }
-    else if(Status == "Gagne")
-    {
-        SaveStats(Status);
-        ClearFile();
-    }
-}
-
-void Jeu::Gauche_clicked()
-{
-    QString Status = grid->Gauche();
-    RefreshGrid();
-
-    if(Status == "Perdu")
-    {
-        SaveStats(Status);
-        ClearFile();
-    }
-    else if(Status == "Gagne")
-    {
-        SaveStats(Status);
-        ClearFile();
-    }
-}
-
-void Jeu::Menu_clicked()
-{
-    if(Loaded == true)
-    {
-        SaveGame();
-    }
-    else if(grid->GetMax() >= 32)
-    {
-        QMessageBox msgBox;
-        msgBox.setText("Voulez vous sauvegarder la partie?");
-        msgBox.setInformativeText("La dernière sauvegarde sera écraser");
-        msgBox.setStandardButtons(QMessageBox::Ok | QMessageBox::Cancel);
-        msgBox.setDefaultButton(QMessageBox::Ok);
-        int rep = msgBox.exec();
-
-        if(rep == QMessageBox::Ok)
-        {
-            SaveGame();
-        }
-    }
-
-    Accueil *w = new Accueil(GridSize,ModeJeu);
-    w->showMaximized();
-    this->close();
 }
 
 void Jeu::CustomLabel(QLabel *label)
@@ -342,6 +469,108 @@ void Jeu::CustomLabel(QLabel *label)
     else
     {
         label->setStyleSheet("QLabel { background-color : rgb(51,255,255); }");
+    }
+}
+#pragma endregion
+
+#pragma region Event
+void Jeu::closeEvent(QCloseEvent* event)
+{
+    Jeu::~Jeu();
+}
+
+void Jeu::keyPressEvent(QKeyEvent* event)
+{
+    if (event->key() == Qt::Key_W)
+    {
+        Bouge_Haut();
+    }
+    else if (event->key() == Qt::Key_D)
+    {
+        Bouge_Droit();
+    }
+    else if (event->key() == Qt::Key_S)
+    {
+        Bouge_Bas();
+    }
+    else if (event->key() == Qt::Key_A)
+    {
+        Bouge_Gauche();
+    }
+}
+#pragma endregion
+
+void Jeu::Menu()
+{
+    bool closeWithoutAsking = true;
+
+    if(Loaded == true)
+    {
+        closeWithoutAsking = true;
+        SaveGame();
+    }
+    else if(grid->GetMax() >= 16)
+    {
+        QFile file("Save.txt");
+
+        if (!file.exists())
+        {
+            closeWithoutAsking = true;
+        }
+        else
+        {
+            if (file.open(QIODevice::ReadOnly | QIODevice::Text))
+            {
+                QTextStream in(&file);
+                if (in.readLine().length() > 5)
+                {
+                    closeWithoutAsking = false;
+                }
+                else
+                {
+                    closeWithoutAsking = true;
+                }
+                file.close();
+            }
+            else
+            {
+                closeWithoutAsking = true;
+            }
+        }
+    }
+    else
+    {
+        closeWithoutAsking = true;
+    }
+
+    if (closeWithoutAsking == true)
+    {
+        Accueil* w = new Accueil(GridSize, ModeJeu);
+        w->showMaximized();
+        this->close();
+    }
+    else
+    {
+        QMessageBox msgBox;
+        msgBox.setText("Voulez vous sauvegarder la partie?");
+        msgBox.setInformativeText("La dernière sauvegarde sera écraser");
+        msgBox.setStandardButtons(QMessageBox::Ok | QMessageBox::Cancel);
+        msgBox.setDefaultButton(QMessageBox::Ok);
+        int rep = msgBox.exec();
+
+        if (rep == QMessageBox::Ok)
+        {
+            SaveGame();
+            Accueil* w = new Accueil(GridSize, ModeJeu);
+            w->showMaximized();
+            this->close();
+        }
+        else
+        {
+            Accueil* w = new Accueil(GridSize, ModeJeu);
+            w->showMaximized();
+            this->close();
+        }
     }
 }
 

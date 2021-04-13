@@ -4,6 +4,7 @@
 #include "include.h"
 #include "accueil.h"
 #include "grid.h"
+#include "FPGA.h"
 
 class Jeu : public QMainWindow
 {
@@ -21,28 +22,52 @@ public:
     QPushButton* Create_Button(QString nom,QString text,int size, bool bold);
     QLabel* Create_Label(QString nom,QString text,int size, bool bold);
 
+    void keyPressEvent(QKeyEvent* event);
+    void closeEvent(QCloseEvent* event);
+
+    void Menu();
+    void Bouge_Haut();
+    void Bouge_Droit();
+    void Bouge_Bas();
+    void Bouge_Gauche();
+
 private slots:
-    void Menu_clicked();
-    void Haut_clicked();
-    void Bas_clicked();
-    void Gauche_clicked();
-    void Droit_clicked();
+    void FPGA_Timer();
+    void Button_clicked();
 
 private:
     QWidget *centralWidget;
+
     QGridLayout *gLayout;
     QVBoxLayout *vLayout;
     QGridLayout *Button_gLayout;
     QGridLayout *Game_gLayout;
     QGridLayout *Stats_gLayout;
-    QLabel **label;
-    QPushButton **button;
+
+    QTimer* Timer;
+
+    QLabel* label_Score;
+    QLabel* label_Max;
+    QLabel* label_NbMove;
+    QLabel ***labelGrid;
+
+    QPushButton* button_Haut;
+    QPushButton* button_Droit;
+    QPushButton* button_Bas;
+    QPushButton* button_Gauche;
+    QPushButton* button_Menu;
+
+    
+
+    Grid *grid;
+    FPGA *CarteFPGA;
 
     int ModeJeu;
     int GridSize;
-    Grid *grid;
-    QLabel ***labelGrid;
+    int interval_read = 10;
+    int interval_wait = 250;
 
+    bool Lecture_FPGA = false;
     bool Loaded;
 };
 

@@ -18,74 +18,54 @@ Accueil::Accueil(int size,int mode) : GridSize(size) , GameMode(mode)
 
         hLayout1 = new QHBoxLayout(centralWidget);
         hLayout1->setObjectName("hLayout1");
-
-        hLayout2 = new QHBoxLayout(centralWidget);
-        hLayout2->setObjectName("hLayout2");
     }
 
     //Labels
     {
-        label = new QLabel*[5];
-
-        label[0] = Create_Label("label_Titre","Super 2048",50,true);
-        label[1] = Create_Label("label_Sub1","Taille de la grille",20,true);
-        label[2] = Create_Label("label_GridSize",QString::number(GridSize) + "x" + QString::number(GridSize),15,false);
-        label[3] = Create_Label("label_Sub2","Taille de la grille",20,true);
-        label[4] = Create_Label("label_GameMode","Interface",15,false);
+        label_Titre = Create_Label("label_Titre","Super 2048",50,true);
+        label_Sub = Create_Label("label_Sub1","Taille de la grille",20,true);
+        label_GridSize = Create_Label("label_GridSize",QString::number(GridSize) + "x" + QString::number(GridSize),15,false);
     }
 
     //Buttons
     {
-        button = new QPushButton*[8];
+        button_Moin = Create_Button("button_Moin","<",15,true);
+        connect(button_Moin, &QPushButton::clicked, this, &Accueil::Button_clicked);
 
-        button[0] = Create_Button("button_SizeMoin","<",15,true);
-        button[1] = Create_Button("button_SizePlus",">",15,true);
-        button[2] = Create_Button("button_ModeMoin","<",15,true);
-        button[3] = Create_Button("button_ModePlus",">",15,true);
-        button[4] = Create_Button("button_Jouer","Jouer",15,true);
-        button[5] = Create_Button("button_Charger","Charger",15,true);
-        button[6] = Create_Button("button_Stats","Stats",15,true);
-        button[7] = Create_Button("button_Quitter","Quitter",15,true);
+        button_Plus = Create_Button("button_Plus",">",15,true);
+        connect(button_Plus, &QPushButton::clicked, this, &Accueil::Button_clicked);
 
-        connect(button[0],SIGNAL(clicked()),this,SLOT(SizeMoin_clicked()));
-        connect(button[1],SIGNAL(clicked()),this,SLOT(SizePlus_clicked()));
-        connect(button[2],SIGNAL(clicked()),this,SLOT(ModeMoin_clicked()));
-        connect(button[3],SIGNAL(clicked()),this,SLOT(ModePlus_clicked()));
+        button_Jouer = Create_Button("button_Jouer","Jouer",15,true);
+        connect(button_Jouer, &QPushButton::clicked, this, &Accueil::Button_clicked);
 
-        connect(button[4],SIGNAL(clicked()),this,SLOT(Jouer_clicked()));
-        connect(button[5],SIGNAL(clicked()),this,SLOT(Charger_clicked()));
-        connect(button[6],SIGNAL(clicked()),this,SLOT(Stats_clicked()));
-        connect(button[7],SIGNAL(clicked()),this,SLOT(Quitter_clicked()));
+        button_Charger = Create_Button("button_Charger","Charger",15,true);
+        connect(button_Charger, &QPushButton::clicked, this, &Accueil::Button_clicked);
+
+        button_Stats = Create_Button("button_Stats","Stats",15,true);
+        connect(button_Stats, &QPushButton::clicked, this, &Accueil::Button_clicked);
+
+        button_Quitter = Create_Button("button_Quitter","Quitter",15,true);
+        connect(button_Quitter,&QPushButton::clicked, this, &Accueil::Button_clicked);
     }
 
     //hLayout1
     {
-        hLayout1->addWidget(button[0]);
-        hLayout1->addWidget(label[2]);
-        hLayout1->addWidget(button[1]);
-    }
-
-    //hLayout2
-    {
-        hLayout2->addWidget(button[2]);
-        hLayout2->addWidget(label[4]);
-        hLayout2->addWidget(button[3]);
+        hLayout1->addWidget(button_Moin);
+        hLayout1->addWidget(label_GridSize);
+        hLayout1->addWidget(button_Plus);
     }
 
     //vLayout
     {
-        vLayout->addWidget(label[0]);
+        vLayout->addWidget(label_Titre);
         vLayout->addSpacerItem(new QSpacerItem(20,20));
-        vLayout->addWidget(label[1]);
+        vLayout->addWidget(label_Sub);
         vLayout->addLayout(hLayout1);
         vLayout->addSpacerItem(new QSpacerItem(20,20));
-        vLayout->addWidget(label[3]);
-        vLayout->addLayout(hLayout2);
-        vLayout->addSpacerItem(new QSpacerItem(20,20));
-        vLayout->addWidget(button[4]);
-        vLayout->addWidget(button[5]);
-        vLayout->addWidget(button[6]);
-        vLayout->addWidget(button[7]);
+        vLayout->addWidget(button_Jouer);
+        vLayout->addWidget(button_Charger);
+        vLayout->addWidget(button_Stats);
+        vLayout->addWidget(button_Quitter);
     }
 
     gLayout->addLayout(vLayout,0,0,Qt::AlignCenter);
@@ -94,12 +74,126 @@ Accueil::Accueil(int size,int mode) : GridSize(size) , GameMode(mode)
 
     CheckSave();
     CheckStats();
-
-
 }
 
 Accueil::~Accueil()
 {
+
+}
+
+void Accueil::Button_clicked()
+{
+    QString name = qobject_cast<QPushButton*>(sender())->objectName();
+
+    if (name == "button_Moin")
+    {
+        if (GridSize > 3)
+        {
+            GridSize--;
+        }
+        else
+        {
+            GridSize = 8;
+        }
+
+        label_GridSize->setText(QString::number(GridSize) + "x" + QString::number(GridSize));
+    }
+    else if (name == "button_Plus")
+    {
+        if (GridSize < 8)
+        {
+            GridSize++;
+        }
+        else
+        {
+            GridSize = 3;
+        }
+
+        label_GridSize->setText(QString::number(GridSize) + "x" + QString::number(GridSize));
+    }
+    else if (name == "button_Jouer")
+    {
+        Jeu* w = new Jeu(GridSize, GameMode, false);
+        w->showMaximized();
+        this->close();
+    }
+    else if (name == "button_Charger")
+    {
+        Jeu* w = new Jeu(GridSize, GameMode, true);
+        w->showMaximized();
+        this->close();
+    }
+    else if (name == "button_Stats")
+    {
+        Stats* w = new Stats(GridSize, GameMode);
+        w->showMaximized();
+        this->close();
+    }
+    else if (name == "button_Quitter")
+    {
+        this->close();
+    }
+
+}
+
+void Accueil::CheckSave()
+{
+    QFile file("Save.txt");
+
+    if(!file.exists())
+    {
+       button_Charger->setEnabled(false);
+    }
+    else
+    {
+        if(file.open(QIODevice::ReadOnly | QIODevice::Text))
+        {
+            QTextStream in(&file);
+            if(in.readLine().length()>5)
+            {
+                button_Charger->setEnabled(true);
+            }
+            else
+            {
+                button_Charger->setEnabled(false);
+            }
+            file.close();
+        }
+        else
+        {
+            button_Charger->setEnabled(false);
+        }
+    }
+}
+
+void Accueil::CheckStats()
+{
+    QFile file("Stats.txt");
+
+    if(!file.exists())
+    {
+       button_Stats->setEnabled(false);
+    }
+    else
+    {
+        if(file.open(QIODevice::ReadOnly | QIODevice::Text))
+        {
+            QTextStream in(&file);
+            if(in.readLine().length()>5)
+            {
+                button_Stats->setEnabled(true);
+            }
+            else
+            {
+                button_Stats->setEnabled(false);
+            }
+            file.close();
+        }
+        else
+        {
+            button_Stats->setEnabled(false);
+        }
+    }
 
 }
 
@@ -129,169 +223,3 @@ QLabel* Accueil::Create_Label(QString nom, QString text,int size, bool bold)
     temp->setFont(font);
     return temp;
 }
-
-void Accueil::CheckSave()
-{
-    QFile file("Save.txt");
-
-    if(!file.exists())
-    {
-       button[5]->setEnabled(false);
-    }
-    else
-    {
-        if(file.open(QIODevice::ReadOnly | QIODevice::Text))
-        {
-            QTextStream in(&file);
-            if(in.readLine().length()>5)
-            {
-                button[5]->setEnabled(true);
-            }
-            else
-            {
-                button[5]->setEnabled(false);
-            }
-            file.close();
-        }
-        else
-        {
-            button[5]->setEnabled(false);
-        }
-    }
-}
-
-void Accueil::CheckStats()
-{
-    QFile file("Stats.txt");
-
-    if(!file.exists())
-    {
-       button[6]->setEnabled(false);
-    }
-    else
-    {
-        if(file.open(QIODevice::ReadOnly | QIODevice::Text))
-        {
-            QTextStream in(&file);
-            if(in.readLine().length()>5)
-            {
-                button[6]->setEnabled(true);
-            }
-            else
-            {
-                button[6]->setEnabled(false);
-            }
-            file.close();
-        }
-        else
-        {
-            button[6]->setEnabled(false);
-        }
-    }
-
-}
-
-void Accueil::SizePlus_clicked()
-{
-    if(GridSize<8)
-    {
-        GridSize++;
-    }
-    else
-    {
-        GridSize = 3;
-    }
-
-    label[2]->setText(QString::number(GridSize) + "x" + QString::number(GridSize));
-}
-
-void Accueil::SizeMoin_clicked()
-{
-    if(GridSize>3)
-    {
-        GridSize--;
-    }
-    else
-    {
-        GridSize = 8;
-    }
-
-    label[2]->setText(QString::number(GridSize) + "x" + QString::number(GridSize));
-}
-
-void Accueil::ModePlus_clicked()
-{
-    if(GameMode < 3)
-    {
-        GameMode++;
-    }
-    else
-    {
-        GameMode = 1;
-    }
-
-    if(GameMode == 1)
-    {
-        label[4]->setText("Interface");
-    }
-    else if(GameMode == 2)
-    {
-        label[4]->setText("Clavier");
-    }
-    else if(GameMode == 3)
-    {
-        label[4]->setText("Voix");
-    }
-}
-
-void Accueil::ModeMoin_clicked()
-{
-    if(GameMode > 1)
-    {
-        GameMode--;
-    }
-    else
-    {
-        GameMode = 3;
-    }
-
-    if(GameMode == 1)
-    {
-        label[4]->setText("Interface");
-    }
-    else if(GameMode == 2)
-    {
-        label[4]->setText("Clavier");
-    }
-    else if(GameMode == 3)
-    {
-        label[4]->setText("Voix");
-    }
-}
-
-void Accueil::Jouer_clicked()
-{
-    Jeu *w = new Jeu(GridSize,GameMode,false);
-    w->showMaximized();
-    this->close();
-}
-
-void Accueil::Charger_clicked()
-{
-    Jeu *w = new Jeu(GridSize,GameMode,true);
-    w->showMaximized();
-    this->close();
-}
-
-void Accueil::Stats_clicked()
-{
-    Stats *w = new Stats(GridSize,GameMode);
-    w->showMaximized();
-    this->close();
-}
-
-void Accueil::Quitter_clicked()
-{
-    this->close();
-}
-
