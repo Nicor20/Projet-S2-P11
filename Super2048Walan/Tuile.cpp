@@ -54,7 +54,6 @@ void Tuile::setValeur(int NouvValeur)
 		setBrush(brush);
 		setOpacity(1);
 		show();
-
 	}
 	else if (Valeur == 4)
 	{

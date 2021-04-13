@@ -52,7 +52,10 @@
     <ClCompile Include="Joueur.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="MyLayoutGrid.cpp">
+    <ClCompile Include="PageJeu.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="PageMenuPrincipal.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="Score.cpp">
@@ -62,9 +65,6 @@
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="Tuile.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="qrc_Resource.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
@@ -81,7 +81,10 @@
     <ClInclude Include="Joueur.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="MyLayoutGrid.h">
+    <ClInclude Include="PageJeu.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="PageMenuPrincipal.h">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="Score.h">
