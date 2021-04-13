@@ -11,21 +11,21 @@ class Grille
 {
 public:
 	Grille();
-	Grille(int mode, int scene_with, int scene_height);											// ajoute une grille de jeux de la taille correspondant au mode de jeux
+	Grille(int mode, int scene_with, int scene_height);			// ajoute une grille de jeux de la taille correspondant au mode de jeux
 	~Grille();
 
-	Tuile* getTuile_XY(int colone, int ranger);					//retourne le poineur de la tuile dans la liste correspondant à l'index XY
-	Tuile* getTuile_List(int index);							//retourne la tuile à l'index de la list
-	void setTuilePoss(int colone, int ranger, Tuile* Newtuile); //change ou determine la position d'une tuile dans la grille
+	Tuile* getTuile_XY(int colone, int ranger);					//retourne le poineur de la tuile dans la liste correspondant à lindex XY
+	Tuile* getTuile_List(int index);							//retourne la tuile à lindex de la list
+	void setTuilePoss(int colone, int ranger, Tuile* Newtuile); //change ou determine la position dune tuile dans la grille
 	void setCoordGrille(int coord_X, int coord_Y);				//determine la position de la grille sur la scene
 	int getSize();												//retourne la taille de la liste de tuile de la grille
-	int getMode();												//retourne le mode(taille) de la grille
-	int getTuile_XY_Position(int colone, int ranger);			//retourne la position dans la liste(index) d'une tuile au coordonee XY de la grille
+	int getMode();												//retourne le mode de la grille
+	int getTuile_XY_Position(int colone, int ranger);			//retourne la position dans la liste d'une tuile au coordonee XY de la grille
 
 private:
-	int Mode = 0; // définit la longueur d'un côté de la grille et le mode de jeux
+	int Mode = 0;												// definit la longueur dun cote de la grille et le mode de jeux
 
-	QVector<Tuile*> ListTuileGrille; //listes des tuiles dans la grilles selon l ordre de créations de celles-ci
+	QVector<Tuile*> ListTuileGrille;							//listes des tuiles dans la grilles selon l ordre de créations de celles-ci
 	int Origine_X = 0;
 	int Origine_Y = 0;
 

@@ -1,8 +1,8 @@
 TEMPLATE     = vcapp
 TARGET       = Super2048
 CONFIG      += warn_on qt debug_and_release windows console
-HEADERS     += Tableau.h Jeu.h Affichage.h Tuile.h Grille.h Joueur.h Score.h MyLayoutGrid.h
-SOURCES     += 2048-Console.cpp Tableau.cpp Jeu.cpp Affichage.cpp Tuile.cpp Grille.cpp Joueur.cpp Score.cpp MyLayoutGrid.cpp qrc_Resource.cpp
+HEADERS     += Tableau.h Jeu.h Affichage.h Tuile.h Grille.h Joueur.h Score.h PageJeu.h PageMenuPrincipal.h
+SOURCES     += 2048-Console.cpp Tableau.cpp Jeu.cpp Affichage.cpp Tuile.cpp Grille.cpp Joueur.cpp Score.cpp PageJeu.cpp PageMenuPrincipal.cpp
 INCLUDEPATH += Ressources\ 
 LIBS	    += 
 RESOURCES   = Resource.qrc

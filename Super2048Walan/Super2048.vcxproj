@@ -144,11 +144,11 @@
     <ClCompile Include="Grille.cpp" />
     <ClCompile Include="Jeu.cpp" />
     <ClCompile Include="Joueur.cpp" />
-    <ClCompile Include="MyLayoutGrid.cpp" />
+    <ClCompile Include="PageJeu.cpp" />
+    <ClCompile Include="PageMenuPrincipal.cpp" />
     <ClCompile Include="Score.cpp" />
     <ClCompile Include="Tableau.cpp" />
     <ClCompile Include="Tuile.cpp" />
-    <ClCompile Include="qrc_Resource.cpp" />
   </ItemGroup>
   <ItemGroup>
     <CustomBuild Include="Affichage.h">
@@ -164,7 +164,8 @@
     <ClInclude Include="Grille.h" />
     <ClInclude Include="Jeu.h" />
     <ClInclude Include="Joueur.h" />
-    <ClInclude Include="MyLayoutGrid.h" />
+    <ClInclude Include="PageJeu.h" />
+    <ClInclude Include="PageMenuPrincipal.h" />
     <ClInclude Include="Score.h" />
     <ClInclude Include="Tableau.h" />
     <CustomBuild Include="Tuile.h">

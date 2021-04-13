@@ -5,14 +5,16 @@
 #include <QFont>
 #include <QWidget>
 #include <QVBoxLayout>
+#include <QGroupBox>
 
-class Score : public QLabel
+class Score : public QGroupBox
 {
 public:
 	Score(QString titre);
 	~Score();
 
-	QWidget* Board;
+	QGroupBox* Board;
+	
 
 	void setScore(int NouvValeur);
 	int getScore();
@@ -20,7 +22,6 @@ public:
 private:
 	QLabel* Titre;
 	QLabel* TextValeur;
-	
 	int Valeur;
 
 };

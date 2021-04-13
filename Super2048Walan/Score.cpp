@@ -4,7 +4,7 @@ Score::Score(QString titre)
 {
 
 	//---initialise le score board
-	Board = new QWidget;
+	Board = new QGroupBox;
 	Titre = new QLabel;
 	TextValeur = new QLabel;
 	
