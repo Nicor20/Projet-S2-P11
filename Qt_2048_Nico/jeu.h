@@ -1,74 +1,115 @@
 #ifndef JEU_H
 #define JEU_H
 
-#include "include.h"
-#include "accueil.h"
-#include "grid.h"
-#include "FPGA.h"
+#include <QString>
+#include <QTimer>
+#include <QFile>
+#include <QTextStream>
+#include "CommunicationFPGA.h"
 
-class Jeu : public QMainWindow
+struct Phoneme
 {
-    Q_OBJECT
+    int val[4][2];
+};
+
+struct Lecture
+{
+    int pot[4];
+};
+
+class Jeu
+{
 public:
-    Jeu(int size = 1, int mode = 4, bool load = false);
+    Jeu(int size = 1, bool load = false);
     ~Jeu();
 
-    void RefreshGrid();
-    void CustomLabel(QLabel *label);
+    //Jeu
+    QString Bouge_Haut();
+    QString Bouge_Droit();
+    QString Bouge_Bas();
+    QString Bouge_Gauche();
+
+    //Grid
+    int Get(int row, int column);
+    int GetScore();
+    int GetNbMove();
+    int GetMax();
+    int GetSize();
+
+    //FPGA
+    bool isConnected();
+    QString Read();
+    int waitTime();
+    int readTime();
+
+    //?????
     void SaveGame();
     void SaveStats(QString s);
     void ClearFile();
-
-    QPushButton* Create_Button(QString nom,QString text,int size, bool bold);
-    QLabel* Create_Label(QString nom,QString text,int size, bool bold);
-
-    void keyPressEvent(QKeyEvent* event);
-    void closeEvent(QCloseEvent* event);
-
-    void Menu();
-    void Bouge_Haut();
-    void Bouge_Droit();
-    void Bouge_Bas();
-    void Bouge_Gauche();
-
-private slots:
-    void FPGA_Timer();
-    void Button_clicked();
+    QString Menu();
 
 private:
-    QWidget *centralWidget;
-
-    QGridLayout *gLayout;
-    QVBoxLayout *vLayout;
-    QGridLayout *Button_gLayout;
-    QGridLayout *Game_gLayout;
-    QGridLayout *Stats_gLayout;
-
-    QTimer* Timer;
-
-    QLabel* label_Score;
-    QLabel* label_Max;
-    QLabel* label_NbMove;
-    QLabel ***labelGrid;
-
-    QPushButton* button_Haut;
-    QPushButton* button_Droit;
-    QPushButton* button_Bas;
-    QPushButton* button_Gauche;
-    QPushButton* button_Menu;
-
-    
-
-    Grid *grid;
-    FPGA *CarteFPGA;
-
-    int ModeJeu;
-    int GridSize;
-    int interval_read = 10;
-    int interval_wait = 250;
-
-    bool Lecture_FPGA = false;
+    //Jeu
+    int read_Time = 10;
+    int wait_Time = 250;
+    //bool Lecture_FPGA = false;
     bool Loaded;
+
+    //Grid
+    void Setup_New_Grid();
+    void Setup_Loaded_Grid();
+    QString Move_Up();
+    QString Move_Right();
+    QString Move_Down();
+    QString Move_Left();
+    void AddRandom();
+    int random(int high);
+    bool Lose();
+    bool Win();
+
+    int** grid;
+    int ratio = 5;
+    int GridSize;
+    int score = 0;
+    int NbMove = 0;
+    QVector<int> twoFour;
+
+    //FPGA
+    void Setup_FPGA();
+    QString Verification();
+
+    int nbLecture = 100;		//	Speed = 1 lecture par 10ms
+    int nbSaved = 0;
+    bool SaveOn = false;
+    bool VerifOn = false;
+
+    Phoneme valPhoneme[4];
+    Lecture* ListLecture = new Lecture[nbLecture];
+
+    BOOL statutport = false;
+
+    int swt = 0;                            // donnee recue du FPGA
+    int aff7sg_octet0 = 0;                  // octet 0 (droite) pour afficheur 7 segments
+    int aff7sg_octet1 = 0;                  // octet 0 (droite) pour afficheur 7 segments
+    int stat_btn = 0;                       // donnee recue du FPGA: statut et BTN
+    int Chanel[4];                          // donnee converties recues du FPGA      
+    const int delai_boucle = 10;            // delai d'attente ajouté dans la boucle de lecture en ms
+    int canal_a_afficher = 0;               // donnee recue du FPGA
+    int indice_canal_a_afficher = 0;
+
+    unsigned const int nreg_lect_stat_btn = 0;  // fpga -> PC  Statut et BTN lus FPGA -> PC
+    unsigned const int nreg_lect_swt = 1;       // fpga -> PC  SWT lus FPGA -> PC
+    unsigned const int nreg_lect_can0 = 3;      // fpga -> PC  canal 0 lus FPGA -> PC
+    unsigned const int nreg_lect_can1 = 4;      // fpga -> PC  canal 1 lus FPGA -> PC
+    unsigned const int nreg_lect_can2 = 5;      // fpga -> PC  canal 2 lus FPGA -> PC
+    unsigned const int nreg_lect_can3 = 6;      // fpga -> PC  canal 3 lus FPGA -> PC
+    unsigned const int nreg_ecri_aff7sg0 = 7;   // PC -> fpga (octet 0  aff.7 seg.)
+    unsigned const int nreg_ecri_aff7sg1 = 8;   // PC -> fpga (octet 1  aff.7 seg.)
+    unsigned const int nreg_ecri_aff7dot = 9;   // PC -> fpga (donnees dot-points)
+    unsigned const int nreg_ecri_led = 10;      // PC -> fpga (donnees leds)
+
+    CommunicationFPGA* port;
+
 };
 
 #endif // JEU_H

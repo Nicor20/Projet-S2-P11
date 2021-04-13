@@ -1,577 +1,1061 @@
 #include "jeu.h"
 #include <iostream>
 
-Jeu::Jeu(int size, int mode, bool load) : ModeJeu(mode) , Loaded(load)
+Jeu::Jeu(int size, bool load) : GridSize(size) , Loaded(load)
 {
-    grid = new Grid(size,load);
-    GridSize = grid->GetSize();
-
-    this->setObjectName("Accueil");
-
-    //Widget
+    if (load == true)
     {
-        centralWidget = new QWidget(this);
-        centralWidget->setObjectName("centralWidget");
+        Setup_Loaded_Grid();
     }
-
-    //Layout
+    else
     {
-        gLayout = new QGridLayout(centralWidget);
-        gLayout->setObjectName("gLayout");
-
-        vLayout = new QVBoxLayout(centralWidget);
-        vLayout->setObjectName("vLayout");
-
-        Game_gLayout = new QGridLayout(centralWidget);
-        Game_gLayout->setObjectName("Game_gLayout");
-
-        Button_gLayout = new QGridLayout(centralWidget);
-        Button_gLayout->setObjectName("Button_gLayout");
-
-        Stats_gLayout = new QGridLayout(centralWidget);
-        Stats_gLayout->setObjectName("Stats_gLayout");
+        Setup_New_Grid();
     }
-
-    //Setup Label Grid
-    {
-        labelGrid = new QLabel**[GridSize];
-        for(int i =0;i<GridSize;i++)
-        {
-            labelGrid[i] = new QLabel*[GridSize];
-        }
-
-        for(int x = 0;x<GridSize;x++)
-        {
-            for(int y = 0;y<GridSize;y++)
-            {
-                labelGrid[x][y] = Create_Label("label"+QString::number((x*4)+y),QString::number(grid->Get(x,y)),15,true);
-                CustomLabel(labelGrid[x][y]);
-            }
-        }
-
-    }
-
-    //Labels
-    {
-        label_Score = Create_Label("label_Score","Score\n" + QString::number(grid->GetScore()),15,true);
-        label_Score->setFrameStyle(QFrame::Box | QFrame::Sunken);
-        label_Score->setLineWidth(4);
-        label_Score->setMidLineWidth(3);
-
-        label_NbMove = Create_Label("label_NbMove","Nb Move\n" + QString::number(grid->GetNbMove()),15,true);
-        label_NbMove->setFrameStyle(QFrame::Box | QFrame::Sunken);
-        label_NbMove->setLineWidth(4);
-        label_NbMove->setMidLineWidth(3);
-
-        label_Max = Create_Label("label_Max","Max\n" + QString::number(grid->GetMax()),15,true);
-        label_Max->setFrameStyle(QFrame::Box | QFrame::Sunken);
-        label_Max->setLineWidth(4);
-        label_Max->setMidLineWidth(3);
-    }
-
-    //Buttons
-    {
-        button_Haut = Create_Button("button_Haut","Haut",15,true);
-        button_Gauche = Create_Button("button_Gauche","Gauche",15,true);
-        button_Bas = Create_Button("button_Bas","Bas",15,true);
-        button_Droit = Create_Button("button_Droit","Droit",15,true);
-        button_Menu = Create_Button("button_Menu","Menu",15,true);
-        
-        connect(button_Haut, &QPushButton::clicked, this, &Jeu::Button_clicked);
-        connect(button_Gauche, &QPushButton::clicked, this, &Jeu::Button_clicked);
-        connect(button_Bas, &QPushButton::clicked, this, &Jeu::Button_clicked);
-        connect(button_Droit, &QPushButton::clicked, this, &Jeu::Button_clicked);
-        connect(button_Menu, &QPushButton::clicked, this, &Jeu::Button_clicked);
-    }
-
-    //Game_gLayout
-    {
-        for(int x = 0;x<GridSize;x++)
-        {
-            for(int y = 0;y<GridSize;y++)
-            {
-                Game_gLayout->addWidget(labelGrid[x][y],x,y);
-            }
-        }
-    }
-
-    //Button_gLayout
-    {
-        Button_gLayout->addWidget(button_Haut,0,1);
-        Button_gLayout->addWidget(button_Gauche,1,0);
-        Button_gLayout->addWidget(button_Bas,1,1);
-        Button_gLayout->addWidget(button_Droit,1,2);
-    }
-
-    //Stats_gLayout
-    {
-        Stats_gLayout->addWidget(label_Score,0,0);
-        Stats_gLayout->addWidget(label_NbMove,0,1);
-        Stats_gLayout->addWidget(label_Max,0,2);
-    }
-
-    //vLayout
-    {
-        vLayout->addLayout(Stats_gLayout);
-        vLayout->addSpacerItem(new QSpacerItem(40,20));
-        vLayout->addLayout(Game_gLayout);
-        vLayout->addSpacerItem(new QSpacerItem(40,20));
-        vLayout->addLayout(Button_gLayout);
-        vLayout->addSpacerItem(new QSpacerItem(40,20));
-        vLayout->addWidget(button_Menu);
-    }
-
-    //Fill gridLayout
-    gLayout->addLayout(vLayout,0,0,Qt::AlignCenter);
-
-    this->setCentralWidget(centralWidget);
-
-    //Timer
-    {
-        CarteFPGA = new FPGA();
-        Timer = new QTimer(centralWidget);
-        connect(Timer, &QTimer::timeout, this, &Jeu::FPGA_Timer);
-
-        if (CarteFPGA->Connected())
-        {
-            Timer->start(interval_wait);
-        }
-    }
+    
+    Setup_FPGA();
 }
 
 Jeu::~Jeu()
 {
-    if (Timer->isActive())
-    {
-        Timer->stop();
-    }
-    
-    delete CarteFPGA;
-    this->destroy();
+
 }
 
-void Jeu::RefreshGrid()
-{
-    for(int x = 0; x < GridSize; x++)
-    {
-        for(int y = 0; y < GridSize; y++)
-        {
-            labelGrid[x][y]->setText(QString::number(grid->Get(x,y)));
-            CustomLabel(labelGrid[x][y]);
-        }
-    }
+#pragma region Jeu
 
-    label_Score ->setText("Score\n" + QString::number(grid->GetScore()));
-    label_NbMove ->setText("Nb Move\n" + QString::number(grid->GetNbMove()));
-    label_Max ->setText("Max\n" + QString::number(grid->GetMax()));
-}
-
-#pragma region Mouvement
-void Jeu::Bouge_Haut()
+QString Jeu::Bouge_Haut()
 {
-    if (Lecture_FPGA == false)
+    if (SaveOn == false ||VerifOn == false)
     {
-        QString Status = grid->Haut();
-        RefreshGrid();
+        QString Status = Move_Up();
 
         if (Status == "Perdu")
         {
             SaveStats(Status);
             ClearFile();
-            Accueil* w = new Accueil(GridSize, ModeJeu);
-            w->showMaximized();
-            this->close();
+            return Status;
         }
         else if (Status == "Gagne")
         {
             SaveStats(Status);
             ClearFile();
-            Accueil* w = new Accueil(GridSize, ModeJeu);
-            w->showMaximized();
-            this->close();
+            return Status;
         }
-    }
-}
-
-void Jeu::Bouge_Droit()
-{
-    if (Lecture_FPGA == false)
-    {
-        QString Status = grid->Droit();
-        RefreshGrid();
-
-        if (Status == "Perdu")
+        else
         {
-            SaveStats(Status);
-            ClearFile();
-            Accueil* w = new Accueil(GridSize, ModeJeu);
-            w->showMaximized();
-            this->close();
+            return "Refresh";
         }
-        else if (Status == "Gagne")
-        {
-            SaveStats(Status);
-            ClearFile();
-            Accueil* w = new Accueil(GridSize, ModeJeu);
-            w->showMaximized();
-            this->close();
-        }
-    }
-}
-
-void Jeu::Bouge_Bas()
-{
-    if (Lecture_FPGA == false)
-    {
-        QString Status = grid->Bas();
-        RefreshGrid();
-
-        if (Status == "Perdu")
-        {
-            SaveStats(Status);
-            ClearFile();
-            Accueil* w = new Accueil(GridSize, ModeJeu);
-            w->showMaximized();
-            this->close();
-        }
-        else if (Status == "Gagne")
-        {
-            SaveStats(Status);
-            ClearFile();
-            Accueil* w = new Accueil(GridSize, ModeJeu);
-            w->showMaximized();
-            this->close();
-        }
-    }
-}
-
-void Jeu::Bouge_Gauche()
-{
-    if (Lecture_FPGA == false)
-    {
-        QString Status = grid->Gauche();
-        RefreshGrid();
-
-        if (Status == "Perdu")
-        {
-            SaveStats(Status);
-            ClearFile();
-            Accueil* w = new Accueil(GridSize, ModeJeu);
-            w->showMaximized();
-            this->close();
-        }
-        else if (Status == "Gagne")
-        {
-            SaveStats(Status);
-            ClearFile();
-            Accueil* w = new Accueil(GridSize, ModeJeu);
-            w->showMaximized();
-            this->close();
-        }
-    }
-}
-#pragma endregion
-
-#pragma region Slot
-void Jeu::FPGA_Timer()
-{
-    QString text = CarteFPGA->Read();
-
-    if (text == "LecStart")
-    {
-        Timer->setInterval(interval_read);
-        Lecture_FPGA = true;
-        cout << "Debut de lecture" << endl;
-    }
-    else if (text == "Lec")
-    {
-        cout << "Lecture" << endl;
-    }
-    else if (text == "LecStop")
-    {
-        Timer->setInterval(interval_wait);
-        cout << "Fin de lecture" << endl;
-    }
-    else if (text == "Haut")
-    {
-        Lecture_FPGA = false;
-        Bouge_Haut();
-        cout << "Haut" << endl;
-    }
-    else if (text == "Droit")
-    {
-        Lecture_FPGA = false;
-        Bouge_Droit();
-        cout << "Droit" << endl;
-    }
-    else if (text == "Bas")
-    {
-        Lecture_FPGA = false;
-        Bouge_Bas();
-        cout << "Bas" << endl;
-    }
-    else if (text == "Gauche")
-    {
-        Lecture_FPGA = false;
-        Bouge_Gauche();
-        cout << "Gauche" << endl;
-    }
-    else if (text == "Aucun")
-    {
-        Lecture_FPGA = false;
-        cout << "Aucun" << endl;
-    }
-    else if (text == "Rien")
-    {
-        cout << "Rien" << endl;
-    }
-    else if (text == "Erreur")
-    {
-        Lecture_FPGA = false;
-        Timer->stop();
-        cout << "Erreur" << endl;
     }
     else
     {
-        Lecture_FPGA = false;
-        cout << "Pas prevus!!!" << endl;
-        Timer->stop();
+        return "En lecture";
     }
 }
 
-void Jeu::Button_clicked()
+QString Jeu::Bouge_Droit()
 {
-    QString name = qobject_cast<QPushButton*>(sender())->objectName();
+    if (SaveOn == false || VerifOn == false)
+    {
+        QString Status = Move_Right();
 
-    if (name == "button_Haut")
-    {
-        cout << "Bouton Haut" << endl;
-        Bouge_Haut();
-    }
-    else if (name == "button_Droit")
-    {
-        cout << "Bouton Droit" << endl;
-        Bouge_Droit();
-    }
-    else if (name == "button_Bas")
-    {
-        cout << "Bouton Bas" << endl;
-        Bouge_Bas();
-    }
-    else if (name == "button_Gauche")
-    {
-        cout << "Bouton Gauche" << endl;
-        Bouge_Gauche();
-    }
-    else if (name == "button_Menu")
-    {
-        cout << "Bouton Menu" << endl;
-        Menu();
-    }
-
-    
-}
-#pragma endregion
-
-#pragma region Creator
-QPushButton* Jeu::Create_Button(QString nom, QString text,int size, bool bold)
-{
-    QFont font;
-    QPushButton *temp = new QPushButton(centralWidget);
-    temp ->setObjectName(nom);
-    temp ->setText(text);
-    font = temp->font();
-    font.setPointSize(size);
-    font.setBold(bold);
-    temp->setFont(font);
-    return temp;
-}
-
-QLabel* Jeu::Create_Label(QString nom, QString text,int size, bool bold)
-{
-    QFont font;
-    QLabel *temp = new QLabel(centralWidget);
-    temp ->setObjectName(nom);
-    temp ->setText(text);
-    temp ->setAlignment(Qt::AlignCenter);
-    font = temp->font();
-    font.setPointSize(size);
-    font.setBold(bold);
-    temp->setFont(font);
-    return temp;
-}
-
-void Jeu::CustomLabel(QLabel *label)
-{
-    int width = 550;
-    //Text
-    if(label->text() == "0")
-    {
-        label->setText("");
-    }
-
-    //style
-    label->setFixedSize(width/GridSize,width/GridSize);
-    label->setFrameStyle(QFrame::Panel | QFrame::Sunken);
-    label->setLineWidth(6);
-    label->setMidLineWidth(3);
-
-    //color
-    label->setAutoFillBackground(true);
-    if(label->text() == "")
-    {
-        label->setStyleSheet("QLabel { background-color : rgba(236,236,236,0.3); }");
-    }
-    else if(label->text() == "2")
-    {
-        label->setStyleSheet("QLabel { background-color : rgb(238,228,218); }");
-    }
-    else if(label->text() == "4")
-    {
-        label->setStyleSheet("QLabel { background-color : rgb(237,224,200); }");
-    }
-    else if(label->text() == "8")
-    {
-        label->setStyleSheet("QLabel { background-color : rgb(242,177,121); }");
-    }
-    else if(label->text() == "16")
-    {
-        label->setStyleSheet("QLabel { background-color : rgb(245,149,99); }");
-    }
-    else if(label->text() == "32")
-    {
-        label->setStyleSheet("QLabel { background-color : rgb(246,124,95); }");
-    }
-    else if(label->text() == "64")
-    {
-        label->setStyleSheet("QLabel { background-color : rgb(246,94,59); }");
-    }
-    else if(label->text() == "128")
-    {
-        label->setStyleSheet("QLabel { background-color : rgb(237,207,114); }");
-    }
-    else if(label->text() == "256")
-    {
-        label->setStyleSheet("QLabel { background-color : rgb(237,204,97); }");
-    }
-    else if(label->text() == "512")
-    {
-        label->setStyleSheet("QLabel { background-color : rgb(237,200,80); }");
-    }
-    else if(label->text() == "1024")
-    {
-        label->setStyleSheet("QLabel { background-color : rgb(237,197,63); }");
-    }
-    else if(label->text() == "2048")
-    {
-        label->setStyleSheet("QLabel { background-color : rgb(0,255,0); }");
+        if (Status == "Perdu")
+        {
+            SaveStats(Status);
+            ClearFile();
+            return Status;
+        }
+        else if (Status == "Gagne")
+        {
+            SaveStats(Status);
+            ClearFile();
+            return Status;
+        }
+        else
+        {
+            return "Refresh";
+        }
     }
     else
     {
-        label->setStyleSheet("QLabel { background-color : rgb(51,255,255); }");
+        return "En lecture";
     }
 }
+
+QString Jeu::Bouge_Bas()
+{
+    if (SaveOn == false || VerifOn == false)
+    {
+        QString Status = Move_Down();
+
+        if (Status == "Perdu")
+        {
+            SaveStats(Status);
+            ClearFile();
+            return Status;
+        }
+        else if (Status == "Gagne")
+        {
+            SaveStats(Status);
+            ClearFile();
+            return Status;
+        }
+        else
+        {
+            return "Refresh";
+        }
+    }
+    else
+    {
+        return "En lecture";
+    }
+}
+
+QString Jeu::Bouge_Gauche()
+{
+    if (SaveOn == false || VerifOn == false)
+    {
+        QString Status = Move_Left();
+
+        if (Status == "Perdu")
+        {
+            SaveStats(Status);
+            ClearFile();
+            return Status;
+        }
+        else if (Status == "Gagne")
+        {
+            SaveStats(Status);
+            ClearFile();
+            return Status;
+        }
+        else
+        {
+            return "Refresh";
+        }
+    }
+    else
+    {
+        return "En lecture";
+    }
+}
+
 #pragma endregion
 
-#pragma region Event
-void Jeu::closeEvent(QCloseEvent* event)
+#pragma region Grid
+
+void Jeu::Setup_New_Grid()
 {
-    Jeu::~Jeu();
+    // Rempli le vecteur de 2 et de 4
+    for (int i = 0; i < ratio * 10; i++)
+    {
+        if (i % ratio != 0)
+        {
+            twoFour.push_back(2);
+        }
+        else
+        {
+            twoFour.push_back(4);
+        }
+    }
+
+    //Création du tableau adaptif selon la valeur de size
+    grid = new int* [GridSize];
+    for (int i = 0; i < GridSize; i++)
+    {
+        grid[i] = new int[GridSize];
+    }
+
+    // Remplis la grille de 0
+    for (int i = 0; i < (GridSize * GridSize); i++)
+    {
+        grid[(int)floor(i / GridSize)][i % GridSize] = 0;
+    }
+
+    AddRandom();
+    AddRandom();
 }
 
-void Jeu::keyPressEvent(QKeyEvent* event)
+void Jeu::Setup_Loaded_Grid()
 {
-    if (event->key() == Qt::Key_W)
+    // Rempli le vecteur de 2 et de 4
+    for (int i = 0; i < ratio * 10; i++)
     {
-        Bouge_Haut();
+        if (i % ratio != 0)
+        {
+            twoFour.push_back(2);
+        }
+        else
+        {
+            twoFour.push_back(4);
+        }
     }
-    else if (event->key() == Qt::Key_D)
+
+    QFile file("Save.txt");
+
+    if (file.exists())
     {
-        Bouge_Droit();
-    }
-    else if (event->key() == Qt::Key_S)
-    {
-        Bouge_Bas();
-    }
-    else if (event->key() == Qt::Key_A)
-    {
-        Bouge_Gauche();
+        file.open(QIODevice::ReadOnly | QIODevice::Text);
+        QTextStream in(&file);
+        QList temp = in.readLine().split("/");
+        file.close();
+
+        GridSize = temp[0].toInt();
+        score = temp[1].toInt();
+        NbMove = temp[2].toInt();
+        grid = new int* [GridSize];
+        for (int i = 0; i < GridSize; i++)
+        {
+            grid[i] = new int[GridSize];
+        }
+
+        for (int i = 0; i < GridSize * GridSize; i++)
+        {
+            grid[(int)floor(i / GridSize)][i % GridSize] = temp[i + 3].toInt();
+        }
     }
 }
+
+void Jeu::AddRandom()
+{
+    // Remplis le vecteur avec la position des case vide du graphique
+    QVector<int> vec;
+    for (int i = 0; i < GridSize * GridSize; i++)
+    {
+        if (grid[(int)floor(i / GridSize)][i % GridSize] == 0)
+        {
+            vec.push_back(i);
+        }
+    }
+
+    // Si il y a une case de vide déterminer une position aléatoire et insert 2 ou 4
+    if (vec.size() > 0)
+    {
+        int pos = vec[random(vec.size())];
+        grid[(int)floor(pos / GridSize)][pos % GridSize] = twoFour[random(ratio * 10)];
+    }
+}
+
+int Jeu::random(int high)
+{
+    //retourne une valeur random entre 0 et high
+    srand((int)time(0));
+    return rand() % high;
+}
+
+QString Jeu::Move_Up()
+{
+    bool move = false;
+    int x = 0, y = 0, z = 0;
+
+    // Passe à travers chaque colone du tableau de la gauche vers la droite
+    for (x = 0; x < GridSize; x++)
+    {
+        // Du haut vers le bas
+        for (y = 0; y < GridSize; y++)
+        {
+            // Si la case n'est pas vide
+            if (grid[y][x] != 0)
+            {
+                // Vérifie chacune des case en bas de celle-ci
+                for (z = y + 1; z < GridSize; z++)
+                {
+                    // Si la case n'est pas vide
+                    if (grid[z][x] != 0)
+                    {
+                        // Si les deux case ont la meme valeur on vas les joindres
+                        if (grid[y][x] == grid[z][x])
+                        {
+                            move = true;
+                            score += grid[y][x] + grid[z][x];
+                            grid[y][x] *= 2;
+                            grid[z][x] = 0;
+                        }
+                        break;
+                    }
+                }
+            }
+        }
+
+        // Du haut vers le bas
+        for (y = 0; y < GridSize; y++)
+        {
+            // Si la case est vide
+            if (grid[y][x] == 0)
+            {
+                // Vérifie chacune des case en bas de celle-ci
+                for (z = y + 1; z < GridSize; z++)
+                {
+                    // Si la case n'est pas vide la bouger
+                    if (grid[z][x] != 0)
+                    {
+                        grid[y][x] = grid[z][x];
+                        grid[z][x] = 0;
+                        move = true;
+                        break;
+                    }
+                }
+            }
+        }
+    }
+
+    // Si une case à bouger augmenter de un le nombre de mouvement
+    if (move == true)
+    {
+        NbMove++;
+        // Ajout d'un 2 ou d'un 4 à une case vide
+        AddRandom();
+
+        if (Win() == true)
+        {
+            return "Gagne";
+        }
+        else if (Lose() == true)
+        {
+            return "Perdu";
+        }
+    }
+    return "Good";
+}
+
+QString Jeu::Move_Right()
+{
+    bool move = false;
+    int x = 0, y = 0, z = 0;
+
+    // Passe à travers chaque rangé du tableau du haut vers le bas
+    for (y = 0; y < GridSize; y++)
+    {
+        // De la droie vers la gauche
+        for (x = GridSize - 1; x >= 0; x--)
+        {
+            // Si la case n'est pas vide
+            if (grid[y][x] != 0)
+            {
+                // Vérifie chacune des case à la gauche de celle-ci
+                for (z = x - 1; z >= 0; z--)
+                {
+                    // Si la case n'est pas vide
+                    if (grid[y][z] != 0)
+                    {
+                        // Si les deux case ont la meme valeur on vas les joindres
+                        if (grid[y][x] == grid[y][z])
+                        {
+                            move = true;
+                            score += grid[y][x] + grid[y][z];
+                            grid[y][x] *= 2;
+                            grid[y][z] = 0;
+                        }
+                        break;
+                    }
+                }
+            }
+        }
+
+        // De la droite vers la gauche
+        for (x = GridSize - 1; x >= 0; x--)
+        {
+            // Si la case est vide
+            if (grid[y][x] == 0)
+            {
+                // Vérifie chacune des case à la gauche de celle-ci
+                for (z = x - 1; z >= 0; z--)
+                {
+                    // Si la case n'est pas vide la bouger
+                    if (grid[y][z] != 0)
+                    {
+                        grid[y][x] = grid[y][z];
+                        grid[y][z] = 0;
+                        move = true;
+                        break;
+                    }
+                }
+            }
+        }
+    }
+
+    // Si une case à bouger augmenter de un le nombre de mouvement
+    if (move == true)
+    {
+        NbMove++;
+        // Ajout d'un 2 ou d'un 4 à une case vide
+        AddRandom();
+
+        if (Win() == true)
+        {
+            return "Gagne";
+        }
+        else if (Lose() == true)
+        {
+            return "Perdu";
+        }
+    }
+    return "Good";
+}
+
+QString Jeu::Move_Down()
+{
+    bool move = false;
+    int x = 0, y = 0, z = 0;
+
+    // Passe à travers chaque colone du tableau de la gauche vers la droite
+    for (x = 0; x < GridSize; x++)
+    {
+        // Du bas vers le haut
+        for (y = GridSize - 1; y >= 0; y--)
+        {
+            // Si la case n'est pas vide
+            if (grid[y][x] != 0)
+            {
+                // Vérifie chacune des case en haut de celle-ci
+                for (z = y - 1; z >= 0; z--)
+                {
+                    // Si la case n'est pas vide
+                    if (grid[z][x] != 0)
+                    {
+                        // Si les deux case ont la meme valeur on vas les joindres
+                        if (grid[y][x] == grid[z][x])
+                        {
+                            move = true;
+                            score += grid[y][x] + grid[z][x];
+                            grid[y][x] *= 2;
+                            grid[z][x] = 0;
+                        }
+                        break;
+                    }
+                }
+            }
+        }
+
+        // Du bas vers le haut
+        for (y = GridSize - 1; y >= 0; y--)
+        {
+            // Si la case est vide
+            if (grid[y][x] == 0)
+            {
+                // Vérifie chacune des case en bas de celle-ci
+                for (z = y - 1; z >= 0; z--)
+                {
+                    // Si la case n'est pas vide la bouger
+                    if (grid[z][x] != 0)
+                    {
+                        grid[y][x] = grid[z][x];
+                        grid[z][x] = 0;
+                        move = true;
+                        break;
+                    }
+                }
+            }
+        }
+    }
+
+    // Si une case à bouger augmenter de un le nombre de mouvement
+    if (move == true)
+    {
+        NbMove++;
+        // Ajout d'un 2 ou d'un 4 à une case vide
+        AddRandom();
+
+        if (Win() == true)
+        {
+            return "Gagne";
+        }
+        else if (Lose() == true)
+        {
+            return "Perdu";
+        }
+    }
+    return "Good";
+}
+
+QString Jeu::Move_Left()
+{
+    bool move = false;
+    int x = 0, y = 0, z = 0;
+
+    // Passe à travers chaque rangé du tableau du haut vers le bas
+    for (y = 0; y < GridSize; y++)
+    {
+        // De la gauche vers la droite
+        for (x = 0; x < GridSize; x++)
+        {
+            // Si la case n'est pas vide
+            if (grid[y][x] != 0)
+            {
+                // Vérifie chacune des case à la droite de celle-ci
+                for (z = x + 1; z < GridSize; z++)
+                {
+                    // Si la case n'est pas vide
+                    if (grid[y][z] != 0)
+                    {
+                        // Si les deux case ont la meme valeur on vas les joindres
+                        if (grid[y][x] == grid[y][z])
+                        {
+                            move = true;
+                            score += grid[y][x] + grid[y][z];
+                            grid[y][x] *= 2;
+                            grid[y][z] = 0;
+                        }
+                        break;
+                    }
+                }
+            }
+        }
+
+        // De la gauche vers la droite
+        for (x = 0; x < GridSize; x++)
+        {
+            // Si la case est vide
+            if (grid[y][x] == 0)
+            {
+                // Vérifie chacune des case à la droite de celle-ci
+                for (z = x + 1; z < GridSize; z++)
+                {
+                    // Si la case n'est pas vide la déplacer
+                    if (grid[y][z] != 0)
+                    {
+                        grid[y][x] = grid[y][z];
+                        grid[y][z] = 0;
+                        move = true;
+                        break;
+                    }
+                }
+            }
+        }
+    }
+
+    // Si une case à bouger augmenter de un le nombre de mouvement
+    if (move == true)
+    {
+        NbMove++;
+        // Ajout d'un 2 ou d'un 4 à une case vide
+        AddRandom();
+
+        if (Win() == true)
+        {
+            return "Gagne";
+        }
+        else if (Lose() == true)
+        {
+            return "Perdu";
+        }
+    }
+    return "Good";
+}
+
+bool Jeu::Lose()
+{
+    int Nb_empty = 0;
+
+    // Compile le nombre de case vide
+    for (int i = 0; i < GridSize * GridSize; i++)
+    {
+        if (grid[(int)floor(i / GridSize)][i % GridSize] == 0)
+        {
+            Nb_empty++;
+        }
+    }
+
+    // Si il n'y a pas de case vide vérifier si il est possible de joindre des case
+    if (Nb_empty == 0)
+    {
+        int x = 0, y = 0, z = 0;
+
+        bool droit = false;
+        for (y = 0; y < GridSize; y++)
+        {
+            for (x = GridSize - 1; x >= 0; x--)
+            {
+                if (grid[y][x] != 0)
+                {
+                    for (z = x - 1; z >= 0; z--)
+                    {
+                        if (grid[y][z] != 0)
+                        {
+                            if (grid[y][x] == grid[y][z])
+                            {
+                                droit = true;
+                            }
+                            break;
+                        }
+                    }
+                }
+            }
+        }
+
+        bool gauche = false;
+        for (y = 0; y < GridSize; y++)
+        {
+            for (x = 0; x < GridSize; x++)
+            {
+                if (grid[y][x] != 0)
+                {
+                    for (z = x + 1; z < GridSize; z++)
+                    {
+                        if (grid[y][z] != 0)
+                        {
+                            if (grid[y][x] == grid[y][z])
+                            {
+                                gauche = true;
+                            }
+                            break;
+                        }
+                    }
+                }
+            }
+        }
+
+        bool haut = false;
+        for (x = 0; x < GridSize; x++)
+        {
+            for (y = 0; y < GridSize; y++)
+            {
+                if (grid[y][x] != 0)
+                {
+                    for (z = y + 1; z < GridSize; z++)
+                    {
+                        if (grid[z][x] != 0)
+                        {
+                            if (grid[y][x] == grid[z][x])
+                            {
+                                haut = true;
+                            }
+                            break;
+                        }
+                    }
+                }
+            }
+        }
+
+        bool bas = false;
+        for (x = 0; x < GridSize; x++)
+        {
+            for (y = GridSize - 1; y >= 0; y--)
+            {
+                if (grid[y][x] != 0)
+                {
+                    for (z = y - 1; z >= 0; z--)
+                    {
+                        if (grid[z][x] != 0)
+                        {
+                            if (grid[y][x] == grid[z][x])
+                            {
+                                bas = true;
+                            }
+                            break;
+                        }
+                    }
+                }
+            }
+        }
+
+        if (droit == false && gauche == false && haut == false && bas == false)
+        {
+            return true;
+        }
+        else
+        {
+            return false;
+        }
+    }
+    else
+    {
+        return false;
+    }
+}
+
+bool Jeu::Win()
+{
+    if (GetMax() == 2048)
+    {
+        return true;
+    }
+    else
+    {
+        return false;
+    }
+}
+
+int Jeu::Get(int x, int y)
+{
+    return grid[x][y];
+}
+
+int Jeu::GetScore()
+{
+    return score;
+}
+
+int Jeu::GetNbMove()
+{
+    return NbMove;
+}
+
+int Jeu::GetMax()
+{
+    int max = 0;
+
+    for (int x = 0; x < GridSize; x++)
+    {
+        for (int y = 0; y < GridSize; y++)
+        {
+            if (grid[x][y] > max)
+            {
+                max = grid[x][y];
+            }
+        }
+    }
+    return max;
+}
+
+int Jeu::GetSize()
+{
+    return GridSize;
+}
+
 #pragma endregion
 
-void Jeu::Menu()
-{
-    bool closeWithoutAsking = true;
+#pragma region FPGA
 
-    if(Loaded == true)
+void Jeu::Setup_FPGA()
+{
+    port = new CommunicationFPGA();
+
+    if (!port->estOk())
     {
-        closeWithoutAsking = true;
+        cout << port->messageErreur() << endl;
+    }
+    else
+    {
+        cout << "Statut initial du port de communication = " << port->estOk() << endl << endl;
+    }
+
+    int statut_circuit = 0;
+    statutport = port->lireRegistre(nreg_lect_stat_btn, statut_circuit);
+
+    //Phoneme 'a'
+    {
+        valPhoneme[0].val[0][0] = 60;		//min pot1
+        valPhoneme[0].val[0][1] = 90;		//max pot1
+        valPhoneme[0].val[1][0] = 520;		//min pot2
+        valPhoneme[0].val[1][1] = 610;		//max pot2
+        valPhoneme[0].val[2][0] = 20;		//min pot3
+        valPhoneme[0].val[2][1] = 60;		//max pot3
+        valPhoneme[0].val[3][0] = 90;		//min pot4
+        valPhoneme[0].val[3][1] = 170;		//max pot4
+    }
+
+    //Phoneme 'e'
+    {
+        valPhoneme[1].val[0][0] = 180;		//min pot1
+        valPhoneme[1].val[0][1] = 270;		//max pot1
+        valPhoneme[1].val[1][0] = 60;		//min pot2
+        valPhoneme[1].val[1][1] = 100;		//max pot2
+        valPhoneme[1].val[2][0] = 300;		//min pot3
+        valPhoneme[1].val[2][1] = 530;		//max pot3
+        valPhoneme[1].val[3][0] = 130;		//min pot4
+        valPhoneme[1].val[3][1] = 240;		//max pot4
+    }
+
+    //Phoneme 'eu'
+    {
+        valPhoneme[2].val[0][0] = 550;		//min pot1
+        valPhoneme[2].val[0][1] = 830;		//max pot1
+        valPhoneme[2].val[1][0] = 180;		//min pot2
+        valPhoneme[2].val[1][1] = 280;		//max pot2
+        valPhoneme[2].val[2][0] = 240;		//min pot3
+        valPhoneme[2].val[2][1] = 390;		//max pot3
+        valPhoneme[2].val[3][0] = 40;		//min pot4
+        valPhoneme[2].val[3][1] = 110;		//max pot4
+    }
+
+    //Phoneme 'i'
+    {
+        valPhoneme[3].val[0][0] = 500;		//min pot1
+        valPhoneme[3].val[0][1] = 780;		//max pot1
+        valPhoneme[3].val[1][0] = 0;		//min pot2
+        valPhoneme[3].val[1][1] = 60;		//max pot2
+        valPhoneme[3].val[2][0] = 430;		//min pot3
+        valPhoneme[3].val[2][1] = 615;		//max pot3
+        valPhoneme[3].val[3][0] = 585;		//min pot4
+        valPhoneme[3].val[3][1] = 810;		//max pot4
+    }
+
+
+    //Phoneme 'a' = ( 0x16 - 0x8D - 0x0A - 0x20 )
+
+    //Phoneme 'e' = ( 0x38 - 0x14 - 0x68 - 0x2E )
+
+    //Phoneme 'eu' = ( 0xAD - 0x3A - 0x4F - 0x16 )
+
+    //Phoneme 'i' = ( 0xA0 - 0x08 - 0x83 - 0xAE )
+}
+
+bool Jeu::isConnected()
+{
+    return statutport;
+}
+
+QString Jeu::Read()
+{
+    // lecture statut et BTN
+    if (statutport)
+    {
+        statutport = port->lireRegistre(nreg_lect_stat_btn, stat_btn);
+    }
+    else
+    {
+        return "Erreur";
+    }
+
+    // lecture swt
+    if (statutport)
+    {
+        statutport = port->lireRegistre(nreg_lect_swt, swt);
+        statutport = port->ecrireRegistre(nreg_ecri_led, swt);
+    }
+    else
+    {
+        return "Erreur";
+    }
+
+    // lecture canal 0
+    if (statutport)
+    {
+        statutport = port->lireRegistre(nreg_lect_can0, Chanel[0]);
+    }
+    else
+    {
+        return "Erreur";
+    }
+
+    // lecture canal 1
+    if (statutport)
+    {
+        statutport = port->lireRegistre(nreg_lect_can1, Chanel[1]);
+    }
+    else
+    {
+        return "Erreur";
+    }
+
+    // lecture canal 2
+    if (statutport)
+    {
+        statutport = port->lireRegistre(nreg_lect_can2, Chanel[2]);
+    }
+    else
+    {
+        return "Erreur";
+    }
+
+    // lecture canal 3
+    if (statutport)
+    {
+        statutport = port->lireRegistre(nreg_lect_can3, Chanel[3]);
+    }
+    else
+    {
+        return "Erreur";
+    }
+
+    if (statutport)
+    {
+        //Ajuster les pot
+        if (swt == 0x80)	//#1
+        {
+            statutport = port->ecrireRegistre(nreg_ecri_aff7sg0, 0x01);
+            statutport = port->ecrireRegistre(nreg_ecri_aff7sg1, Chanel[0]);
+            statutport = port->ecrireRegistre(nreg_ecri_aff7dot, 0x04);
+        }
+        else if (swt == 0x40)	//#2
+        {
+            statutport = port->ecrireRegistre(nreg_ecri_aff7sg0, 0x02);
+            statutport = port->ecrireRegistre(nreg_ecri_aff7sg1, Chanel[1]);
+            statutport = port->ecrireRegistre(nreg_ecri_aff7dot, 0x04);
+        }
+        else if (swt == 0x20)	//#3
+        {
+            statutport = port->ecrireRegistre(nreg_ecri_aff7sg0, 0x03);
+            statutport = port->ecrireRegistre(nreg_ecri_aff7sg1, Chanel[2]);
+            statutport = port->ecrireRegistre(nreg_ecri_aff7dot, 0x04);
+        }
+        else if (swt == 0x10)	//#4
+        {
+            statutport = port->ecrireRegistre(nreg_ecri_aff7sg0, 0x04);
+            statutport = port->ecrireRegistre(nreg_ecri_aff7sg1, Chanel[3]);
+            statutport = port->ecrireRegistre(nreg_ecri_aff7dot, 0x04);
+        }
+        else
+        {
+            statutport = port->ecrireRegistre(nreg_ecri_aff7sg0, 0x00);
+            statutport = port->ecrireRegistre(nreg_ecri_aff7sg1, 0x00);
+            statutport = port->ecrireRegistre(nreg_ecri_aff7dot, 0x00);
+        }
+
+        if (stat_btn == 0x11 && swt == 0x00 && SaveOn == false && VerifOn == false)	//Lance la lecture
+        {
+            SaveOn = true;
+            return "LecStart";
+        }
+        else if (SaveOn == true && nbSaved < nbLecture && VerifOn == false)	//Enregistre les lectures
+        {
+            for (int i = 0; i < 4; i++)
+                ListLecture[nbSaved].pot[i] = Chanel[i];
+
+            nbSaved++;
+            return "Lec";
+        }
+        else if (SaveOn == true && nbSaved == nbLecture && VerifOn == false)	//Arrête la lecture
+        {
+            SaveOn = false;
+            VerifOn = true;
+            return "LecStop";
+        }
+        else if (SaveOn == false && VerifOn == true)	//Vérifie la correspondance
+        {
+            QString rep = Verification();
+            VerifOn = false;
+            nbSaved = 0;
+            return rep;
+        }
+
+        return "Rien";
+    }
+    else
+    {
+        return "Erreur";
+    }
+}
+
+QString Jeu::Verification()
+{
+    int pointage[4] = { 0 };
+    int lecture;
+    for (int a = 0; a < nbLecture; a++) // lecture #1 a #10
+    {
+        for (int b = 0; b < 4; b++)// pot #1 a #4
+        {
+            for (int c = 0; c < 4; c++) //Phonème #1 a #4
+            {
+                lecture = ListLecture[a].pot[b] * 4;
+
+                if (lecture >= valPhoneme[c].val[b][0] && lecture <= valPhoneme[c].val[b][1])
+                {
+                    //cout << dec << "l=" << to_string(a + 1) << " P=" << to_string(b + 1) << " h=" << to_string(c + 1) << " val=";
+                    //cout << hex << to_string(ListLecture[a].pot[b]) << endl;
+                    pointage[c]++;
+                }
+            }
+        }
+    }
+
+    //Trouver le correspondant
+    int max = 0;
+    int num = 0;
+    int seuil = floor((4.0 * nbLecture) * 0.8);
+    for (int i = 0; i < 4; i++)
+    {
+        if (pointage[i] >= max)
+        {
+            num = i + 1;
+            max = pointage[i];
+        }
+    }
+
+    cout << "Nombre de bon = " << to_string(max) << "\nNum : " << to_string(num) << endl;
+    if (num == 1 && max >= seuil)
+    {
+        statutport = port->ecrireRegistre(nreg_ecri_aff7sg0, num);
+        statutport = port->ecrireRegistre(nreg_ecri_aff7sg1, pointage[num - 1]);
+        statutport = port->ecrireRegistre(nreg_ecri_aff7dot, 0x04);
+        return "Haut";
+    }
+    else if (num == 2 && max >= seuil)
+    {
+        statutport = port->ecrireRegistre(nreg_ecri_aff7sg0, num);
+        statutport = port->ecrireRegistre(nreg_ecri_aff7sg1, pointage[num - 1]);
+        statutport = port->ecrireRegistre(nreg_ecri_aff7dot, 0x04);
+        return "Droit";
+    }
+    else if (num == 3 && max >= seuil)
+    {
+        statutport = port->ecrireRegistre(nreg_ecri_aff7sg0, num);
+        statutport = port->ecrireRegistre(nreg_ecri_aff7sg1, pointage[num - 1]);
+        statutport = port->ecrireRegistre(nreg_ecri_aff7dot, 0x04);
+        return "Bas";
+    }
+    else if (num == 4 && max >= seuil)
+    {
+        statutport = port->ecrireRegistre(nreg_ecri_aff7sg0, num);
+        statutport = port->ecrireRegistre(nreg_ecri_aff7sg1, pointage[num - 1]);
+        statutport = port->ecrireRegistre(nreg_ecri_aff7dot, 0x04);
+        return "Gauche";
+    }
+    else
+    {
+        statutport = port->ecrireRegistre(nreg_ecri_aff7sg0, 0x0E);
+        statutport = port->ecrireRegistre(nreg_ecri_aff7sg1, 0xE0);
+        statutport = port->ecrireRegistre(nreg_ecri_aff7dot, 0);
+        return "Aucun";
+    }
+}
+
+int Jeu::waitTime()
+{
+    return wait_Time;
+}
+
+int Jeu::readTime()
+{
+    return read_Time;
+}
+
+
+#pragma endregion
+
+QString Jeu::Menu()
+{
+    if (Loaded == true)
+    {
         SaveGame();
+        return "Sauvegarde";
     }
-    else if(grid->GetMax() >= 16)
+    else if (GetMax() >= 16)
     {
         QFile file("Save.txt");
 
-        if (!file.exists())
-        {
-            closeWithoutAsking = true;
-        }
-        else
+        if (file.exists())
         {
             if (file.open(QIODevice::ReadOnly | QIODevice::Text))
             {
                 QTextStream in(&file);
                 if (in.readLine().length() > 5)
                 {
-                    closeWithoutAsking = false;
+                    //Demander si il faut écraser
+                    return "Question";
                 }
                 else
                 {
-                    closeWithoutAsking = true;
+                    SaveGame();
+                    return "Sauvegarde";
                 }
                 file.close();
             }
             else
             {
-                closeWithoutAsking = true;
+                return "Erreur ouverture";
             }
-        }
-    }
-    else
-    {
-        closeWithoutAsking = true;
-    }
-
-    if (closeWithoutAsking == true)
-    {
-        Accueil* w = new Accueil(GridSize, ModeJeu);
-        w->showMaximized();
-        this->close();
-    }
-    else
-    {
-        QMessageBox msgBox;
-        msgBox.setText("Voulez vous sauvegarder la partie?");
-        msgBox.setInformativeText("La dernière sauvegarde sera écraser");
-        msgBox.setStandardButtons(QMessageBox::Ok | QMessageBox::Cancel);
-        msgBox.setDefaultButton(QMessageBox::Ok);
-        int rep = msgBox.exec();
-
-        if (rep == QMessageBox::Ok)
-        {
-            SaveGame();
-            Accueil* w = new Accueil(GridSize, ModeJeu);
-            w->showMaximized();
-            this->close();
         }
         else
         {
-            Accueil* w = new Accueil(GridSize, ModeJeu);
-            w->showMaximized();
-            this->close();
+            return "Fichier introuvable";
         }
     }
+    else
+    {
+        return "Rien";
+    }
+
+    
 }
 
 void Jeu::SaveGame()
@@ -583,20 +1067,19 @@ void Jeu::SaveGame()
         QTextStream in(&file);
 
         in << QString::number(GridSize)+"/";
-        in << QString::number(grid->GetScore())+"/";
-        in << QString::number(grid->GetNbMove())+"/";
-        //in << QString::number(grid->GetMax())+"/";
+        in << QString::number(GetScore())+"/";
+        in << QString::number(GetNbMove())+"/";
         for(int x = 0; x<GridSize;x++)
         {
             for(int y = 0;y<GridSize;y++)
             {
                 if(x == GridSize-1 && y == GridSize-1)
                 {
-                    in << QString::number(grid->Get(x,y));
+                    in << QString::number(grid[x][y]);
                 }
                 else
                 {
-                    in << QString::number(grid->Get(x,y)) + "/";
+                    in << QString::number(grid[x][y]) + "/";
                 }
 
             }
@@ -614,9 +1097,9 @@ void Jeu::SaveStats(QString s)
         QTextStream in(&file);
         in << s + "/";
         in << QString::number(GridSize)+ "x" + QString::number(GridSize) +"/";
-        in << QString::number(grid->GetScore())+"/";
-        in << QString::number(grid->GetNbMove())+"/";
-        in << QString::number(grid->GetMax())+"\n";
+        in << QString::number(GetScore())+"/";
+        in << QString::number(GetNbMove())+"/";
+        in << QString::number(GetMax())+"\n";
     }
     file.close();
 }

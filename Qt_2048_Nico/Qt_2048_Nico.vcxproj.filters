@@ -25,15 +25,22 @@
       <UniqueIdentifier>{4FC737F1-C7A5-4376-A066-2A32D752A2FF}</UniqueIdentifier>
       <Extensions>cpp;c;cxx;def;odl;idl;hpj;bat;asm;asmx</Extensions>
     </Filter>
+    <Filter Include="Distribution Files">
+      <UniqueIdentifier>{B83CAF91-C7BF-462F-B76C-EA11631F866C}</UniqueIdentifier>
+      <Extensions>*</Extensions>
+      <ParseFiles>false</ParseFiles>
+    </Filter>
+    <Filter Include="Distribution Files">
+      <UniqueIdentifier>{B83CAF91-C7BF-462F-B76C-EA11631F866C}</UniqueIdentifier>
+      <Extensions>*</Extensions>
+      <ParseFiles>false</ParseFiles>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="FPGA.cpp">
+    <ClCompile Include="UI.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="accueil.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="grid.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="jeu.cpp">
@@ -50,36 +57,24 @@
     <ClInclude Include="CommunicationFPGA.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="FPGA.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <CustomBuild Include="accueil.h">
+    <CustomBuild Include="UI.h">
       <Filter>Header Files</Filter>
     </CustomBuild>
-    <ClInclude Include="grid.h">
+    <ClInclude Include="accueil.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="include.h">
+    <ClInclude Include="jeu.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <CustomBuild Include="jeu.h">
+    <ClInclude Include="stats.h">
       <Filter>Header Files</Filter>
-    </CustomBuild>
-    <CustomBuild Include="stats.h">
-      <Filter>Header Files</Filter>
-    </CustomBuild>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="debug\moc_accueil.cpp">
+    <ClCompile Include="debug\moc_UI.cpp">
       <Filter>Generated Files</Filter>
     </ClCompile>
-    <ClCompile Include="release\moc_accueil.cpp">
-      <Filter>Generated Files</Filter>
-    </ClCompile>
-    <ClCompile Include="debug\moc_jeu.cpp">
-      <Filter>Generated Files</Filter>
-    </ClCompile>
-    <ClCompile Include="release\moc_jeu.cpp">
+    <ClCompile Include="release\moc_UI.cpp">
       <Filter>Generated Files</Filter>
     </ClCompile>
     <CustomBuild Include="debug\moc_predefs.h.cbt">
@@ -88,15 +83,16 @@
     <CustomBuild Include="release\moc_predefs.h.cbt">
       <Filter>Generated Files</Filter>
     </CustomBuild>
-    <ClCompile Include="debug\moc_stats.cpp">
-      <Filter>Generated Files</Filter>
-    </ClCompile>
-    <ClCompile Include="release\moc_stats.cpp">
-      <Filter>Generated Files</Filter>
-    </ClCompile>
   </ItemGroup>
   <ItemGroup>
-    <Text Include="Save.txt" />
-    <Text Include="Stats.txt" />
+    <None Include="BG.png">
+      <Filter>Distribution Files</Filter>
+    </None>
+    <None Include="Save.txt">
+      <Filter>Distribution Files</Filter>
+    </None>
+    <None Include="Stats.txt">
+      <Filter>Distribution Files</Filter>
+    </None>
   </ItemGroup>
 </Project>

@@ -1,2 +1,2 @@
-C:\Users\canti\Desktop\Projet-S2-P11\tryNico\debug\Qt_2048_Nico.exe
-C:\Users\canti\Desktop\Projet-S2-P11\tryNico\debug\Qt_2048_Nico.pdb
+C:\Users\canti\Desktop\Projet-S2-P11\Qt_2048_Nico\debug\Qt_2048_Nico.exe
+C:\Users\canti\Desktop\Projet-S2-P11\Qt_2048_Nico\debug\Qt_2048_Nico.pdb
