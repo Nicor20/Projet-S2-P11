@@ -1,0 +1,5 @@
+<RCC>
+    <qresource prefix="/Resources">
+	<file>BG.png</file>
+    </qresource>
+</RCC>

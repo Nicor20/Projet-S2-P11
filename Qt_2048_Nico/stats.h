@@ -1,7 +1,7 @@
 #ifndef STATS_H
 #define STATS_H
 
-#include <QFileDialog>
+#include "needed.h"
 
 struct Game
 {
@@ -14,20 +14,24 @@ struct Game
     int Overall;
 };
 
-class Stats
+class Stats : public QWidget
 {
 public:
     Stats();
     ~Stats();
 
-    int GetNbToShow();
-    Game GetGameAt(int i);
+    void Read();
+    void Sort();
 
+    QPushButton* Create_Button_Stats(QString nom, QString text, int size, bool bold, bool custom);
+    QLabel* Create_Label_Stats(QString nom, QString text, int size, bool bold, bool info, bool stats, int num = 0);
+
+    QPushButton* button_Accueil;
 
 private:
     QList<Game> ListGame;
 
-    int Shown = 15;
+    int NbToShow = 15;
 };
 
 #endif // STATS_H

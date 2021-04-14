@@ -1,10 +1,55 @@
-﻿  MOC UI.h
+﻿  Generate moc_predefs.h
+  RCC Resource.qrc
+  MOC UI.h
+  Fpga.cpp
+C:\Users\canti\Desktop\Projet-S2-P11\Qt_2048_Nico\Fpga.cpp(1,1): warning C4828: The file contains a character starting at offset 0x1604 that is illegal in the current source character set (codepage 65001).
+C:\Users\canti\Desktop\Projet-S2-P11\Qt_2048_Nico\Fpga.cpp(1,1): warning C4828: The file contains a character starting at offset 0x16bb that is illegal in the current source character set (codepage 65001).
+C:\Users\canti\Desktop\Projet-S2-P11\Qt_2048_Nico\Fpga.cpp(1,1): warning C4828: The file contains a character starting at offset 0x18c0 that is illegal in the current source character set (codepage 65001).
+C:\Users\canti\Desktop\Projet-S2-P11\Qt_2048_Nico\Fpga.h(1,1): warning C4828: The file contains a character starting at offset 0x428 that is illegal in the current source character set (codepage 65001).
+  Grid.cpp
+C:\Users\canti\Desktop\Projet-S2-P11\Qt_2048_Nico\Grid.cpp(1,1): warning C4828: The file contains a character starting at offset 0x448 that is illegal in the current source character set (codepage 65001).
+C:\Users\canti\Desktop\Projet-S2-P11\Qt_2048_Nico\Grid.cpp(1,1): warning C4828: The file contains a character starting at offset 0x755 that is illegal in the current source character set (codepage 65001).
+C:\Users\canti\Desktop\Projet-S2-P11\Qt_2048_Nico\Grid.cpp(1,1): warning C4828: The file contains a character starting at offset 0x76e that is illegal in the current source character set (codepage 65001).
+C:\Users\canti\Desktop\Projet-S2-P11\Qt_2048_Nico\Grid.cpp(1,1): warning C4828: The file contains a character starting at offset 0x927 that is illegal in the current source character set (codepage 65001).
+C:\Users\canti\Desktop\Projet-S2-P11\Qt_2048_Nico\Grid.cpp(1,1): warning C4828: The file contains a character starting at offset 0xa56 that is illegal in the current source character set (codepage 65001).
+C:\Users\canti\Desktop\Projet-S2-P11\Qt_2048_Nico\Grid.cpp(1,1): warning C4828: The file contains a character starting at offset 0xde5 that is illegal in the current source character set (codepage 65001).
+C:\Users\canti\Desktop\Projet-S2-P11\Qt_2048_Nico\Grid.cpp(1,1): warning C4828: The file contains a character starting at offset 0xfd7 that is illegal in the current source character set (codepage 65001).
+C:\Users\canti\Desktop\Projet-S2-P11\Qt_2048_Nico\Grid.cpp(1,1): warning C4828: The file contains a character starting at offset 0x105b that is illegal in the current source character set (codepage 65001).
+C:\Users\canti\Desktop\Projet-S2-P11\Qt_2048_Nico\Grid.cpp(1,1): warning C4828: The file contains a character starting at offset 0x11ac that is illegal in the current source character set (codepage 65001).
+C:\Users\canti\Desktop\Projet-S2-P11\Qt_2048_Nico\Grid.cpp(1,1): warning C4828: The file contains a character starting at offset 0x11c1 that is illegal in the current source character set (codepage 65001).
+C:\Users\canti\Desktop\Projet-S2-P11\Qt_2048_Nico\Grid.cpp(1,1): warning C4828: The file contains a character starting at offset 0x12de that is illegal in the current source character set (codepage 65001).
+C:\Users\canti\Desktop\Projet-S2-P11\Qt_2048_Nico\Grid.cpp(1,1): warning C4828: The file contains a character starting at offset 0x12f6 that is illegal in the current source character set (codepage 65001).
+C:\Users\canti\Desktop\Projet-S2-P11\Qt_2048_Nico\Grid.cpp(1,1): warning C4828: The file contains a character starting at offset 0x1678 that is illegal in the current source character set (codepage 65001).
+C:\Users\canti\Desktop\Projet-S2-P11\Qt_2048_Nico\Grid.cpp(1,1): warning C4828: The file contains a character starting at offset 0x1690 that is illegal in the current source character set (codepage 65001).
+C:\Users\canti\Desktop\Projet-S2-P11\Qt_2048_Nico\Grid.cpp(1,1): warning C4828: The file contains a character starting at offset 0x1868 that is illegal in the current source character set (codepage 65001).
+C:\Users\canti\Desktop\Projet-S2-P11\Qt_2048_Nico\Grid.cpp(1,1): warning C4828: The file contains a character starting at offset 0x18ec that is illegal in the current source character set (codepage 65001).
+C:\Users\canti\Desktop\Projet-S2-P11\Qt_2048_Nico\Grid.cpp(1,1): warning C4828: The file contains a character starting at offset 0x1a3c that is illegal in the current source character set (codepage 65001).
+C:\Users\canti\Desktop\Projet-S2-P11\Qt_2048_Nico\Grid.cpp(1,1): warning C4828: The file contains a character starting at offset 0x1b70 that is illegal in the current source character set (codepage 65001).
+C:\Users\canti\Desktop\Projet-S2-P11\Qt_2048_Nico\Grid.cpp(1,1): warning C4828: The file contains a character starting at offset 0x1efe that is illegal in the current source character set (codepage 65001).
+C:\Users\canti\Desktop\Projet-S2-P11\Qt_2048_Nico\Grid.cpp(1,1): warning C4828: The file contains a character starting at offset 0x20e9 that is illegal in the current source character set (codepage 65001).
+C:\Users\canti\Desktop\Projet-S2-P11\Qt_2048_Nico\Grid.cpp(1,1): warning C4828: The file contains a character starting at offset 0x216d that is illegal in the current source character set (codepage 65001).
+C:\Users\canti\Desktop\Projet-S2-P11\Qt_2048_Nico\Grid.cpp(1,1): warning C4828: The file contains a character starting at offset 0x22bd that is illegal in the current source character set (codepage 65001).
+C:\Users\canti\Desktop\Projet-S2-P11\Qt_2048_Nico\Grid.cpp(1,1): warning C4828: The file contains a character starting at offset 0x22d2 that is illegal in the current source character set (codepage 65001).
+C:\Users\canti\Desktop\Projet-S2-P11\Qt_2048_Nico\Grid.cpp(1,1): warning C4828: The file contains a character starting at offset 0x23eb that is illegal in the current source character set (codepage 65001).
+C:\Users\canti\Desktop\Projet-S2-P11\Qt_2048_Nico\Grid.cpp(1,1): warning C4828: The file contains a character starting at offset 0x2403 that is illegal in the current source character set (codepage 65001).
+C:\Users\canti\Desktop\Projet-S2-P11\Qt_2048_Nico\Grid.cpp(1,1): warning C4828: The file contains a character starting at offset 0x2787 that is illegal in the current source character set (codepage 65001).
+C:\Users\canti\Desktop\Projet-S2-P11\Qt_2048_Nico\Grid.cpp(1,1): warning C4828: The file contains a character starting at offset 0x279f that is illegal in the current source character set (codepage 65001).
+C:\Users\canti\Desktop\Projet-S2-P11\Qt_2048_Nico\Grid.cpp(1,1): warning C4828: The file contains a character starting at offset 0x2835 that is illegal in the current source character set (codepage 65001).
+C:\Users\canti\Desktop\Projet-S2-P11\Qt_2048_Nico\Grid.cpp(1,1): warning C4828: The file contains a character starting at offset 0x2980 that is illegal in the current source character set (codepage 65001).
+C:\Users\canti\Desktop\Projet-S2-P11\Qt_2048_Nico\Grid.cpp(1,1): warning C4828: The file contains a character starting at offset 0x2a04 that is illegal in the current source character set (codepage 65001).
+C:\Users\canti\Desktop\Projet-S2-P11\Qt_2048_Nico\Grid.cpp(1,1): warning C4828: The file contains a character starting at offset 0x2c22 that is illegal in the current source character set (codepage 65001).
   UI.cpp
-C:\Users\canti\Desktop\Projet-S2-P11\Qt_2048_Nico\UI.cpp(1,1): warning C4828: The file contains a character starting at offset 0x2604 that is illegal in the current source character set (codepage 65001).
-C:\Users\canti\Desktop\Projet-S2-P11\Qt_2048_Nico\jeu.h(1,1): warning C4828: The file contains a character starting at offset 0x836 that is illegal in the current source character set (codepage 65001).
-  moc_UI.cpp
-C:\Users\canti\Desktop\Projet-S2-P11\Qt_2048_Nico\jeu.h(1,1): warning C4828: The file contains a character starting at offset 0x836 that is illegal in the current source character set (codepage 65001).
+C:\Users\canti\Desktop\Projet-S2-P11\Qt_2048_Nico\Fpga.h(1,1): warning C4828: The file contains a character starting at offset 0x428 that is illegal in the current source character set (codepage 65001).
+  accueil.cpp
+  jeu.cpp
+C:\Users\canti\Desktop\Projet-S2-P11\Qt_2048_Nico\Fpga.h(1,1): warning C4828: The file contains a character starting at offset 0x428 that is illegal in the current source character set (codepage 65001).
   main.cpp
-C:\Users\canti\Desktop\Projet-S2-P11\Qt_2048_Nico\jeu.h(1,1): warning C4828: The file contains a character starting at offset 0x836 that is illegal in the current source character set (codepage 65001).
+C:\Users\canti\Desktop\Projet-S2-P11\Qt_2048_Nico\Fpga.h(1,1): warning C4828: The file contains a character starting at offset 0x428 that is illegal in the current source character set (codepage 65001).
+  stats.cpp
+C:\Users\canti\Desktop\Projet-S2-P11\Qt_2048_Nico\stats.cpp(95,9): warning C4189: 'i': local variable is initialized but not referenced
+C:\Users\canti\Desktop\Projet-S2-P11\Qt_2048_Nico\stats.cpp(152,94): warning C4100: 'custom': unreferenced formal parameter
+  moc_UI.cpp
+C:\Users\canti\Desktop\Projet-S2-P11\Qt_2048_Nico\Fpga.h(1,1): warning C4828: The file contains a character starting at offset 0x428 that is illegal in the current source character set (codepage 65001).
+  qrc_Resource.cpp
   Generating Code...
   Qt_2048_Nico.vcxproj -> C:\Users\canti\Desktop\Projet-S2-P11\Qt_2048_Nico\debug\Qt_2048_Nico.exe

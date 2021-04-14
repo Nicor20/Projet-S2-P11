@@ -1,9 +1,9 @@
 TEMPLATE     = vcapp
 TARGET       = Qt_2048_Nico
 CONFIG      += warn_on qt debug_and_release windows console
-HEADERS     += accueil.h CommunicationFPGA.h jeu.h stats.h UI.h
-SOURCES     += accueil.cpp jeu.cpp main.cpp stats.cpp UI.cpp
+HEADERS     += accueil.h CommunicationFPGA.h jeu.h stats.h UI.h Grid.h Fpga.h needed.h
+SOURCES     += accueil.cpp jeu.cpp main.cpp stats.cpp UI.cpp Grid.cpp Fpga.cpp
 INCLUDEPATH += C:/Users/canti/Desktop/Projet-S2-P11/Qt_2048_Nico
 LIBS	    += C:/Users/canti/Desktop/Projet-S2-P11/Qt_2048_Nico/CommunicationFPGA.lib
 QT 	    += widgets
-DISTFILES   += Save.txt Stats.txt BG.png
+RESOURCES   += Resource.qrc

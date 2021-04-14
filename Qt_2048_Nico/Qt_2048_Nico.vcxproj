@@ -139,6 +139,8 @@
     </ResourceCompile>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="Fpga.cpp" />
+    <ClCompile Include="Grid.cpp" />
     <ClCompile Include="UI.cpp" />
     <ClCompile Include="accueil.cpp" />
     <ClCompile Include="jeu.cpp" />
@@ -147,6 +149,8 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="CommunicationFPGA.h" />
+    <ClInclude Include="Fpga.h" />
+    <ClInclude Include="Grid.h" />
     <CustomBuild Include="UI.h">
       <AdditionalInputs Condition="&apos;$(Configuration)|$(Platform)&apos;==&apos;Release|x64&apos;">UI.h;release\moc_predefs.h;C:\Qt\6.0.1\msvc2019_64\bin\moc.exe;%(AdditionalInputs)</AdditionalInputs>
       <Command Condition="&apos;$(Configuration)|$(Platform)&apos;==&apos;Release|x64&apos;">C:\Qt\6.0.1\msvc2019_64\bin\moc.exe  -DUNICODE -D_UNICODE -DWIN32 -D_ENABLE_EXTENDED_ALIGNED_STORAGE -DWIN64 -DNDEBUG -DQT_NO_DEBUG -DQT_WIDGETS_LIB -DQT_GUI_LIB -DQT_CORE_LIB --compiler-flavor=msvc --include C:/Users/canti/Desktop/Projet-S2-P11/Qt_2048_Nico/release/moc_predefs.h -IC:/Qt/6.0.1/msvc2019_64/mkspecs/win32-msvc -IC:/Users/canti/Desktop/Projet-S2-P11/Qt_2048_Nico -IC:/Users/canti/Desktop/Projet-S2-P11/Qt_2048_Nico -IC:/Qt/6.0.1/msvc2019_64/include -IC:/Qt/6.0.1/msvc2019_64/include/QtWidgets -IC:/Qt/6.0.1/msvc2019_64/include/QtGui -IC:/Qt/6.0.1/msvc2019_64/include/QtCore -I&quot;C:\Program Files (x86)\Microsoft Visual Studio\2019\Community\VC\Tools\MSVC\14.28.29333\include&quot; -I&quot;C:\Program Files (x86)\Windows Kits\NETFXSDK\4.8\include\um&quot; -I&quot;C:\Program Files (x86)\Windows Kits\10\include\10.0.18362.0\ucrt&quot; -I&quot;C:\Program Files (x86)\Windows Kits\10\include\10.0.18362.0\shared&quot; -I&quot;C:\Program Files (x86)\Windows Kits\10\include\10.0.18362.0\um&quot; -I&quot;C:\Program Files (x86)\Windows Kits\10\include\10.0.18362.0\winrt&quot; -I&quot;C:\Program Files (x86)\Windows Kits\10\include\10.0.18362.0\cppwinrt&quot; UI.h -o release\moc_UI.cpp</Command>
@@ -159,6 +163,7 @@
     </CustomBuild>
     <ClInclude Include="accueil.h" />
     <ClInclude Include="jeu.h" />
+    <ClInclude Include="needed.h" />
     <ClInclude Include="stats.h" />
   </ItemGroup>
   <ItemGroup>
@@ -184,11 +189,26 @@
       <Outputs Condition="&apos;$(Configuration)|$(Platform)&apos;==&apos;Release|x64&apos;">release\moc_predefs.h;%(Outputs)</Outputs>
       <ExcludedFromBuild Condition="&apos;$(Configuration)|$(Platform)&apos;==&apos;Debug|x64&apos;">true</ExcludedFromBuild>
     </CustomBuild>
+    <ClCompile Include="debug\qrc_Resource.cpp">
+      <ExcludedFromBuild Condition="&apos;$(Configuration)|$(Platform)&apos;==&apos;Release|x64&apos;">true</ExcludedFromBuild>
+    </ClCompile>
+    <ClCompile Include="release\qrc_Resource.cpp">
+      <ExcludedFromBuild Condition="&apos;$(Configuration)|$(Platform)&apos;==&apos;Debug|x64&apos;">true</ExcludedFromBuild>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <None Include="BG.png" />
-    <None Include="Save.txt" />
-    <None Include="Stats.txt" />
+    <CustomBuild Include="Resource.qrc">
+      <FileType>Document</FileType>
+      <AdditionalInputs Condition="&apos;$(Configuration)|$(Platform)&apos;==&apos;Release|x64&apos;">Resource.qrc;C:\Qt\6.0.1\msvc2019_64\bin\rcc.exe;BG.png;%(AdditionalInputs)</AdditionalInputs>
+      <Command Condition="&apos;$(Configuration)|$(Platform)&apos;==&apos;Release|x64&apos;">C:\Qt\6.0.1\msvc2019_64\bin\rcc.exe -name Resource Resource.qrc -o release\qrc_Resource.cpp</Command>
+      <Message Condition="&apos;$(Configuration)|$(Platform)&apos;==&apos;Release|x64&apos;">RCC Resource.qrc</Message>
+      <Outputs Condition="&apos;$(Configuration)|$(Platform)&apos;==&apos;Release|x64&apos;">release\qrc_Resource.cpp;%(Outputs)</Outputs>
+      <AdditionalInputs Condition="&apos;$(Configuration)|$(Platform)&apos;==&apos;Debug|x64&apos;">Resource.qrc;C:\Qt\6.0.1\msvc2019_64\bin\rcc.exe;BG.png;%(AdditionalInputs)</AdditionalInputs>
+      <Command Condition="&apos;$(Configuration)|$(Platform)&apos;==&apos;Debug|x64&apos;">C:\Qt\6.0.1\msvc2019_64\bin\rcc.exe -name Resource Resource.qrc -o debug\qrc_Resource.cpp</Command>
+      <Message Condition="&apos;$(Configuration)|$(Platform)&apos;==&apos;Debug|x64&apos;">RCC Resource.qrc</Message>
+      <Outputs Condition="&apos;$(Configuration)|$(Platform)&apos;==&apos;Debug|x64&apos;">debug\qrc_Resource.cpp;%(Outputs)</Outputs>
+    </CustomBuild>
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets" />
