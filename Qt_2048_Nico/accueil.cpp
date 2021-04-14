@@ -1,101 +1,56 @@
 #include "accueil.h"
 
-Accueil::Accueil(int size,int mode) : GridSize(size) , GameMode(mode)
+Accueil::Accueil(int* size) : GridSize(size)
 {
-    //Widget
-    {
-        centralWidget = new QWidget(this);
-        centralWidget->setObjectName("centralWidget");
-    }
+    this->setObjectName("widget_Accueil");
 
     //Layout
-    {
-        gLayout = new QGridLayout(centralWidget);
-        gLayout->setObjectName("gLayout");
+    QGridLayout* gLayout = new QGridLayout(this);
+    gLayout->setObjectName("gLayout");
 
-        vLayout = new QVBoxLayout(centralWidget);
-        vLayout->setObjectName("vLayout");
+    QVBoxLayout* vLayout = new QVBoxLayout();
+    vLayout->setObjectName("vLayout");
 
-        hLayout1 = new QHBoxLayout(centralWidget);
-        hLayout1->setObjectName("hLayout1");
+    QHBoxLayout* hLayout = new QHBoxLayout();
+    hLayout->setObjectName("hLayout");
 
-        hLayout2 = new QHBoxLayout(centralWidget);
-        hLayout2->setObjectName("hLayout2");
-    }
+    //Label
+    QLabel* label_Titre = Create_Label_Accueil("label_Titre", "Super 2048", 80, true);
+    QLabel* label_Sub = Create_Label_Accueil("label_Sub", "Taille de la grille", 30, true);
+    label_GridSize = Create_Label_Accueil("label_GridSize", QString::number(*GridSize) + "x" + QString::number(*GridSize), 25, true, true);
 
-    //Labels
-    {
-        label = new QLabel*[5];
+    //Button
+    QPushButton* button_Moin = Create_Button_Accueil("button_Accueil_Moin", "<", 20, true, true);
+    QPushButton* button_Plus = Create_Button_Accueil("button_Accueil_Plus", ">", 20, true, true);
 
-        label[0] = Create_Label("label_Titre","Super 2048",50,true);
-        label[1] = Create_Label("label_Sub1","Taille de la grille",20,true);
-        label[2] = Create_Label("label_GridSize",QString::number(GridSize) + "x" + QString::number(GridSize),15,false);
-        label[3] = Create_Label("label_Sub2","Taille de la grille",20,true);
-        label[4] = Create_Label("label_GameMode","Interface",15,false);
-    }
-
-    //Buttons
-    {
-        button = new QPushButton*[8];
-
-        button[0] = Create_Button("button_SizeMoin","<",15,true);
-        button[1] = Create_Button("button_SizePlus",">",15,true);
-        button[2] = Create_Button("button_ModeMoin","<",15,true);
-        button[3] = Create_Button("button_ModePlus",">",15,true);
-        button[4] = Create_Button("button_Jouer","Jouer",15,true);
-        button[5] = Create_Button("button_Charger","Charger",15,true);
-        button[6] = Create_Button("button_Stats","Stats",15,true);
-        button[7] = Create_Button("button_Quitter","Quitter",15,true);
-
-        connect(button[0],SIGNAL(clicked()),this,SLOT(SizeMoin_clicked()));
-        connect(button[1],SIGNAL(clicked()),this,SLOT(SizePlus_clicked()));
-        connect(button[2],SIGNAL(clicked()),this,SLOT(ModeMoin_clicked()));
-        connect(button[3],SIGNAL(clicked()),this,SLOT(ModePlus_clicked()));
-
-        connect(button[4],SIGNAL(clicked()),this,SLOT(Jouer_clicked()));
-        connect(button[5],SIGNAL(clicked()),this,SLOT(Charger_clicked()));
-        connect(button[6],SIGNAL(clicked()),this,SLOT(Stats_clicked()));
-        connect(button[7],SIGNAL(clicked()),this,SLOT(Quitter_clicked()));
-    }
+    button_Jouer = Create_Button_Accueil("button_Accueil_Jouer", "Jouer", 20, true, false);
+    button_Charger = Create_Button_Accueil("button_Accueil_Charger", "Charger", 20, true, false);
+    button_Stats = Create_Button_Accueil("button_Accueil_Stats", "Stats", 20, true, false);
+    button_Quitter = Create_Button_Accueil("button_Accueil_Quitter", "Quitter", 20, true, false);
 
     //hLayout1
-    {
-        hLayout1->addWidget(button[0]);
-        hLayout1->addWidget(label[2]);
-        hLayout1->addWidget(button[1]);
-    }
-
-    //hLayout2
-    {
-        hLayout2->addWidget(button[2]);
-        hLayout2->addWidget(label[4]);
-        hLayout2->addWidget(button[3]);
-    }
+    hLayout->addWidget(button_Moin);
+    hLayout->addWidget(label_GridSize);
+    hLayout->addWidget(button_Plus);
 
     //vLayout
-    {
-        vLayout->addWidget(label[0]);
-        vLayout->addSpacerItem(new QSpacerItem(20,20));
-        vLayout->addWidget(label[1]);
-        vLayout->addLayout(hLayout1);
-        vLayout->addSpacerItem(new QSpacerItem(20,20));
-        vLayout->addWidget(label[3]);
-        vLayout->addLayout(hLayout2);
-        vLayout->addSpacerItem(new QSpacerItem(20,20));
-        vLayout->addWidget(button[4]);
-        vLayout->addWidget(button[5]);
-        vLayout->addWidget(button[6]);
-        vLayout->addWidget(button[7]);
-    }
+    vLayout->addWidget(label_Titre);
+    vLayout->addSpacerItem(new QSpacerItem(20, 20));
+    vLayout->addWidget(label_Sub);
+    vLayout->addLayout(hLayout);
+    vLayout->addSpacerItem(new QSpacerItem(20, 20));
+    vLayout->addWidget(button_Jouer);
+    vLayout->addWidget(button_Charger);
+    vLayout->addWidget(button_Stats);
+    vLayout->addWidget(button_Quitter);
 
-    gLayout->addLayout(vLayout,0,0,Qt::AlignCenter);
+    gLayout->addLayout(vLayout, 0, 0, Qt::AlignCenter);
 
-    this->setCentralWidget(centralWidget);
+    //Check Save
+    button_Charger->setEnabled(CheckSave());
 
-    CheckSave();
-    CheckStats();
-
-
+    //Check Stats
+    button_Stats->setEnabled(CheckStats());
 }
 
 Accueil::~Accueil()
@@ -103,195 +58,175 @@ Accueil::~Accueil()
 
 }
 
-QPushButton* Accueil::Create_Button(QString nom, QString text,int size, bool bold)
+bool Accueil::CheckSave()
 {
-    QFont font;
-    QPushButton *temp = new QPushButton(centralWidget);
-    temp ->setObjectName(nom);
-    temp ->setText(text);
-    font = temp->font();
-    font.setPointSize(size);
-    font.setBold(bold);
-    temp->setFont(font);
-    return temp;
-}
+    QFile file("Game.2048");
 
-QLabel* Accueil::Create_Label(QString nom, QString text,int size, bool bold)
-{
-    QFont font;
-    QLabel *temp = new QLabel(centralWidget);
-    temp ->setObjectName(nom);
-    temp ->setText(text);
-    temp ->setAlignment(Qt::AlignCenter);
-    font = temp->font();
-    font.setPointSize(size);
-    font.setBold(bold);
-    temp->setFont(font);
-    return temp;
-}
-
-void Accueil::CheckSave()
-{
-    QFile file("Save.txt");
-
-    if(!file.exists())
-    {
-       button[5]->setEnabled(false);
-    }
-    else
+    if(file.exists())
     {
         if(file.open(QIODevice::ReadOnly | QIODevice::Text))
         {
             QTextStream in(&file);
             if(in.readLine().length()>5)
             {
-                button[5]->setEnabled(true);
+                return true;
             }
             else
             {
-                button[5]->setEnabled(false);
+                return false;
             }
             file.close();
         }
         else
         {
-            button[5]->setEnabled(false);
+            return false;
         }
+    }
+    else
+    {
+        CreateSave();
+        return false;
     }
 }
 
-void Accueil::CheckStats()
+bool Accueil::CheckStats()
 {
-    QFile file("Stats.txt");
+    QFile file("Stats.2048");
 
-    if(!file.exists())
-    {
-       button[6]->setEnabled(false);
-    }
-    else
+    if(file.exists())
     {
         if(file.open(QIODevice::ReadOnly | QIODevice::Text))
         {
             QTextStream in(&file);
             if(in.readLine().length()>5)
             {
-                button[6]->setEnabled(true);
+                return true;
             }
             else
             {
-                button[6]->setEnabled(false);
+                return false;
             }
             file.close();
         }
         else
         {
-            button[6]->setEnabled(false);
+            return false;
         }
     }
-
-}
-
-void Accueil::SizePlus_clicked()
-{
-    if(GridSize<8)
-    {
-        GridSize++;
-    }
     else
     {
-        GridSize = 3;
+        CreateStats();
+        return false;
     }
 
-    label[2]->setText(QString::number(GridSize) + "x" + QString::number(GridSize));
 }
 
-void Accueil::SizeMoin_clicked()
+void Accueil::CreateSave()
 {
-    if(GridSize>3)
-    {
-        GridSize--;
-    }
-    else
-    {
-        GridSize = 8;
-    }
-
-    label[2]->setText(QString::number(GridSize) + "x" + QString::number(GridSize));
+    QFile file("Game.2048");
+    file.open(QIODevice::WriteOnly | QIODevice::Text);
+    QTextStream stream(&file);
+    stream << "";
+    file.close();
 }
 
-void Accueil::ModePlus_clicked()
+void Accueil::CreateStats()
 {
-    if(GameMode < 3)
-    {
-        GameMode++;
-    }
-    else
-    {
-        GameMode = 1;
-    }
-
-    if(GameMode == 1)
-    {
-        label[4]->setText("Interface");
-    }
-    else if(GameMode == 2)
-    {
-        label[4]->setText("Clavier");
-    }
-    else if(GameMode == 3)
-    {
-        label[4]->setText("Voix");
-    }
+    QFile file("Stats.2048");
+    file.open(QIODevice::WriteOnly | QIODevice::Text);
+    QTextStream stream(&file);
+    stream << "";
+    file.close();
 }
 
-void Accueil::ModeMoin_clicked()
+
+QPushButton* Accueil::Create_Button_Accueil(QString nom, QString text, int size, bool bold, bool custom)
 {
-    if(GameMode > 1)
-    {
-        GameMode--;
-    }
-    else
-    {
-        GameMode = 3;
-    }
+    QFont font;
+    QPushButton* button = new QPushButton();
+    button->setObjectName(nom);
+    button->setText(text);
+    font = button->font();
+    font.setPointSize(size);
+    font.setBold(bold);
+    button->setFont(font);
+    button->setFixedHeight(50);
+    button->setAutoFillBackground(true);
+    button->setStyleSheet("QPushButton { background-color : rgb(255,255,255); }");
 
-    if(GameMode == 1)
+    if (custom == true)
     {
-        label[4]->setText("Interface");
+        connect(button, &QPushButton::pressed, this, &Accueil::Button_Pressed);
+        connect(button, &QPushButton::released, this, &Accueil::Button_Released);
+        connect(button, &QPushButton::clicked, this, &Accueil::Button_clicked);
     }
-    else if(GameMode == 2)
-    {
-        label[4]->setText("Clavier");
-    }
-    else if(GameMode == 3)
-    {
-        label[4]->setText("Voix");
-    }
+    
+
+    return button;
 }
 
-void Accueil::Jouer_clicked()
+QLabel* Accueil::Create_Label_Accueil(QString nom, QString text, int size, bool bold, bool custom)
 {
-    Jeu *w = new Jeu(GridSize,GameMode,false);
-    w->showMaximized();
-    this->close();
+    QFont font;
+    QLabel* label = new QLabel();
+    label->setObjectName(nom);
+    label->setText(text);
+    label->setAlignment(Qt::AlignCenter);
+    font = label->font();
+    font.setPointSize(size);
+    font.setBold(bold);
+    label->setFont(font);
+
+    if (custom == true)
+    {
+        //label->setFrameStyle(QFrame::WinPanel | QFrame::Raised);
+        //label->setLineWidth(4);
+        //label->setMidLineWidth(3);
+    }
+
+    return label;
 }
 
-void Accueil::Charger_clicked()
+void Accueil::Button_clicked()
 {
-    Jeu *w = new Jeu(GridSize,GameMode,true);
-    w->showMaximized();
-    this->close();
+    QString name = qobject_cast<QPushButton*>(sender())->objectName();
+
+    if (name == "button_Accueil_Moin")  //Accueil
+    {
+        if (*GridSize > 3)
+        {
+            *GridSize = *GridSize-1;
+        }
+        else
+        {
+            *GridSize = 8;
+        }
+
+        label_GridSize->setText(QString::number(*GridSize) + "x" + QString::number(*GridSize));
+    }
+    else if (name == "button_Accueil_Plus")     //Accueil
+    {
+        if (*GridSize < 8)
+        {
+            *GridSize = *GridSize + 1;
+        }
+        else
+        {
+            *GridSize = 3;
+        }
+
+        label_GridSize->setText(QString::number(*GridSize) + "x" + QString::number(*GridSize));
+    }
 }
 
-void Accueil::Stats_clicked()
+void Accueil::Button_Pressed()
 {
-    Stats *w = new Stats(GridSize,GameMode);
-    w->showMaximized();
-    this->close();
+    QPushButton* button = qobject_cast<QPushButton*>(sender());
+    button->setStyleSheet("QPushButton { background-color : rgb(211,211,211); }");   //Dark
 }
 
-void Accueil::Quitter_clicked()
+void Accueil::Button_Released()
 {
-    this->close();
+    QPushButton* button = qobject_cast<QPushButton*>(sender());
+    button->setStyleSheet("QPushButton { background-color : rgb(255,255,255); }"); //light
 }
-

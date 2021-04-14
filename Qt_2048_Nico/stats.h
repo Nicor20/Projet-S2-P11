@@ -1,36 +1,37 @@
 #ifndef STATS_H
 #define STATS_H
 
-#include "include.h"
-#include "accueil.h"
-#include <QFileDialog>
+#include "needed.h"
 
-class Stats : public QMainWindow
+struct Game
 {
-    Q_OBJECT
+    QString Status;
+    QString Size;
+    int Score;
+    int NbMove;
+    int Max;
+
+    int Overall;
+};
+
+class Stats : public QWidget
+{
 public:
-    Stats(int size, int mode);
+    Stats();
     ~Stats();
 
-    QPushButton* Create_Button(QString nom,QString text,int size, bool bold);
-    QLabel* Create_Label(QString nom,QString text,int size, bool bold);
+    void Read();
+    void Sort();
 
+    QPushButton* Create_Button_Stats(QString nom, QString text, int size, bool bold, bool custom);
+    QLabel* Create_Label_Stats(QString nom, QString text, int size, bool bold, bool info, bool stats, int num = 0);
 
-private slots:
-    void Menu_clicked();
+    QPushButton* button_Accueil;
 
 private:
-    QWidget *centralWidget;
-    QGridLayout *gLayout;
-    QGridLayout *Stats_gLayout;
-    QVBoxLayout *vLayout;
+    QList<Game> ListGame;
 
-    QLabel *titre;
-    QLabel **label;
-    QPushButton **button;
-
-    int GridSize;
-    int GameMode;
+    int NbToShow = 15;
 };
 
 #endif // STATS_H

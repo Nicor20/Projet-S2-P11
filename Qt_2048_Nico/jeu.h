@@ -1,49 +1,57 @@
 #ifndef JEU_H
 #define JEU_H
 
-#include "include.h"
-#include "accueil.h"
-#include "grid.h"
+#include "needed.h"
+#include "Fpga.h"
+#include "Grid.h"
 
-class Jeu : public QMainWindow
+class Jeu : public QWidget
 {
-    Q_OBJECT
 public:
-    Jeu(int size = 1, int mode = 4, bool load = false);
+    Jeu(int* size, bool load = false);
     ~Jeu();
 
-    void RefreshGrid();
-    void CustomLabel(QLabel *label);
+    //Jeu
+    QString Bouge_Haut();
+    QString Bouge_Droit();
+    QString Bouge_Bas();
+    QString Bouge_Gauche();
+    void CustomLabel(QLabel* label);
+    QPushButton* Create_Button_Jeu(QString nom, QString text, int size, bool bold, bool custom);
+    QLabel* Create_Label_Jeu(QString nom, QString text, int size, bool bold, bool info, bool custom);
+    void Refresh_Grid();
+
+    void keyPressEvent(QKeyEvent* event);
+
+    void CheckMove(QString s);
     void SaveGame();
     void SaveStats(QString s);
     void ClearFile();
+    QString Menu();
 
-    QPushButton* Create_Button(QString nom,QString text,int size, bool bold);
-    QLabel* Create_Label(QString nom,QString text,int size, bool bold);
+    QPushButton* button_Accueil;
 
 private slots:
-    void Menu_clicked();
-    void Haut_clicked();
-    void Bas_clicked();
-    void Gauche_clicked();
-    void Droit_clicked();
+    void FPGA_Timer();
+    void Button_clicked();
+    void Button_Pressed();
+    void Button_Released();
 
 private:
-    QWidget *centralWidget;
-    QGridLayout *gLayout;
-    QVBoxLayout *vLayout;
-    QGridLayout *Button_gLayout;
-    QGridLayout *Game_gLayout;
-    QGridLayout *Stats_gLayout;
-    QLabel **label;
-    QPushButton **button;
-
-    int ModeJeu;
-    int GridSize;
-    Grid *grid;
-    QLabel ***labelGrid;
-
+    //Jeu
+    QTimer* Timer;
     bool Loaded;
+    int read_Time = 10;
+    int wait_Time = 250;
+    QLabel*** labelGrid;
+    QLabel* label_Score;
+    QLabel* label_NbMove;
+    QLabel* label_Max;
+
+    int* GridSize;
+
+    Grid* grid;
+    Fpga* fpga;
 };
 
 #endif // JEU_H

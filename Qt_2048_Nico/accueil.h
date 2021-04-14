@@ -1,43 +1,37 @@
 #ifndef ACCUEIL_H
 #define ACCUEIL_H
 
-#include "jeu.h"
-#include "stats.h"
-#include "include.h"
+#include "needed.h"
 
-class Accueil : public QMainWindow
+class Accueil : public QWidget
 {
-    Q_OBJECT
 public:
-    Accueil(int size = 4, int mode =1);
+    Accueil(int* size);
     ~Accueil();
 
-    QPushButton* Create_Button(QString nom,QString text,int size, bool bold);
-    QLabel* Create_Label(QString nom,QString text,int size, bool bold);
+    QPushButton* Create_Button_Accueil(QString nom, QString text, int size, bool bold, bool custom);
+    QLabel* Create_Label_Accueil(QString nom, QString text, int size, bool bold, bool custom = false);
 
-    void CheckStats();
-    void CheckSave();
+    bool CheckStats();
+    bool CheckSave();
+
+    void CreateStats();
+    void CreateSave();
+
+    QPushButton* button_Jouer;
+    QPushButton* button_Charger;
+    QPushButton* button_Stats;
+    QPushButton* button_Quitter;
 
 private slots:
-    void SizePlus_clicked();
-    void SizeMoin_clicked();
-    void ModePlus_clicked();
-    void ModeMoin_clicked();
-    void Jouer_clicked();
-    void Charger_clicked();
-    void Stats_clicked();
-    void Quitter_clicked();
-private:
-    QWidget *centralWidget;
-    QGridLayout *gLayout;
-    QVBoxLayout *vLayout;
-    QHBoxLayout *hLayout1;
-    QHBoxLayout *hLayout2;
-    QLabel **label;
-    QPushButton **button;
+    void Button_clicked();
+    void Button_Pressed();
+    void Button_Released();
 
-    int GridSize;
-    int GameMode;
+private:
+    QLabel* label_GridSize;
+
+    int* GridSize;
 };
 
 #endif // ACCUEIL_H

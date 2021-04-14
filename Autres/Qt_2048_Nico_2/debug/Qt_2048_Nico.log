@@ -1,0 +1,4 @@
+﻿  jeu.cpp
+C:\Users\canti\Desktop\Projet-S2-P11\Qt_2048_Nico\FPGA.h(1,1): warning C4828: The file contains a character starting at offset 0x439 that is illegal in the current source character set (codepage 65001).
+C:\Users\canti\Desktop\Projet-S2-P11\Qt_2048_Nico\jeu.cpp(509,35): warning C4100: 'event': unreferenced formal parameter
+  Qt_2048_Nico.vcxproj -> C:\Users\canti\Desktop\Projet-S2-P11\Qt_2048_Nico\debug\Qt_2048_Nico.exe
