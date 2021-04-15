@@ -1,7 +1,15 @@
+/*
+* Nom des créateur : Nicolas Cantin, Anthony Denis, Walan Brousseau
+* Date de création : 05/04/2021 à 15/04/2021
+* Nom de fichier : accueil.cpp
+* Description : Permet de créer l'interface de l'accueil et de gérer son fonctionnement et ces intéractions
+*/
 #include "accueil.h"
+
 
 Accueil::Accueil(int* size) : GridSize(size)
 {
+    //Permet de créer les éléments de l'interface d'accueil
     this->setObjectName("widget_Accueil");
 
     //Layout
@@ -25,7 +33,7 @@ Accueil::Accueil(int* size) : GridSize(size)
 
     button_Jouer = Create_Button_Accueil("button_Accueil_Jouer", "Jouer", 20, true, false);
     button_Charger = Create_Button_Accueil("button_Accueil_Charger", "Charger", 20, true, false);
-    button_Stats = Create_Button_Accueil("button_Accueil_Stats", "Stats", 20, true, false);
+    button_Stats = Create_Button_Accueil("button_Accueil_Stats", "Classement", 20, true, false);
     button_Quitter = Create_Button_Accueil("button_Accueil_Quitter", "Quitter", 20, true, false);
 
     //hLayout1
@@ -35,13 +43,17 @@ Accueil::Accueil(int* size) : GridSize(size)
 
     //vLayout
     vLayout->addWidget(label_Titre);
-    vLayout->addSpacerItem(new QSpacerItem(20, 20));
+    vLayout->addSpacerItem(new QSpacerItem(10, 30));
     vLayout->addWidget(label_Sub);
+    vLayout->addSpacerItem(new QSpacerItem(10, 10));
     vLayout->addLayout(hLayout);
-    vLayout->addSpacerItem(new QSpacerItem(20, 20));
+    vLayout->addSpacerItem(new QSpacerItem(10, 10));
     vLayout->addWidget(button_Jouer);
+    vLayout->addSpacerItem(new QSpacerItem(10, 10));
     vLayout->addWidget(button_Charger);
+    vLayout->addSpacerItem(new QSpacerItem(10, 10));
     vLayout->addWidget(button_Stats);
+    vLayout->addSpacerItem(new QSpacerItem(10, 10));
     vLayout->addWidget(button_Quitter);
 
     gLayout->addLayout(vLayout, 0, 0, Qt::AlignCenter);
@@ -60,6 +72,8 @@ Accueil::~Accueil()
 
 bool Accueil::CheckSave()
 {
+    //Vérifie si il y a une partie sauvegarder pour activer ou désactiver le bouton charger
+
     QFile file("Game.2048");
 
     if(file.exists())
@@ -91,6 +105,8 @@ bool Accueil::CheckSave()
 
 bool Accueil::CheckStats()
 {
+    //Vérifie si il y  des statistique de classement sauvegarder pour activer ou désactiver le bouton classement
+
     QFile file("Stats.2048");
 
     if(file.exists())
@@ -123,6 +139,7 @@ bool Accueil::CheckStats()
 
 void Accueil::CreateSave()
 {
+    //Crée un fichier de sauvegarde pour une partie
     QFile file("Game.2048");
     file.open(QIODevice::WriteOnly | QIODevice::Text);
     QTextStream stream(&file);
@@ -132,6 +149,7 @@ void Accueil::CreateSave()
 
 void Accueil::CreateStats()
 {
+    //Crée un fichier de sauvegarde pour le classement
     QFile file("Stats.2048");
     file.open(QIODevice::WriteOnly | QIODevice::Text);
     QTextStream stream(&file);
@@ -139,13 +157,13 @@ void Accueil::CreateStats()
     file.close();
 }
 
-
 QPushButton* Accueil::Create_Button_Accueil(QString nom, QString text, int size, bool bold, bool custom)
 {
+    //Fonction pour créer des boutons pour la classe accueil
     QFont font;
     QPushButton* button = new QPushButton();
     button->setObjectName(nom);
-    button->setText(text);
+    button->setText("&" + text);
     font = button->font();
     font.setPointSize(size);
     font.setBold(bold);
@@ -153,6 +171,7 @@ QPushButton* Accueil::Create_Button_Accueil(QString nom, QString text, int size,
     button->setFixedHeight(50);
     button->setAutoFillBackground(true);
     button->setStyleSheet("QPushButton { background-color : rgb(255,255,255); }");
+    button->setCursor(Qt::PointingHandCursor);
 
     if (custom == true)
     {
@@ -167,6 +186,7 @@ QPushButton* Accueil::Create_Button_Accueil(QString nom, QString text, int size,
 
 QLabel* Accueil::Create_Label_Accueil(QString nom, QString text, int size, bool bold, bool custom)
 {
+    //Fonction pour créer des label pour la classe accueil
     QFont font;
     QLabel* label = new QLabel();
     label->setObjectName(nom);
@@ -179,9 +199,11 @@ QLabel* Accueil::Create_Label_Accueil(QString nom, QString text, int size, bool 
 
     if (custom == true)
     {
-        //label->setFrameStyle(QFrame::WinPanel | QFrame::Raised);
-        //label->setLineWidth(4);
-        //label->setMidLineWidth(3);
+        label->setAutoFillBackground(true);
+        label->setStyleSheet("QPushButton { background-color : rgb(255,255,255); }");
+        label->setFrameStyle(QFrame::Box | QFrame::Plain);
+        label->setLineWidth(4);
+        label->setMidLineWidth(3);
     }
 
     return label;
@@ -189,6 +211,7 @@ QLabel* Accueil::Create_Label_Accueil(QString nom, QString text, int size, bool 
 
 void Accueil::Button_clicked()
 {
+    //SLOT pour quand les boutons de l'accueil sont cliquer
     QString name = qobject_cast<QPushButton*>(sender())->objectName();
 
     if (name == "button_Accueil_Moin")  //Accueil
@@ -221,12 +244,14 @@ void Accueil::Button_clicked()
 
 void Accueil::Button_Pressed()
 {
+    //SLOT pour quand certains boutons de l'accueil sont presser
     QPushButton* button = qobject_cast<QPushButton*>(sender());
     button->setStyleSheet("QPushButton { background-color : rgb(211,211,211); }");   //Dark
 }
 
 void Accueil::Button_Released()
 {
+    //SLOT pour quand certains boutons de l'accueil sont relacher
     QPushButton* button = qobject_cast<QPushButton*>(sender());
     button->setStyleSheet("QPushButton { background-color : rgb(255,255,255); }"); //light
 }

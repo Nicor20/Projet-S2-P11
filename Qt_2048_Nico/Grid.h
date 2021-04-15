@@ -1,3 +1,9 @@
+/*
+* Nom des créateur : Nicolas Cantin, Anthony Denis, Walan Brousseau
+* Date de création : 05/04/2021 à 15/04/2021
+* Nom de fichier : Grid.h
+* Description : Permet de gérer le back end de la grille de jeu
+*/
 #ifndef GRID_H
 #define GRID_H
 
@@ -18,6 +24,8 @@ public:
     QString Move_Right();
     QString Move_Down();
     QString Move_Left();
+
+    bool ChangeMade();
 
 private:
     

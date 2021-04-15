@@ -1,3 +1,10 @@
+/*
+* Nom des créateur : Nicolas Cantin, Anthony Denis, Walan Brousseau
+* Date de création : 05/04/2021 à 15/04/2021
+* Nom de fichier : jeu.h
+* Description : Permet de créer l'interface de jeu et de gérer son fonctionnement et ces intéractions
+*/
+
 #ifndef JEU_H
 #define JEU_H
 
@@ -12,10 +19,11 @@ public:
     ~Jeu();
 
     //Jeu
-    QString Bouge_Haut();
-    QString Bouge_Droit();
-    QString Bouge_Bas();
-    QString Bouge_Gauche();
+    void Bouge_Haut();
+    void Bouge_Droit();
+    void Bouge_Bas();
+    void Bouge_Gauche();
+
     void CustomLabel(QLabel* label);
     QPushButton* Create_Button_Jeu(QString nom, QString text, int size, bool bold, bool custom);
     QLabel* Create_Label_Jeu(QString nom, QString text, int size, bool bold, bool info, bool custom);
@@ -30,6 +38,8 @@ public:
     QString Menu();
 
     QPushButton* button_Accueil;
+    
+
 
 private slots:
     void FPGA_Timer();
@@ -49,6 +59,7 @@ private:
     QLabel* label_Max;
 
     int* GridSize;
+    QString GameState;
 
     Grid* grid;
     Fpga* fpga;
