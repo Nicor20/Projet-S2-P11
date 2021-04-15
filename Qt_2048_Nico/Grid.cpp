@@ -1,3 +1,9 @@
+/*
+* Nom des créateur : Nicolas Cantin, Anthony Denis, Walan Brousseau
+* Date de création : 05/04/2021 à 15/04/2021
+* Nom de fichier : Grid.cpp
+* Description : Permet de gérer le back end de la grille de jeu
+*/
 #include "Grid.h"
 
 Grid::Grid(int* size, bool load) : GridSize(size)

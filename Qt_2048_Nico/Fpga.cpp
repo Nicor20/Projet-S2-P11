@@ -1,7 +1,14 @@
+/*
+* Nom des créateur : Nicolas Cantin, Anthony Denis, Walan Brousseau
+* Date de création : 05/04/2021 à 15/04/2021
+* Nom de fichier : Fpga.cpp
+* Description : Permet de gérer la lecture de la carte Fpga
+*/
 #include "Fpga.h"
 
 Fpga::Fpga()
 {
+    //Instancie la connection avec la carte fpga et les valeurs de référence pour chaque phonème
     port = new CommunicationFPGA();
 
     if (!port->estOk())
@@ -82,6 +89,7 @@ Fpga::~Fpga()
 
 bool Fpga::isConnected()
 {
+    //Vérifie si la connection est ok
     return statutport;
 }
 
@@ -181,28 +189,33 @@ QString Fpga::Read()
             statutport = port->ecrireRegistre(nreg_ecri_aff7sg1, 0x00);
             statutport = port->ecrireRegistre(nreg_ecri_aff7dot, 0x00);
         }
-
-        if (stat_btn == 0x11 && swt == 0x00 && SaveOn == false && VerifOn == false)	//Lance la lecture
+        
+        
+        if (stat_btn == 0x11 && swt == 0x00 && SaveOn == false && VerifOn == false)	
         {
+            //Lance la lecture
             SaveOn = true;
             return "LecStart";
         }
-        else if (SaveOn == true && nbSaved < nbLecture && VerifOn == false)	//Enregistre les lectures
+        else if (SaveOn == true && nbSaved < nbLecture && VerifOn == false)	
         {
+            //Enregistre les lectures
             for (int i = 0; i < 4; i++)
                 ListLecture[nbSaved].pot[i] = Chanel[i];
 
             nbSaved++;
             return "Lec";
         }
-        else if (SaveOn == true && nbSaved == nbLecture && VerifOn == false)	//Arrête la lecture
+        else if (SaveOn == true && nbSaved == nbLecture && VerifOn == false)	
         {
+            //Arrête la lecture
             SaveOn = false;
             VerifOn = true;
             return "LecStop";
         }
-        else if (SaveOn == false && VerifOn == true)	//Vérifie la correspondance
+        else if (SaveOn == false && VerifOn == true)	
         {
+            //Vérifie la correspondance
             QString rep = Verification();
             VerifOn = false;
             nbSaved = 0;
@@ -219,6 +232,7 @@ QString Fpga::Read()
 
 QString Fpga::Verification()
 {
+    //effectue la comparaison pour déterminer le phonème dit
     int pointage[4] = { 0 };
     int lecture;
     for (int a = 0; a < nbLecture; a++) // lecture #1 a #10

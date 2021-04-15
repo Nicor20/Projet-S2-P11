@@ -1,3 +1,10 @@
+/*
+* Nom des créateur : Nicolas Cantin, Anthony Denis, Walan Brousseau
+* Date de création : 05/04/2021 à 15/04/2021
+* Nom de fichier : jeu.h
+* Description : Permet de créer l'interface de jeu et de gérer son fonctionnement et ces intéractions
+*/
+
 #ifndef JEU_H
 #define JEU_H
 

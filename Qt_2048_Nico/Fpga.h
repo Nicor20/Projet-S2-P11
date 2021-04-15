@@ -1,3 +1,9 @@
+/*
+* Nom des créateur : Nicolas Cantin, Anthony Denis, Walan Brousseau
+* Date de création : 05/04/2021 à 15/04/2021
+* Nom de fichier : Fpga.h
+* Description : Permet de gérer la lecture de la carte Fpga
+*/
 #ifndef FPGA_H
 #define FPGA_H
 

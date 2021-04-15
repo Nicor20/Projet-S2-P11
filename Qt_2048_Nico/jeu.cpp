@@ -1,7 +1,15 @@
+/*
+* Nom des créateur : Nicolas Cantin, Anthony Denis, Walan Brousseau
+* Date de création : 05/04/2021 à 15/04/2021
+* Nom de fichier : jeu.cpp
+* Description : Permet de créer l'interface de jeu et de gérer son fonctionnement et ces intéractions
+*/
+
 #include "jeu.h"
 
 Jeu::Jeu(int* size, bool load) : GridSize(size) , Loaded(load)
 {
+    //Permet de créer les éléments de l'interface d'accueil
     grid = new Grid(size, load);
     fpga = new Fpga();
     
@@ -110,6 +118,7 @@ Jeu::~Jeu()
 
 void Jeu::Bouge_Haut()
 {
+    //Vérifie si il est possible de bouger vers le haut avec la classe Grid et Fpga
     QString State;
     if (fpga->SaveOn == false && fpga->VerifOn == false)
     {
@@ -125,6 +134,7 @@ void Jeu::Bouge_Haut()
 
 void Jeu::Bouge_Droit()
 {
+    //Vérifie si il est possible de bouger vers la droite avec la classe Grid et Fpga
     QString State;
     if (fpga->SaveOn == false && fpga->VerifOn == false)
     {
@@ -140,6 +150,7 @@ void Jeu::Bouge_Droit()
 
 void Jeu::Bouge_Bas()
 {
+    //Vérifie si il est possible de bouger vers le bas avec la classe Grid et Fpga
     QString State;
     if (fpga->SaveOn == false && fpga->VerifOn == false)
     {
@@ -155,6 +166,7 @@ void Jeu::Bouge_Bas()
 
 void Jeu::Bouge_Gauche()
 {
+    //Vérifie si il est possible de bouger vers la gauche avec la classe Grid et Fpga
     QString State;
     if (fpga->SaveOn == false && fpga->VerifOn == false)
     {
@@ -170,6 +182,7 @@ void Jeu::Bouge_Gauche()
 
 void Jeu::CheckMove(QString s)
 {
+    //Vérifie le résultat du mouvement et traite la réponse
     GameState = s;
     if (s == "Gagne")
     {
@@ -231,6 +244,8 @@ void Jeu::CheckMove(QString s)
 
 QString Jeu::Menu()
 {
+    //Détermine l'action a faire lorsqu'il est nécessaire de passer de l'interface jeu à l'interface accueil
+
     if (GameState == "Gagne" || GameState == "Perdu")
     {
         return "Fin";
@@ -246,18 +261,19 @@ QString Jeu::Menu()
         msgBox.setFont(font);
 
         msgBox.setText("Voulez vous vraiment quitter?");
-        msgBox.setStandardButtons(QMessageBox::Yes | QMessageBox::No);
-        msgBox.setDefaultButton(QMessageBox::No);
-        int rep = msgBox.exec();
+        QPushButton* boutonOui = msgBox.addButton("Oui", QMessageBox::YesRole);
+        QPushButton* boutonNon = msgBox.addButton("Non", QMessageBox::NoRole);
+        msgBox.setDefaultButton(boutonNon);
+        msgBox.exec();
 
-        if (rep == QMessageBox::Yes)
+        if (msgBox.clickedButton() == boutonOui)
         {
             if (Loaded == true)
             {
                 if (grid->ChangeMade() == true)
                 {
                     msgBox.setText("Voulez vous sauvegarder la partie en cours?");
-                    msgBox.setInformativeText("La derniere version de cette partie sera remplacee!");
+                    msgBox.setInformativeText("La derniere version de cette partie sera remplacée!");
                 }
                 else
                 {
@@ -277,13 +293,13 @@ QString Jeu::Menu()
                         QTextStream in(&file);
                         if (in.readLine().length() > 5)
                         {
-                            msgBox.setInformativeText("La sauvegarde d'une partie différente sera ecrasee!");
+                            msgBox.setInformativeText("La sauvegarde d'une partie différente sera ecrasée!");
                         }
                         file.close();
                     }
                     else
                     {
-                        msgBox.setInformativeText("La sauvegarde d'une partie différente sera peut-etre ecrasee!");
+                        msgBox.setInformativeText("La sauvegarde d'une partie différente sera peut-etre ecrasée!");
                     }
                 }
             }
@@ -292,18 +308,13 @@ QString Jeu::Menu()
                 return "Exit";
             }
 
-            msgBox.setStandardButtons(QMessageBox::Yes | QMessageBox::No);
-            msgBox.setDefaultButton(QMessageBox::Yes);
-            int rep = msgBox.exec();
+            msgBox.setDefaultButton(boutonOui);
+            msgBox.exec();
 
-            if (rep == QMessageBox::Yes)
+            if (msgBox.clickedButton() == boutonOui)
             {
                 SaveGame();
             }
-            return "Exit";
-        }
-        else if (rep == QMessageBox::Yes && grid->GetMax() < 8)
-        {
             return "Exit";
         }
         else
@@ -315,6 +326,7 @@ QString Jeu::Menu()
 
 void Jeu::SaveGame()
 {
+    //Sauvegarde la partie en cours dans le dans le fichier Game.2048
     QFile file("Game.2048");
 
     if(file.open(QIODevice::WriteOnly | QIODevice::Text))
@@ -345,6 +357,7 @@ void Jeu::SaveGame()
 
 void Jeu::SaveStats(QString s)
 {
+    //Sauvegarde les statistique de la partie en cours dans le dans le fichier Stats.2048
     QFile file("Stats.2048");
 
     if(file.open(QIODevice::WriteOnly | QIODevice::Append | QIODevice::Text))
@@ -366,6 +379,7 @@ void Jeu::SaveStats(QString s)
 
 void Jeu::ClearFile()
 {
+    //Vide le fichier Game.2048
     QFile file("Game.2048");
 
     if(file.open(QIODevice::WriteOnly | QIODevice::Text))
@@ -378,6 +392,7 @@ void Jeu::ClearFile()
 
 void Jeu::Refresh_Grid()
 {
+    //Rafréchie la grille de jeu et les informations à l'écran
     for (int x = 0; x < *GridSize; x++)
     {
         for (int y = 0; y < *GridSize; y++)
@@ -395,6 +410,11 @@ void Jeu::Refresh_Grid()
 //Actions
 void Jeu::FPGA_Timer()
 {
+    //Timer pour lire la carte fpga à chaque 250 millisecondes jusqu'a ce que le bouton 1 soit pesser
+    //change l'intervale de lecture à 10 millisecondes et prend des mesures pendant 1 seconde et retourne a 250 ms après
+    //traite le retour de la lecture
+
+
     QString text = fpga->Read();
 
     if (text == "LecStart")
@@ -449,6 +469,7 @@ void Jeu::FPGA_Timer()
 
 void Jeu::keyPressEvent(QKeyEvent* event)
 {
+    //traite les touche de clavier cliquer et leurs interactions
     if (event->isAutoRepeat() == false)
     {
         if (event->key() == Qt::Key_W || event->key() == Qt::Key_Up)
@@ -472,6 +493,7 @@ void Jeu::keyPressEvent(QKeyEvent* event)
 
 void Jeu::Button_clicked()
 {
+    //SLOT pour traite les actions a effectuer lorsque un des bouton de l'interface jeu est cliquer
     QString name = qobject_cast<QPushButton*>(sender())->objectName();
 
     if (name == "button_Jeu_Up")
@@ -494,12 +516,14 @@ void Jeu::Button_clicked()
 
 void Jeu::Button_Pressed()
 {
+    //SLOT pour traite les actions a effectuer lorsque un des bouton de l'interface jeu est presser
     QPushButton* button = qobject_cast<QPushButton*>(sender());
     button->setStyleSheet("QPushButton { background-color : rgb(211,211,211); }");   //Dark
 }
 
 void Jeu::Button_Released()
 {
+    //SLOT pour traite les actions a effectuer lorsque un des bouton de l'interface jeu est relacher
     QPushButton* button = qobject_cast<QPushButton*>(sender());
     button->setStyleSheet("QPushButton { background-color : rgb(255,255,255); }"); //light
 }
@@ -507,6 +531,8 @@ void Jeu::Button_Released()
 //Création
 void Jeu::CustomLabel(QLabel* label)
 {
+    //Modifie l'apparance des case du jeu pour s'adapter a leur valeurs
+
     //Text
     if (label->text() == "0")
     {
@@ -570,6 +596,7 @@ void Jeu::CustomLabel(QLabel* label)
 
 QPushButton* Jeu::Create_Button_Jeu(QString nom, QString text, int size, bool bold, bool custom)
 {
+    //Fonction pour créer des boutons pour la classe Jeu
     QFont font;
     QPushButton* button = new QPushButton();
     button->setObjectName(nom);
@@ -596,6 +623,7 @@ QPushButton* Jeu::Create_Button_Jeu(QString nom, QString text, int size, bool bo
 
 QLabel* Jeu::Create_Label_Jeu(QString nom, QString text, int size, bool bold, bool info, bool custom)
 {
+    //Fonction pour créer les labels pour la classe Jeu
     QFont font;
     QLabel* label = new QLabel();
     label->setObjectName(nom);

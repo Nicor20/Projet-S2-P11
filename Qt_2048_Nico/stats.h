@@ -1,3 +1,9 @@
+/*
+* Nom des créateur : Nicolas Cantin, Anthony Denis, Walan Brousseau
+* Date de création : 05/04/2021 à 15/04/2021
+* Nom de fichier : stats.h
+* Description : Permet de créer l'interface de classement et de gérer son fonctionnement et ces intéractions
+*/
 #ifndef STATS_H
 #define STATS_H
 
