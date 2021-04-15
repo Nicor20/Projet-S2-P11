@@ -66,6 +66,33 @@ Grid::~Grid()
 
 }
 
+bool Grid::ChangeMade()
+{
+    QFile file("Game.2048");
+    if (file.exists())
+    {
+        file.open(QIODevice::ReadOnly | QIODevice::Text);
+
+        QTextStream in(&file);
+        QList temp = in.readLine().split("/");
+        file.close();
+
+        if (*GridSize == temp[0].toInt() && score == temp[1].toInt() && NbMove == temp[2].toInt())
+        {
+            return false;
+        }
+        else
+        {
+            return true;
+        }
+    }
+    else
+    {
+        return true;
+    }
+}
+
+
 void Grid::AddRandom()
 {
     // Remplis le vecteur avec la position des case vide du graphique
@@ -164,8 +191,16 @@ QString Grid::Move_Up()
         {
             return "Perdu";
         }
+        else
+        {
+            return "Refresh";
+        }
     }
-    return "Good";
+    else
+    {
+        return "No Move";
+    }
+    
 }
 
 QString Grid::Move_Right()
@@ -239,8 +274,15 @@ QString Grid::Move_Right()
         {
             return "Perdu";
         }
+        else
+        {
+            return "Refresh";
+        }
     }
-    return "Good";
+    else
+    {
+        return "No Move";
+    }
 }
 
 QString Grid::Move_Down()
@@ -314,8 +356,15 @@ QString Grid::Move_Down()
         {
             return "Perdu";
         }
+        else
+        {
+            return "Refresh";
+        }
     }
-    return "Good";
+    else
+    {
+        return "No Move";
+    }
 }
 
 QString Grid::Move_Left()
@@ -389,8 +438,15 @@ QString Grid::Move_Left()
         {
             return "Perdu";
         }
+        else
+        {
+            return "Refresh";
+        }
     }
-    return "Good";
+    else
+    {
+        return "No Move";
+    }
 }
 
 bool Grid::Lose()

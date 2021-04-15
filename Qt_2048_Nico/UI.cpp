@@ -2,6 +2,7 @@
 
 UI::UI()
 {
+    this->setWindowTitle("Super 2048");
     this->setObjectName("UI");
 
     Load_Accueil();
@@ -22,12 +23,10 @@ UI::~UI()
 void UI::Load_Accueil()
 {
     accueil = new Accueil(&GridSize);
-
     connect(accueil->button_Jouer, &QPushButton::clicked, this, &UI::Button_clicked);
     connect(accueil->button_Charger, &QPushButton::clicked, this, &UI::Button_clicked);
     connect(accueil->button_Stats, &QPushButton::clicked, this, &UI::Button_clicked);
     connect(accueil->button_Quitter, &QPushButton::clicked, this, &UI::Button_clicked);
-
     this->setCentralWidget(accueil);
 }
 
@@ -69,39 +68,13 @@ void UI::Button_clicked()
     {
         QString rep = jeu->Menu();
 
-        if (rep == "Sauvegarde" || rep == "Rien")
+        if (rep == "Fin" || rep == "Exit")
         {
             Load_Accueil();
         }
-        else if (rep == "Erreur ouverture")
+        else if (rep == "Cancel Exit")
         {
-            cout << "Erreur ouverture" << endl;
-            Load_Accueil();
-        }
-        else if (rep == "Fichier introuvable")
-        {
-            cout << "Fichier introuvable" << endl;
-            Load_Accueil();
-        }
-        else if (rep == "Question")
-        {
-            QMessageBox msgBox;
-            msgBox.setText("Voulez vous sauvegarder la partie?");
-            msgBox.setInformativeText("La derniere sauvegarde sera ecraser");
-            msgBox.setStandardButtons(QMessageBox::Ok | QMessageBox::Cancel);
-            msgBox.setDefaultButton(QMessageBox::Ok);
-            msgBox.setGeometry(960, 510, 800, 550);
-            int rep = msgBox.exec();
-
-            if (rep == QMessageBox::Ok)
-            {
-                jeu->SaveGame();
-                Load_Accueil();
-            }
-            else
-            {
-                Load_Accueil();
-            }
+            //Cancel
         }
     }
     else if (name == "button_Stats_Accueil")

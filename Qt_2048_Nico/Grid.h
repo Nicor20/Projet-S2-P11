@@ -19,6 +19,8 @@ public:
     QString Move_Down();
     QString Move_Left();
 
+    bool ChangeMade();
+
 private:
     
     void AddRandom();

@@ -15,6 +15,8 @@ Stats::Stats()
 
     //Button
     button_Accueil = Create_Button_Stats("button_Stats_Accueil", "Menu", 15, true, false);
+    QPushButton* button_Effacer = Create_Button_Stats("button_Stats_Effacer", "Effacer", 15, true, false);
+    connect(button_Effacer, &QPushButton::clicked, this, &Stats::Button_clicked);
 
 
     //Layout
@@ -81,6 +83,8 @@ Stats::Stats()
     vLayout->addWidget(frame);
     vLayout->addSpacerItem(new QSpacerItem(40, 20));
     vLayout->addWidget(button_Accueil);
+    vLayout->addSpacerItem(new QSpacerItem(40, 20));
+    vLayout->addWidget(button_Effacer);
 
     gLayout->addLayout(vLayout, 0, 0, Qt::AlignCenter);
 }
@@ -154,7 +158,7 @@ QPushButton* Stats::Create_Button_Stats(QString nom, QString text, int size, boo
     QFont font;
     QPushButton* button = new QPushButton();
     button->setObjectName(nom);
-    button->setText(text);
+    button->setText("&"+text);
     font = button->font();
     font.setPointSize(size);
     font.setBold(bold);
@@ -162,7 +166,7 @@ QPushButton* Stats::Create_Button_Stats(QString nom, QString text, int size, boo
     button->setFixedHeight(50);
     button->setAutoFillBackground(true);
     button->setStyleSheet("QPushButton { background-color : rgb(255,255,255); }");
-
+    button->setCursor(Qt::PointingHandCursor);
 
     //if (custom == true)
     //{
@@ -211,4 +215,40 @@ QLabel* Stats::Create_Label_Stats(QString nom, QString text, int size, bool bold
     }
 
     return label;
+}
+
+void Stats::Button_clicked()
+{
+    QString name = qobject_cast<QPushButton*>(sender())->objectName();
+
+    if (name == "button_Stats_Effacer")
+    {
+        QMessageBox msgBox;
+        msgBox.setWindowTitle("Super 2048");
+
+        QFont font = msgBox.font();
+        font.setPointSize(15);
+        font.setBold(false);
+        msgBox.setFont(font);
+
+        msgBox.setText("Voulez vous vraiment effacer le leaderboard?");
+        msgBox.setStandardButtons(QMessageBox::Ok | QMessageBox::Cancel);
+        msgBox.setDefaultButton(QMessageBox::Cancel);
+
+        int rep = msgBox.exec();
+
+        if (rep == QMessageBox::Ok)
+        {
+            QFile file("Stats.2048");
+
+            if (file.open(QIODevice::WriteOnly | QIODevice::Text))
+            {
+                QTextStream in(&file);
+                in << "";
+            }
+            file.close();
+            button_Accueil->animateClick();
+        }
+    }
+    
 }

@@ -35,13 +35,17 @@ Accueil::Accueil(int* size) : GridSize(size)
 
     //vLayout
     vLayout->addWidget(label_Titre);
-    vLayout->addSpacerItem(new QSpacerItem(20, 20));
+    vLayout->addSpacerItem(new QSpacerItem(10, 30));
     vLayout->addWidget(label_Sub);
+    vLayout->addSpacerItem(new QSpacerItem(10, 10));
     vLayout->addLayout(hLayout);
-    vLayout->addSpacerItem(new QSpacerItem(20, 20));
+    vLayout->addSpacerItem(new QSpacerItem(10, 10));
     vLayout->addWidget(button_Jouer);
+    vLayout->addSpacerItem(new QSpacerItem(10, 10));
     vLayout->addWidget(button_Charger);
+    vLayout->addSpacerItem(new QSpacerItem(10, 10));
     vLayout->addWidget(button_Stats);
+    vLayout->addSpacerItem(new QSpacerItem(10, 10));
     vLayout->addWidget(button_Quitter);
 
     gLayout->addLayout(vLayout, 0, 0, Qt::AlignCenter);
@@ -139,13 +143,12 @@ void Accueil::CreateStats()
     file.close();
 }
 
-
 QPushButton* Accueil::Create_Button_Accueil(QString nom, QString text, int size, bool bold, bool custom)
 {
     QFont font;
     QPushButton* button = new QPushButton();
     button->setObjectName(nom);
-    button->setText(text);
+    button->setText("&" + text);
     font = button->font();
     font.setPointSize(size);
     font.setBold(bold);
@@ -153,6 +156,7 @@ QPushButton* Accueil::Create_Button_Accueil(QString nom, QString text, int size,
     button->setFixedHeight(50);
     button->setAutoFillBackground(true);
     button->setStyleSheet("QPushButton { background-color : rgb(255,255,255); }");
+    button->setCursor(Qt::PointingHandCursor);
 
     if (custom == true)
     {
@@ -179,9 +183,11 @@ QLabel* Accueil::Create_Label_Accueil(QString nom, QString text, int size, bool 
 
     if (custom == true)
     {
-        //label->setFrameStyle(QFrame::WinPanel | QFrame::Raised);
-        //label->setLineWidth(4);
-        //label->setMidLineWidth(3);
+        label->setAutoFillBackground(true);
+        label->setStyleSheet("QPushButton { background-color : rgb(255,255,255); }");
+        label->setFrameStyle(QFrame::Box | QFrame::Plain);
+        label->setLineWidth(4);
+        label->setMidLineWidth(3);
     }
 
     return label;

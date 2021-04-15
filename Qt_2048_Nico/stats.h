@@ -27,11 +27,12 @@ public:
     QLabel* Create_Label_Stats(QString nom, QString text, int size, bool bold, bool info, bool stats, int num = 0);
 
     QPushButton* button_Accueil;
-
+private slots:
+    void Button_clicked();
 private:
     QList<Game> ListGame;
 
-    int NbToShow = 15;
+    int NbToShow = 10;
 };
 
 #endif // STATS_H

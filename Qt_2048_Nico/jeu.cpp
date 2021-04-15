@@ -108,166 +108,209 @@ Jeu::~Jeu()
 
 }
 
-QString Jeu::Bouge_Haut()
+void Jeu::Bouge_Haut()
 {
-    if (fpga->SaveOn == false || fpga->VerifOn == false)
+    QString State;
+    if (fpga->SaveOn == false && fpga->VerifOn == false)
     {
-        QString Status = grid->Move_Up();
-
-        if (Status == "Perdu")
-        {
-            SaveStats(Status);
-            ClearFile();
-            return Status;
-        }
-        else if (Status == "Gagne")
-        {
-            SaveStats(Status);
-            ClearFile();
-            return Status;
-        }
-        else
-        {
-            return "Refresh";
-        }
+        State = grid->Move_Up();
+        cout << "Bouge Haut" << endl;
     }
     else
     {
-        return "En lecture";
+        State = "Traitement FPGA";
     }
+    CheckMove(State);
 }
 
-QString Jeu::Bouge_Droit()
+void Jeu::Bouge_Droit()
 {
-    if (fpga->SaveOn == false || fpga->VerifOn == false)
+    QString State;
+    if (fpga->SaveOn == false && fpga->VerifOn == false)
     {
-        QString Status = grid->Move_Right();
-
-        if (Status == "Perdu")
-        {
-            SaveStats(Status);
-            ClearFile();
-            return Status;
-        }
-        else if (Status == "Gagne")
-        {
-            SaveStats(Status);
-            ClearFile();
-            return Status;
-        }
-        else
-        {
-            return "Refresh";
-        }
+        State = grid->Move_Right();
+        cout << "Bouge Droit" << endl;
     }
     else
     {
-        return "En lecture";
+        State = "Traitement FPGA";
     }
+    CheckMove(State);
 }
 
-QString Jeu::Bouge_Bas()
+void Jeu::Bouge_Bas()
 {
-    if (fpga->SaveOn == false || fpga->VerifOn == false)
+    QString State;
+    if (fpga->SaveOn == false && fpga->VerifOn == false)
     {
-        QString Status = grid->Move_Down();
-
-        if (Status == "Perdu")
-        {
-            SaveStats(Status);
-            ClearFile();
-            return Status;
-        }
-        else if (Status == "Gagne")
-        {
-            SaveStats(Status);
-            ClearFile();
-            return Status;
-        }
-        else
-        {
-            return "Refresh";
-        }
+        State = grid->Move_Down();
+        cout << "Bouge Bas" << endl;
     }
     else
     {
-        return "En lecture";
+        State = "Traitement FPGA";
     }
+    CheckMove(State);
 }
 
-QString Jeu::Bouge_Gauche()
+void Jeu::Bouge_Gauche()
 {
-    if (fpga->SaveOn == false || fpga->VerifOn == false)
+    QString State;
+    if (fpga->SaveOn == false && fpga->VerifOn == false)
     {
-        QString Status = grid->Move_Left();
-
-        if (Status == "Perdu")
-        {
-            SaveStats(Status);
-            ClearFile();
-            return Status;
-        }
-        else if (Status == "Gagne")
-        {
-            SaveStats(Status);
-            ClearFile();
-            return Status;
-        }
-        else
-        {
-            return "Refresh";
-        }
+        State = grid->Move_Left();
+        cout << "Bouge Gauche" << endl;
     }
     else
     {
-        return "En lecture";
+        State = "Traitement FPGA";
+    }
+    CheckMove(State);
+}
+
+void Jeu::CheckMove(QString s)
+{
+    GameState = s;
+    if (s == "Gagne")
+    {
+        Refresh_Grid();
+        SaveStats(s);
+        QMessageBox msgBox;
+        msgBox.setWindowTitle("Super 2048");
+
+        QFont font = msgBox.font();
+        font.setPointSize(15);
+        font.setBold(false);
+        msgBox.setFont(font);
+
+        msgBox.setText("Vous avez gagné!");
+        msgBox.setStandardButtons(QMessageBox::Ok);
+        msgBox.setDefaultButton(QMessageBox::Ok);
+        
+        msgBox.exec();
+
+        button_Accueil->animateClick();
+    }
+    else if (s == "Perdu")
+    {
+        Refresh_Grid();
+        SaveStats(s);
+        QMessageBox msgBox;
+        msgBox.setWindowTitle("Super 2048");
+
+        QFont font = msgBox.font();
+        font.setPointSize(15);
+        font.setBold(false);
+        msgBox.setFont(font);
+
+        msgBox.setText("Vous avez Perdu!");
+        msgBox.setStandardButtons(QMessageBox::Ok);
+        msgBox.setDefaultButton(QMessageBox::Ok);
+
+        msgBox.exec();
+
+        button_Accueil->animateClick();
+    }
+    else if (s == "Refresh")
+    {
+        Refresh_Grid();
+    }
+    else if (s == "No Move")
+    {
+        //Rien faire
+    }
+    else if (s == "Traitement FPGA")
+    {
+        //Rien faire
+    }
+    else
+    {
+        //Erreur
     }
 }
 
 QString Jeu::Menu()
 {
-    if (Loaded == true)
+    if (GameState == "Gagne" || GameState == "Perdu")
     {
-        SaveGame();
-        return "Sauvegarde";
-    }
-    else if (grid->GetMax() >= 16)
-    {
-        QFile file("Game.2048");
-
-        if (file.exists())
-        {
-            if (file.open(QIODevice::ReadOnly | QIODevice::Text))
-            {
-                QTextStream in(&file);
-                if (in.readLine().length() > 5)
-                {
-                    //Demander si il faut écraser
-                    return "Question";
-                }
-                else
-                {
-                    SaveGame();
-                    return "Sauvegarde";
-                }
-                file.close();
-            }
-            else
-            {
-                return "Erreur ouverture";
-            }
-        }
-        else
-        {
-            return "Fichier introuvable";
-        }
+        return "Fin";
     }
     else
     {
-        return "Rien";
-    }
+        QMessageBox msgBox;
+        msgBox.setWindowTitle("Super 2048");
 
-    
+        QFont font = msgBox.font();
+        font.setPointSize(15);
+        font.setBold(false);
+        msgBox.setFont(font);
+
+        msgBox.setText("Voulez vous vraiment quitter?");
+        msgBox.setStandardButtons(QMessageBox::Yes | QMessageBox::No);
+        msgBox.setDefaultButton(QMessageBox::No);
+        int rep = msgBox.exec();
+
+        if (rep == QMessageBox::Yes)
+        {
+            if (Loaded == true)
+            {
+                if (grid->ChangeMade() == true)
+                {
+                    msgBox.setText("Voulez vous sauvegarder la partie en cours?");
+                    msgBox.setInformativeText("La derniere version de cette partie sera remplacee!");
+                }
+                else
+                {
+                    return "Exit";
+                }
+            }
+            else if (grid->GetMax() >= 8)
+            {
+                msgBox.setText("Voulez vous sauvegarder la partie en cours?");
+                
+                QFile file("Game.2048");
+
+                if (file.exists())
+                {
+                    if (file.open(QIODevice::ReadOnly | QIODevice::Text))
+                    {
+                        QTextStream in(&file);
+                        if (in.readLine().length() > 5)
+                        {
+                            msgBox.setInformativeText("La sauvegarde d'une partie différente sera ecrasee!");
+                        }
+                        file.close();
+                    }
+                    else
+                    {
+                        msgBox.setInformativeText("La sauvegarde d'une partie différente sera peut-etre ecrasee!");
+                    }
+                }
+            }
+            else
+            {
+                return "Exit";
+            }
+
+            msgBox.setStandardButtons(QMessageBox::Yes | QMessageBox::No);
+            msgBox.setDefaultButton(QMessageBox::Yes);
+            int rep = msgBox.exec();
+
+            if (rep == QMessageBox::Yes)
+            {
+                SaveGame();
+            }
+            return "Exit";
+        }
+        else if (rep == QMessageBox::Yes && grid->GetMax() < 8)
+        {
+            return "Exit";
+        }
+        else
+        {
+            return "Cancel Exit";
+        }
+    }
 }
 
 void Jeu::SaveGame()
@@ -314,6 +357,11 @@ void Jeu::SaveStats(QString s)
         in << QString::number(grid->GetMax())+"\n";
     }
     file.close();
+
+    if (Loaded == true)
+    {
+        ClearFile();
+    }
 }
 
 void Jeu::ClearFile()
@@ -328,6 +376,23 @@ void Jeu::ClearFile()
     file.close();
 }
 
+void Jeu::Refresh_Grid()
+{
+    for (int x = 0; x < *GridSize; x++)
+    {
+        for (int y = 0; y < *GridSize; y++)
+        {
+            labelGrid[x][y]->setText(QString::number(grid->Get(x, y)));
+            CustomLabel(labelGrid[x][y]);
+        }
+    }
+
+    label_Score->setText("Score\n" + QString::number(grid->GetScore()));
+    label_NbMove->setText("Nb Move\n" + QString::number(grid->GetNbMove()));
+    label_Max->setText("Max\n" + QString::number(grid->GetMax()));
+}
+
+//Actions
 void Jeu::FPGA_Timer()
 {
     QString text = fpga->Read();
@@ -348,23 +413,19 @@ void Jeu::FPGA_Timer()
     }
     else if (text == "Haut")
     {
-        CheckMove(Bouge_Haut());
-        cout << "Haut" << endl;
+        Bouge_Haut();
     }
     else if (text == "Droit")
     {
-        CheckMove(Bouge_Droit());
-        cout << "Droit" << endl;
+        Bouge_Droit();
     }
     else if (text == "Bas")
     {
-        CheckMove(Bouge_Bas());
-        cout << "Bas" << endl;
+        Bouge_Bas();
     }
     else if (text == "Gauche")
     {
-        CheckMove(Bouge_Gauche());
-        cout << "Gauche" << endl;
+        Bouge_Gauche();
     }
     else if (text == "Aucun")
     {
@@ -386,62 +447,64 @@ void Jeu::FPGA_Timer()
     }
 }
 
-void Jeu::Refresh_Grid()
-{
-    for (int x = 0; x < *GridSize; x++)
-    {
-        for (int y = 0; y < *GridSize; y++)
-        {
-            labelGrid[x][y]->setText(QString::number(grid->Get(x, y)));
-            CustomLabel(labelGrid[x][y]);
-        }
-    }
-
-    label_Score->setText("Score\n" + QString::number(grid->GetScore()));
-    label_NbMove->setText("Nb Move\n" + QString::number(grid->GetNbMove()));
-    label_Max->setText("Max\n" + QString::number(grid->GetMax()));
-}
-
 void Jeu::keyPressEvent(QKeyEvent* event)
 {
-    if (event->key() == Qt::Key_W)
+    if (event->isAutoRepeat() == false)
     {
-        CheckMove(Bouge_Haut());
-    }
-    else if (event->key() == Qt::Key_D)
-    {
-        CheckMove(Bouge_Droit());
-    }
-    else if (event->key() == Qt::Key_S)
-    {
-        CheckMove(Bouge_Bas());
-    }
-    else if (event->key() == Qt::Key_A)
-    {
-        CheckMove(Bouge_Gauche());
+        if (event->key() == Qt::Key_W || event->key() == Qt::Key_Up)
+        {
+            Bouge_Haut();
+        }
+        else if (event->key() == Qt::Key_D || event->key() == Qt::Key_Right)
+        {
+            Bouge_Droit();
+        }
+        else if (event->key() == Qt::Key_S || event->key() == Qt::Key_Down)
+        {
+            Bouge_Bas();
+        }
+        else if (event->key() == Qt::Key_A || event->key() == Qt::Key_Left)
+        {
+            Bouge_Gauche();
+        }
     }
 }
 
-void Jeu::CheckMove(QString s)
+void Jeu::Button_clicked()
 {
-    if (s == "Gagne")
+    QString name = qobject_cast<QPushButton*>(sender())->objectName();
+
+    if (name == "button_Jeu_Up")
     {
-        //Ouvrir un truc pour indiquer que la partie est gagné
+        Bouge_Haut();
     }
-    else if (s == "Perdu")
+    else if (name == "button_Jeu_Right")
     {
-        //Ouvrir un truc pour indiquer que la partie est perdu
+        Bouge_Droit();
     }
-    else if (s == "Refresh")
+    else if (name == "button_Jeu_Down")
     {
-        Refresh_Grid();
+        Bouge_Bas();
     }
-    else if (s == "En lecture")
+    else if (name == "button_Jeu_Left")
     {
-        //Inscrire que en lecture
+        Bouge_Gauche();
     }
 }
 
+void Jeu::Button_Pressed()
+{
+    QPushButton* button = qobject_cast<QPushButton*>(sender());
+    button->setStyleSheet("QPushButton { background-color : rgb(211,211,211); }");   //Dark
+}
+
+void Jeu::Button_Released()
+{
+    QPushButton* button = qobject_cast<QPushButton*>(sender());
+    button->setStyleSheet("QPushButton { background-color : rgb(255,255,255); }"); //light
+}
+
+//Création
 void Jeu::CustomLabel(QLabel* label)
 {
     //Text
@@ -510,7 +573,7 @@ QPushButton* Jeu::Create_Button_Jeu(QString nom, QString text, int size, bool bo
     QFont font;
     QPushButton* button = new QPushButton();
     button->setObjectName(nom);
-    button->setText(text);
+    button->setText("&" + text);
     font = button->font();
     font.setPointSize(size);
     font.setBold(bold);
@@ -518,6 +581,7 @@ QPushButton* Jeu::Create_Button_Jeu(QString nom, QString text, int size, bool bo
     button->setFixedHeight(50);
     button->setAutoFillBackground(true);
     button->setStyleSheet("QPushButton { background-color : rgb(255,255,255); }");
+    button->setCursor(Qt::PointingHandCursor);
 
     if (custom == true)
     {
@@ -563,38 +627,4 @@ QLabel* Jeu::Create_Label_Jeu(QString nom, QString text, int size, bool bold, bo
     }
 
     return label;
-}
-
-void Jeu::Button_clicked()
-{
-    QString name = qobject_cast<QPushButton*>(sender())->objectName();
-
-    if (name == "button_Jeu_Up")
-    {
-        CheckMove(Bouge_Haut());
-    }
-    else if (name == "button_Jeu_Right")
-    {
-        CheckMove(Bouge_Droit());
-    }
-    else if (name == "button_Jeu_Down")
-    {
-        CheckMove(Bouge_Bas());
-    }
-    else if (name == "button_Jeu_Left")
-    {
-        CheckMove(Bouge_Gauche());
-    }
-}
-
-void Jeu::Button_Pressed()
-{
-    QPushButton* button = qobject_cast<QPushButton*>(sender());
-    button->setStyleSheet("QPushButton { background-color : rgb(211,211,211); }");   //Dark
-}
-
-void Jeu::Button_Released()
-{
-    QPushButton* button = qobject_cast<QPushButton*>(sender());
-    button->setStyleSheet("QPushButton { background-color : rgb(255,255,255); }"); //light
 }
