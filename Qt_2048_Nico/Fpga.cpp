@@ -197,16 +197,16 @@ QString Fpga::Read()
             SaveOn = true;
             return "LecStart";
         }
-        else if (SaveOn == true && nbSaved < nbLecture && VerifOn == false)	
+        else if (SaveOn == true && nbRead < nbToRead && VerifOn == false)	
         {
             //Enregistre les lectures
             for (int i = 0; i < 4; i++)
-                ListLecture[nbSaved].pot[i] = Chanel[i];
+                ListLecture[nbRead].pot[i] = Chanel[i];
 
-            nbSaved++;
+            nbRead++;
             return "Lec";
         }
-        else if (SaveOn == true && nbSaved == nbLecture && VerifOn == false)	
+        else if (SaveOn == true && nbRead == nbToRead && VerifOn == false)
         {
             //Arrête la lecture
             SaveOn = false;
@@ -218,7 +218,7 @@ QString Fpga::Read()
             //Vérifie la correspondance
             QString rep = Verification();
             VerifOn = false;
-            nbSaved = 0;
+            nbRead = 0;
             return rep;
         }
 
@@ -235,7 +235,7 @@ QString Fpga::Verification()
     //effectue la comparaison pour déterminer le phonème dit
     int pointage[4] = { 0 };
     int lecture;
-    for (int a = 0; a < nbLecture; a++) // lecture #1 a #10
+    for (int a = 0; a < nbToRead; a++) // lecture #1 a #10
     {
         for (int b = 0; b < 4; b++)// pot #1 a #4
         {
@@ -256,7 +256,7 @@ QString Fpga::Verification()
     //Trouver le correspondant
     int max = 0;
     int num = 0;
-    int seuil = floor((4.0 * nbLecture) * 0.8);
+    int seuil = floor((4.0 * nbToRead) * 0.8);
     for (int i = 0; i < 4; i++)
     {
         if (pointage[i] >= max)
@@ -302,4 +302,218 @@ QString Fpga::Verification()
         statutport = port->ecrireRegistre(nreg_ecri_aff7dot, 0);
         return "Aucun";
     }
+}
+
+QString Fpga::LectureRecord()
+{
+    // lecture statut et BTN
+    if (statutport)
+    {
+        statutport = port->lireRegistre(nreg_lect_stat_btn, stat_btn);
+    }
+    else
+    {
+        return "Erreur";
+    }
+
+    // lecture swt
+    if (statutport)
+    {
+        statutport = port->lireRegistre(nreg_lect_swt, swt);
+        statutport = port->ecrireRegistre(nreg_ecri_led, swt);
+    }
+    else
+    {
+        return "Erreur";
+    }
+
+    // lecture canal 0
+    if (statutport)
+    {
+        statutport = port->lireRegistre(nreg_lect_can0, Chanel[0]);
+    }
+    else
+    {
+        return "Erreur";
+    }
+
+    // lecture canal 1
+    if (statutport)
+    {
+        statutport = port->lireRegistre(nreg_lect_can1, Chanel[1]);
+    }
+    else
+    {
+        return "Erreur";
+    }
+
+    // lecture canal 2
+    if (statutport)
+    {
+        statutport = port->lireRegistre(nreg_lect_can2, Chanel[2]);
+    }
+    else
+    {
+        return "Erreur";
+    }
+
+    // lecture canal 3
+    if (statutport)
+    {
+        statutport = port->lireRegistre(nreg_lect_can3, Chanel[3]);
+    }
+    else
+    {
+        return "Erreur";
+    }
+
+    if (statutport)
+    {
+        //Ajuster les pot
+        if (swt == 0x80)	//#1
+        {
+            statutport = port->ecrireRegistre(nreg_ecri_aff7sg0, 0x01);
+            statutport = port->ecrireRegistre(nreg_ecri_aff7sg1, Chanel[0]);
+            statutport = port->ecrireRegistre(nreg_ecri_aff7dot, 0x04);
+        }
+        else if (swt == 0x40)	//#2
+        {
+            statutport = port->ecrireRegistre(nreg_ecri_aff7sg0, 0x02);
+            statutport = port->ecrireRegistre(nreg_ecri_aff7sg1, Chanel[1]);
+            statutport = port->ecrireRegistre(nreg_ecri_aff7dot, 0x04);
+        }
+        else if (swt == 0x20)	//#3
+        {
+            statutport = port->ecrireRegistre(nreg_ecri_aff7sg0, 0x03);
+            statutport = port->ecrireRegistre(nreg_ecri_aff7sg1, Chanel[2]);
+            statutport = port->ecrireRegistre(nreg_ecri_aff7dot, 0x04);
+        }
+        else if (swt == 0x10)	//#4
+        {
+            statutport = port->ecrireRegistre(nreg_ecri_aff7sg0, 0x04);
+            statutport = port->ecrireRegistre(nreg_ecri_aff7sg1, Chanel[3]);
+            statutport = port->ecrireRegistre(nreg_ecri_aff7dot, 0x04);
+        }
+        else
+        {
+            statutport = port->ecrireRegistre(nreg_ecri_aff7sg0, 0x00);
+            statutport = port->ecrireRegistre(nreg_ecri_aff7sg1, 0x00);
+            statutport = port->ecrireRegistre(nreg_ecri_aff7dot, 0x00);
+        }
+
+
+        if (stat_btn == 0x11 && swt == 0x00 && RecordOn == false && AnalyzeOn == false)
+        {
+            //Lance la lecture
+            RecordOn = true;
+            return "LecStart";
+        }
+        else if (RecordOn == true && nbRecord < nbToRecord && AnalyzeOn == false)
+        {
+            //Enregistre les lectures
+            SBA[nbRecord] = Chanel[0];
+            SBB[nbRecord] = Chanel[1];
+            SBC[nbRecord] = Chanel[2];
+            SBD[nbRecord] = Chanel[3];
+
+            nbRecord++;
+            return "Lec";
+        }
+        else if (RecordOn == true && nbRecord == nbToRecord && AnalyzeOn == false)
+        {
+            //Arrête la lecture
+            RecordOn = false;
+            AnalyzeOn = true;
+            return "LecStop";
+        }
+        else if (RecordOn == false && AnalyzeOn == true)
+        {
+            //Vérifie la correspondance
+            QString rep = AnalyzeRecord();
+            AnalyzeOn = false;
+            nbRecord = 0;
+            return rep;
+        }
+
+        return "Rien";
+    }
+    else
+    {
+        return "Erreur";
+    }
+}
+
+QString Fpga::AnalyzeRecord()
+{
+    //SBA
+    {
+        int minimum = 0, moyenne = 0, maximum = 0, pourcentage = 0;
+        sort(std::begin(SBA),std::end(SBA));
+        //Calculs
+
+
+        //Inscription
+        RecordValue.SBA[0] = QString::number(minimum);
+        RecordValue.SBA[1] = QString::number(moyenne);
+        RecordValue.SBA[2] = QString::number(maximum);
+        RecordValue.SBA[3] = QString::number(pourcentage);
+    }
+
+    //SBB
+    {
+        int minimum = 0, moyenne = 0, maximum = 0, pourcentage = 0;
+        sort(std::begin(SBB), std::end(SBB));
+        //Calculs
+
+
+        //Inscription
+        RecordValue.SBB[0] = QString::number(minimum);
+        RecordValue.SBB[1] = QString::number(moyenne);
+        RecordValue.SBB[2] = QString::number(maximum);
+        RecordValue.SBB[3] = QString::number(pourcentage);
+    }
+
+    //SBC
+    {
+        int minimum = 0, moyenne = 0, maximum = 0, pourcentage = 0;
+        sort(std::begin(SBC), std::end(SBC));
+        //Calculs
+
+
+        //Inscription
+        RecordValue.SBC[0] = QString::number(minimum);
+        RecordValue.SBC[1] = QString::number(moyenne);
+        RecordValue.SBC[2] = QString::number(maximum);
+        RecordValue.SBC[3] = QString::number(pourcentage);
+    }
+
+    //SBD
+    {
+        int minimum = 0, moyenne = 0, maximum = 0, pourcentage = 0;
+        sort(std::begin(SBD), std::end(SBD));
+        //Calculs
+
+
+        //Inscription
+        RecordValue.SBD[0] = QString::number(minimum);
+        RecordValue.SBD[1] = QString::number(moyenne);
+        RecordValue.SBD[2] = QString::number(maximum);
+        RecordValue.SBD[3] = QString::number(pourcentage);
+    }
+
+    return "Done";
+}
+
+void Fpga::SaveRecord(QString s)
+{
+    QFile file(s);
+    file.open(QIODevice::WriteOnly | QIODevice::Text);
+    QTextStream in(&file);
+
+    in << RecordValue.SBA[0] + "-" + RecordValue.SBA[1] + "-" + RecordValue.SBA[2] + "-" + RecordValue.SBA[3] + "\n";
+    in << RecordValue.SBB[0] + "-" + RecordValue.SBB[1] + "-" + RecordValue.SBB[2] + "-" + RecordValue.SBB[3] + "\n";
+    in << RecordValue.SBC[0] + "-" + RecordValue.SBC[1] + "-" + RecordValue.SBC[2] + "-" + RecordValue.SBC[3] + "\n";
+    in << RecordValue.SBD[0] + "-" + RecordValue.SBD[1] + "-" + RecordValue.SBD[2] + "-" + RecordValue.SBD[3] + "\n";
+
+    file.close();
 }

@@ -10,6 +10,10 @@
 #include "needed.h"
 #include "CommunicationFPGA.h"
 
+const int nbToRead = 100;
+const int nbToRecord = 100;
+
+
 struct Phoneme
 {
     int val[4][2];
@@ -20,6 +24,39 @@ struct Lecture
     int pot[4];
 };
 
+struct RecordStruct
+{
+    //  minimum - moyenne - maximum - pourcentage
+    QString SBA[4];
+    QString SBB[4];
+    QString SBC[4];
+    QString SBD[4];
+
+    QString toString()
+    {
+        QString text = "SBA :\n";
+        text += "Minumum : " + SBA[0] + "\n";
+        text += "Moyenne : " + SBA[1] + "\n";
+        text += "Maximum : " + SBA[2] + "\n";
+        text += "Pourcentage : " + SBA[3] + "\n\n";
+        text += "SBB :\n";
+        text += "Minumum : " + SBB[0] + "\n";
+        text += "Moyenne : " + SBB[1] + "\n";
+        text += "Maximum : " + SBB[2] + "\n";
+        text += "Pourcentage : " + SBB[3] + "\n\n";
+        text += "SBC :\n";
+        text += "Minumum : " + SBC[0] + "\n";
+        text += "Moyenne : " + SBC[1] + "\n";
+        text += "Maximum : " + SBC[2] + "\n";
+        text += "Pourcentage : " + SBC[3] + "\n\n";
+        text += "SBD :\n";
+        text += "Minumum : " + SBD[0] + "\n";
+        text += "Moyenne : " + SBD[1] + "\n";
+        text += "Maximum : " + SBD[2] + "\n";
+        text += "Pourcentage : " + SBD[3];
+        return text;
+    }
+};
 
 class Fpga
 {
@@ -31,16 +68,37 @@ public:
     QString Read();
     QString Verification();
 
+    QString LectureRecord();
+    QString AnalyzeRecord();
+
+    void SaveRecord(QString file);
+
     bool SaveOn = false;
     bool VerifOn = false;
+    int nbRead = 0;
+
+    bool RecordOn = false;
+    bool AnalyzeOn = false;
+    int nbRecord = 0;
+    RecordStruct RecordValue;
+
 
 private:
-    int nbLecture = 100;		//	Speed = 1 lecture par 10ms
-    int nbSaved = 0;
+    //Read
+    
+    Lecture ListLecture[nbToRead];
+
+    //Record
+    int SBA[nbToRecord];
+    int SBB[nbToRecord];
+    int SBC[nbToRecord];
+    int SBD[nbToRecord];
+    
     
 
+
     Phoneme valPhoneme[4];
-    Lecture* ListLecture = new Lecture[nbLecture];
+    
 
     BOOL statutport = false;
 

@@ -4,9 +4,10 @@
 * Nom de fichier : stats.cpp
 * Description : Permet de créer l'interface de classement et de gérer son fonctionnement et ces intéractions
 */
+
 #include "stats.h"
 
-Stats::Stats()
+Stats::Stats(QWidget* parent) : QWidget(parent)
 {
     //Permet de créer les éléments de l'interface de classement
     this->setObjectName("widget_Stats");
@@ -21,10 +22,11 @@ Stats::Stats()
     QLabel* label_Max = Create_Label_Stats("label_Max", "Max", 15, true, true, false);
 
     //Button
-    button_Accueil = Create_Button_Stats("button_Stats_Accueil", "Menu", 15, true, false);
-    QPushButton* button_Effacer = Create_Button_Stats("button_Stats_Effacer", "Effacer", 15, true, false);
-    connect(button_Effacer, &QPushButton::clicked, this, &Stats::Button_clicked);
+    Bouton_Quitter = Create_Button_Stats("button_Stats_Accueil", "Menu", 15, true);
+    connect(Bouton_Quitter, SIGNAL(clicked()), parent, SLOT(Bouton_Stats_Quitter_Clicked()));
 
+    Bouton_Effacer = Create_Button_Stats("button_Stats_Effacer", "Effacer", 15, true);
+    connect(Bouton_Effacer, SIGNAL(clicked()), this, SLOT(Bouton_Effacer_Clicked()));
 
     //Layout
     QGridLayout* gLayout = new QGridLayout(this);
@@ -89,9 +91,9 @@ Stats::Stats()
     vLayout->addSpacerItem(new QSpacerItem(40, 20));
     vLayout->addWidget(frame);
     vLayout->addSpacerItem(new QSpacerItem(40, 20));
-    vLayout->addWidget(button_Accueil);
+    vLayout->addWidget(Bouton_Quitter);
     vLayout->addSpacerItem(new QSpacerItem(40, 20));
-    vLayout->addWidget(button_Effacer);
+    vLayout->addWidget(Bouton_Effacer);
 
     gLayout->addLayout(vLayout, 0, 0, Qt::AlignCenter);
 }
@@ -162,7 +164,7 @@ void Stats::Sort()
     ListGame = temp;
 }
 
-QPushButton* Stats::Create_Button_Stats(QString nom, QString text, int size, bool bold, bool custom)
+QPushButton* Stats::Create_Button_Stats(QString nom, QString text, int size, bool bold)
 {   
     //Fonction pour créer des boutons pour la classe Stats
     QFont font;
@@ -177,13 +179,6 @@ QPushButton* Stats::Create_Button_Stats(QString nom, QString text, int size, boo
     button->setAutoFillBackground(true);
     button->setStyleSheet("QPushButton { background-color : rgb(255,255,255); }");
     button->setCursor(Qt::PointingHandCursor);
-
-    //if (custom == true)
-    //{
-    //    connect(button, &QPushButton::pressed, this, &UI::Button_Pressed);
-    //    connect(button, &QPushButton::released, this, &UI::Button_Released);
-    //}
-    //connect(button, &QPushButton::clicked, this, &UI::Button_clicked);
 
     return button;
 }
@@ -228,39 +223,32 @@ QLabel* Stats::Create_Label_Stats(QString nom, QString text, int size, bool bold
     return label;
 }
 
-void Stats::Button_clicked()
+void Stats::Bouton_Effacer_Clicked()
 {
-    //SLOT pour traite les actions a effectuer lorsque un des bouton de l'interface stats est cliquer
-    QString name = qobject_cast<QPushButton*>(sender())->objectName();
+    QMessageBox msgBox;
+    msgBox.setWindowTitle("Super 2048");
 
-    if (name == "button_Stats_Effacer")
+    QFont font = msgBox.font();
+    font.setPointSize(15);
+    font.setBold(false);
+    msgBox.setFont(font);
+
+    msgBox.setText("Voulez vous vraiment effacer les donnees du classement?");
+    QPushButton* boutonOui = msgBox.addButton("Oui", QMessageBox::YesRole);
+    QPushButton* boutonNon = msgBox.addButton("Non", QMessageBox::NoRole);
+    msgBox.setDefaultButton(boutonNon);
+    msgBox.exec();
+
+    if (msgBox.clickedButton() == boutonOui)
     {
-        QMessageBox msgBox;
-        msgBox.setWindowTitle("Super 2048");
+        QFile file("Stats.2048");
 
-        QFont font = msgBox.font();
-        font.setPointSize(15);
-        font.setBold(false);
-        msgBox.setFont(font);
-
-        msgBox.setText("Voulez vous vraiment effacer les donnees du classement?");
-        QPushButton* boutonOui = msgBox.addButton("Oui", QMessageBox::YesRole);
-        QPushButton* boutonNon = msgBox.addButton("Non", QMessageBox::NoRole);
-        msgBox.setDefaultButton(boutonNon);
-        msgBox.exec();
-
-        if (msgBox.clickedButton() == boutonOui)
+        if (file.open(QIODevice::WriteOnly | QIODevice::Text))
         {
-            QFile file("Stats.2048");
-
-            if (file.open(QIODevice::WriteOnly | QIODevice::Text))
-            {
-                QTextStream in(&file);
-                in << "";
-            }
-            file.close();
-            button_Accueil->animateClick();
+            QTextStream in(&file);
+            in << "";
         }
+        file.close();
+        Bouton_Quitter->animateClick();
     }
-    
 }

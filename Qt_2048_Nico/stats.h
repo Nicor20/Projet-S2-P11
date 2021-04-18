@@ -22,20 +22,24 @@ struct Game
 
 class Stats : public QWidget
 {
+    Q_OBJECT
 public:
-    Stats();
+    Stats(QWidget* parent);
     ~Stats();
 
     void Read();
     void Sort();
 
-    QPushButton* Create_Button_Stats(QString nom, QString text, int size, bool bold, bool custom);
+    QPushButton* Create_Button_Stats(QString nom, QString text, int size, bool bold);
     QLabel* Create_Label_Stats(QString nom, QString text, int size, bool bold, bool info, bool stats, int num = 0);
 
-    QPushButton* button_Accueil;
 private slots:
-    void Button_clicked();
+    void Bouton_Effacer_Clicked();
+
 private:
+    QPushButton* Bouton_Effacer;
+    QPushButton* Bouton_Quitter;
+
     QList<Game> ListGame;
 
     int NbToShow = 10;

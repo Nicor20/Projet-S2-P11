@@ -12,6 +12,7 @@
 #include "accueil.h"
 #include "jeu.h"
 #include "stats.h"
+#include "Record.h"
 
 class UI : public QMainWindow
 {
@@ -20,17 +21,30 @@ public:
     UI();
     ~UI();
 
+    void resizeEvent(QResizeEvent* event);
+
     void Load_Accueil();
     void Load_Jeu(bool load);
     void Load_Stats();
+    void Load_Record();
 
 private slots:
-    void Button_clicked();
+    void Bouton_Accueil_Jouer_Clicked();
+    void Bouton_Accueil_Charger_Clicked();
+    void Bouton_Accueil_Stats_Clicked();
+    void Bouton_Accueil_Record_Clicked();
+    void Bouton_Accueil_Quitter_Clicked();
+    void Bouton_Jeu_Quitter_Clicked();
+    void Bouton_Stats_Quitter_Clicked();
+    void Bouton_Record_Quitter_Clicked();
 
 private:
     Accueil* accueil;
     Jeu* jeu;
     Stats* stats;
+    Record* record;
+
+    int current;
 
     int GridSize = 4;
 };

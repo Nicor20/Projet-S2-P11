@@ -11,31 +11,39 @@
 
 class Accueil : public QWidget
 {
+    Q_OBJECT
 public:
-    Accueil(int* size);
+    Accueil(QWidget* parent, int* size);
     ~Accueil();
 
-    QPushButton* Create_Button_Accueil(QString nom, QString text, int size, bool bold, bool custom);
-    QLabel* Create_Label_Accueil(QString nom, QString text, int size, bool bold, bool custom = false);
+    void resizeEvent(QResizeEvent* event);
+    
+    void CheckFiles();
 
-    bool CheckStats();
-    bool CheckSave();
-
-    void CreateStats();
-    void CreateSave();
-
-    QPushButton* button_Jouer;
-    QPushButton* button_Charger;
-    QPushButton* button_Stats;
-    QPushButton* button_Quitter;
+    QPushButton* Create_Button(QWidget* parent, QString nom, QString text, int size, bool bold);
+    QLabel* Create_Label(QWidget* parent, QString nom, QString text, int size, bool bold);
 
 private slots:
-    void Button_clicked();
-    void Button_Pressed();
-    void Button_Released();
+    void Bouton_Moin_Clicked();
+    void Bouton_Plus_Clicked();
+    void Bouton_Pressed();
+    void Bouton_Released();
 
 private:
+    QGridLayout* gLayout1;
+    QGridLayout* gLayout2;
+
+    QLabel* label_Titre;
+    QLabel* label_Sub;
     QLabel* label_GridSize;
+
+    QPushButton* Bouton_Moin;
+    QPushButton* Bouton_Plus;
+    QPushButton* Bouton_Jouer;
+    QPushButton* Bouton_Charger;
+    QPushButton* Bouton_Classement;
+    QPushButton* Bouton_Record;
+    QPushButton* Bouton_Quitter;
 
     int* GridSize;
 };
