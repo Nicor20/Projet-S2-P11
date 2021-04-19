@@ -19,3 +19,4 @@
 #include <QString>
 #include <QVector>
 #include <iostream>
+#include <QStatusBar>

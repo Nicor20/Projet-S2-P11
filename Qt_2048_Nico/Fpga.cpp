@@ -8,6 +8,7 @@
 
 Fpga::Fpga()
 {
+
     //Instancie la connection avec la carte fpga et les valeurs de référence pour chaque phonème
     port = new CommunicationFPGA();
 
@@ -79,6 +80,7 @@ Fpga::Fpga()
     //Phoneme 'eu' = ( 0xAD - 0x3A - 0x4F - 0x16 )
 
     //Phoneme 'i' = ( 0xA0 - 0x08 - 0x83 - 0xAE )
+    CreatePhoneme();
 
 }
 
@@ -200,8 +202,15 @@ QString Fpga::Read()
         else if (SaveOn == true && nbRead < nbToRead && VerifOn == false)	
         {
             //Enregistre les lectures
-            for (int i = 0; i < 4; i++)
-                ListLecture[nbRead].pot[i] = Chanel[i];
+            SBA_L[nbRead] = Chanel[0];
+            SBB_L[nbRead] = Chanel[1];
+            SBC_L[nbRead] = Chanel[2];
+            SBD_L[nbRead] = Chanel[3];
+            cout << "SBA(" << Chanel[0] << ") SBB(" << Chanel[1] << ") SBC(" << Chanel[2] << ") SBD(" << Chanel[3] << ")" << endl;
+
+
+            //for (int i = 0; i < 4; i++)
+            //    ListLecture[nbRead].pot[i] = Chanel[i];
 
             nbRead++;
             return "Lec";
@@ -232,6 +241,216 @@ QString Fpga::Read()
 
 QString Fpga::Verification()
 {
+    int moyenne[4] = { 0,0,0,0 };
+
+    //SBA_L
+    QList<int> Temp_SBA;
+    std::sort(std::begin(SBA_L), std::end(SBA_L));
+
+    //Remove zero
+    for (int i = 0; i < nbToRead; i++)
+    {
+        if (SBA_L[i] != 0)
+        {
+            Temp_SBA.append(SBA_L[i]);
+        }
+    }
+
+    //Moyenne
+    if (Temp_SBA.length() > 0)
+    {
+        for (int i = 0; i < Temp_SBA.length(); i++)
+        {
+            moyenne[0] += Temp_SBA.at(i);
+        }
+
+        
+        moyenne[0] = std::ceil(moyenne[0] / Temp_SBA.length());
+    }
+
+    
+    
+    //SBB_L
+    QList<int> Temp_SBB;
+    std::sort(std::begin(SBB_L), std::end(SBB_L));
+
+    //Remove zero
+    for (int i = 0; i < nbToRead; i++)
+    {
+        if (SBB_L[i] != 0)
+        {
+            Temp_SBB.append(SBB_L[i]);
+        }
+    }
+
+    //Moyenne
+    if (Temp_SBB.length() > 0)
+    {
+        for (int i = 0; i < Temp_SBB.length(); i++)
+        {
+            moyenne[1] += Temp_SBB.at(i);
+        }
+        moyenne[1] = std::ceil(moyenne[1] / Temp_SBB.length());
+    }
+
+    
+    
+    //SBC_L
+    QList<int> Temp_SBC;
+    std::sort(std::begin(SBC_L), std::end(SBC_L));
+
+    //Remove zero
+    for (int i = 0; i < nbToRead; i++)
+    {
+        if (SBC_L[i] != 0)
+        {
+            Temp_SBC.append(SBC_L[i]);
+        }
+    }
+
+    //Moyenne
+    if (Temp_SBC.length() > 0)
+    {
+        for (int i = 0; i < Temp_SBC.length(); i++)
+        {
+            moyenne[2] += Temp_SBC.at(i);
+        }
+        moyenne[2] = std::ceil(moyenne[2] / Temp_SBC.length());
+    }
+
+    
+    
+    //SBD_L
+    QList<int> Temp_SBD;
+    std::sort(std::begin(SBD_L), std::end(SBD_L));
+
+    //Remove zero
+    for (int i = 0; i < nbToRead; i++)
+    {
+        if (SBD_L[i] != 0)
+        {
+            Temp_SBD.append(SBD_L[i]);
+        }
+    }
+
+    //Moyenne
+    if (Temp_SBD.length() > 0)
+    {
+        for (int i = 0; i < Temp_SBD.length(); i++)
+        {
+            moyenne[3] += Temp_SBD.at(i);
+        }
+        moyenne[3] = std::ceil(moyenne[3] / Temp_SBD.length());
+    }
+
+
+    int diff_Each[4][4] = { { 0,0,0,0 }, { 0,0,0,0 }, { 0,0,0,0 }, { 0,0,0,0 } };
+    int diff_All[4] = { 0,0,0,0 };
+
+    for (int a = 0; a < 4; a++)
+    {
+        for (int b = 0; b < 4; b++)
+        {
+            diff_Each[a][b] += std::abs(ListPhoneme[a].moyenne[b].toInt() - moyenne[b]);
+            diff_All[a] += std::abs(ListPhoneme[a].moyenne[b].toInt() - moyenne[b]);
+        }
+    }
+
+
+    int max = diff_All[0];
+    int index = 0;
+
+    for (int i = 1; i < 4; i++)
+    {
+        if (diff_All[i] <= max)
+        {
+            max = diff_All[i];
+            index = i;
+        }
+    }
+
+
+
+
+
+
+
+    int good_SBA = 30;
+    int good_SBB = 30;
+    int good_SBC = 30;
+    int good_SBD = 30;
+
+    if (index == 0)
+    {
+        //A
+        cout << "Result A" << endl;
+        cout << "Difference (" << diff_Each[index][0] << "-" << diff_Each[index][1] << "-" << diff_Each[index][2] << "-" << diff_Each[index][3] << ")" << endl;
+        cout << "Moyenne (" << moyenne[0] << "-" << moyenne[1] << "-" << moyenne[2] << "-" << moyenne[3] << ")" << endl;
+
+        if (diff_Each[index][0] <= good_SBA && diff_Each[index][1] <= good_SBB && diff_Each[index][2] <= good_SBC && diff_Each[index][3] <= good_SBD)
+        {
+            return "Haut";
+        }
+        else
+        {
+            return "Aucun";
+        }
+    }
+    else if (index == 1)
+    {
+        //E
+        cout << "Result E" << endl;
+        cout << "Difference (" << diff_Each[index][0] << "-" << diff_Each[index][1] << "-" << diff_Each[index][2] << "-" << diff_Each[index][3] << ")" << endl;
+        cout << "Moyenne (" << moyenne[0] << "-" << moyenne[1] << "-" << moyenne[2] << "-" << moyenne[3] << ")" << endl;
+
+        if (diff_Each[index][0] <= good_SBA && diff_Each[index][1] <= good_SBB && diff_Each[index][2] <= good_SBC && diff_Each[index][3] <= good_SBD)
+        {
+            return "Droit";
+        }
+        else
+        {
+            return "Aucun";
+        }
+    }
+    else if (index == 2)
+    {
+        //EU
+        cout << "Result EU" << endl;
+        cout << "Difference (" << diff_Each[index][0] << "-" << diff_Each[index][1] << "-" << diff_Each[index][2] << "-" << diff_Each[index][3] << ")" << endl;
+        cout << "Moyenne (" << moyenne[0] << "-" << moyenne[1] << "-" << moyenne[2] << "-" << moyenne[3] << ")" << endl;
+
+        if (diff_Each[index][0] <= good_SBA && diff_Each[index][1] <= good_SBB && diff_Each[index][2] <= good_SBC && diff_Each[index][3] <= good_SBD)
+        {
+            return "Bas";
+        }
+        else
+        {
+            return "Aucun";
+        }
+    }
+    else if (index == 3)
+    {
+        //I
+        cout << "Result I" << endl;
+        cout << "Difference (" << diff_Each[index][0] << "-" << diff_Each[index][1] << "-" << diff_Each[index][2] << "-" << diff_Each[index][3] << ")" << endl;
+        cout << "Moyenne (" << moyenne[0] << "-" << moyenne[1] << "-" << moyenne[2] << "-" << moyenne[3] << ")" << endl;
+
+        if (diff_Each[index][0] <= good_SBA && diff_Each[index][1] <= good_SBB && diff_Each[index][2] <= good_SBC && diff_Each[index][3] <= good_SBD)
+        {
+            return "Gauche";
+        }
+        else
+        {
+            return "Aucun";
+        }
+    }
+    else
+    {
+        return "Aucun";
+    }
+
+
+    /*
     //effectue la comparaison pour déterminer le phonème dit
     int pointage[4] = { 0 };
     int lecture;
@@ -302,6 +521,7 @@ QString Fpga::Verification()
         statutport = port->ecrireRegistre(nreg_ecri_aff7dot, 0);
         return "Aucun";
     }
+    */
 }
 
 QString Fpga::LectureRecord()
@@ -416,6 +636,8 @@ QString Fpga::LectureRecord()
             SBC[nbRecord] = Chanel[2];
             SBD[nbRecord] = Chanel[3];
 
+            cout << "SBA(" << Chanel[0] << ") SBB(" << Chanel[1] << ") SBC(" << Chanel[2] << ") SBD(" << Chanel[3] << ")" << endl;
+
             nbRecord++;
             return "Lec";
         }
@@ -445,62 +667,142 @@ QString Fpga::LectureRecord()
 
 QString Fpga::AnalyzeRecord()
 {
+    RecordValue.moyenne[0] = 0;
+    RecordValue.moyenne[1] = 0;
+    RecordValue.moyenne[2] = 0;
+    RecordValue.moyenne[3] = 0;
+    
     //SBA
     {
-        int minimum = 0, moyenne = 0, maximum = 0, pourcentage = 0;
-        sort(std::begin(SBA),std::end(SBA));
-        //Calculs
+        QList<int> Temp;
+        int moyenne = 0;
 
+        std::sort(std::begin(SBA), std::end(SBA));
+        
+        //Remove zero
+        for (int i = 0; i < nbToRecord; i++)
+        {
+            if (SBA[i] != 0)
+            {
+                Temp.append(SBA[i]);
+            }
+        }
+
+        //Moyenne
+        if (Temp.length() > 0)
+        {
+            for (int i = 0; i < Temp.length(); i++)
+            {
+                moyenne += Temp.at(i);
+            }
+            moyenne = std::ceil(moyenne/Temp.length());
+        }
+
+        //Show
+        //if (Temp.length() > 0)
+        //{
+        //    for (int i = 0; i < Temp.length(); i++)
+        //    {
+        //        cout << "SBA : " << Temp.at(i) << endl;
+        //    }
+        //}
 
         //Inscription
-        RecordValue.SBA[0] = QString::number(minimum);
-        RecordValue.SBA[1] = QString::number(moyenne);
-        RecordValue.SBA[2] = QString::number(maximum);
-        RecordValue.SBA[3] = QString::number(pourcentage);
+        RecordValue.moyenne[0] = QString::number(moyenne);
     }
 
     //SBB
     {
-        int minimum = 0, moyenne = 0, maximum = 0, pourcentage = 0;
-        sort(std::begin(SBB), std::end(SBB));
-        //Calculs
+        QList<int> Temp;
+        int moyenne = 0;
 
+        std::sort(std::begin(SBB), std::end(SBB));
+
+
+        //Remove zero
+        for (int i = 0; i < nbToRecord; i++)
+        {
+            if (SBB[i] != 0)
+            {
+                Temp.append(SBB[i]);
+            }
+        }
+
+        //Moyenne
+        if (Temp.length() > 0)
+        {
+            for (int i = 0; i < Temp.length(); i++)
+            {
+                moyenne += Temp.at(i);
+            }
+            moyenne = std::ceil(moyenne / Temp.length());
+        }
+        
 
         //Inscription
-        RecordValue.SBB[0] = QString::number(minimum);
-        RecordValue.SBB[1] = QString::number(moyenne);
-        RecordValue.SBB[2] = QString::number(maximum);
-        RecordValue.SBB[3] = QString::number(pourcentage);
+        RecordValue.moyenne[1] = QString::number(moyenne);
     }
 
     //SBC
     {
-        int minimum = 0, moyenne = 0, maximum = 0, pourcentage = 0;
-        sort(std::begin(SBC), std::end(SBC));
-        //Calculs
+        QList<int> Temp;
+        int moyenne = 0;
 
+        std::sort(std::begin(SBC), std::end(SBC));
+        
+
+        //Remove zero
+        for (int i = 0; i < nbToRecord; i++)
+        {
+            if (SBC[i] != 0)
+            {
+                Temp.append(SBC[i]);
+            }
+        }
+
+        //Moyenne
+        if (Temp.length() > 0)
+        {
+            for (int i = 0; i < Temp.length(); i++)
+            {
+                moyenne += Temp.at(i);
+            }
+            moyenne = std::ceil(moyenne / Temp.length());
+        }
 
         //Inscription
-        RecordValue.SBC[0] = QString::number(minimum);
-        RecordValue.SBC[1] = QString::number(moyenne);
-        RecordValue.SBC[2] = QString::number(maximum);
-        RecordValue.SBC[3] = QString::number(pourcentage);
+        RecordValue.moyenne[2] = QString::number(moyenne);
     }
 
     //SBD
     {
-        int minimum = 0, moyenne = 0, maximum = 0, pourcentage = 0;
-        sort(std::begin(SBD), std::end(SBD));
-        //Calculs
+        QList<int> Temp;
+        int moyenne = 0;
 
+        std::sort(std::begin(SBD), std::end(SBD));
 
+        //Remove zero
+        for (int i = 0; i < nbToRecord; i++)
+        {
+            if (SBD[i] != 0)
+            {
+                Temp.append(SBD[i]);
+            }
+        }
+
+        //Moyenne
+        if (Temp.length() > 0)
+        {
+            for (int i = 0; i < Temp.length(); i++)
+            {
+                moyenne += Temp.at(i);
+            }
+            moyenne  = std::ceil(moyenne / Temp.length());
+        }
+        
         //Inscription
-        RecordValue.SBD[0] = QString::number(minimum);
-        RecordValue.SBD[1] = QString::number(moyenne);
-        RecordValue.SBD[2] = QString::number(maximum);
-        RecordValue.SBD[3] = QString::number(pourcentage);
+        RecordValue.moyenne[3] = QString::number(moyenne);
     }
-
     return "Done";
 }
 
@@ -510,10 +812,41 @@ void Fpga::SaveRecord(QString s)
     file.open(QIODevice::WriteOnly | QIODevice::Text);
     QTextStream in(&file);
 
-    in << RecordValue.SBA[0] + "-" + RecordValue.SBA[1] + "-" + RecordValue.SBA[2] + "-" + RecordValue.SBA[3] + "\n";
-    in << RecordValue.SBB[0] + "-" + RecordValue.SBB[1] + "-" + RecordValue.SBB[2] + "-" + RecordValue.SBB[3] + "\n";
-    in << RecordValue.SBC[0] + "-" + RecordValue.SBC[1] + "-" + RecordValue.SBC[2] + "-" + RecordValue.SBC[3] + "\n";
-    in << RecordValue.SBD[0] + "-" + RecordValue.SBD[1] + "-" + RecordValue.SBD[2] + "-" + RecordValue.SBD[3] + "\n";
+    in << RecordValue.moyenne[0] + "-" + RecordValue.moyenne[1] + "-" + RecordValue.moyenne[2] + "-" + RecordValue.moyenne[3] + "\n";
 
     file.close();
+}
+
+void Fpga::CreatePhoneme()
+{
+    QString FileName[4] = { "PH_A.2048","PH_E.2048","PH_EU.2048","PH_I.2048" };
+
+
+    for (int i = 0; i < 4; i++)
+    {
+        QFile file(FileName[i]);
+
+        if (file.exists())
+        {
+            file.open(QIODevice::ReadOnly | QIODevice::Text);
+
+            QTextStream in(&file);
+
+            QString line = in.readLine();
+
+            qDebug() << FileName[i] << " (" << line << ")\n";
+
+            ListPhoneme[i].moyenne[0] = line.split("-")[0];
+            ListPhoneme[i].moyenne[1] = line.split("-")[1];
+            ListPhoneme[i].moyenne[2] = line.split("-")[2];
+            ListPhoneme[i].moyenne[3] = line.split("-")[3];
+
+            file.close();
+        }
+    }
+}
+
+int Fpga::GetNbToRecord()
+{
+    return nbToRecord;
 }

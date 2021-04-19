@@ -1,5 +1,6 @@
 <RCC>
     <qresource prefix="/Resources">
 	<file>BG.png</file>
+	<file>LOGO_SUPER2048.jpg</file>
     </qresource>
 </RCC>

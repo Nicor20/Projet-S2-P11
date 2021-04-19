@@ -30,11 +30,14 @@ public:
     void SaveStats(QString s);
     void ClearFile();
     QString Menu();
-    
+
+    void Status(QString s);
+    void Clear_Status();
     
     QPushButton* Create_Button(QString nom, QString text, int size, bool bold);
     QLabel* Create_Label(QString nom, QString text, int size, bool bold);
     QLabel* Create_Custom_Label(QString nom, QString text, int size, bool bold);
+    QLabel* Create_Game_Label(QString nom, QString text, int size, bool bold);
     void Customize_Label(QLabel* label);
 
 private slots:
@@ -51,12 +54,14 @@ private slots:
 private:
     QGridLayout* gLayout1;
     QGridLayout* gLayout2;
+    QGridLayout* gLayout_Game;
+    QGridLayout* gLayout_Button;
     QFrame* frame;
 
-    QLabel* label_Titre;
     QLabel* label_Score;
     QLabel* label_NbMove;
     QLabel* label_Max;
+    QLabel* label_Status;
     QLabel*** labelGrid;
 
     QPushButton* Bouton_Haut;

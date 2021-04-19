@@ -2,4 +2,4 @@
   CommunicationFPGA-release.lib(CommunicationFPGA.obj) : MSIL .netmodule or module compiled with /GL found; restarting link with /LTCG; add /LTCG to the link command line to improve linker performance
   Generating code
   Finished generating code
-  can_b2_console.vcxproj -> C:\Users\canti\Desktop\Projet-S2-P11\test\can_b2_console\can_b2_console\VS2017\x64\Release\can_b2_console.exe
+  can_b2_console.vcxproj -> C:\Users\canti\Desktop\Projet-S2-P11\Autres\test\can_b2_console\can_b2_console\VS2017\x64\Release\can_b2_console.exe

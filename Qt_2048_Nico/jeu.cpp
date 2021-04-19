@@ -19,9 +19,17 @@ Jeu::Jeu(QWidget* parent, int* size, bool load) : QWidget(parent), GridSize(size
     {
         gLayout1 = new QGridLayout(this);
         gLayout1->setObjectName("gLayout1");
+        this->setLayout(gLayout1);
 
         gLayout2 = new QGridLayout(gLayout1->widget());
         gLayout2->setObjectName("gLayout2");
+
+
+        gLayout_Game = new QGridLayout(gLayout2->widget());
+        gLayout_Game->setObjectName("gLayout_Game");
+
+        gLayout_Button = new QGridLayout(gLayout2->widget());
+        gLayout_Button->setObjectName("gLayout_Game");
 
         gLayout1->addLayout(gLayout2, 0, 0, Qt::AlignCenter);
     }
@@ -38,40 +46,40 @@ Jeu::Jeu(QWidget* parent, int* size, bool load) : QWidget(parent), GridSize(size
         {
             for (int y = 0; y < *size; y++)
             {
-                labelGrid[x][y] = Create_Custom_Label("label" + QString::number((x * 4) + y), QString::number(grid->Get(x, y)), 15, true);
+                labelGrid[x][y] = Create_Game_Label("label" + QString::number((x * 4) + y), QString::number(grid->Get(x, y)), 15, true);
             }
         }
     }
     
     //Labels
     {
-        label_Titre = Create_Label("Label Titre", "Super 2048", 50, true);
+        label_Score = Create_Custom_Label("Label Score", "Score\n" + QString::number(grid->GetScore()), 15, true);
 
-        label_Score = Create_Label("Label Score", "Score\n" + QString::number(grid->GetScore()), 15, true);
+        label_NbMove = Create_Custom_Label("Label NbMove", "Nb Move\n" + QString::number(grid->GetNbMove()), 15, true);
 
-        label_NbMove = Create_Label("Label NbMove", "Nb Move\n" + QString::number(grid->GetNbMove()), 15, true);
+        label_Max = Create_Custom_Label("Label Max", "Max\n" + QString::number(grid->GetMax()), 15, true);
 
-        label_Max = Create_Label("Label Max", "Max\n" + QString::number(grid->GetMax()), 15, true);
+        label_Status = Create_Label("Label Status", "", 20, true);
     }
     
     //Buttons
     {
-        Bouton_Haut = Create_Button("Bouton Haut", "Haut", 20, true);
+        Bouton_Haut = Create_Button("Bouton Haut", "Haut (A)", 20, true);
         connect(Bouton_Haut, SIGNAL(clicked()), this, SLOT(Bouton_Haut_Clicked()));
         connect(Bouton_Haut, SIGNAL(pressed()), this, SLOT(Bouton_Pressed()));
         connect(Bouton_Haut, SIGNAL(released()), this, SLOT(Bouton_Released()));
 
-        Bouton_Droit = Create_Button("Bouton Droit", "Droit", 20, true);
+        Bouton_Droit = Create_Button("Bouton Droit", "Droit (E)", 20, true);
         connect(Bouton_Droit, SIGNAL(clicked()), this, SLOT(Bouton_Droit_Clicked()));
         connect(Bouton_Droit, SIGNAL(pressed()), this, SLOT(Bouton_Pressed()));
         connect(Bouton_Droit, SIGNAL(released()), this, SLOT(Bouton_Released()));
 
-        Bouton_Bas = Create_Button("Bouton Bas", "Bas", 20, true);
+        Bouton_Bas = Create_Button("Bouton Bas", "Bas (EU)", 20, true);
         connect(Bouton_Bas, SIGNAL(clicked()), this, SLOT(Bouton_Bas_Clicked()));
         connect(Bouton_Bas, SIGNAL(pressed()), this, SLOT(Bouton_Pressed()));
         connect(Bouton_Bas, SIGNAL(released()), this, SLOT(Bouton_Released()));
 
-        Bouton_Gauche = Create_Button("Bouton Gauche", "Gauche", 20, true);
+        Bouton_Gauche = Create_Button("Bouton Gauche", "Gauche (I)", 20, true);
         connect(Bouton_Gauche, SIGNAL(clicked()), this, SLOT(Bouton_Gauche_Clicked()));
         connect(Bouton_Gauche, SIGNAL(pressed()), this, SLOT(Bouton_Pressed()));
         connect(Bouton_Gauche, SIGNAL(released()), this, SLOT(Bouton_Released()));
@@ -79,31 +87,43 @@ Jeu::Jeu(QWidget* parent, int* size, bool load) : QWidget(parent), GridSize(size
         Bouton_Quitter = Create_Button("Bouton Quitter", "Menu", 20, true);
         connect(Bouton_Quitter, SIGNAL(clicked()), parent, SLOT(Bouton_Jeu_Quitter_Clicked()));
     }
-    
-    //gLayout2
+
+    //gLayout_Game
     {
-        int size = *GridSize;
-
-        gLayout2->addWidget(label_Titre, 0, 0,1,3*size);
-
-        gLayout2->addWidget(label_Score, 1, 0 * size, 1, size);
-        gLayout2->addWidget(label_NbMove, 1, 1 * size, 1, size);
-        gLayout2->addWidget(label_Max, 1, 2 * size, 1, size);
-
-        for (int x = 0; x < size; x++)
+        for (int x = 0; x < *size; x++)
         {
-            for (int y = 0; y < size; y++)
+            for (int y = 0; y < *size; y++)
             {
-                gLayout2->addWidget(labelGrid[x][y], 2 + x, y * 3, 1, 3);
+                gLayout_Game->addWidget(labelGrid[x][y],x, y);
             }
         }
 
-        gLayout2->addWidget(Bouton_Haut, 2 + size, 1 * size, 1, size);
-        gLayout2->addWidget(Bouton_Gauche, 3 + size, 0 * size, 1, size);
-        gLayout2->addWidget(Bouton_Bas, 3 + size, 1 * size, 1, size);
-        gLayout2->addWidget(Bouton_Droit, 3 + size, 2 * size, 1, size);
+        frame = new QFrame(this);
+        frame->setFrameStyle(QFrame::Box | QFrame::Plain);
+        frame->setLineWidth(5);
+        frame->setLayout(gLayout_Game);
 
-        gLayout2->addWidget(Bouton_Quitter, 4 + size, 0, 1, 3 * size);
+    }
+
+    //gLayout_Button
+    {
+        gLayout_Button->addWidget(Bouton_Haut, 0, 1);
+        gLayout_Button->addWidget(Bouton_Gauche,1, 0);
+        gLayout_Button->addWidget(Bouton_Bas, 1,1);
+        gLayout_Button->addWidget(Bouton_Droit,1,2);
+    }
+    
+    //gLayout2
+    {
+        gLayout2->addWidget(label_Score, 0, 0);
+        gLayout2->addWidget(label_NbMove,0, 1);
+        gLayout2->addWidget(label_Max, 0, 2);
+        gLayout2->addWidget(frame, 1, 0, 1, 3);
+        gLayout2->addWidget(label_Status, 2, 0, 1, 3);
+        gLayout2->addLayout(gLayout_Button, 3, 0, 1, 3);
+        gLayout2->addWidget(Bouton_Quitter, 4, 0, 1, 3);
+
+        gLayout2->setVerticalSpacing(10);
     }
 
     //Timer
@@ -113,13 +133,15 @@ Jeu::Jeu(QWidget* parent, int* size, bool load) : QWidget(parent), GridSize(size
 
         if (fpga->isConnected())
         {
+            Status("Fpga connecte");
             Timer->start(wait_Time);
         }
+        else
+        {
+            Status("Fpga non connecte");
+        }
     }
-
-    frame = new QFrame(this);
-    frame->setFrameStyle(QFrame::Box | QFrame::Plain);
-    frame->setLineWidth(5);
+    
 }
 
 Jeu::~Jeu()
@@ -127,30 +149,13 @@ Jeu::~Jeu()
     delete fpga;
 }
 
-void Jeu::resizeEvent(QResizeEvent* event)
-{
-    int x = labelGrid[0][0]->x()-5;
-    int y = labelGrid[0][0]->y()-5;
-
-    int width = labelGrid[*GridSize - 1][*GridSize - 1]->x();
-    width += labelGrid[*GridSize - 1][*GridSize - 1]->rect().width();
-    width -= x;
-    width += 5;
-
-    int height = labelGrid[*GridSize - 1][*GridSize - 1]->y();
-    height += labelGrid[*GridSize - 1][*GridSize - 1]->rect().height();
-    height -= y;
-    height += 5;
-
-    frame->setGeometry(x, y, width, height);
-}
-
 void Jeu::CheckMove(QString s)
 {
     //Vérifie le résultat du mouvement et traite la réponse
-    GameState = s;
+    Status(s);
     if (s == "Gagne")
     {
+        GameState = "Gagne";
         Refresh_Grid();
         SaveStats(s);
         QMessageBox msgBox;
@@ -171,6 +176,7 @@ void Jeu::CheckMove(QString s)
     }
     else if (s == "Perdu")
     {
+        GameState = "Perdu";
         Refresh_Grid();
         SaveStats(s);
         QMessageBox msgBox;
@@ -189,11 +195,12 @@ void Jeu::CheckMove(QString s)
 
         Bouton_Quitter->animateClick();
     }
-    else if (s == "Refresh")
+    else if (s == "Actualisation")
     {
+        GameState = "Refresh";
         Refresh_Grid();
     }
-    else if (s == "No Move")
+    else if (s == "Mouvement Impossible")
     {
         //Rien faire
     }
@@ -213,6 +220,7 @@ QString Jeu::Menu()
 
     if (GameState == "Gagne" || GameState == "Perdu")
     {
+        ClearFile();
         return "Fin";
     }
     else
@@ -306,6 +314,24 @@ void Jeu::Refresh_Grid()
     label_Max->setText("Max\n" + QString::number(grid->GetMax()));
 }
 
+void Jeu::Status(QString s)
+{
+    label_Status->setText("Status (" + s + ")");
+}
+
+void Jeu::Clear_Status()
+{
+    label_Status->setText("");
+    qDebug() << "Status clearded\n";
+}
+
+#pragma region Event
+
+void Jeu::resizeEvent(QResizeEvent* event)
+{
+   
+}
+
 void Jeu::keyPressEvent(QKeyEvent* event)
 {
     //traite les touche de clavier cliquer et leurs interactions
@@ -329,6 +355,8 @@ void Jeu::keyPressEvent(QKeyEvent* event)
         }
     }
 }
+
+#pragma endregion
 
 #pragma region Sauvegarde
 
@@ -414,49 +442,65 @@ void Jeu::FPGA_Timer()
     if (text == "LecStart")
     {
         Timer->setInterval(read_Time);
-        cout << "Debut de lecture" << endl;
+
+        qDebug() << text << "\n";
+        Status(text);
     }
     else if (text == "Lec")
     {
-        cout << "Lecture" << endl;
+        Status("Lecture : " + QString::number(fpga->nbRead/2) + "%");
     }
     else if (text == "LecStop")
     {
         Timer->setInterval(wait_Time);
-        cout << "Fin de lecture" << endl;
+
+        qDebug() << text << "\n";
+        Status(text);
     }
     else if (text == "Haut")
     {
+        qDebug() << text << "\n";
+        Status(text);
         Bouton_Haut->animateClick();
     }
     else if (text == "Droit")
     {
+        qDebug() << text << "\n";
+        Status(text);
         Bouton_Droit->animateClick();
     }
     else if (text == "Bas")
     {
+        qDebug() << text << "\n";
+        Status(text);
         Bouton_Bas->animateClick();
     }
     else if (text == "Gauche")
     {
+        qDebug() << text << "\n";
+        Status(text);
         Bouton_Gauche->animateClick();
     }
     else if (text == "Aucun")
     {
+        qDebug() << text << "\n";
+        Status(text);
         cout << "Aucun" << endl;
     }
     else if (text == "Rien")
     {
-        cout << "Rien" << endl;
+        //cout << "Rien" << endl;
     }
     else if (text == "Erreur")
     {
         Timer->stop();
-        cout << "Erreur" << endl;
+        qDebug() << text << "\n";
+        Status(text);
     }
     else
     {
-        cout << "Pas prevus!!!" << endl;
+        qDebug() << "Pas prevus!!!" << "\n";
+        Status("Pas prevus!!!");
         Timer->stop();
     }
 }
@@ -569,11 +613,36 @@ QLabel* Jeu::Create_Label(QString nom, QString text, int size, bool bold)
     QLabel* label = new QLabel();
     label->setObjectName(nom);
     label->setText(text);
+    //label->setAlignment(Qt::AlignCenter);
+    font = label->font();
+    font.setPointSize(size);
+    font.setBold(bold);
+    label->setFont(font);
+    label->setMargin(10);
+
+    label->setFrameStyle(QFrame::Box | QFrame::Plain);
+    label->setLineWidth(4);
+    label->setMidLineWidth(3);
+    label->setAutoFillBackground(true);
+    label->setStyleSheet("QLabel { background-color : rgba(255,255,255,0.5); }");
+
+    return label;
+}
+
+QLabel* Jeu::Create_Custom_Label(QString nom, QString text, int size, bool bold)
+{
+    //Fonction pour créer les labels pour la classe Jeu
+    //Fonction pour créer les labels pour la classe Jeu
+    QFont font;
+    QLabel* label = new QLabel();
+    label->setObjectName(nom);
+    label->setText(text);
     label->setAlignment(Qt::AlignCenter);
     font = label->font();
     font.setPointSize(size);
     font.setBold(bold);
     label->setFont(font);
+    label->setMargin(5);
 
     label->setFrameStyle(QFrame::Box | QFrame::Plain);
     label->setLineWidth(4);
@@ -584,7 +653,7 @@ QLabel* Jeu::Create_Label(QString nom, QString text, int size, bool bold)
     return label;
 }
 
-QLabel* Jeu::Create_Custom_Label(QString nom, QString text, int size, bool bold)
+QLabel* Jeu::Create_Game_Label(QString nom, QString text, int size, bool bold)
 {
     //Fonction pour créer les labels pour la classe Jeu
     QFont font;
@@ -674,3 +743,4 @@ void Jeu::Customize_Label(QLabel* label)
 }
 
 #pragma endregion
+

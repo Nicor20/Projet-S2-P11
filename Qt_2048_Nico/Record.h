@@ -30,8 +30,8 @@ private slots:
 	void Bouton_Plus_Clicked();
 
 private:
-	QString Tab[4] = { "a","e","eu","i" };
-	QString FileName[4] = { "PH1.2048","PH2.2048","PH3.2048","PH4.2048" };
+	QString Tab[4] = { "A","E","EU","I" };
+	QString FileName[4] = { "PH_A.2048","PH_E.2048","PH_EU.2048","PH_I.2048" };
 	bool saved[4] = { false,false,false,false };
 
 	int nbShow = 0;

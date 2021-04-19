@@ -199,12 +199,12 @@ QString Grid::Move_Up()
         }
         else
         {
-            return "Refresh";
+            return "Actualisation";
         }
     }
     else
     {
-        return "No Move";
+        return "Mouvement Impossible";
     }
     
 }
@@ -282,12 +282,12 @@ QString Grid::Move_Right()
         }
         else
         {
-            return "Refresh";
+            return "Actualisation";
         }
     }
     else
     {
-        return "No Move";
+        return "Mouvement Impossible";
     }
 }
 
@@ -364,12 +364,12 @@ QString Grid::Move_Down()
         }
         else
         {
-            return "Refresh";
+            return "Actualisation";
         }
     }
     else
     {
-        return "No Move";
+        return "Mouvement Impossible";
     }
 }
 
@@ -446,12 +446,12 @@ QString Grid::Move_Left()
         }
         else
         {
-            return "Refresh";
+            return "Actualisation";
         }
     }
     else
     {
-        return "No Move";
+        return "Mouvement Impossible";
     }
 }
 

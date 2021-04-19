@@ -10,8 +10,8 @@
 #include "needed.h"
 #include "CommunicationFPGA.h"
 
-const int nbToRead = 100;
-const int nbToRecord = 100;
+const int nbToRead = 200;
+const int nbToRecord = 200;
 
 
 struct Phoneme
@@ -26,34 +26,16 @@ struct Lecture
 
 struct RecordStruct
 {
-    //  minimum - moyenne - maximum - pourcentage
-    QString SBA[4];
-    QString SBB[4];
-    QString SBC[4];
-    QString SBD[4];
+    QString moyenne[4];
 
     QString toString()
     {
-        QString text = "SBA :\n";
-        text += "Minumum : " + SBA[0] + "\n";
-        text += "Moyenne : " + SBA[1] + "\n";
-        text += "Maximum : " + SBA[2] + "\n";
-        text += "Pourcentage : " + SBA[3] + "\n\n";
-        text += "SBB :\n";
-        text += "Minumum : " + SBB[0] + "\n";
-        text += "Moyenne : " + SBB[1] + "\n";
-        text += "Maximum : " + SBB[2] + "\n";
-        text += "Pourcentage : " + SBB[3] + "\n\n";
-        text += "SBC :\n";
-        text += "Minumum : " + SBC[0] + "\n";
-        text += "Moyenne : " + SBC[1] + "\n";
-        text += "Maximum : " + SBC[2] + "\n";
-        text += "Pourcentage : " + SBC[3] + "\n\n";
-        text += "SBD :\n";
-        text += "Minumum : " + SBD[0] + "\n";
-        text += "Moyenne : " + SBD[1] + "\n";
-        text += "Maximum : " + SBD[2] + "\n";
-        text += "Pourcentage : " + SBD[3];
+        QString text;
+        text += "Moyenne SBA : " + moyenne[0] + "\n";
+        text += "Moyenne SBB : " + moyenne[1] + "\n";
+        text += "Moyenne SBC : " + moyenne[2] + "\n";
+        text += "Moyenne SBD : " + moyenne[3];
+
         return text;
     }
 };
@@ -64,12 +46,16 @@ public:
     Fpga();
     ~Fpga();
 
+    void CreatePhoneme();
+
     bool isConnected();
     QString Read();
     QString Verification();
 
     QString LectureRecord();
     QString AnalyzeRecord();
+
+    int GetNbToRecord();
 
     void SaveRecord(QString file);
 
@@ -85,8 +71,15 @@ public:
 
 private:
     //Read
-    
+    int SBA_L[nbToRead];
+    int SBB_L[nbToRead];
+    int SBC_L[nbToRead];
+    int SBD_L[nbToRead];
+
     Lecture ListLecture[nbToRead];
+
+    RecordStruct ListPhoneme[4];
+
 
     //Record
     int SBA[nbToRecord];

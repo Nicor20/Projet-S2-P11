@@ -14,13 +14,6 @@ UI::UI()
     this->setObjectName("UI");
 
     Load_Accueil();
-
-    //Ajoute le Background
-    QPixmap bk(":/Resources/BG.png");
-    bk = bk.scaled(qApp->primaryScreen()->size(), Qt::IgnoreAspectRatio);
-    QPalette pa;
-    pa.setBrush(QPalette::Window, bk);
-    this->setPalette(pa);
 }
 
 UI::~UI()
@@ -31,6 +24,7 @@ UI::~UI()
 void UI::resizeEvent(QResizeEvent* event)
 {
     QPixmap bk(":/Resources/BG.png");
+    //QPixmap bk(":/Resources/LOGO_SUPER2048.jpg");
     bk = bk.scaled(this->size(), Qt::IgnoreAspectRatio);
     QPalette pa;
     pa.setBrush(QPalette::Window, bk);
@@ -64,6 +58,12 @@ void UI::Load_Record()
     setCentralWidget(record);
 }
 
+void UI::Load_Instruction()
+{
+    instruction = new Instruction(this);
+    setCentralWidget(instruction);
+}
+
 void UI::Bouton_Accueil_Jouer_Clicked()
 {
     Load_Jeu(false);
@@ -74,9 +74,14 @@ void UI::Bouton_Accueil_Charger_Clicked()
     Load_Jeu(true);
 }
 
-void UI::Bouton_Accueil_Stats_Clicked()
+void UI::Bouton_Accueil_Classement_Clicked()
 {
     Load_Stats();
+}
+
+void UI::Bouton_Accueil_Instruction_Clicked()
+{
+    Load_Instruction();
 }
 
 void UI::Bouton_Accueil_Record_Clicked()
@@ -122,6 +127,11 @@ void UI::Bouton_Jeu_Quitter_Clicked()
 }
 
 void UI::Bouton_Stats_Quitter_Clicked()
+{
+    Load_Accueil();
+}
+
+void UI::Bouton_Instruction_Quitter_Clicked()
 {
     Load_Accueil();
 }

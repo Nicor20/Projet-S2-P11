@@ -13,6 +13,7 @@
 #include "jeu.h"
 #include "stats.h"
 #include "Record.h"
+#include "Instruction.h"
 
 class UI : public QMainWindow
 {
@@ -27,15 +28,18 @@ public:
     void Load_Jeu(bool load);
     void Load_Stats();
     void Load_Record();
+    void Load_Instruction();
 
 private slots:
     void Bouton_Accueil_Jouer_Clicked();
     void Bouton_Accueil_Charger_Clicked();
-    void Bouton_Accueil_Stats_Clicked();
+    void Bouton_Accueil_Classement_Clicked();
+    void Bouton_Accueil_Instruction_Clicked();
     void Bouton_Accueil_Record_Clicked();
     void Bouton_Accueil_Quitter_Clicked();
     void Bouton_Jeu_Quitter_Clicked();
     void Bouton_Stats_Quitter_Clicked();
+    void Bouton_Instruction_Quitter_Clicked();
     void Bouton_Record_Quitter_Clicked();
 
 private:
@@ -43,6 +47,7 @@ private:
     Jeu* jeu;
     Stats* stats;
     Record* record;
+    Instruction* instruction;
 
     int current;
 

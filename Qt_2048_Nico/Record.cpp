@@ -149,9 +149,9 @@ void Record::FPGA_Timer()
     }
     else if (text == "Lec")
     {
-        Label_Pourcentage->setText(QString::number(fpga->nbRecord) + "%");
-        Label_Pourcentage->setStyleSheet("QLabel { background-color : rgba(0, 230, 64,"+ QString::number((double)fpga->nbRecord / 100.0) + "); }");
-        cout << "Lecture" << endl;
+        Label_Pourcentage->setText(QString::number(fpga->nbRecord * 100 / fpga->GetNbToRecord()) + "%");
+        Label_Pourcentage->setStyleSheet("QLabel { background-color : rgba(0, 230, 64,"+ QString::number((double)fpga->nbRecord/200.0) + "); }");
+        //cout << "Lecture : "<< fpga->nbRecord << endl;
     }
     else if (text == "LecStop")
     {
@@ -241,8 +241,7 @@ void Record::DoneRecord()
     msgBox.setFont(font);
 
     msgBox.setText("Voulez vous sauvegarder le phoneme?");
-    msgBox.setInformativeText("Fin de l'enregistrement");
-    msgBox.setDetailedText(fpga->RecordValue.toString());
+    msgBox.setInformativeText(fpga->RecordValue.toString());
 
     QPushButton* boutonOui = msgBox.addButton("Oui", QMessageBox::YesRole);
     QPushButton* boutonNon = msgBox.addButton("Non", QMessageBox::NoRole);
@@ -261,6 +260,11 @@ void Record::DoneRecord()
 
     Bouton_Moin->setEnabled(true);
     Bouton_Plus->setEnabled(true);
+
+    if (saved[nbShow] == true)
+    {
+        Bouton_Plus->animateClick();
+    }
 }
 
 QPushButton* Record::Create_Button(QString nom, QString text, int size, bool bold)

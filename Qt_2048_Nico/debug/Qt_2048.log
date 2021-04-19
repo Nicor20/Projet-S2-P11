@@ -1,4 +1,27 @@
-﻿  jeu.cpp
+﻿  UI.cpp
+C:\Users\canti\Desktop\Projet-S2-P11\Qt_2048_Nico\UI.cpp(1,1): warning C4828: The file contains a character starting at offset 0x10 that is illegal in the current source character set (codepage 65001).
+C:\Users\canti\Desktop\Projet-S2-P11\Qt_2048_Nico\UI.cpp(1,1): warning C4828: The file contains a character starting at offset 0x55 that is illegal in the current source character set (codepage 65001).
+C:\Users\canti\Desktop\Projet-S2-P11\Qt_2048_Nico\UI.cpp(1,1): warning C4828: The file contains a character starting at offset 0x69 that is illegal in the current source character set (codepage 65001).
+C:\Users\canti\Desktop\Projet-S2-P11\Qt_2048_Nico\UI.cpp(1,1): warning C4828: The file contains a character starting at offset 0xcb that is illegal in the current source character set (codepage 65001).
+C:\Users\canti\Desktop\Projet-S2-P11\Qt_2048_Nico\UI.cpp(1,1): warning C4828: The file contains a character starting at offset 0x12b that is illegal in the current source character set (codepage 65001).
+C:\Users\canti\Desktop\Projet-S2-P11\Qt_2048_Nico\UI.h(1,1): warning C4828: The file contains a character starting at offset 0x10 that is illegal in the current source character set (codepage 65001).
+C:\Users\canti\Desktop\Projet-S2-P11\Qt_2048_Nico\UI.h(1,1): warning C4828: The file contains a character starting at offset 0x55 that is illegal in the current source character set (codepage 65001).
+C:\Users\canti\Desktop\Projet-S2-P11\Qt_2048_Nico\UI.h(1,1): warning C4828: The file contains a character starting at offset 0x69 that is illegal in the current source character set (codepage 65001).
+C:\Users\canti\Desktop\Projet-S2-P11\Qt_2048_Nico\UI.h(1,1): warning C4828: The file contains a character starting at offset 0xc9 that is illegal in the current source character set (codepage 65001).
+C:\Users\canti\Desktop\Projet-S2-P11\Qt_2048_Nico\needed.h(1,1): warning C4828: The file contains a character starting at offset 0x10 that is illegal in the current source character set (codepage 65001).
+C:\Users\canti\Desktop\Projet-S2-P11\Qt_2048_Nico\needed.h(1,1): warning C4828: The file contains a character starting at offset 0x55 that is illegal in the current source character set (codepage 65001).
+C:\Users\canti\Desktop\Projet-S2-P11\Qt_2048_Nico\needed.h(1,1): warning C4828: The file contains a character starting at offset 0x69 that is illegal in the current source character set (codepage 65001).
+C:\Users\canti\Desktop\Projet-S2-P11\Qt_2048_Nico\needed.h(1,1): warning C4828: The file contains a character starting at offset 0xbb that is illegal in the current source character set (codepage 65001).
+C:\Users\canti\Desktop\Projet-S2-P11\Qt_2048_Nico\accueil.h(1,1): warning C4828: The file contains a character starting at offset 0x10 that is illegal in the current source character set (codepage 65001).
+C:\Users\canti\Desktop\Projet-S2-P11\Qt_2048_Nico\accueil.h(1,1): warning C4828: The file contains a character starting at offset 0x55 that is illegal in the current source character set (codepage 65001).
+C:\Users\canti\Desktop\Projet-S2-P11\Qt_2048_Nico\accueil.h(1,1): warning C4828: The file contains a character starting at offset 0x69 that is illegal in the current source character set (codepage 65001).
+C:\Users\canti\Desktop\Projet-S2-P11\Qt_2048_Nico\accueil.h(1,1): warning C4828: The file contains a character starting at offset 0xb1 that is illegal in the current source character set (codepage 65001).
+C:\Users\canti\Desktop\Projet-S2-P11\Qt_2048_Nico\accueil.h(1,1): warning C4828: The file contains a character starting at offset 0xd5 that is illegal in the current source character set (codepage 65001).
+C:\Users\canti\Desktop\Projet-S2-P11\Qt_2048_Nico\accueil.h(1,1): warning C4828: The file contains a character starting at offset 0xf7 that is illegal in the current source character set (codepage 65001).
+C:\Users\canti\Desktop\Projet-S2-P11\Qt_2048_Nico\needed.h(1,1): warning C4828: The file contains a character starting at offset 0x10 that is illegal in the current source character set (codepage 65001).
+C:\Users\canti\Desktop\Projet-S2-P11\Qt_2048_Nico\needed.h(1,1): warning C4828: The file contains a character starting at offset 0x55 that is illegal in the current source character set (codepage 65001).
+C:\Users\canti\Desktop\Projet-S2-P11\Qt_2048_Nico\needed.h(1,1): warning C4828: The file contains a character starting at offset 0x69 that is illegal in the current source character set (codepage 65001).
+C:\Users\canti\Desktop\Projet-S2-P11\Qt_2048_Nico\needed.h(1,1): warning C4828: The file contains a character starting at offset 0xbb that is illegal in the current source character set (codepage 65001).
 C:\Users\canti\Desktop\Projet-S2-P11\Qt_2048_Nico\jeu.h(1,1): warning C4828: The file contains a character starting at offset 0x10 that is illegal in the current source character set (codepage 65001).
 C:\Users\canti\Desktop\Projet-S2-P11\Qt_2048_Nico\jeu.h(1,1): warning C4828: The file contains a character starting at offset 0x55 that is illegal in the current source character set (codepage 65001).
 C:\Users\canti\Desktop\Projet-S2-P11\Qt_2048_Nico\jeu.h(1,1): warning C4828: The file contains a character starting at offset 0x69 that is illegal in the current source character set (codepage 65001).
@@ -13,7 +36,7 @@ C:\Users\canti\Desktop\Projet-S2-P11\Qt_2048_Nico\Fpga.h(1,1): warning C4828: Th
 C:\Users\canti\Desktop\Projet-S2-P11\Qt_2048_Nico\Fpga.h(1,1): warning C4828: The file contains a character starting at offset 0x55 that is illegal in the current source character set (codepage 65001).
 C:\Users\canti\Desktop\Projet-S2-P11\Qt_2048_Nico\Fpga.h(1,1): warning C4828: The file contains a character starting at offset 0x69 that is illegal in the current source character set (codepage 65001).
 C:\Users\canti\Desktop\Projet-S2-P11\Qt_2048_Nico\Fpga.h(1,1): warning C4828: The file contains a character starting at offset 0xad that is illegal in the current source character set (codepage 65001).
-C:\Users\canti\Desktop\Projet-S2-P11\Qt_2048_Nico\Fpga.h(1,1): warning C4828: The file contains a character starting at offset 0xab3 that is illegal in the current source character set (codepage 65001).
+C:\Users\canti\Desktop\Projet-S2-P11\Qt_2048_Nico\Fpga.h(1,1): warning C4828: The file contains a character starting at offset 0x880 that is illegal in the current source character set (codepage 65001).
 C:\Users\canti\Desktop\Projet-S2-P11\Qt_2048_Nico\needed.h(1,1): warning C4828: The file contains a character starting at offset 0x10 that is illegal in the current source character set (codepage 65001).
 C:\Users\canti\Desktop\Projet-S2-P11\Qt_2048_Nico\needed.h(1,1): warning C4828: The file contains a character starting at offset 0x55 that is illegal in the current source character set (codepage 65001).
 C:\Users\canti\Desktop\Projet-S2-P11\Qt_2048_Nico\needed.h(1,1): warning C4828: The file contains a character starting at offset 0x69 that is illegal in the current source character set (codepage 65001).
@@ -26,5 +49,20 @@ C:\Users\canti\Desktop\Projet-S2-P11\Qt_2048_Nico\needed.h(1,1): warning C4828: 
 C:\Users\canti\Desktop\Projet-S2-P11\Qt_2048_Nico\needed.h(1,1): warning C4828: The file contains a character starting at offset 0x55 that is illegal in the current source character set (codepage 65001).
 C:\Users\canti\Desktop\Projet-S2-P11\Qt_2048_Nico\needed.h(1,1): warning C4828: The file contains a character starting at offset 0x69 that is illegal in the current source character set (codepage 65001).
 C:\Users\canti\Desktop\Projet-S2-P11\Qt_2048_Nico\needed.h(1,1): warning C4828: The file contains a character starting at offset 0xbb that is illegal in the current source character set (codepage 65001).
-C:\Users\canti\Desktop\Projet-S2-P11\Qt_2048_Nico\jeu.cpp(131,37): warning C4100: 'event': unreferenced formal parameter
+C:\Users\canti\Desktop\Projet-S2-P11\Qt_2048_Nico\stats.h(1,1): warning C4828: The file contains a character starting at offset 0x10 that is illegal in the current source character set (codepage 65001).
+C:\Users\canti\Desktop\Projet-S2-P11\Qt_2048_Nico\stats.h(1,1): warning C4828: The file contains a character starting at offset 0x55 that is illegal in the current source character set (codepage 65001).
+C:\Users\canti\Desktop\Projet-S2-P11\Qt_2048_Nico\stats.h(1,1): warning C4828: The file contains a character starting at offset 0x69 that is illegal in the current source character set (codepage 65001).
+C:\Users\canti\Desktop\Projet-S2-P11\Qt_2048_Nico\stats.h(1,1): warning C4828: The file contains a character starting at offset 0xaf that is illegal in the current source character set (codepage 65001).
+C:\Users\canti\Desktop\Projet-S2-P11\Qt_2048_Nico\stats.h(1,1): warning C4828: The file contains a character starting at offset 0xd4 that is illegal in the current source character set (codepage 65001).
+C:\Users\canti\Desktop\Projet-S2-P11\Qt_2048_Nico\stats.h(1,1): warning C4828: The file contains a character starting at offset 0xf6 that is illegal in the current source character set (codepage 65001).
+C:\Users\canti\Desktop\Projet-S2-P11\Qt_2048_Nico\needed.h(1,1): warning C4828: The file contains a character starting at offset 0x10 that is illegal in the current source character set (codepage 65001).
+C:\Users\canti\Desktop\Projet-S2-P11\Qt_2048_Nico\needed.h(1,1): warning C4828: The file contains a character starting at offset 0x55 that is illegal in the current source character set (codepage 65001).
+C:\Users\canti\Desktop\Projet-S2-P11\Qt_2048_Nico\needed.h(1,1): warning C4828: The file contains a character starting at offset 0x69 that is illegal in the current source character set (codepage 65001).
+C:\Users\canti\Desktop\Projet-S2-P11\Qt_2048_Nico\needed.h(1,1): warning C4828: The file contains a character starting at offset 0xbb that is illegal in the current source character set (codepage 65001).
+C:\Users\canti\Desktop\Projet-S2-P11\Qt_2048_Nico\needed.h(1,1): warning C4828: The file contains a character starting at offset 0x10 that is illegal in the current source character set (codepage 65001).
+C:\Users\canti\Desktop\Projet-S2-P11\Qt_2048_Nico\needed.h(1,1): warning C4828: The file contains a character starting at offset 0x55 that is illegal in the current source character set (codepage 65001).
+C:\Users\canti\Desktop\Projet-S2-P11\Qt_2048_Nico\needed.h(1,1): warning C4828: The file contains a character starting at offset 0x69 that is illegal in the current source character set (codepage 65001).
+C:\Users\canti\Desktop\Projet-S2-P11\Qt_2048_Nico\needed.h(1,1): warning C4828: The file contains a character starting at offset 0xbb that is illegal in the current source character set (codepage 65001).
+C:\Users\canti\Desktop\Projet-S2-P11\Qt_2048_Nico\UI.cpp(24,36): warning C4100: 'event': unreferenced formal parameter
+C:\Users\canti\Desktop\Projet-S2-P11\Qt_2048_Nico\UI.cpp(105,18): warning C4189: 'boutonNon': local variable is initialized but not referenced
   Qt_2048.vcxproj -> C:\Users\canti\Desktop\Projet-S2-P11\Qt_2048_Nico\debug\Qt_2048.exe

@@ -57,9 +57,12 @@ Accueil::Accueil(QWidget* parent, int* size) : QWidget(parent) , GridSize(size)
         connect(Bouton_Charger, SIGNAL(clicked()), parent, SLOT(Bouton_Accueil_Charger_Clicked()));
 
         Bouton_Classement = Create_Button(gLayout2->widget(), "Bouton Classement", "&Classement", 20, true);
-        connect(Bouton_Classement, SIGNAL(clicked()), parent, SLOT(Bouton_Accueil_Stats_Clicked()));
+        connect(Bouton_Classement, SIGNAL(clicked()), parent, SLOT(Bouton_Accueil_Classement_Clicked()));
 
-        Bouton_Record = Create_Button(gLayout2->widget(), "Bouton Record", "&Record", 20, true);
+        Bouton_Instruction = Create_Button(gLayout2->widget(), "Bouton Instruction", "&Instruction", 20, true);
+        connect(Bouton_Instruction, SIGNAL(clicked()), parent, SLOT(Bouton_Accueil_Instruction_Clicked()));
+
+        Bouton_Record = Create_Button(gLayout2->widget(), "Bouton Record", "&Enregistrement", 20, true);
         connect(Bouton_Record, SIGNAL(clicked()), parent, SLOT(Bouton_Accueil_Record_Clicked()));
 
         Bouton_Quitter = Create_Button(gLayout2->widget(), "Bouton Quitter", "&Quitter", 20, true);
@@ -77,8 +80,9 @@ Accueil::Accueil(QWidget* parent, int* size) : QWidget(parent) , GridSize(size)
         gLayout2->addWidget(Bouton_Jouer, 3, 0, 1, 3);
         gLayout2->addWidget(Bouton_Charger, 4, 0, 1, 3);
         gLayout2->addWidget(Bouton_Classement, 5, 0, 1, 3);
-        gLayout2->addWidget(Bouton_Record, 6, 0, 1, 3);
-        gLayout2->addWidget(Bouton_Quitter, 7, 0, 1, 3);
+        gLayout2->addWidget(Bouton_Instruction, 6, 0, 1, 3);
+        gLayout2->addWidget(Bouton_Record, 7, 0, 1, 3);
+        gLayout2->addWidget(Bouton_Quitter, 8, 0, 1, 3);
     }
 
     CheckFiles();
@@ -91,7 +95,7 @@ Accueil::~Accueil()
 
 void Accueil::CheckFiles()
 {
-    QString FileName[6] = { "Game.2048","Stats.2048","PH1.2048","PH2.2048","PH3.2048","PH4.2048" };
+    QString FileName[6] = { "Game.2048","Stats.2048","PH_A.2048","PH_E.2048","PH_EU.2048","PH_I.2048" };
     bool Good[6] = { false,false,false,false,false,false };
 
     //Check
@@ -153,7 +157,7 @@ void Accueil::CheckFiles()
 
 void Accueil::resizeEvent(QResizeEvent* event)
 {
-    label_Titre->setText("(" + QString::number(this->width()) + " , " + QString::number(this->height()) + ")");
+    //label_Titre->setText("(" + QString::number(this->width()) + " , " + QString::number(this->height()) + ")");
 }
 
 #pragma region Slots

@@ -42,6 +42,7 @@ private:
     QPushButton* Bouton_Jouer;
     QPushButton* Bouton_Charger;
     QPushButton* Bouton_Classement;
+    QPushButton* Bouton_Instruction;
     QPushButton* Bouton_Record;
     QPushButton* Bouton_Quitter;
 

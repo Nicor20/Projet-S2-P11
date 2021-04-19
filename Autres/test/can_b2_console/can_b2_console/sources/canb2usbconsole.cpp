@@ -96,7 +96,7 @@ int main(int argc, char **argv, char **envp)
 
     const int nitermax  = 10000;         // Nbre d'itération max de la boucle de lecture d'acquisition (limite pour tests)
                                          // changer la condition de boucle sans cette limite selon le besoin de l'application
-    const int delai_boucle = 200;         // delai d'attente ajouté dans la boucle de lecture en ms
+    const int delai_boucle = 10;         // delai d'attente ajouté dans la boucle de lecture en ms
 
 	// numeros de registres correspondants pour les echanges FPGA <-> PC  ...
 	unsigned const int nreg_lect_stat_btn = 0;  // fpga -> PC  Statut et BTN lus FPGA -> PC
@@ -214,7 +214,7 @@ int main(int argc, char **argv, char **envp)
 	int value = 0;
     for (int niter = 0; ((niter < nitermax) && ((stat_btn & 8) == 0)); niter++)  // tant que nitermax non atteint et que btn3 non 1
     {
-		/*
+		
         if (statutport) statutport = port.lireRegistre(nreg_lect_stat_btn, stat_btn);     // lecture statut et BTN
         else { cout << "Erreur du port nreg_lect_stat_btn" << endl; exit(1); }
         if (statutport) statutport = port.lireRegistre(nreg_lect_swt, swt);               // lecture swt
@@ -254,16 +254,25 @@ int main(int argc, char **argv, char **envp)
            if (statutport) statutport = port.ecrireRegistre(nreg_ecri_aff7dot, stat_btn & 0xFF);                  // envoyer vecteur  bouton (sans le statut)
            else { cout << "Erreur du port nreg_ecri_aff7dot" << endl; exit(1); }
         //
-        cout << "      " << (int)stat_btn << ",   " << (int)swt << ",     " << (int)compteur_temps;
+        //cout << "      " << (int)stat_btn << ",   " << (int)swt << ",     " << (int)compteur_temps;
         indice_canal_a_afficher = 0;
-        for (indice_canal_a_afficher; indice_canal_a_afficher < 4; indice_canal_a_afficher++)
-            if ((int)echconv[indice_canal_a_afficher] == 0)  
-                cout << ",     0x00";
-            else   cout << ",    " << (int)echconv[indice_canal_a_afficher];
-        cout << endl;
-		*/
 
-		cout << value << endl;
+        for (indice_canal_a_afficher; indice_canal_a_afficher < 4; indice_canal_a_afficher++)
+        {
+            if ((int)echconv[indice_canal_a_afficher] == 0)
+            {
+                cout << ",      0x00";
+            } 
+            else
+            {
+                cout << ",      " << (int)echconv[indice_canal_a_afficher];
+            }
+        }
+            
+        cout << endl;
+		
+
+		//cout << value << endl;
 		statutport = port.ecrireRegistre(nreg_ecri_aff7dot, (int)value);
 
 
@@ -271,10 +280,11 @@ int main(int argc, char **argv, char **envp)
         Sleep(delai_boucle);                                                                                       // attente x ms sans occuper de CPU ... 
     }
 
-    cout << endl << "--------------------------------------------------" << endl;
+    //cout << endl << "--------------------------------------------------" << endl;
 
 
-    cout << "--fin. " << endl;
-    return 0;  // fin normale
+    //cout << "--fin. " << endl;
+    //return 0;  // fin normale
+    system("pause");
 }
 

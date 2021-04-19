@@ -43,6 +43,9 @@
     <ClCompile Include="Grid.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="Instruction.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
     <ClCompile Include="Record.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
@@ -70,6 +73,9 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="Grid.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Instruction.h">
       <Filter>Header Files</Filter>
     </ClInclude>
     <CustomBuild Include="Record.h">
@@ -137,6 +143,9 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="BG.png">
+      <Filter>Resource Files</Filter>
+    </None>
+    <None Include="LOGO_SUPER2048.jpg">
       <Filter>Resource Files</Filter>
     </None>
     <CustomBuild Include="Resource.qrc">
