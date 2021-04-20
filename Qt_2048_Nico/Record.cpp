@@ -1,3 +1,9 @@
+/*
+* Nom des créateur : Nicolas Cantin, Anthony Denis, Walan Brousseau
+* Date de création : 05/04/2021 à 19/04/2021
+* Nom de fichier : Record.cpp
+* Description : Permet de créer l'interface d'enregistrement et de gérer son fonctionnement et ces intéractions
+*/
 #include "Record.h"
 
 Record::Record(QWidget* parent) : QWidget(parent)
@@ -169,7 +175,7 @@ void Record::FPGA_Timer()
     }
     else if (text == "Rien")
     {
-        cout << "Rien" << endl;
+        //cout << "Rien" << endl;
     }
     else if (text == "Erreur")
     {

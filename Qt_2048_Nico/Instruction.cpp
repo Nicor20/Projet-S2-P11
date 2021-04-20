@@ -1,3 +1,9 @@
+/*
+* Nom des créateur : Nicolas Cantin, Anthony Denis, Walan Brousseau
+* Date de création : 05/04/2021 à 19/04/2021
+* Nom de fichier : instruction.cpp
+* Description : Permet de créer l'interface d'instruction
+*/
 #include "Instruction.h"
 
 Instruction::Instruction(QWidget* parent) : QWidget(parent)
@@ -50,8 +56,9 @@ Instruction::Instruction(QWidget* parent) : QWidget(parent)
         text += "   - Cliquer sur une des touche de l'ecran pour demarer la partie\n";
         text += "   - Bouger les case avec les touches w a s d du clavier\n";
         text += "   - Bouger les case avec les touches a l'ecran\n";
-        text += "   - Bouger les case avec la voix en cliquant sur le bouton 0 de la carte Fpga et en prononcant le phoneme voulu durant 1 seconde \n";
+        text += "   - Bouger les case avec la voix en cliquant sur le bouton 0 de la carte Fpga et en prononcant le phoneme voulu durant 2 seconde \n";
         text += "   - Cliquer sur le bouton Menu pour revenir a l'accueil\n";
+
 
         label_Info = new QLabel(text,this);
         label_Info->setObjectName("label Info");

@@ -1,6 +1,6 @@
 /*
 * Nom des créateur : Nicolas Cantin, Anthony Denis, Walan Brousseau
-* Date de création : 05/04/2021 à 15/04/2021
+* Date de création : 05/04/2021 à 19/04/2021
 * Nom de fichier : jeu.cpp
 * Description : Permet de créer l'interface de jeu et de gérer son fonctionnement et ces intéractions
 */
@@ -147,6 +147,7 @@ Jeu::Jeu(QWidget* parent, int* size, bool load) : QWidget(parent), GridSize(size
 Jeu::~Jeu()
 {
     delete fpga;
+    delete grid;
 }
 
 void Jeu::CheckMove(QString s)
@@ -481,11 +482,15 @@ void Jeu::FPGA_Timer()
         Status(text);
         Bouton_Gauche->animateClick();
     }
+    else if (text == "Phonemes non enregistrees")
+    {
+        qDebug() << text << "\n";
+        Status(text);
+    }
     else if (text == "Aucun")
     {
         qDebug() << text << "\n";
         Status(text);
-        cout << "Aucun" << endl;
     }
     else if (text == "Rien")
     {

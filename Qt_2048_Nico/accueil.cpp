@@ -1,6 +1,6 @@
 /*
 * Nom des créateur : Nicolas Cantin, Anthony Denis, Walan Brousseau
-* Date de création : 05/04/2021 à 15/04/2021
+* Date de création : 05/04/2021 à 19/04/2021
 * Nom de fichier : accueil.cpp
 * Description : Permet de créer l'interface de l'accueil et de gérer son fonctionnement et ces intéractions
 */
@@ -119,23 +119,21 @@ void Accueil::CheckFiles()
             QFile file(FileName[i]);
             file.open(QIODevice::WriteOnly | QIODevice::Text);
             QTextStream stream(&file);
-            stream << "";
+            if (i == 0 || i == 1)
+            {
+                stream << "";
+            }
+            else
+            {
+                stream << "0-0-0-0";
+            }
+            
             file.close();
         }
     }
 
-    //Bouton Jouer
-    if (Good[2] == true && Good[3] == true && Good[4] == true && Good[5] == true)
-    {
-        Bouton_Jouer->setEnabled(true);
-    }
-    else
-    {
-        Bouton_Jouer->setEnabled(false);
-    }
-
     //Bouton Charger
-    if (Good[0] == true && Good[2] == true && Good[3] == true && Good[4] == true && Good[5] == true)
+    if (Good[0] == true)
     {
         Bouton_Charger->setEnabled(true);
     }

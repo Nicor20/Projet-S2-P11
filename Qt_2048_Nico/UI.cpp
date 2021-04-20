@@ -1,6 +1,6 @@
 /*
 * Nom des créateur : Nicolas Cantin, Anthony Denis, Walan Brousseau
-* Date de création : 05/04/2021 à 15/04/2021
+* Date de création : 05/04/2021 à 19/04/2021
 * Nom de fichier : UI.cpp
 * Description : MainWindow qui permet d'afficher les différentes widget comme accueil, Jeu, et Classement
 */

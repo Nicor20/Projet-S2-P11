@@ -1,3 +1,9 @@
+/*
+* Nom des créateur : Nicolas Cantin, Anthony Denis, Walan Brousseau
+* Date de création : 05/04/2021 à 19/04/2021
+* Nom de fichier : Record.h
+* Description : Permet de créer l'interface d'enregistrement et de gérer son fonctionnement et ces intéractions
+*/
 #ifndef RECORD_H
 #define RECORD_H
 

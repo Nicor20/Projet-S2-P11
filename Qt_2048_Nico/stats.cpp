@@ -1,6 +1,6 @@
 /*
 * Nom des créateur : Nicolas Cantin, Anthony Denis, Walan Brousseau
-* Date de création : 05/04/2021 à 15/04/2021
+* Date de création : 05/04/2021 à 19/04/2021
 * Nom de fichier : stats.cpp
 * Description : Permet de créer l'interface de classement et de gérer son fonctionnement et ces intéractions
 */
@@ -14,18 +14,18 @@ Stats::Stats(QWidget* parent) : QWidget(parent)
 
     //Label
     QLabel* label_Titre = Create_Label_Stats("label_Titre", "Classement", 75, true, false, false);
-    QLabel* label_Position = Create_Label_Stats("label_Position", "Position", 15, true, true, false);
-    QLabel* label_Status = Create_Label_Stats("label_Status", "Status", 15, true, true, false);
-    QLabel* label_Size = Create_Label_Stats("label_Size", "Size", 15, true, true, false);
-    QLabel* label_Score = Create_Label_Stats("label_Score", "Score", 15, true, true, false);
-    QLabel* label_NbMove = Create_Label_Stats("label_NbMove", "Nb Move", 15, true, true, false);
-    QLabel* label_Max = Create_Label_Stats("label_Max", "Max", 15, true, true, false);
+    QLabel* label_Position = Create_Label_Stats("label_Position", "Position", 20, true, true, false);
+    QLabel* label_Status = Create_Label_Stats("label_Status", "Status", 20, true, true, false);
+    QLabel* label_Size = Create_Label_Stats("label_Size", "Size", 20, true, true, false);
+    QLabel* label_Score = Create_Label_Stats("label_Score", "Score", 20, true, true, false);
+    QLabel* label_NbMove = Create_Label_Stats("label_NbMove", "Nb Move", 20, true, true, false);
+    QLabel* label_Max = Create_Label_Stats("label_Max", "Max", 20, true, true, false);
 
     //Button
-    Bouton_Quitter = Create_Button_Stats("button_Stats_Accueil", "Menu", 15, true);
+    Bouton_Quitter = Create_Button_Stats("button_Stats_Accueil", "Menu", 20, true);
     connect(Bouton_Quitter, SIGNAL(clicked()), parent, SLOT(Bouton_Stats_Quitter_Clicked()));
 
-    Bouton_Effacer = Create_Button_Stats("button_Stats_Effacer", "Effacer", 15, true);
+    Bouton_Effacer = Create_Button_Stats("button_Stats_Effacer", "Effacer", 20, true);
     connect(Bouton_Effacer, SIGNAL(clicked()), this, SLOT(Bouton_Effacer_Clicked()));
 
     //Layout
@@ -80,7 +80,7 @@ Stats::Stats(QWidget* parent) : QWidget(parent)
     QFrame* frame = new QFrame();
     frame->setObjectName("Frame");
     frame->setFrameStyle(QFrame::Box | QFrame::Plain);
-    frame->setLineWidth(2);
+    frame->setLineWidth(4);
     frame->setMidLineWidth(3);
     frame->setLayout(Stats_gLayout);
     frame->setAutoFillBackground(true);
@@ -89,11 +89,12 @@ Stats::Stats(QWidget* parent) : QWidget(parent)
     //vLayout
     vLayout->addWidget(label_Titre);
     vLayout->addSpacerItem(new QSpacerItem(40, 20));
+    vLayout->addWidget(Bouton_Effacer);
+    vLayout->addSpacerItem(new QSpacerItem(40, 20));
     vLayout->addWidget(frame);
     vLayout->addSpacerItem(new QSpacerItem(40, 20));
     vLayout->addWidget(Bouton_Quitter);
-    vLayout->addSpacerItem(new QSpacerItem(40, 20));
-    vLayout->addWidget(Bouton_Effacer);
+    
 
     gLayout->addLayout(vLayout, 0, 0, Qt::AlignCenter);
 }
@@ -198,7 +199,7 @@ QLabel* Stats::Create_Label_Stats(QString nom, QString text, int size, bool bold
 
     if (info == true)
     {
-        label->setFixedWidth(110);
+        label->setFixedWidth(150);
         label->setFrameStyle(QFrame::WinPanel | QFrame::Raised);
         label->setLineWidth(4);
         label->setMidLineWidth(3);

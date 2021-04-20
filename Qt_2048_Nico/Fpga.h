@@ -1,6 +1,6 @@
 /*
 * Nom des créateur : Nicolas Cantin, Anthony Denis, Walan Brousseau
-* Date de création : 05/04/2021 à 15/04/2021
+* Date de création : 05/04/2021 à 19/04/2021
 * Nom de fichier : Fpga.h
 * Description : Permet de gérer la lecture de la carte Fpga
 */
@@ -13,18 +13,7 @@
 const int nbToRead = 200;
 const int nbToRecord = 200;
 
-
 struct Phoneme
-{
-    int val[4][2];
-};
-
-struct Lecture
-{
-    int pot[4];
-};
-
-struct RecordStruct
 {
     QString moyenne[4];
 
@@ -66,20 +55,18 @@ public:
     bool RecordOn = false;
     bool AnalyzeOn = false;
     int nbRecord = 0;
-    RecordStruct RecordValue;
+    Phoneme RecordValue;
 
 
 private:
+
     //Read
     int SBA_L[nbToRead];
     int SBB_L[nbToRead];
     int SBC_L[nbToRead];
     int SBD_L[nbToRead];
 
-    Lecture ListLecture[nbToRead];
-
-    RecordStruct ListPhoneme[4];
-
+    Phoneme ListPhoneme[4];
 
     //Record
     int SBA[nbToRecord];
@@ -87,12 +74,6 @@ private:
     int SBC[nbToRecord];
     int SBD[nbToRecord];
     
-    
-
-
-    Phoneme valPhoneme[4];
-    
-
     BOOL statutport = false;
 
     int swt = 0;                            // donnee recue du FPGA
